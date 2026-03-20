@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["../../../AppData/Roaming/npm/node_modules/serve/build/main.js", "-l", "3456", "-s", "."],
+      "port": 3456
+    }
+  ]
+}
