@@ -7,7 +7,13 @@ Visual identity assets for the MIT AI Risk Initiative (AIRI), AI Risk Index, and
 - Open **[brand-guide.html](brand-guide.html)** in a browser for a visual overview (self-contained, shareable)
 - Browse **[skill/logos/](skill/logos/)** for SVG and PNG logo files
 
-## Using as a Claude Code skill
+## Using with Claude
+
+### Upload to Claude.ai
+
+Download **[airi-brand-skill.zip](airi-brand-skill.zip)** and upload it to a Claude conversation as a project knowledge file. Claude will automatically apply AIRI branding when generating HTML, CSS, charts, or other visual output.
+
+### Claude Code skill
 
 The `skill/` folder is a self-contained Claude Code skill. To install:
 
