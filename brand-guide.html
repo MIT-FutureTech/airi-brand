@@ -150,5 +150,78 @@
   <li><code>logo_development/</code> — Logo build tooling and font files</li>
 </ul>
 
+
+<h2>Open Questions &amp; Proposed Changes</h2>
+<p>Proposed brand extensions based on the <a href="https://labs.aksaeri.com/airi-mockup/">AIRI website mockup project</a> (March 2026). Each links to a GitHub issue with full details.</p>
+
+<div style="display:flex; flex-direction:column; gap:16px; margin-top:16px;">
+
+  <div style="background:#fff; border:1px solid #e0e0e0; border-radius:8px; padding:20px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <span style="background:#A32035; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:12px;">PROPOSED</span>
+      <strong style="font-size:1.05rem;">Extended color palette for data visualization</strong>
+      <a href="https://github.com/MIT-FutureTech/airi-brand/issues/5" style="margin-left:auto; font-size:0.85rem; color:#A32035;">Issue #5</a>
+    </div>
+    <p style="margin-bottom:12px;">The current 4-color palette (red, rose, gray, dark) is insufficient for charts with 5+ series or image sets needing distinct identities. Propose adding a secondary palette influenced by ColorBrewer Set2:</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+      <div class="swatch" style="background:#66C2A5; color:#fff; min-width:100px;"><code>#66C2A5</code><br>Teal</div>
+      <div class="swatch" style="background:#FC8D62; color:#fff; min-width:100px;"><code>#FC8D62</code><br>Coral</div>
+      <div class="swatch" style="background:#8DA0CB; color:#fff; min-width:100px;"><code>#8DA0CB</code><br>Blue</div>
+      <div class="swatch" style="background:#A6D854; color:#1a1a1a; min-width:100px;"><code>#A6D854</code><br>Green</div>
+      <div class="swatch" style="background:#E78AC3; color:#fff; min-width:100px;"><code>#E78AC3</code><br>Lavender</div>
+      <div class="swatch" style="background:#E5C494; color:#1a1a1a; min-width:100px;"><code>#E5C494</code><br>Sand</div>
+    </div>
+    <div class="note"><strong>Key question:</strong> Should these be formal brand colors with CSS tokens, or a recommended supplementary palette without token status? The current spec says do not introduce additional brand colors — this would change that rule.</div>
+  </div>
+
+  <div style="background:#fff; border:1px solid #e0e0e0; border-radius:8px; padding:20px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <span style="background:#A32035; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:12px;">PROPOSED</span>
+      <strong style="font-size:1.05rem;">Image and illustration style guide</strong>
+      <a href="https://github.com/MIT-FutureTech/airi-brand/issues/6" style="margin-left:auto; font-size:0.85rem; color:#A32035;">Issue #6</a>
+    </div>
+    <p style="margin-bottom:12px;">The brand spec has no guidance on imagery. Propose adding a visual philosophy and style rules:</p>
+    <ul>
+      <li><strong>Style:</strong> Abstract geometric and mathematical art — tessellated patterns, network graphs, Voronoi diagrams, topological surfaces.</li>
+      <li><strong>Pattern mapping:</strong> Each AIRI tool gets a signature visual motif (Repository = lattice, Incidents = fractal branching, Governance = overlapping circles, Mitigations = hexagonal tessellation)</li>
+      <li><strong>Rules:</strong> No text in images, no photorealism, no AI-generated faces. Photography only for headshots.</li>
+      <li><strong>Colors:</strong> Use extended palette for variety. MIT red as accent, not dominant.</li>
+    </ul>
+    <p style="margin-top:8px;"><a href="https://labs.aksaeri.com/airi-mockup/assets/images/catalog.html" style="color:#A32035;">See image catalog with reproducible prompts</a></p>
+    <div class="note"><strong>Key question:</strong> How prescriptive should the pattern-to-tool mapping be? Strict rules ensure consistency; loose guidance allows flexibility.</div>
+  </div>
+
+  <div style="background:#fff; border:1px solid #e0e0e0; border-radius:8px; padding:20px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <span style="background:#898A8D; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:12px;">UNDER REVIEW</span>
+      <strong style="font-size:1.05rem;">Additional web component patterns</strong>
+      <a href="https://github.com/MIT-FutureTech/airi-brand/issues/7" style="margin-left:auto; font-size:0.85rem; color:#A32035;">Issue #7</a>
+    </div>
+    <p style="margin-bottom:12px;">Propose adding component patterns that emerged as necessary during the mockup:</p>
+    <ul>
+      <li><strong>Stats bar:</strong> Key numbers in <code>primary</code> with labels in <code>gray</code>. Content-relevant metrics, not vanity numbers.</li>
+      <li><strong>Carousel:</strong> Horizontal scroll-snap with arrow controls. For blog posts, testimonials, data snapshots.</li>
+      <li><strong>Logo display:</strong> Partner/media logos in greyscale, hover to full color. Group partners by sector.</li>
+      <li><strong>Testimonials:</strong> Blockquote with open-quote accent, author + role.</li>
+      <li><strong>Section rhythm:</strong> Alternating <code>#FAFAFA</code> / <code>#FFFFFF</code> backgrounds.</li>
+    </ul>
+    <div class="note"><strong>Key question:</strong> Do these belong in the brand spec or a separate design system doc? The current spec already includes buttons and cards, so precedent exists.</div>
+  </div>
+
+  <div style="background:#fafafa; border:1px dashed #e0e0e0; border-radius:8px; padding:20px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+      <span style="background:#e0e0e0; color:#666; font-size:11px; font-weight:700; padding:2px 8px; border-radius:12px;">OUT OF SCOPE</span>
+      <strong style="font-size:1.05rem;">Findings documented elsewhere</strong>
+    </div>
+    <p style="margin-bottom:8px;">These emerged from persona reviews but belong in a separate content/UX guidelines doc:</p>
+    <ul>
+      <li><strong>Tone of voice:</strong> Avoid jargon, be precise about org relationships, include data freshness dates. (<a href="https://github.com/MIT-FutureTech/airi-brand/issues/8" style="color:#898A8D;">Closed #8</a>)</li>
+      <li><strong>CTA strategy:</strong> Differentiate CTAs by audience — policymakers, researchers, industry. (<a href="https://github.com/MIT-FutureTech/airi-brand/issues/9" style="color:#898A8D;">Closed #9</a>)</li>
+    </ul>
+    <p style="font-size:0.85rem; color:#898A8D; margin-top:8px;">Full persona reviews: <a href="https://labs.aksaeri.com/airi-mockup/reviews/amara.html" style="color:#898A8D;">Amara (Policy)</a> · <a href="https://labs.aksaeri.com/airi-mockup/reviews/liang.html" style="color:#898A8D;">Liang (Research)</a> · <a href="https://labs.aksaeri.com/airi-mockup/reviews/priya.html" style="color:#898A8D;">Priya (Industry)</a></p>
+  </div>
+
+</div>
+
 </body>
 </html>

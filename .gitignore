@@ -1,3 +1,8 @@
 node_modules/
 .DS_Store
 Thumbs.db
+
+# Local-only (labs-publish metadata, dev symlink, experiments)
+project.yaml
+index.html
+dev/
