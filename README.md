@@ -6,6 +6,7 @@ Visual identity assets for the MIT AI Risk Initiative (AIRI), AI Risk Index, and
 
 - Open **[brand-guide.html](brand-guide.html)** in a browser for a visual overview (self-contained, shareable)
 - Browse **[skill/logos/](skill/logos/)** for SVG and PNG logo files
+- Read **[CONTRIBUTING.md](CONTRIBUTING.md)** for a guided tour and cookbook — especially if you're auditing old work, reconciling a divergent fork, or proposing changes with an AI assistant (Claude Code, Codex, Cursor)
 
 ## Using with Claude
 
