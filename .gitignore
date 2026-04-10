@@ -5,4 +5,3 @@ Thumbs.db
 # Local-only (labs-publish metadata, dev symlink, experiments)
 project.yaml
 index.html
-dev/

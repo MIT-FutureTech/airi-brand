@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIRI Brand Identity Exploration</title>
+  <link rel="icon" type="image/svg+xml" href="../skill/logos/initiative/icon.svg">
+  <link rel="stylesheet" href="../skill/brand.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
+      color: var(--color-dark);
+      background: var(--color-white);
+      line-height: var(--line-height-normal);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--color-primary); text-decoration: none; }
+    a:hover { color: var(--color-primary-dark); }
+    img { max-width: 100%; height: auto; display: block; }
+
+    .page { max-width: 960px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+
+    /* Header */
+    .page-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
+    .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .page-header p { color: var(--color-gray); font-size: 0.9rem; line-height: 1.6; max-width: 600px; }
+    .page-header .provenance { font-size: 0.8rem; color: var(--color-gray); margin-top: 0.75rem; }
+    .page-header .provenance code { background: var(--color-background); padding: 1px 5px; border-radius: 3px; font-size: 0.75rem; }
+
+    /* Section */
+    section { margin-bottom: 3rem; }
+    section > h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem; }
+    section > .section-desc { color: var(--color-gray); font-size: 0.85rem; margin-bottom: 1.5rem; line-height: 1.6; }
+
+    /* Color palette */
+    .palette-group { margin-bottom: 2rem; }
+    .palette-group h3 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gray); margin-bottom: 0.75rem; }
+    .palette-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .color-chip {
+      display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+    }
+    .color-chip .swatch {
+      width: 64px; height: 64px; border-radius: 8px; border: 1px solid var(--color-border);
+    }
+    .color-chip .label { font-size: 0.7rem; font-family: monospace; color: var(--color-gray); text-align: center; }
+    .color-chip .name { font-size: 0.7rem; font-weight: 600; color: var(--color-dark); text-align: center; }
+
+    /* Image grid */
+    .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .image-card {
+      border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden;
+      background: var(--color-background);
+    }
+    .image-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .image-card .info { padding: 0.75rem 1rem; }
+    .image-card .info h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .image-card .info .tag {
+      display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.04em; background: rgba(163,32,53,0.08); color: var(--color-primary);
+      padding: 2px 6px; border-radius: 3px; margin-bottom: 0.4rem;
+    }
+    .image-card .info p { font-size: 0.75rem; color: var(--color-gray); line-height: 1.5; }
+    .image-card .swatches { display: flex; gap: 4px; margin-top: 0.5rem; }
+    .image-card .swatches .dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); }
+
+    /* Prompt detail (expandable) */
+    details { margin-top: 0.5rem; }
+    details summary {
+      font-size: 0.7rem; font-weight: 600; color: var(--color-gray); cursor: pointer;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    details .prompt-text {
+      margin-top: 0.35rem; font-family: monospace; font-size: 0.7rem; color: var(--color-gray);
+      line-height: 1.5; background: var(--color-white); border: 1px solid var(--color-border);
+      border-radius: 4px; padding: 0.5rem 0.75rem; white-space: pre-wrap; word-break: break-word;
+    }
+
+    /* Style guide summary */
+    .style-summary {
+      background: rgba(163,32,53,0.03); border: 1px solid rgba(163,32,53,0.1);
+      border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;
+    }
+    .style-summary h3 { font-size: 0.9rem; color: var(--color-primary); margin-bottom: 0.5rem; }
+    .style-summary p, .style-summary li { font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; }
+    .style-summary ul { padding-left: 1.25rem; margin-top: 0.35rem; }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="page-header">
+      <h1>Brand Identity Exploration</h1>
+      <p>Early iteration of AIRI's visual identity — color palette and generated image patterns. Developed during the website mockup project (March 2026) as a first pass at what the brand's visual language could look like.</p>
+      <div class="provenance">Source: <code>airi-mockup</code> project. Images generated with Gemini 3 Pro at 2K, 16:9.</div>
+    </div>
+
+    <!-- ===== COLOR PALETTE ===== -->
+    <section>
+      <h2>Color Palette</h2>
+      <p class="section-desc">Brand primaries from the AIRI identity, extended with a Set2-influenced qualitative palette for visual variety across images and data visualizations.</p>
+
+      <div class="palette-group">
+        <h3>Brand Primary</h3>
+        <div class="palette-row">
+          <div class="color-chip"><div class="swatch" style="background:#A32035"></div><div class="name">MIT Red</div><div class="label">#A32035</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#D07886"></div><div class="name">Rose</div><div class="label">#D07886</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#5E0E20"></div><div class="name">Dark Red</div><div class="label">#5E0E20</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#1A1A1A"></div><div class="name">Dark</div><div class="label">#1A1A1A</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#898A8D"></div><div class="name">Gray</div><div class="label">#898A8D</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#FAFAFA; border-color:#ddd"></div><div class="name">Background</div><div class="label">#FAFAFA</div></div>
+        </div>
+      </div>
+
+      <div class="palette-group">
+        <h3>Extended (Set2-influenced)</h3>
+        <div class="palette-row">
+          <div class="color-chip"><div class="swatch" style="background:#66C2A5"></div><div class="name">Teal</div><div class="label">#66C2A5</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#FC8D62"></div><div class="name">Coral</div><div class="label">#FC8D62</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#8DA0CB"></div><div class="name">Blue</div><div class="label">#8DA0CB</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#A6D854"></div><div class="name">Green</div><div class="label">#A6D854</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#E78AC3"></div><div class="name">Lavender</div><div class="label">#E78AC3</div></div>
+          <div class="color-chip"><div class="swatch" style="background:#E5C494"></div><div class="name">Sand</div><div class="label">#E5C494</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== IMAGE STYLE ===== -->
+    <section>
+      <h2>Image Style</h2>
+      <div class="style-summary">
+        <h3>Visual Philosophy</h3>
+        <p>Abstract geometric and mathematical art — tessellated patterns, network graphs, Voronoi diagrams, topological surfaces, lattice structures. Clean, precise, almost architectural. Like looking at the hidden mathematical structure beneath AI systems and their societal impacts.</p>
+        <ul>
+          <li><strong>Mood:</strong> Serious but elegant. Academic gravitas with visual sophistication.</li>
+          <li><strong>Rules:</strong> No text in images. No photorealistic elements. No AI-generated faces.</li>
+          <li><strong>Backgrounds:</strong> Off-white (#FAFAFA) or deep charcoal (#1A1A1A).</li>
+        </ul>
+      </div>
+      <p class="section-desc">Full style guide: <a href="IMAGE_STYLE.md">IMAGE_STYLE.md</a></p>
+    </section>
+
+    <!-- ===== IMAGE CATALOG ===== -->
+    <section>
+      <h2>Generated Images</h2>
+      <p class="section-desc">Each AIRI product maps to a distinct geometric pattern type that visually represents its function.</p>
+
+      <div class="image-grid">
+
+        <div class="image-card">
+          <img src="images/hero-pattern.jpg" alt="Hero pattern" loading="lazy">
+          <div class="info">
+            <span class="tag">Hero</span>
+            <h4>hero-pattern.jpg</h4>
+            <p>Flowing tessellated network graph. Used at 12% opacity as hero section background. Suggests interconnection and breadth.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#A32035"></div>
+              <div class="dot" style="background:#66C2A5"></div>
+              <div class="dot" style="background:#8DA0CB"></div>
+              <div class="dot" style="background:#FC8D62"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Wide panoramic abstract tessellated network graph, interconnected nodes and edges forming a flowing lattice structure, using colors #A32035 red, #66C2A5 teal, #8DA0CB blue, #FC8D62 coral on white #FAFAFA background, clean geometric precision, generative art style, mathematical beauty, no text, minimal and elegant</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/card-repository.jpg" alt="Repository" loading="lazy">
+          <div class="info">
+            <span class="tag">Repository</span>
+            <h4>card-repository.jpg</h4>
+            <p>Dense grid lattice. Structured knowledge taxonomy. Regular geometric tessellation with subtle color variation.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#A32035"></div>
+              <div class="dot" style="background:#66C2A5"></div>
+              <div class="dot" style="background:#8DA0CB"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract dense grid lattice pattern representing structured knowledge taxonomy, regular geometric tessellation with subtle color variation, using #A32035 red, #66C2A5 teal, #8DA0CB blue on off-white background, clean mathematical precision, generative art style, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/card-incidents.jpg" alt="Incidents" loading="lazy">
+          <div class="info">
+            <span class="tag">Incident Tracker</span>
+            <h4>card-incidents.jpg</h4>
+            <p>Branching fractal tree. Cascading events spreading outward in a dendritic network.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#FC8D62"></div>
+              <div class="dot" style="background:#A32035"></div>
+              <div class="dot" style="background:#E78AC3"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract branching fractal tree pattern representing cascading events, dendritic network spreading outward, using #FC8D62 coral, #A32035 red, #E78AC3 pink on off-white background, clean geometric precision, generative art style, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/card-governance.jpg" alt="Governance" loading="lazy">
+          <div class="info">
+            <span class="tag">Governance Map</span>
+            <h4>card-governance.jpg</h4>
+            <p>Overlapping circles and Venn diagrams. Concentric rings intersecting — jurisdictional overlap.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#8DA0CB"></div>
+              <div class="dot" style="background:#66C2A5"></div>
+              <div class="dot" style="background:#A32035"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract overlapping circles and Venn diagram pattern representing jurisdictional overlap, concentric rings intersecting, using #8DA0CB blue, #66C2A5 teal, #A32035 red on off-white background, clean mathematical precision, generative art, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/card-mitigations.jpg" alt="Mitigations" loading="lazy">
+          <div class="info">
+            <span class="tag">Mitigations</span>
+            <h4>card-mitigations.jpg</h4>
+            <p>Hexagonal tessellation honeycomb. Protective risk controls as a shield pattern.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#66C2A5"></div>
+              <div class="dot" style="background:#A32035"></div>
+              <div class="dot" style="background:#A6D854"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract hexagonal tessellation honeycomb pattern representing protective risk controls, using #66C2A5 teal, #A32035 red, #A6D854 green on off-white background, clean geometric precision, generative art style, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/card-blog-1.jpg" alt="Blog 1" loading="lazy">
+          <div class="info">
+            <span class="tag">Blog / General</span>
+            <h4>card-blog-1.jpg</h4>
+            <p>Wave interference pattern. Sinusoidal curves overlapping — emerging knowledge.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#E78AC3"></div>
+              <div class="dot" style="background:#66C2A5"></div>
+              <div class="dot" style="background:#FC8D62"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract flowing wave interference pattern, sinusoidal curves overlapping creating moire-like effects, using #E78AC3 pink, #66C2A5 teal, #FC8D62 coral on off-white background, clean geometric precision, generative art, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/card-blog-2.jpg" alt="Blog 2" loading="lazy">
+          <div class="info">
+            <span class="tag">Blog / General</span>
+            <h4>card-blog-2.jpg</h4>
+            <p>Voronoi diagram. Irregular polygonal cells — natural partitioning and categorization.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#8DA0CB"></div>
+              <div class="dot" style="background:#E5C494"></div>
+              <div class="dot" style="background:#A32035"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract Voronoi diagram pattern, irregular polygonal cells with colored fills, organic tessellation suggesting natural partitioning, using #8DA0CB blue, #E5C494 sand, #A32035 red on off-white background, clean geometric precision, generative art, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/card-blog-3.jpg" alt="Blog 3" loading="lazy">
+          <div class="info">
+            <span class="tag">Blog / General</span>
+            <h4>card-blog-3.jpg</h4>
+            <p>Topological surface contour lines. Smooth elevation gradients — the risk landscape.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#D07886"></div>
+              <div class="dot" style="background:#66C2A5"></div>
+              <div class="dot" style="background:#8DA0CB"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract topological surface contour lines and level sets, smooth curves with elevation gradients, mathematical landscape, using #D07886 rose, #66C2A5 teal, #8DA0CB blue on off-white background, clean geometric precision, generative art, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/snapshot-incidents.jpg" alt="Snapshot incidents" loading="lazy">
+          <div class="info">
+            <span class="tag">Snapshot</span>
+            <h4>snapshot-incidents.jpg</h4>
+            <p>Branching horizontal timelines diverging and converging — incidents over time.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#FC8D62"></div>
+              <div class="dot" style="background:#A32035"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract branching horizontal timeline lines diverging and converging, suggesting incident tracking over time, using warm coral #FC8D62 and #A32035 red on off-white background, clean geometric precision, generative art, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/snapshot-governance.jpg" alt="Snapshot governance" loading="lazy">
+          <div class="info">
+            <span class="tag">Snapshot</span>
+            <h4>snapshot-governance.jpg</h4>
+            <p>Overlapping translucent circular and polygonal regions on a grid — governance zones.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#8DA0CB"></div>
+              <div class="dot" style="background:#66C2A5"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract overlapping translucent circular and polygonal regions on a grid, suggesting geographic governance zones, using muted blue #8DA0CB and teal #66C2A5 on off-white background, clean geometric precision, generative art, no text</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="images/snapshot-mitigations.jpg" alt="Snapshot mitigations" loading="lazy">
+          <div class="info">
+            <span class="tag">Snapshot</span>
+            <h4>snapshot-mitigations.jpg</h4>
+            <p>Treemap visualization with nested rectangles and hierarchical subdivisions — taxonomy.</p>
+            <div class="swatches">
+              <div class="dot" style="background:#66C2A5"></div>
+              <div class="dot" style="background:#A6D854"></div>
+            </div>
+            <details>
+              <summary>Prompt</summary>
+              <div class="prompt-text">Abstract treemap visualization with nested rectangular regions and hierarchical subdivisions, suggesting taxonomy categorization, using soft teal #66C2A5 and green #A6D854 on off-white background, clean geometric precision, generative art, no text</div>
+            </details>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
