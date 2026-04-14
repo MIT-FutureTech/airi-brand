@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-175.14 -78.83 692.77 719.16" font-family="sans-serif">
+<defs><clipPath id="1dff2a3d3f"><path d="M 0 0.01 L 486.5 0.01 L 486.5 531.49 L 0 531.49 Z M 0 0.01 " clip-rule="nonzero"/></clipPath><clipPath id="d64dd6b48d"><path d="M 24.86 21 L 477.63 21 L 477.63 510.34 L 24.86 510.34 Z M 24.86 21 " clip-rule="nonzero"/></clipPath></defs>
+<text x="251.2" y="-38.8" text-anchor="middle" font-size="30" font-weight="700" fill="#111">AIRI icon — square reference</text>
+<g clip-path="url(#1dff2a3d3f)"></g><g clip-path="url(#d64dd6b48d)"><path fill="#e5d5d8" d="M 477.75 307.43 L 477.75 224.07 L 311.02 224.07 L 311.02 307.43 Z M 24.86 213.67 L 24.86 187.91 L 50.63 187.91 L 50.63 213.67 Z M 191.6 46.94 L 191.6 21.17 L 217.36 21.17 L 217.36 46.94 Z M 243.35 73.03 L 243.35 125.11 L 295.43 125.11 L 295.43 73.03 Z M 108.23 130.3 L 108.23 104.54 L 134 104.54 L 134 130.3 Z M 160.09 156.4 L 160.09 208.48 L 212.17 208.48 L 212.17 156.4 Z M 394.49 224.07 L 394.49 390.8 L 311.12 390.8 L 311.12 307.43 L 227.76 307.43 L 227.76 224.07 L 311.12 224.07 L 311.12 140.7 L 394.49 140.7 Z M 24.86 343.59 L 24.86 317.82 L 50.63 317.82 L 50.63 343.59 Z M 76.72 291.73 L 128.8 291.73 L 128.8 239.66 L 76.72 239.66 Z M 191.6 510.33 L 191.6 484.56 L 217.36 484.56 L 217.36 510.33 Z M 243.35 458.46 L 243.35 406.39 L 295.43 406.39 L 295.43 458.46 Z M 108.23 426.96 L 108.23 401.19 L 134 401.19 L 134 426.96 Z M 160.09 375.1 L 160.09 323.02 L 212.17 323.02 L 212.17 375.1 Z M 160.09 375.1 " fill-opacity="1" fill-rule="evenodd"/></g>
+<rect x="24.86" y="187.91" width="25.77" height="25.77" fill="none" stroke="#2563eb" stroke-width="3"/>
+<text x="37.7" y="200.8" text-anchor="middle" dominant-baseline="central" font-size="11.0" font-weight="700" fill="#1e3a8a">S1</text>
+<rect x="191.60" y="21.17" width="25.77" height="25.77" fill="none" stroke="#2563eb" stroke-width="3"/>
+<text x="204.5" y="34.1" text-anchor="middle" dominant-baseline="central" font-size="11.0" font-weight="700" fill="#1e3a8a">S2</text>
+<rect x="108.23" y="104.54" width="25.77" height="25.77" fill="none" stroke="#2563eb" stroke-width="3"/>
+<text x="121.1" y="117.4" text-anchor="middle" dominant-baseline="central" font-size="11.0" font-weight="700" fill="#1e3a8a">S3</text>
+<rect x="24.86" y="317.82" width="25.77" height="25.77" fill="none" stroke="#2563eb" stroke-width="3"/>
+<text x="37.7" y="330.7" text-anchor="middle" dominant-baseline="central" font-size="11.0" font-weight="700" fill="#1e3a8a">S4</text>
+<rect x="191.60" y="484.56" width="25.77" height="25.77" fill="none" stroke="#2563eb" stroke-width="3"/>
+<text x="204.5" y="497.4" text-anchor="middle" dominant-baseline="central" font-size="11.0" font-weight="700" fill="#1e3a8a">S5</text>
+<rect x="108.23" y="401.19" width="25.77" height="25.77" fill="none" stroke="#2563eb" stroke-width="3"/>
+<text x="121.1" y="414.1" text-anchor="middle" dominant-baseline="central" font-size="11.0" font-weight="700" fill="#1e3a8a">S6</text>
+<rect x="243.35" y="73.03" width="52.08" height="52.08" fill="none" stroke="#16a34a" stroke-width="3"/>
+<text x="269.4" y="99.1" text-anchor="middle" dominant-baseline="central" font-size="16.7" font-weight="700" fill="#14532d">M1</text>
+<rect x="160.09" y="156.40" width="52.08" height="52.08" fill="none" stroke="#16a34a" stroke-width="3"/>
+<text x="186.1" y="182.4" text-anchor="middle" dominant-baseline="central" font-size="16.7" font-weight="700" fill="#14532d">M2</text>
+<rect x="76.72" y="239.66" width="52.08" height="52.08" fill="none" stroke="#16a34a" stroke-width="3"/>
+<text x="102.8" y="265.7" text-anchor="middle" dominant-baseline="central" font-size="16.7" font-weight="700" fill="#14532d">M3</text>
+<rect x="243.35" y="406.39" width="52.08" height="52.08" fill="none" stroke="#16a34a" stroke-width="3"/>
+<text x="269.4" y="432.4" text-anchor="middle" dominant-baseline="central" font-size="16.7" font-weight="700" fill="#14532d">M4</text>
+<rect x="160.09" y="323.02" width="52.08" height="52.08" fill="none" stroke="#16a34a" stroke-width="3"/>
+<text x="186.1" y="349.1" text-anchor="middle" dominant-baseline="central" font-size="16.7" font-weight="700" fill="#14532d">M5</text>
+<rect x="311.12" y="140.70" width="83.36" height="83.36" fill="none" stroke="#ea580c" stroke-width="3"/>
+<text x="352.8" y="182.4" text-anchor="middle" dominant-baseline="central" font-size="26.7" font-weight="700" fill="#7c2d12">L1</text>
+<rect x="227.76" y="224.07" width="83.36" height="83.36" fill="none" stroke="#ea580c" stroke-width="3"/>
+<text x="269.4" y="265.8" text-anchor="middle" dominant-baseline="central" font-size="26.7" font-weight="700" fill="#7c2d12">L2</text>
+<rect x="311.12" y="224.07" width="83.36" height="83.36" fill="none" stroke="#ea580c" stroke-width="3"/>
+<text x="352.8" y="265.8" text-anchor="middle" dominant-baseline="central" font-size="26.7" font-weight="700" fill="#7c2d12">L3</text>
+<rect x="394.39" y="224.07" width="83.36" height="83.36" fill="none" stroke="#ea580c" stroke-width="3"/>
+<text x="436.1" y="265.8" text-anchor="middle" dominant-baseline="central" font-size="26.7" font-weight="700" fill="#7c2d12">L4</text>
+<rect x="311.12" y="307.43" width="83.36" height="83.36" fill="none" stroke="#ea580c" stroke-width="3"/>
+<text x="352.8" y="349.1" text-anchor="middle" dominant-baseline="central" font-size="26.7" font-weight="700" fill="#7c2d12">L5</text>
+<line x1="-35.14" y1="140.7" x2="-35.14" y2="390.8" stroke="#ea580c" stroke-width="3"/>
+<line x1="-45.14" y1="140.7" x2="-25.14" y2="140.7" stroke="#ea580c" stroke-width="3"/>
+<line x1="-45.14" y1="390.8" x2="-25.14" y2="390.8" stroke="#ea580c" stroke-width="3"/>
+<text x="-49.14" y="265.8" text-anchor="end" dominant-baseline="central" font-size="20" font-weight="700" fill="#7c2d12">3×L = 250.1</text>
+<rect x="24.86" y="560.3299999999999" width="26" height="26" fill="none" stroke="#2563eb" stroke-width="3"/>
+<text x="58.86" y="580.3299999999999" font-size="22" fill="#111">Small = 25.77</text>
+<rect x="175.7833333333333" y="560.3299999999999" width="26" height="26" fill="none" stroke="#16a34a" stroke-width="3"/>
+<text x="209.7833333333333" y="580.3299999999999" font-size="22" fill="#111">Medium = 52.08</text>
+<rect x="326.70666666666665" y="560.3299999999999" width="26" height="26" fill="none" stroke="#ea580c" stroke-width="3"/>
+<text x="360.70666666666665" y="580.3299999999999" font-size="22" fill="#111">Large = 83.36</text>
+</svg>
