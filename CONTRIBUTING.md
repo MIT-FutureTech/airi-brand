@@ -39,12 +39,22 @@ airi-brand/
 │   ├── BRAND.md            # Full brand specification (read this first)
 │   ├── brand.css           # Drop-in CSS with custom properties
 │   ├── tokens.json         # Machine-readable design tokens
-│   └── logos/              # SVG + PNG in three product families
-│       ├── initiative/     # General AIRI
-│       ├── index/          # AI Risk Index
-│       └── repository/     # AI Risk Repository
-├── brand-guide.html        # Visual brand guide (open in browser)
+│   └── logos/              # SVG + PNG, three product folders
+│       ├── initiative/     # General AIRI — icon + Initiative lockup
+│       ├── index/          # AI Risk Index — same icon + Index lockup
+│       └── repository/     # AI Risk Repository — same icon + Repository lockup
+├── guide/                  # ← visual brand guide (labs target + clone entry)
+│   ├── index.html          # Open in a browser for a one-page visual overview
+│   ├── logos/              # → symlink to ../skill/logos (stays DRY)
+│   ├── brand.css           # → symlink to ../skill/brand.css
+│   └── project.yaml        # labs-publish metadata
+├── dev/                    # Exploratory work, build tooling, experiments
+│   ├── logo-builder/       # Python builder that emits skill/logos/ contents
+│   └── brand-identity-exploration.html
+├── legacy/                 # Retired assets kept for reference
+│   └── logos/              # Pre-consolidation Index and Repository logos
 ├── airi-brand-skill.zip    # Upload this to Claude.ai projects
+├── CLAUDE.md               # Briefing for AI coding assistants (structure, rules)
 ├── README.md               # Quick start for consumers
 └── CONTRIBUTING.md         # This file
 ```
@@ -59,16 +69,9 @@ There are **three sources of truth**, and a change to one should usually update 
 
 If these drift apart, the brand is broken. Internal consistency is the first thing Jess will check when you flag a change.
 
-### The `dev` branch
+### Branches
 
-There is a separate `dev` branch for exploratory work — early iterations, proposed extensions, image style experiments. It contains a `dev/` folder that is gitignored on `main`. Check it out when you want to see what is being prototyped, but do not treat it as the brand:
-
-```bash
-git fetch origin
-git checkout dev
-# explore dev/brand-identity-exploration.html
-git checkout main   # go back to the real brand
-```
+**There is only `main`.** Early in the repo's life there was a separate `dev` branch for exploratory work, but it caused more pain than it solved (cherry-picks, stale labs content, files flickering in and out of the working tree on checkout). Everything — shipped brand kit, build tooling, experiments — lives on `main`. Exploratory work goes in the `dev/` folder, which is a normal tracked folder, not a branch.
 
 ### Before any work
 
@@ -275,9 +278,9 @@ plus a unified diff of the file changes. Do NOT attempt to commit or push.
 ## Common gotchas
 
 - **The three sources of truth must stay in sync.** `BRAND.md`, `brand.css`, and `tokens.json` are all authoritative. If you edit one, edit the others. AI assistants will sometimes only update one — check before committing.
-- **Logos are generated, not hand-drawn.** If a logo needs changing, the tooling lives in a separate repo ([airi-logo-development](https://github.com/MIT-FutureTech/airi-logo-development) if it exists). Do not hand-edit SVGs in `skill/logos/`.
+- **Logos are generated, not hand-drawn.** The builder lives in `dev/logo-builder/`. To regenerate or add a product lockup, edit `PRODUCTS` in `build.py`, run it, and copy the output over `skill/logos/`. Do not hand-edit SVGs in `skill/logos/`.
 - **The `skill/` folder is a Claude Code skill.** Do not rename it or move its contents around. Skills are located by path.
-- **The `dev/` folder is gitignored on `main`** and tracked on `dev`. If you put experimental work in `dev/` on `main`, it will stay local — that is the feature, not a bug.
+- **`guide/logos` and `guide/brand.css` are symlinks** to `../skill/logos` and `../skill/brand.css`. This keeps the visual brand guide in sync with the source without duplicating assets. Do not replace them with copies.
 - **Do not introduce new brand colors casually.** `BRAND.md` has an explicit rule against this. If you need a color that isn't there, raise it with Jess (Recipe 7), don't sneak it in.
 - **Use opacity for lighter fills**, not new colors. `rgba(163, 32, 53, 0.1)` is the pattern for "light red background."
 - **When in doubt about a file's purpose**, ask your AI assistant to read `README.md` + `skill/SKILL.md` before anything else.

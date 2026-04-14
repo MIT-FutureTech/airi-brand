@@ -4,8 +4,9 @@ Visual identity assets for the MIT AI Risk Initiative (AIRI), AI Risk Index, and
 
 ## Quick start
 
-- Open **[brand-guide.html](brand-guide.html)** in a browser for a visual overview (self-contained, shareable)
-- Browse **[skill/logos/](skill/logos/)** for SVG and PNG logo files
+- **Visual brand guide:** open **[guide/index.html](guide/index.html)** in a browser, or view it online at **[labs.aksaeri.com/airi/brand/](https://labs.aksaeri.com/airi/brand/)** — one logo, one icon, the palette, font, and sub-product lockups on a single page
+- Browse **[skill/logos/](skill/logos/)** for SVG and PNG logo files (`initiative/`, `index/`, `repository/`)
+- Read **[skill/BRAND.md](skill/BRAND.md)** for the full specification (colours, typography, component patterns)
 - Read **[CONTRIBUTING.md](CONTRIBUTING.md)** for a guided tour and cookbook — especially if you're auditing old work, reconciling a divergent fork, or proposing changes with an AI assistant (Claude Code, Codex, Cursor)
 
 ## Using with Claude
@@ -36,11 +37,11 @@ Claude will auto-trigger the skill when working on AIRI projects. You can also i
 | `skill/BRAND.md` | Full brand specification — colors, typography, logos, component patterns |
 | `skill/brand.css` | CSS custom properties, ready to import |
 | `skill/tokens.json` | Machine-readable design tokens |
-| `skill/logos/` | SVG + PNG logos for Index, Initiative, and Repository |
+| `skill/logos/` | SVG + PNG logos — one shared icon, three horizontal lockups (`initiative/`, `index/`, `repository/`) |
 
 ## Logo variants
 
-Each product (index, initiative, repository) has icon and horizontal layouts in four color variants:
+Each product folder (`initiative/`, `index/`, `repository/`) has an icon and a horizontal lockup in four colour variants. The icon is byte-identical across the three folders — only the horizontal lockup differs in its second wordmark line:
 
 | Variant | Use case |
 |---------|----------|
@@ -50,4 +51,4 @@ Each product (index, initiative, repository) has icon and horizontal layouts in 
 
 ## Logo development
 
-The build tooling for regenerating logos (font changes, layout tweaks, etc.) lives in a separate repository. See [airi-logo-development](https://github.com/MIT-FutureTech/airi-logo-development) if it exists, or ask the maintainer.
+The build tooling for regenerating logos lives in **[dev/logo-builder/](dev/logo-builder/)**. Run `python build.py` from a venv with the requirements installed, and the full set of icon + horizontal variants is emitted to `output/{initiative,index,repository}/`. To add a new product lockup, edit the `PRODUCTS` list at the top of `build.py`.

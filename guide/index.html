@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIRI Brand Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Figtree', sans-serif;
+    color: #1a1a1a;
+    background: #fafafa;
+    padding: 40px 24px 80px;
+    max-width: 1080px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+  h1 { font-size: 2rem; font-weight: 700; color: #A32035; margin-bottom: 6px; }
+  h1 span { color: #1a1a1a; font-weight: 400; }
+  .subtitle { color: #898A8D; margin-bottom: 40px; max-width: 720px; }
+  h2 {
+    font-size: 1.4rem; font-weight: 700; color: #1a1a1a;
+    margin-top: 56px; margin-bottom: 16px;
+    padding-bottom: 8px; border-bottom: 2px solid #A32035;
+  }
+  h3 { font-size: 1rem; font-weight: 600; color: #898A8D; margin: 20px 0 10px; text-transform: none; letter-spacing: 0; }
+  p, li { font-size: 0.95rem; line-height: 1.65; }
+  ul { padding-left: 20px; margin: 8px 0 16px; }
+  code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; }
+  a { color: #A32035; }
+  a:hover { color: #5E0E20; }
+
+  .note {
+    background: #fff; border-left: 3px solid #A32035;
+    padding: 12px 16px; margin: 16px 0;
+    border-radius: 0 8px 8px 0; font-size: 0.9rem;
+  }
+
+  /* Logo presentation */
+  .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
+  .logo-cell {
+    padding: 28px 24px;
+    border-radius: 10px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 140px;
+  }
+  .logo-cell.light { background: #fff; border: 1px solid #e0e0e0; }
+  .logo-cell.dark  { background: #1a1a1a; }
+  .logo-cell.red   { background: #A32035; }
+  .logo-cell .label {
+    display: block; font-size: 11px;
+    color: #898A8D;
+    margin-top: 14px;
+    font-family: ui-monospace, monospace;
+  }
+  .logo-cell.dark .label, .logo-cell.red .label { color: rgba(255,255,255,0.7); }
+  img.horiz { height: 72px; width: auto; max-width: 100%; }
+  img.icon  { width: 96px; height: 96px; }
+  img.horiz-sm { height: 56px; width: auto; max-width: 100%; }
+
+  /* Colour + typography */
+  .palette { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 8px; }
+  .swatch {
+    padding: 14px 16px; border-radius: 8px;
+    min-width: 150px; font-size: 0.85rem;
+  }
+  .swatch strong { display: block; font-weight: 700; margin-bottom: 3px; }
+  .swatch code { background: rgba(255,255,255,0.2); color: inherit; }
+
+  .type-sample { margin: 10px 0; }
+  .type-sample .label { font-size: 0.75rem; color: #898A8D; margin-bottom: 2px; }
+
+  /* Sub-product lockups — compact */
+  .subproduct {
+    background: #fff; border: 1px solid #e0e0e0; border-radius: 10px;
+    padding: 20px 24px; margin: 12px 0;
+  }
+  .subproduct h3 { margin: 0 0 8px; color: #1a1a1a; font-size: 1rem; }
+  .subproduct .folder { font-family: ui-monospace, monospace; color: #898A8D; font-size: 0.8rem; display: block; margin-bottom: 14px; }
+  .subproduct .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .subproduct .cell {
+    padding: 14px 8px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 68px;
+  }
+  .subproduct .cell.light { background: #fafafa; border: 1px solid #e0e0e0; }
+  .subproduct .cell.dark  { background: #1a1a1a; }
+  .subproduct .cell.red   { background: #A32035; }
+  .subproduct img { max-height: 44px; width: auto; max-width: 100%; }
+
+  /* Open questions */
+  details.qna {
+    background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+    padding: 14px 20px; margin: 10px 0;
+  }
+  details.qna summary {
+    cursor: pointer; font-weight: 600; font-size: 0.95rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  details.qna[open] summary { margin-bottom: 12px; }
+  .tag {
+    font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 10px;
+    color: #fff; background: #A32035;
+  }
+  .tag.grey { background: #898A8D; }
+  .tag.outline { background: #e0e0e0; color: #666; }
+
+  footer {
+    margin-top: 72px; padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+    color: #898A8D; font-size: 0.85rem;
+  }
+  footer a { color: #898A8D; text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>MIT AI Risk <span>Brand Guide</span></h1>
+<p class="subtitle">Visual identity for the AI Risk Initiative and its two named sub-products — the AI Risk Repository and the AI Risk Index. One shared icon, one type family, one palette, three product wordmarks.</p>
+
+<!-- ============================================================ -->
+<!-- 1. Logo -->
+<!-- ============================================================ -->
+<h2>1 · Logo</h2>
+<p>The primary mark is the Initiative horizontal lockup: the AIRI icon beside the two-line wordmark "MIT AI Risk / Initiative". Use this everywhere the brand needs a full name — navigation bars, document headers, hero sections.</p>
+
+<div class="logo-grid">
+  <div class="logo-cell light">
+    <img class="horiz" src="logos/initiative/horizontal-on-light.svg" alt="Initiative horizontal lockup on light">
+    <span class="label">horizontal-on-light</span>
+  </div>
+  <div class="logo-cell light">
+    <img class="horiz" src="logos/initiative/horizontal.svg" alt="Initiative horizontal lockup (default)">
+    <span class="label">horizontal (default)</span>
+  </div>
+  <div class="logo-cell dark">
+    <img class="horiz" src="logos/initiative/horizontal-on-dark.svg" alt="Initiative horizontal lockup on dark">
+    <span class="label">horizontal-on-dark</span>
+  </div>
+  <div class="logo-cell red">
+    <img class="horiz" src="logos/initiative/horizontal-on-red.svg" alt="Initiative horizontal lockup on red">
+    <span class="label">horizontal-on-red</span>
+  </div>
+</div>
+
+<div class="note">
+  Files: <code>skill/logos/initiative/horizontal*.svg</code> (and <code>.png</code>, 512 px tall). Text is rendered as outlined SVG paths, so the logo files have no font dependency. Lockup proportions are locked — the gap equals one "large square" in the icon, and the text is sized to span two medium squares.
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. Icon -->
+<!-- ============================================================ -->
+<h2>2 · Icon</h2>
+<p>The icon is the "plus of squares" mark, shared by all three products. Use it on its own for favicons, app icons, small nav contexts, and anywhere the wordmark would be illegible.</p>
+
+<div class="logo-grid">
+  <div class="logo-cell light">
+    <img class="icon" src="logos/initiative/icon-on-light.svg" alt="AIRI icon on light">
+    <span class="label">icon-on-light</span>
+  </div>
+  <div class="logo-cell light">
+    <img class="icon" src="logos/initiative/icon.svg" alt="AIRI icon (default)">
+    <span class="label">icon (default)</span>
+  </div>
+  <div class="logo-cell dark">
+    <img class="icon" src="logos/initiative/icon-on-dark.svg" alt="AIRI icon on dark">
+    <span class="label">icon-on-dark</span>
+  </div>
+  <div class="logo-cell red">
+    <img class="icon" src="logos/initiative/icon-on-red.svg" alt="AIRI icon on red">
+    <span class="label">icon-on-red</span>
+  </div>
+</div>
+
+<div class="note">
+  Files: <code>skill/logos/initiative/icon*.svg</code> (and <code>.png</code>, 1024×1024). Byte-identical copies also live in <code>skill/logos/index/</code> and <code>skill/logos/repository/</code> so consumers can grab one folder and have a complete set — do not modify the icon per product.
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. Font + colour -->
+<!-- ============================================================ -->
+<h2>3 · Font &amp; colour</h2>
+
+<h3>Figtree — the only brand font</h3>
+<p>Figtree is used for everything: UI, documents, the wordmark in the logo lockup. Available from <a href="https://fonts.google.com/specimen/Figtree">Google Fonts</a>. Weights: 400 (regular), 600 (semibold), 700 (bold).</p>
+
+<div class="type-sample">
+  <div class="label">Regular (400)</div>
+  <div style="font-weight:400; font-size:1.2rem">The quick brown fox jumps over the lazy dog</div>
+</div>
+<div class="type-sample">
+  <div class="label">Semibold (600)</div>
+  <div style="font-weight:600; font-size:1.2rem">The quick brown fox jumps over the lazy dog</div>
+</div>
+<div class="type-sample">
+  <div class="label">Bold (700)</div>
+  <div style="font-weight:700; font-size:1.2rem">The quick brown fox jumps over the lazy dog</div>
+</div>
+
+<h3>Palette</h3>
+<div class="palette">
+  <div class="swatch" style="background:#A32035; color:#fff">
+    <strong>Primary (MIT red)</strong>#A32035 · <code>primary</code></div>
+  <div class="swatch" style="background:#D07886; color:#fff">
+    <strong>Primary light</strong>#D07886 · <code>primary-light</code></div>
+  <div class="swatch" style="background:#5E0E20; color:#fff">
+    <strong>Primary dark</strong>#5E0E20 · <code>primary-dark</code></div>
+  <div class="swatch" style="background:#1A1A1A; color:#fff">
+    <strong>Dark</strong>#1A1A1A · <code>dark</code></div>
+  <div class="swatch" style="background:#898A8D; color:#fff">
+    <strong>Gray</strong>#898A8D · <code>gray</code></div>
+  <div class="swatch" style="background:#FAFAFA; color:#1a1a1a; border:1px solid #e0e0e0">
+    <strong>Background</strong>#FAFAFA · <code>background</code></div>
+  <div class="swatch" style="background:#FFFFFF; color:#1a1a1a; border:1px solid #e0e0e0">
+    <strong>White</strong>#FFFFFF · <code>white</code></div>
+</div>
+<ul>
+  <li><strong>Primary</strong> — buttons, links, headings, accents, the logo itself.</li>
+  <li><strong>Primary light / dark</strong> — hover tints and hover states respectively.</li>
+  <li><strong>Dark</strong> — body text and headings on light backgrounds.</li>
+  <li><strong>Gray</strong> — muted text, captions, secondary borders.</li>
+  <li>Do not introduce new brand colours. For lighter fills, use opacity variants of the primary (e.g., <code>rgba(163, 32, 53, 0.1)</code>).</li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- 4. Sub-project lockups -->
+<!-- ============================================================ -->
+<h2>4 · Sub-project lockups</h2>
+<p>Two sub-products have their own horizontal lockups. They share the icon and the first line of the wordmark with the Initiative; only the second line changes. Use the matching folder when you're specifically branding an Index or Repository surface. When in doubt, fall back to the Initiative lockup.</p>
+
+<div class="subproduct">
+  <h3>AI Risk Index</h3>
+  <span class="folder">skill/logos/index/horizontal*.svg</span>
+  <div class="row">
+    <div class="cell light"><img src="logos/index/horizontal-on-light.svg" alt="Index lockup on light"></div>
+    <div class="cell light"><img src="logos/index/horizontal.svg" alt="Index lockup default"></div>
+    <div class="cell dark"><img src="logos/index/horizontal-on-dark.svg" alt="Index lockup on dark"></div>
+    <div class="cell red"><img src="logos/index/horizontal-on-red.svg" alt="Index lockup on red"></div>
+  </div>
+</div>
+
+<div class="subproduct">
+  <h3>AI Risk Repository</h3>
+  <span class="folder">skill/logos/repository/horizontal*.svg</span>
+  <div class="row">
+    <div class="cell light"><img src="logos/repository/horizontal-on-light.svg" alt="Repository lockup on light"></div>
+    <div class="cell light"><img src="logos/repository/horizontal.svg" alt="Repository lockup default"></div>
+    <div class="cell dark"><img src="logos/repository/horizontal-on-dark.svg" alt="Repository lockup on dark"></div>
+    <div class="cell red"><img src="logos/repository/horizontal-on-red.svg" alt="Repository lockup on red"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. Open questions -->
+<!-- ============================================================ -->
+<h2>5 · Open questions</h2>
+<p>Internal notes on proposed extensions from the March 2026 website mockup project. Not part of the current brand — discuss with Jess before acting on any of these.</p>
+
+<details class="qna">
+  <summary><span class="tag">proposed</span> Extended colour palette for data visualisation</summary>
+  <p>The current 4-colour palette (red, rose, gray, dark) is insufficient for charts with 5+ series or image sets needing distinct identities. A ColorBrewer Set2-influenced secondary palette (teal / coral / blue / green / lavender / sand) has been prototyped.</p>
+  <p><strong>Key question:</strong> Should these become formal brand colours with CSS tokens, or a recommended supplementary palette without token status? Either way, it changes the current "do not introduce additional brand colours" rule.</p>
+</details>
+
+<details class="qna">
+  <summary><span class="tag">proposed</span> Image and illustration style guide</summary>
+  <p>The brand spec has no guidance on imagery. Proposed philosophy: abstract geometric and mathematical art (tessellations, network graphs, Voronoi diagrams), with each AIRI tool getting a signature visual motif. No text in images, no photorealism, no AI-generated faces. Photography only for headshots.</p>
+  <p><strong>Key question:</strong> How prescriptive should the pattern-to-tool mapping be? Strict rules ensure consistency; loose guidance allows flexibility.</p>
+</details>
+
+<details class="qna">
+  <summary><span class="tag grey">under review</span> Additional web component patterns</summary>
+  <p>Proposed additions: stats bar (primary numbers, gray labels), carousel with scroll-snap, greyscale partner logo display, blockquote testimonials, alternating section backgrounds. All emerged as necessary during the website mockup.</p>
+  <p><strong>Key question:</strong> Do these belong in the brand spec or a separate design system doc?</p>
+</details>
+
+<details class="qna">
+  <summary><span class="tag outline">out of scope</span> Findings belonging to a content/UX doc</summary>
+  <p>Tone of voice, CTA strategy by audience, data-freshness labelling — emerged from persona reviews but belong in a separate content and UX guidelines doc, not the brand.</p>
+</details>
+
+<!-- ============================================================ -->
+<!-- Footer -->
+<!-- ============================================================ -->
+<footer>
+  <p><strong>More detail:</strong> <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/skill/BRAND.md">skill/BRAND.md</a> has the full specification, including component patterns (buttons, cards, tables, charts). <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> explains how AI coding assistants should apply the brand to new artefacts.</p>
+  <p><strong>Contributing:</strong> this repository does not accept branches, issues, or pull requests. For changes or questions, contact <a href="mailto:jgra98@mit.edu">Jess Graham</a> or message her on Slack.</p>
+</footer>
+
+</body>
+</html>

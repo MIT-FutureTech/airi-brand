@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIRI horizontal lockup — variant comparison</title>
+<style>
+  :root {
+    --red: #a32035;
+    --bg: #fafafa;
+    --card: #ffffff;
+    --border: #e5e5e5;
+    --text: #111;
+    --muted: #666;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 80px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .container { max-width: 1080px; margin: 0 auto; }
+  header { margin-bottom: 40px; }
+  h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); margin: 0; max-width: 720px; }
+  h2 { font-size: 20px; margin: 48px 0 16px; letter-spacing: -0.01em; }
+  .reference {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .reference img { display: block; max-width: 520px; width: 100%; margin: 0 auto; }
+  .reference .caption { color: var(--muted); font-size: 14px; margin-top: 12px; text-align: center; }
+
+  .grid { display: flex; flex-direction: column; gap: 20px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .card header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 20px 28px 16px;
+    margin: 0;
+    border-bottom: 1px solid #f3f3f3;
+  }
+  .num {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--red);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    min-width: 36px;
+  }
+  .heading { flex: 1; }
+  .title { font-size: 17px; font-weight: 600; margin: 0 0 2px; }
+  .meta {
+    color: var(--muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+  }
+  .preview {
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+  }
+  .preview img { max-width: 100%; height: auto; display: block; }
+  .group-label {
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 32px 0 -8px;
+  }
+  footer {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .lh-compare .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 16px 16px 0;
+    border-bottom: 1px solid #f3f3f3;
+  }
+  .lh-compare .tabs button {
+    appearance: none;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 16px;
+    font: inherit;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    cursor: pointer;
+    margin-bottom: -1px;
+  }
+  .lh-compare .tabs button:hover { color: var(--text); }
+  .lh-compare .tabs button.active {
+    background: #fff;
+    border-color: var(--border);
+    color: var(--red);
+    font-weight: 600;
+  }
+  .preview.stacked {
+    position: relative;
+    min-height: 260px;
+    padding: 28px;
+  }
+  .preview.stacked img {
+    position: absolute;
+    top: 50%;
+    left: 28px;
+    transform: translateY(-50%);
+    height: 200px;
+    width: auto;
+    max-width: calc(100% - 56px);
+    opacity: 0;
+    transition: opacity 0.12s ease;
+    pointer-events: none;
+  }
+  .preview.stacked img.active {
+    opacity: 1;
+  }
+
+  .bounds-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text);
+  }
+  .bounds-toggle input { cursor: pointer; margin: 0; }
+
+  body.show-bounds .preview img {
+    outline: 1px solid #c8c8c8;
+    outline-offset: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AIRI horizontal lockup — variant comparison</h1>
+      <p class="sub">
+        Eleven variants of the horizontal lockup for the MIT AI Risk Initiative.
+        All use Figtree (400 for "MIT AI Risk", 700 for "Initiative"), no divider,
+        light background, and a gap of one large-square unit between icon and text.
+      </p>
+      <label class="bounds-toggle">
+        <input type="checkbox" id="bounds-toggle">
+        <span>Show bounding box around each lockup</span>
+      </label>
+    </header>
+
+    <h2>Reference grid</h2>
+    <div class="reference">
+      <img src="reference-grid.png" alt="Reference grid labelling every square in the AIRI icon">
+      <p class="caption">
+        The icon has three square sizes: <strong>S</strong> (25.77), <strong>M</strong> (52.08),
+        <strong>L</strong> (83.36). Five L squares form a plus in the centre; six S and five M
+        squares scatter around it. Orange bracket shows 3×L — the vertical span from the top of L1
+        to the bottom of L5.
+      </p>
+    </div>
+
+    <p class="group-label">Span variants — text fits between named squares</p>
+    <div class="grid">
+
+      <section class="card">
+        <header>
+          <div class="num">1</div>
+          <div class="heading">
+            <p class="title">Span: S2 → S5 (full icon height)</p>
+            <p class="meta">font ≈ 58.95pt · line-height 1.2 · cap-top of M on top of S2, baseline of "Initiative" on bottom of S5</p>
+          </div>
+        </header>
+        <div class="preview">
+          <img src="horizontal-1-span-S2-S5-on-light.png" alt="Variant 1: text spans full icon height">
+        </div>
+      </section>
+
+      <section class="card">
+        <header>
+          <div class="num">2</div>
+          <div class="heading">
+            <p class="title">Span: M1 → M4</p>
+            <p class="meta">font ≈ 46.45pt · line-height 1.2 · cap-top of M on top of M1, baseline of "Initiative" on bottom of M4</p>
+          </div>
+        </header>
+        <div class="preview">
+          <img src="horizontal-2-span-M1-M4-on-light.png" alt="Variant 2: text spans M1 to M4">
+        </div>
+      </section>
+
+      <section class="card">
+        <header>
+          <div class="num">3</div>
+          <div class="heading">
+            <p class="title">Span: L1 → L5 (central plus)</p>
+            <p class="meta">font ≈ 30.14pt · line-height 1.2 · cap-top of M on top of L1, baseline of "Initiative" on bottom of L5</p>
+          </div>
+        </header>
+        <div class="preview">
+          <img src="horizontal-3-span-L1-L5-on-light.png" alt="Variant 3: text spans L1 to L5">
+        </div>
+      </section>
+
+    </div>
+
+    <p class="group-label">Line-height × L1→L5 (variants 4–7) — click a tab to compare</p>
+    <p class="sub" style="margin-bottom: 16px; font-size: 14px;">
+      All four pin the text to L1→L5 (same vertical span as variant 3). As line-height tightens,
+      font grows to hold the span, so letters get bigger and lines crowd each other. The icon
+      stays in the same position in all four — toggle tabs to see the difference directly.
+    </p>
+    <div class="grid">
+      <section class="card lh-compare">
+        <div class="tabs">
+          <button type="button" data-lh="0.9">4 · lh 0.9 · 35.79pt</button>
+          <button type="button" data-lh="1.0">5 · lh 1.0 · 33.68pt</button>
+          <button type="button" data-lh="1.1">6 · lh 1.1 · 31.81pt</button>
+          <button type="button" data-lh="1.2" class="active">7 · lh 1.2 · 30.14pt (default)</button>
+        </div>
+        <div class="preview stacked">
+          <img src="horizontal-4-lh-0.9-on-light.png" data-lh="0.9" alt="Variant 4: line-height 0.9">
+          <img src="horizontal-5-lh-1.0-on-light.png" data-lh="1.0" alt="Variant 5: line-height 1.0">
+          <img src="horizontal-6-lh-1.1-on-light.png" data-lh="1.1" alt="Variant 6: line-height 1.1">
+          <img src="horizontal-7-lh-1.2-on-light.png" data-lh="1.2" class="active" alt="Variant 7: line-height 1.2">
+        </div>
+      </section>
+    </div>
+
+    <p class="group-label">Line-height × M1→M4 (variants 8–11) — click a tab to compare</p>
+    <p class="sub" style="margin-bottom: 16px; font-size: 14px;">
+      Same four line-heights, but pinned to the larger M1→M4 span (88.25 units vs 57.26 for L1→L5).
+      Text is noticeably bigger — letters reach roughly the vertical extent between the two medium
+      squares. Variant 11 (lh 1.2) matches variant 2.
+    </p>
+    <div class="grid">
+      <section class="card lh-compare">
+        <div class="tabs">
+          <button type="button" data-lh="0.9">8 · lh 0.9 · 55.16pt</button>
+          <button type="button" data-lh="1.0">9 · lh 1.0 · 51.91pt</button>
+          <button type="button" data-lh="1.1">10 · lh 1.1 · 49.03pt</button>
+          <button type="button" data-lh="1.2" class="active">11 · lh 1.2 · 46.45pt (= variant 2)</button>
+        </div>
+        <div class="preview stacked">
+          <img src="horizontal-8-m-lh-0.9-on-light.png" data-lh="0.9" alt="Variant 8: M-span line-height 0.9">
+          <img src="horizontal-9-m-lh-1.0-on-light.png" data-lh="1.0" alt="Variant 9: M-span line-height 1.0">
+          <img src="horizontal-10-m-lh-1.1-on-light.png" data-lh="1.1" alt="Variant 10: M-span line-height 1.1">
+          <img src="horizontal-11-m-lh-1.2-on-light.png" data-lh="1.2" class="active" alt="Variant 11: M-span line-height 1.2">
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      Generated by <code>dev/logo-builder/explore.py</code>.
+      Font: Figtree (variable), rendered as SVG outline paths.
+      PNG rendering via cairosvg.
+    </footer>
+  </div>
+  <script>
+    document.getElementById('bounds-toggle').addEventListener('change', (e) => {
+      document.body.classList.toggle('show-bounds', e.target.checked);
+    });
+    document.querySelectorAll('.lh-compare').forEach(card => {
+      const buttons = card.querySelectorAll('.tabs button');
+      const images = card.querySelectorAll('.preview img');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lh = btn.dataset.lh;
+          buttons.forEach(b => b.classList.toggle('active', b.dataset.lh === lh));
+          images.forEach(img => img.classList.toggle('active', img.dataset.lh === lh));
+        });
+      });
+    });
+  </script>
+</body>
+</html>
