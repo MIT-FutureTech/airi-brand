@@ -60,7 +60,15 @@ PNG_ICON_SIZE = 1024
 PNG_HORIZ_HEIGHT = 512
 
 LOCKUP_LINE1 = "MIT AI Risk"
-LOCKUP_LINE2 = "Initiative"
+
+# Product lockups share the icon and the first line ("MIT AI Risk"); only the
+# second line differs. Each product is written to its own subfolder under
+# OUTPUT/ so consumers can grab one folder and have a complete set.
+PRODUCTS = [
+    ("initiative", "Initiative"),
+    ("index", "Index"),
+    ("repository", "Repository"),
+]
 
 # Icon geometry landmarks, in sources/icon.svg source units. Hand-catalogued
 # from the path data — the icon is composed of small/medium/large squares.
@@ -237,7 +245,7 @@ def build_icon_svg(defs: str, body: str, tight: tuple, fill: str) -> str:
 # Horizontal lockup (icon + two-line text, no divider)
 # -----------------------------------------------------------------------------
 
-def build_horizontal_svg(defs: str, body: str, tight: tuple, fill: str) -> str:
+def build_horizontal_svg(defs: str, body: str, tight: tuple, fill: str, line2: str = "Initiative") -> str:
     min_x, min_y, vb_w, vb_h = tight
 
     icon_target_h = HORIZ_HEIGHT - ICON_MARGIN * 2
@@ -271,10 +279,10 @@ def build_horizontal_svg(defs: str, body: str, tight: tuple, fill: str) -> str:
     line2_y = line1_y + line_spacing
 
     d1, _ = text_to_path_d(LOCKUP_LINE1, 400, font_size, text_x, line1_y)
-    d2, _ = text_to_path_d(LOCKUP_LINE2, 700, font_size, text_x, line2_y)
+    d2, _ = text_to_path_d(line2, 700, font_size, text_x, line2_y)
 
     w1 = text_advance_width(LOCKUP_LINE1, 400, font_size)
-    w2 = text_advance_width(LOCKUP_LINE2, 700, font_size)
+    w2 = text_advance_width(line2, 700, font_size)
     # Symmetric right padding of one L-square.
     total_width = text_x + max(w1, w2) + gap
 
@@ -339,6 +347,52 @@ def horizontal_png_width(svg: str) -> int:
 # Main
 # -----------------------------------------------------------------------------
 
+def build_product(slug: str, line2: str, defs: str, body: str, tight: tuple) -> None:
+    """Write a full set of icon + horizontal variants for one product."""
+    out_dir = OUTPUT / slug
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    icon_variants = {
+        "icon.svg": BRAND_RED,
+        "icon-on-light.svg": BRAND_RED,
+        "icon-on-dark.svg": WHITE,
+    }
+    for name, fill in icon_variants.items():
+        svg = build_icon_svg(defs, body, tight, fill)
+        (out_dir / name).write_text(svg)
+        render_png(svg, out_dir / name.replace(".svg", ".png"),
+                   target_width=PNG_ICON_SIZE, target_height=PNG_ICON_SIZE)
+        print(f"  {slug}/{name}")
+
+    on_dark_icon = (out_dir / "icon-on-dark.svg").read_text()
+    red_icon = add_red_background(on_dark_icon)
+    (out_dir / "icon-on-red.svg").write_text(red_icon)
+    render_png(red_icon, out_dir / "icon-on-red.png",
+               target_width=PNG_ICON_SIZE, target_height=PNG_ICON_SIZE)
+    print(f"  {slug}/icon-on-red.svg")
+
+    lockup_variants = {
+        "horizontal.svg": BRAND_RED,
+        "horizontal-on-light.svg": BRAND_RED,
+        "horizontal-on-dark.svg": WHITE,
+    }
+    for name, fill in lockup_variants.items():
+        svg = build_horizontal_svg(defs, body, tight, fill, line2=line2)
+        (out_dir / name).write_text(svg)
+        render_png(svg, out_dir / name.replace(".svg", ".png"),
+                   target_height=PNG_HORIZ_HEIGHT,
+                   target_width=horizontal_png_width(svg))
+        print(f"  {slug}/{name}")
+
+    on_dark_lockup = (out_dir / "horizontal-on-dark.svg").read_text()
+    red_lockup = add_red_background(on_dark_lockup)
+    (out_dir / "horizontal-on-red.svg").write_text(red_lockup)
+    render_png(red_lockup, out_dir / "horizontal-on-red.png",
+               target_height=PNG_HORIZ_HEIGHT,
+               target_width=horizontal_png_width(red_lockup))
+    print(f"  {slug}/horizontal-on-red.svg")
+
+
 def main() -> None:
     OUTPUT.mkdir(exist_ok=True)
 
@@ -347,52 +401,12 @@ def main() -> None:
     min_x, min_y, w, h = tight
     print(f"  tight bounds: x={min_x:.2f} y={min_y:.2f} w={w:.2f} h={h:.2f}")
 
-    # --- Standalone icons ---
-    print("Building standalone icons...")
-    icon_variants = {
-        "icon.svg": BRAND_RED,
-        "icon-on-light.svg": BRAND_RED,
-        "icon-on-dark.svg": WHITE,
-    }
-    for name, fill in icon_variants.items():
-        svg = build_icon_svg(defs, body, tight, fill)
-        (OUTPUT / name).write_text(svg)
-        render_png(svg, OUTPUT / name.replace(".svg", ".png"),
-                   target_width=PNG_ICON_SIZE, target_height=PNG_ICON_SIZE)
-        print(f"  {name}")
+    for slug, line2 in PRODUCTS:
+        print(f"Building {slug} ({LOCKUP_LINE1} / {line2})...")
+        build_product(slug, line2, defs, body, tight)
 
-    # on-red derived from on-dark
-    on_dark_svg = (OUTPUT / "icon-on-dark.svg").read_text()
-    red_icon = add_red_background(on_dark_svg)
-    (OUTPUT / "icon-on-red.svg").write_text(red_icon)
-    render_png(red_icon, OUTPUT / "icon-on-red.png",
-               target_width=PNG_ICON_SIZE, target_height=PNG_ICON_SIZE)
-    print("  icon-on-red.svg")
-
-    # --- Horizontal lockups ---
-    print("Building horizontal lockups...")
-    lockup_variants = {
-        "horizontal.svg": BRAND_RED,
-        "horizontal-on-light.svg": BRAND_RED,
-        "horizontal-on-dark.svg": WHITE,
-    }
-    for name, fill in lockup_variants.items():
-        svg = build_horizontal_svg(defs, body, tight, fill)
-        (OUTPUT / name).write_text(svg)
-        render_png(svg, OUTPUT / name.replace(".svg", ".png"),
-                   target_height=PNG_HORIZ_HEIGHT,
-                   target_width=horizontal_png_width(svg))
-        print(f"  {name}")
-
-    on_dark_lockup = (OUTPUT / "horizontal-on-dark.svg").read_text()
-    red_lockup = add_red_background(on_dark_lockup)
-    (OUTPUT / "horizontal-on-red.svg").write_text(red_lockup)
-    render_png(red_lockup, OUTPUT / "horizontal-on-red.png",
-               target_height=PNG_HORIZ_HEIGHT,
-               target_width=horizontal_png_width(red_lockup))
-    print("  horizontal-on-red.svg")
-
-    print(f"\nDone. {len(list(OUTPUT.glob('*')))} files in {OUTPUT}")
+    total = sum(1 for _ in OUTPUT.rglob("*") if _.is_file())
+    print(f"\nDone. {total} files in {OUTPUT}")
 
 
 if __name__ == "__main__":
