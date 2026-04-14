@@ -8,6 +8,7 @@ Visual identity assets for the MIT AI Risk Initiative (AIRI), AI Risk Index, and
 - Browse **[skill/logos/](skill/logos/)** for SVG and PNG logo files (`initiative/`, `index/`, `repository/`)
 - Read **[skill/BRAND.md](skill/BRAND.md)** for the full specification (colours, typography, component patterns)
 - Read **[CONTRIBUTING.md](CONTRIBUTING.md)** for a guided tour and cookbook — especially if you're auditing old work, reconciling a divergent fork, or proposing changes with an AI assistant (Claude Code, Codex, Cursor)
+- **AI coding assistants:** read **[.claude/CLAUDE.md](.claude/CLAUDE.md)** before making changes — it briefs you on the repo structure, branch model, brand-guide rules, and common mistakes
 
 ## Using with Claude
 
