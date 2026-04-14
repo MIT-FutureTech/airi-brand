@@ -1,8 +1,19 @@
 # Working with the AIRI Brand Kit
 
-A guided tour and cookbook for exploring, adapting, and proposing changes to the AIRI (MIT AI Risk Initiative) brand. Written for people using AI coding assistants — **Claude Code**, **Codex**, **Cursor**, or similar — to interact with this repository.
+A guided tour and cookbook for exploring and adapting the AIRI (MIT AI Risk Initiative) brand. Written for people using AI coding assistants — **Claude Code**, **Codex**, **Cursor**, or similar — to interact with this repository.
 
 > **TL;DR** — Clone the repo, open it in your AI assistant, point it at `skill/BRAND.md`, and then pick a recipe below that matches your situation.
+
+> ### ⚠️ Do not contribute changes via GitHub
+>
+> This repository does **not** accept branches, feature additions, issues, or pull requests from contributors. GitHub is used for distribution, not collaboration.
+>
+> If you have a proposed change, bug report, or question about the brand, **contact Jess Graham directly**:
+>
+> - **Email:** [jgra98@mit.edu](mailto:jgra98@mit.edu)
+> - **Slack:** message Jess in the MIT AIRI workspace
+>
+> Please include rationale, use case, and (if possible) a screenshot or example. Jess will route it to the right place. Do **not** open a GitHub issue or PR — they will not be reviewed.
 
 ---
 
@@ -11,7 +22,7 @@ A guided tour and cookbook for exploring, adapting, and proposing changes to the
 - **You inherited a project** that uses old AIRI styling and you want to know what's current.
 - **You made changes weeks or months ago** and need to reconcile them with what has since landed.
 - **You're building something new** and want to apply AIRI branding without reinventing anything.
-- **You want to propose a change** to the brand itself, and you'd like it reviewed by the maintainers.
+- **You have a suggestion for the brand itself** and want to raise it with the maintainers (see the callout above — contact Jess Graham; do not open a PR).
 
 You do not need to be a designer. You do need to be comfortable reading diffs and steering an AI assistant through a small number of files.
 
@@ -38,7 +49,7 @@ airi-brand/
 └── CONTRIBUTING.md         # This file
 ```
 
-There are **three sources of truth**, and a PR that changes one should usually update all three:
+There are **three sources of truth**, and a change to one should usually update all three:
 
 | File | Purpose | Format |
 |---|---|---|
@@ -46,7 +57,7 @@ There are **three sources of truth**, and a PR that changes one should usually u
 | `skill/brand.css` | Runtime CSS | CSS custom properties |
 | `skill/tokens.json` | Programmatic tokens | JSON |
 
-If these drift apart, the brand is broken. Internal consistency is the first thing maintainers check.
+If these drift apart, the brand is broken. Internal consistency is the first thing Jess will check when you flag a change.
 
 ### The `dev` branch
 
@@ -175,31 +186,31 @@ Upload `airi-brand-skill.zip` as a project knowledge file. Claude will apply AIR
 
 ### Recipe 5 — Experiment locally without affecting anyone else
 
-**Scenario:** You want to try a variant of the brand to see if it works for your use case. You're not sure yet if it should ever land upstream.
+**Scenario:** You want to try a variant of the brand to see if it works for your use case. You're not sure yet whether it should influence the brand at all.
 
 **Approach:**
-1. Create a branch: `git checkout -b experiment/my-variant`
-2. Put working files in `dev/` — that folder is gitignored on `main`, so nothing will leak back
-3. Track your rationale in a short note (`dev/NOTES.md`) so you can explain the experiment later
-4. Rebase onto `main` occasionally to stay current: `git pull --rebase origin main`
+1. Work in your local clone. Do **not** push a branch to GitHub — this repo does not accept contributor branches.
+2. Put working files in `dev/` — that folder is gitignored on `main`, so nothing will leak back.
+3. Track your rationale in a short note (`dev/NOTES.md`) so you can explain the experiment later.
+4. Pull from `main` occasionally to stay current: `git pull origin main`
 
-If the experiment starts looking like a real proposal, jump to Recipe 7.
+If the experiment turns into something you think the brand should adopt, jump to Recipe 7 — you'll send it to Jess, not push a branch.
 
 ---
 
-### Recipe 6 — Reconcile a divergent fork or branch
+### Recipe 6 — Reconcile a divergent local copy
 
-**Scenario:** You (or a colleague) made changes to the brand weeks ago. Since then the brand has moved on. You need to figure out what's in, what's out, and what needs a decision.
+**Scenario:** You (or a colleague) made changes to the brand weeks or months ago in a local copy or fork. Since then the brand has moved on. You need to figure out what's in, what's out, and what's worth flagging to Jess.
 
 **Prompt:**
 ```
-I'm on branch [my-branch]. Compare it against origin/main for the
-skill/ folder only. For every divergence, categorize it:
+Compare my local copy against origin/main for the skill/ folder only.
+For every divergence, categorize it:
 
 (a) UPSTREAM WINS — main has evolved past mine; I should discard my
     version and take main's
 (b) MINE IS A LEGITIMATE EXTENSION — something I added that does not
-    conflict with main; worth considering as a PR
+    conflict with main; worth raising with Jess as a possible brand change
 (c) CONFLICT — both sides changed the same thing in incompatible ways;
     needs human judgment
 (d) UNRELATED — changes in files that have nothing to do with each other
@@ -208,40 +219,35 @@ For each item, show me: the file, a short description, and which bucket
 it's in. Do not attempt to resolve anything yet.
 
 When you're done, also tell me whether skill/BRAND.md, skill/brand.css,
-and skill/tokens.json are still internally consistent on my branch. If
+and skill/tokens.json are still internally consistent on my copy. If
 they've drifted apart on my side, flag it.
 ```
 
-**Expect back:** A reconciliation worksheet. Walk through it with the assistant one item at a time before touching files.
+**Expect back:** A reconciliation worksheet. Walk through it with the assistant one item at a time. Anything that ends up in bucket (b) goes to Jess (Recipe 7), not a GitHub PR.
 
 ---
 
 ### Recipe 7 — Propose a change to the brand
 
-**Scenario:** You've used the brand in anger and you're convinced something should change — a missing color, a component pattern, a rule that's causing pain. You'd like to propose it.
+**Scenario:** You've used the brand in anger and you're convinced something should change — a missing color, a component pattern, a rule that's causing pain. You'd like the brand itself to evolve.
 
-**Maintainers care about:**
+> **Reminder:** this repo does **not** accept GitHub branches, issues, or pull requests. All proposals go to Jess Graham — [jgra98@mit.edu](mailto:jgra98@mit.edu) or Slack.
+
+**What Jess needs in order to act on a proposal:**
 
 1. **Rationale.** What specific problem does this solve? Name the use case.
-2. **Internal consistency.** `BRAND.md`, `brand.css`, and `tokens.json` must stay in sync. A PR that updates only one is incomplete.
-3. **Scope discipline.** One concept per PR. If you want to add an extended palette *and* new components, that's two PRs.
-4. **Compatibility.** Does this break existing consumers? If so, what's the migration story?
-5. **Evidence.** Screenshots, before/after, or a link to the artifact that pushed you to propose this.
+2. **Scope.** One concept per proposal. If you want to add an extended palette *and* new components, that's two separate messages.
+3. **Compatibility.** Does this break existing consumers? If so, what's the migration story?
+4. **Evidence.** Screenshots, before/after, or a link to the artifact that pushed you to propose this.
+5. **Consistency (if you've drafted the change).** If you've already edited files locally, make sure `BRAND.md`, `brand.css`, and `tokens.json` are aligned — inconsistency is the first thing that will get the proposal bounced back.
 
 **Workflow:**
 
-```bash
-# 1. Open an issue FIRST with rationale. Don't skip this step — a 20-line
-#    issue can save you a 200-line PR that won't get merged.
-gh issue create --title "Proposal: ..." --body "..."
+1. **Draft the proposal locally (optional but helpful).** Edit the files on your machine so you can show Jess exactly what you have in mind. Use the prompt below.
+2. **Package it for Jess.** A short email or Slack message with the summary, rationale, and (if drafted) a diff or a zip of the edited files. You can also link to a local branch visible to Jess if you share a workstation.
+3. **Do not push a branch, open an issue, or open a PR on GitHub.** They will not be reviewed.
 
-# 2. Branch
-git checkout -b propose/extended-palette
-
-# 3. Make the change. Use your AI assistant:
-```
-
-**Prompt for step 3:**
+**Prompt for drafting the change locally:**
 ```
 I want to propose [change] to the AIRI brand. The rationale is: [why].
 
@@ -253,45 +259,15 @@ ALL THREE files consistently. Keep the tone and structure of BRAND.md
 matching what's already there. Update any "do not" rules if the proposal
 changes them.
 
-After the edits, produce a PR description I can paste into GitHub with:
+After the edits, produce a short write-up I can send to Jess with:
 - Summary (2-3 sentences)
 - Rationale (why this, why now, what it unlocks)
 - What changed (per file)
 - Compatibility notes
-- A checklist of things for reviewers to sanity-check
-```
+- Anything Jess should sanity-check
 
-```bash
-# 4. Commit, push, open PR
-git add skill/
-git commit -m "Proposal: extended palette for data visualization"
-git push -u origin propose/extended-palette
-gh pr create --title "..." --body "..."
-```
-
----
-
-### Recipe 8 — Review someone else's proposed change
-
-**Scenario:** A PR has landed and you want to understand what it actually does before approving.
-
-**Prompt:**
-```
-PR #[number] modifies the AIRI brand. Fetch it, then walk me through it:
-
-1. What is the proposal in one sentence?
-2. Which of the three sources of truth (BRAND.md, brand.css,
-   tokens.json) does it change, and are those changes consistent
-   with each other?
-3. Does it introduce any new colors, fonts, or rules that would
-   conflict with existing guidance?
-4. What downstream consumers would be affected (the skill, the
-   brand-guide, the logos)?
-5. Are there any "do not" rules in BRAND.md that this change
-   implicitly violates?
-
-Do not approve or reject — I want to make that call myself. Just give
-me the summary.
+Give me the write-up as plain text I can paste into an email or Slack,
+plus a unified diff of the file changes. Do NOT attempt to commit or push.
 ```
 
 ---
@@ -302,7 +278,7 @@ me the summary.
 - **Logos are generated, not hand-drawn.** If a logo needs changing, the tooling lives in a separate repo ([airi-logo-development](https://github.com/MIT-FutureTech/airi-logo-development) if it exists). Do not hand-edit SVGs in `skill/logos/`.
 - **The `skill/` folder is a Claude Code skill.** Do not rename it or move its contents around. Skills are located by path.
 - **The `dev/` folder is gitignored on `main`** and tracked on `dev`. If you put experimental work in `dev/` on `main`, it will stay local — that is the feature, not a bug.
-- **Do not introduce new brand colors casually.** `BRAND.md` has an explicit rule against this. If you need a color that isn't there, propose it (Recipe 7), don't sneak it in.
+- **Do not introduce new brand colors casually.** `BRAND.md` has an explicit rule against this. If you need a color that isn't there, raise it with Jess (Recipe 7), don't sneak it in.
 - **Use opacity for lighter fills**, not new colors. `rgba(163, 32, 53, 0.1)` is the pattern for "light red background."
 - **When in doubt about a file's purpose**, ask your AI assistant to read `README.md` + `skill/SKILL.md` before anything else.
 
@@ -310,10 +286,12 @@ me the summary.
 
 ## Getting help
 
-- **Questions about existing brand** → open an issue with the `question` label.
-- **Proposing a change** → open an issue with `enhancement` first, then a PR.
-- **Bug in the brand kit itself** (broken CSS, wrong token) → open an issue with `bug`.
-- **Browsing open proposals** → [open issues labeled `enhancement`](../../issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement).
+**All paths go through Jess Graham — [jgra98@mit.edu](mailto:jgra98@mit.edu) or Slack.** Do not open GitHub issues or PRs.
+
+- **Questions about the current brand** → email or Slack Jess. Include which file you were looking at.
+- **Proposing a change** → see Recipe 7. Draft locally if you can, then send the write-up and diff to Jess.
+- **Bug in the brand kit itself** (broken CSS, wrong token, stale asset) → email or Slack Jess with the file and a short description of the problem.
+- **Wondering if someone has already proposed the same thing** → ask Jess. Proposals are tracked outside GitHub.
 
 ---
 
@@ -325,4 +303,4 @@ This cookbook assumes you're working with an AI assistant. A few principles that
 - **Ask for a diff before any write.** "Show me the diff first" is the most valuable sentence in this workflow.
 - **Do not delegate judgment calls.** "Based on your audit, fix everything" is how drift gets introduced, not removed. Walk through the audit, make the calls yourself, and *then* ask for edits.
 - **Review the three-file consistency explicitly.** Assistants are not reliable at remembering to keep `BRAND.md`, `brand.css`, and `tokens.json` aligned unless you tell them to.
-- **Commit small.** One concept per commit, one concept per PR. The brand is a small artifact — big commits are a smell.
+- **Keep proposals small.** One concept per message to Jess. Bundling an extended palette *and* new components together will just slow things down — split them.
