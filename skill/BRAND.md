@@ -8,7 +8,7 @@ The MIT AI Risk Initiative (AIRI) is the umbrella project. It has two named sub-
 
 | Token | Hex | Role |
 |-------|-----|------|
-| `primary` | `#A32035` | MIT red. Buttons, links, headings, accents, logo |
+| `primary` | `#A32035` | AIRI red. Buttons, links, headings, accents, logo. Distinct from MIT's institutional red (`#750014`) |
 | `primary-light` | `#D07886` | Lighter accent. Hover tints, secondary highlights, tags |
 | `primary-dark` | `#5E0E20` | Darkest red. Hover states for primary buttons |
 | `dark` | `#1A1A1A` | Body text, headings on light backgrounds |
