@@ -22,7 +22,7 @@ Before generating any visual output for an AIRI project, read and apply the bran
 ## Quick reference
 
 **Colors:**
-- Primary (MIT red): `#A32035`
+- Primary (AIRI red): `#A32035`
 - Primary light: `#D07886`
 - Primary dark: `#5E0E20`
 - Text: `#1A1A1A`

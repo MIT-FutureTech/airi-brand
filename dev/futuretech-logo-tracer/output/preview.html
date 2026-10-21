@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FutureTech Logo Trace Preview</title>
+<style>
+  body { font-family: sans-serif; padding: 40px; background: #f0f0f0; }
+  h2 { margin-top: 40px; }
+  .preview { display: inline-block; margin: 10px; padding: 20px; border-radius: 8px; }
+  .preview.light { background: #fff; border: 1px solid #ddd; }
+  .preview.dark { background: #1a1a1a; }
+  .preview.red { background: #9A2030; }
+  .preview img { height: 120px; width: auto; }
+  .original img { height: 120px; width: auto; }
+  .label { font-size: 12px; color: #888; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1>FutureTech Logo Trace — Preview</h1>
+
+<h2>Original PNG</h2>
+<div class="preview light original">
+  <img src="/home/alex/inbox/futuretech_logo/MIT FutureTech-full.png" alt="Original">
+  <div class="label">Original PNG</div>
+</div>
+
+<h2>Traced SVG Variants</h2>
+<div>
+  <div class="preview light">
+    <img src="futuretech.svg" alt="default">
+    <div class="label">futuretech.svg (default)</div>
+  </div>
+  <div class="preview light">
+    <img src="futuretech-on-light.svg" alt="on-light">
+    <div class="label">futuretech-on-light.svg</div>
+  </div>
+  <div class="preview dark">
+    <img src="futuretech-on-dark.svg" alt="on-dark">
+    <div class="label" style="color: rgba(255,255,255,0.7)">futuretech-on-dark.svg</div>
+  </div>
+  <div class="preview red">
+    <img src="futuretech-on-red.svg" alt="on-red">
+    <div class="label" style="color: rgba(255,255,255,0.7)">futuretech-on-red.svg</div>
+  </div>
+</div>
+</body>
+</html>
