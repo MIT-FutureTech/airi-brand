@@ -81,14 +81,73 @@
   .subproduct .folder { font-family: ui-monospace, monospace; color: #898A8D; font-size: 0.8rem; display: block; margin-bottom: 14px; }
   .subproduct .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   .subproduct .cell {
-    padding: 14px 8px; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
+    padding: 14px 8px 10px; border-radius: 6px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px;
     min-height: 68px;
   }
   .subproduct .cell.light { background: #fafafa; border: 1px solid #e0e0e0; }
   .subproduct .cell.dark  { background: #1a1a1a; }
   .subproduct .cell.red   { background: #A32035; }
   .subproduct img { max-height: 44px; width: auto; max-width: 100%; }
+
+  /* Asset download links under each embedded logo/icon */
+  .asset-links { display: flex; gap: 6px; margin-top: 8px; }
+  .asset-links a {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid #898A8D;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.9);
+    color: #1a1a1a;
+    text-decoration: none;
+    font-family: ui-monospace, monospace;
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .asset-links a:hover {
+    background: #A32035; border-color: #A32035; color: #fff;
+  }
+  .logo-cell.dark .asset-links a,
+  .logo-cell.red .asset-links a,
+  .subproduct .cell.dark .asset-links a,
+  .subproduct .cell.red .asset-links a {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.92);
+  }
+  .logo-cell.dark .asset-links a:hover,
+  .logo-cell.red .asset-links a:hover,
+  .subproduct .cell.dark .asset-links a:hover,
+  .subproduct .cell.red .asset-links a:hover {
+    background: #fff; color: #1a1a1a; border-color: #fff;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 640px) {
+    body { padding: 24px 16px 60px; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.2rem; margin-top: 40px; }
+    .subtitle { margin-bottom: 28px; }
+
+    /* Cramped 4-column sub-product grid → 2 columns at phone width */
+    .subproduct { padding: 16px 14px; }
+    .subproduct .row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .subproduct img { max-height: 36px; }
+
+    /* Main logo cells: reduce padding so 96px icons aren't crowding the edges */
+    .logo-cell { padding: 20px 12px; min-height: 120px; }
+
+    /* Bigger tap targets for asset-link buttons on touch devices */
+    .asset-links { gap: 8px; margin-top: 10px; }
+    .asset-links a {
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+    }
+  }
 
   /* Open questions */
   details.qna {
@@ -131,18 +190,34 @@
   <div class="logo-cell light">
     <img class="horiz" src="logos/initiative/horizontal-on-light.svg" alt="Initiative horizontal lockup on light">
     <span class="label">horizontal-on-light</span>
+    <div class="asset-links">
+      <a href="logos/initiative/horizontal-on-light.svg" target="_blank" rel="noopener">SVG</a>
+      <a href="logos/initiative/horizontal-on-light.png" target="_blank" rel="noopener">PNG</a>
+    </div>
   </div>
   <div class="logo-cell light">
     <img class="horiz" src="logos/initiative/horizontal.svg" alt="Initiative horizontal lockup (default)">
     <span class="label">horizontal (default)</span>
+    <div class="asset-links">
+      <a href="logos/initiative/horizontal.svg" target="_blank" rel="noopener">SVG</a>
+      <a href="logos/initiative/horizontal.png" target="_blank" rel="noopener">PNG</a>
+    </div>
   </div>
   <div class="logo-cell dark">
     <img class="horiz" src="logos/initiative/horizontal-on-dark.svg" alt="Initiative horizontal lockup on dark">
     <span class="label">horizontal-on-dark</span>
+    <div class="asset-links">
+      <a href="logos/initiative/horizontal-on-dark.svg" target="_blank" rel="noopener">SVG</a>
+      <a href="logos/initiative/horizontal-on-dark.png" target="_blank" rel="noopener">PNG</a>
+    </div>
   </div>
   <div class="logo-cell red">
     <img class="horiz" src="logos/initiative/horizontal-on-red.svg" alt="Initiative horizontal lockup on red">
     <span class="label">horizontal-on-red</span>
+    <div class="asset-links">
+      <a href="logos/initiative/horizontal-on-red.svg" target="_blank" rel="noopener">SVG</a>
+      <a href="logos/initiative/horizontal-on-red.png" target="_blank" rel="noopener">PNG</a>
+    </div>
   </div>
 </div>
 
@@ -160,18 +235,34 @@
   <div class="logo-cell light">
     <img class="icon" src="logos/initiative/icon-on-light.svg" alt="AIRI icon on light">
     <span class="label">icon-on-light</span>
+    <div class="asset-links">
+      <a href="logos/initiative/icon-on-light.svg" target="_blank" rel="noopener">SVG</a>
+      <a href="logos/initiative/icon-on-light.png" target="_blank" rel="noopener">PNG</a>
+    </div>
   </div>
   <div class="logo-cell light">
     <img class="icon" src="logos/initiative/icon.svg" alt="AIRI icon (default)">
     <span class="label">icon (default)</span>
+    <div class="asset-links">
+      <a href="logos/initiative/icon.svg" target="_blank" rel="noopener">SVG</a>
+      <a href="logos/initiative/icon.png" target="_blank" rel="noopener">PNG</a>
+    </div>
   </div>
   <div class="logo-cell dark">
     <img class="icon" src="logos/initiative/icon-on-dark.svg" alt="AIRI icon on dark">
     <span class="label">icon-on-dark</span>
+    <div class="asset-links">
+      <a href="logos/initiative/icon-on-dark.svg" target="_blank" rel="noopener">SVG</a>
+      <a href="logos/initiative/icon-on-dark.png" target="_blank" rel="noopener">PNG</a>
+    </div>
   </div>
   <div class="logo-cell red">
     <img class="icon" src="logos/initiative/icon-on-red.svg" alt="AIRI icon on red">
     <span class="label">icon-on-red</span>
+    <div class="asset-links">
+      <a href="logos/initiative/icon-on-red.svg" target="_blank" rel="noopener">SVG</a>
+      <a href="logos/initiative/icon-on-red.png" target="_blank" rel="noopener">PNG</a>
+    </div>
   </div>
 </div>
 
@@ -235,10 +326,34 @@
   <h3>AI Risk Index</h3>
   <span class="folder">skill/logos/index/horizontal*.svg</span>
   <div class="row">
-    <div class="cell light"><img src="logos/index/horizontal-on-light.svg" alt="Index lockup on light"></div>
-    <div class="cell light"><img src="logos/index/horizontal.svg" alt="Index lockup default"></div>
-    <div class="cell dark"><img src="logos/index/horizontal-on-dark.svg" alt="Index lockup on dark"></div>
-    <div class="cell red"><img src="logos/index/horizontal-on-red.svg" alt="Index lockup on red"></div>
+    <div class="cell light">
+      <img src="logos/index/horizontal-on-light.svg" alt="Index lockup on light">
+      <div class="asset-links">
+        <a href="logos/index/horizontal-on-light.svg" target="_blank" rel="noopener">SVG</a>
+        <a href="logos/index/horizontal-on-light.png" target="_blank" rel="noopener">PNG</a>
+      </div>
+    </div>
+    <div class="cell light">
+      <img src="logos/index/horizontal.svg" alt="Index lockup default">
+      <div class="asset-links">
+        <a href="logos/index/horizontal.svg" target="_blank" rel="noopener">SVG</a>
+        <a href="logos/index/horizontal.png" target="_blank" rel="noopener">PNG</a>
+      </div>
+    </div>
+    <div class="cell dark">
+      <img src="logos/index/horizontal-on-dark.svg" alt="Index lockup on dark">
+      <div class="asset-links">
+        <a href="logos/index/horizontal-on-dark.svg" target="_blank" rel="noopener">SVG</a>
+        <a href="logos/index/horizontal-on-dark.png" target="_blank" rel="noopener">PNG</a>
+      </div>
+    </div>
+    <div class="cell red">
+      <img src="logos/index/horizontal-on-red.svg" alt="Index lockup on red">
+      <div class="asset-links">
+        <a href="logos/index/horizontal-on-red.svg" target="_blank" rel="noopener">SVG</a>
+        <a href="logos/index/horizontal-on-red.png" target="_blank" rel="noopener">PNG</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -246,10 +361,34 @@
   <h3>AI Risk Repository</h3>
   <span class="folder">skill/logos/repository/horizontal*.svg</span>
   <div class="row">
-    <div class="cell light"><img src="logos/repository/horizontal-on-light.svg" alt="Repository lockup on light"></div>
-    <div class="cell light"><img src="logos/repository/horizontal.svg" alt="Repository lockup default"></div>
-    <div class="cell dark"><img src="logos/repository/horizontal-on-dark.svg" alt="Repository lockup on dark"></div>
-    <div class="cell red"><img src="logos/repository/horizontal-on-red.svg" alt="Repository lockup on red"></div>
+    <div class="cell light">
+      <img src="logos/repository/horizontal-on-light.svg" alt="Repository lockup on light">
+      <div class="asset-links">
+        <a href="logos/repository/horizontal-on-light.svg" target="_blank" rel="noopener">SVG</a>
+        <a href="logos/repository/horizontal-on-light.png" target="_blank" rel="noopener">PNG</a>
+      </div>
+    </div>
+    <div class="cell light">
+      <img src="logos/repository/horizontal.svg" alt="Repository lockup default">
+      <div class="asset-links">
+        <a href="logos/repository/horizontal.svg" target="_blank" rel="noopener">SVG</a>
+        <a href="logos/repository/horizontal.png" target="_blank" rel="noopener">PNG</a>
+      </div>
+    </div>
+    <div class="cell dark">
+      <img src="logos/repository/horizontal-on-dark.svg" alt="Repository lockup on dark">
+      <div class="asset-links">
+        <a href="logos/repository/horizontal-on-dark.svg" target="_blank" rel="noopener">SVG</a>
+        <a href="logos/repository/horizontal-on-dark.png" target="_blank" rel="noopener">PNG</a>
+      </div>
+    </div>
+    <div class="cell red">
+      <img src="logos/repository/horizontal-on-red.svg" alt="Repository lockup on red">
+      <div class="asset-links">
+        <a href="logos/repository/horizontal-on-red.svg" target="_blank" rel="noopener">SVG</a>
+        <a href="logos/repository/horizontal-on-red.png" target="_blank" rel="noopener">PNG</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -270,18 +409,30 @@
   <div class="logo-cell light">
     <img class="horiz" src="logos/futuretech/futuretech.svg" alt="FutureTech logo (default)" style="height:48px">
     <span class="label">futuretech (default)</span>
+    <div class="asset-links">
+      <a href="logos/futuretech/futuretech.svg" target="_blank" rel="noopener">SVG</a>
+    </div>
   </div>
   <div class="logo-cell light">
     <img class="horiz" src="logos/futuretech/futuretech-on-light.svg" alt="FutureTech logo on light" style="height:48px">
     <span class="label">futuretech-on-light</span>
+    <div class="asset-links">
+      <a href="logos/futuretech/futuretech-on-light.svg" target="_blank" rel="noopener">SVG</a>
+    </div>
   </div>
   <div class="logo-cell dark">
     <img class="horiz" src="logos/futuretech/futuretech-on-dark.svg" alt="FutureTech logo on dark" style="height:48px">
     <span class="label">futuretech-on-dark</span>
+    <div class="asset-links">
+      <a href="logos/futuretech/futuretech-on-dark.svg" target="_blank" rel="noopener">SVG</a>
+    </div>
   </div>
   <div class="logo-cell red">
     <img class="horiz" src="logos/futuretech/futuretech-on-red.svg" alt="FutureTech logo on red" style="height:48px">
     <span class="label">futuretech-on-red</span>
+    <div class="asset-links">
+      <a href="logos/futuretech/futuretech-on-red.svg" target="_blank" rel="noopener">SVG</a>
+    </div>
   </div>
 </div>
 
