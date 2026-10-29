@@ -13,7 +13,6 @@ skill/                 the brand kit; also a Claude skill (path-sensitive: don't
   logos/initiative/    the AIRI icon + horizontal logo, 4 variants, SVG + PNG
   logos/futuretech/    MIT FutureTech parent logo, 4 variants, SVG (traced from FutureTech's PNG)
 guide/index.html       one-page visual guide; guide/logos and guide/brand.css are symlinks into skill/
-guide/project.yaml     metadata for the page's listing on a personal static host
 airi-brand-skill.zip   skill/ zipped for Claude.ai upload
 dev/logo-builder/      build.py generates skill/logos/initiative/ (output/ is gitignored)
 legacy/logos/          retired Index and Repository lockups
