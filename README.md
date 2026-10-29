@@ -1,55 +1,46 @@
 # AIRI Brand Kit
 
-Visual identity assets for the MIT AI Risk Initiative (AIRI), AI Risk Index, and AI Risk Repository.
+The visual identity of the MIT AI Risk Initiative (AIRI): logo, icon, colours and font, plus a Claude skill that applies them to generated work. Use it for all AIRI work, including the AI Risk Repository and the AI Risk Index.
 
-## Quick start
+## Start here
 
-- **Visual brand guide:** open **[guide/index.html](guide/index.html)** in a browser, or view it online at **[labs.aksaeri.com/airi/brand/](https://labs.aksaeri.com/airi/brand/)** — one logo, one icon, the palette, font, and sub-product lockups on a single page
-- Browse **[skill/logos/](skill/logos/)** for SVG and PNG logo files (`initiative/`, `index/`, `repository/`)
-- Read **[skill/BRAND.md](skill/BRAND.md)** for the full specification (colours, typography, component patterns)
-- Read **[CONTRIBUTING.md](CONTRIBUTING.md)** for a guided tour and cookbook — especially if you're auditing old work, reconciling a divergent fork, or proposing changes with an AI assistant (Claude Code, Codex, Cursor)
-- **AI coding assistants:** read **[.claude/CLAUDE.md](.claude/CLAUDE.md)** before making changes — it briefs you on the repo structure, branch model, brand-guide rules, and common mistakes
-
-## Using with Claude
-
-### Upload to Claude.ai
-
-Download **[airi-brand-skill.zip](airi-brand-skill.zip)** and upload it to a Claude conversation as a project knowledge file. Claude will automatically apply AIRI branding when generating HTML, CSS, charts, or other visual output.
-
-### Claude Code skill
-
-The `skill/` folder is a self-contained Claude Code skill. To install:
-
-```bash
-# Personal (all projects)
-ln -s /path/to/this/repo/skill ~/.claude/skills/airi-brand
-
-# Or project-specific
-ln -s /path/to/this/repo/skill .claude/skills/airi-brand
-```
-
-Claude will auto-trigger the skill when working on AIRI projects. You can also invoke it manually with `/airi-brand`.
-
-## What's in the skill
-
-| File | Purpose |
-|------|---------|
-| `skill/SKILL.md` | Skill entry point — triggers, instructions, quick reference |
-| `skill/BRAND.md` | Full brand specification — colors, typography, logos, component patterns |
-| `skill/brand.css` | CSS custom properties, ready to import |
-| `skill/tokens.json` | Machine-readable design tokens |
-| `skill/logos/` | SVG + PNG logos — one shared icon, three horizontal lockups (`initiative/`, `index/`, `repository/`) |
+- **See the brand:** open [guide/index.html](guide/index.html) in a browser. It shows the logo, icon, font, palette and the MIT FutureTech parent logo on one page, with download links for each file.
+- **Get the logo files:** [skill/logos/initiative/](skill/logos/initiative/) has the AIRI icon and horizontal logo as SVG and PNG. [skill/logos/futuretech/](skill/logos/futuretech/) has the FutureTech logo for co-branded materials.
+- **Read the full spec:** [skill/BRAND.md](skill/BRAND.md) covers colours, typography, logo usage and component patterns (buttons, cards, tables, charts).
+- **Ask a question or propose a change:** open a [GitHub issue](https://github.com/MIT-FutureTech/airi-brand/issues). See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Logo variants
 
-Each product folder (`initiative/`, `index/`, `repository/`) has an icon and a horizontal lockup in four colour variants. The icon is byte-identical across the three folders — only the horizontal lockup differs in its second wordmark line:
+Every logo comes in four colour variants:
 
-| Variant | Use case |
-|---------|----------|
-| default / `-on-light` | Light backgrounds (red content, transparent bg) |
-| `-on-dark` | Dark backgrounds (white content, transparent bg) |
-| `-on-red` | Self-contained with #A32035 background (documents, slides) |
+| File | Use on |
+|------|--------|
+| default / `-on-light` | White or light backgrounds (red logo, transparent background) |
+| `-on-dark` | Dark backgrounds (white logo, transparent background) |
+| `-on-red` | Anywhere you need a self-contained logo (white logo on brand red) |
 
-## Logo development
+## Using the brand with Claude
 
-The build tooling for regenerating logos lives in **[dev/logo-builder/](dev/logo-builder/)**. Run `python build.py` from a venv with the requirements installed, and the full set of icon + horizontal variants is emitted to `output/{initiative,index,repository}/`. To add a new product lockup, edit the `PRODUCTS` list at the top of `build.py`.
+In Claude.ai, upload [airi-brand-skill.zip](airi-brand-skill.zip) as a skill or project file. Claude will apply AIRI branding to HTML, charts, slides and other visual output.
+
+In Claude Code, the `skill/` folder works as a skill on its own. Link it into your skills folder:
+
+```bash
+# For all your projects
+ln -s /path/to/airi-brand/skill ~/.claude/skills/airi-brand
+
+# For one project
+ln -s /path/to/airi-brand/skill .claude/skills/airi-brand
+```
+
+Claude Code picks it up when you mention AIRI, the Repository or the Index. You can also run `/airi-brand`.
+
+## What's in the repo
+
+| Path | What it is |
+|------|------------|
+| `skill/` | The brand kit itself: `BRAND.md` (spec), `SKILL.md` (Claude skill entry point), `brand.css` (CSS custom properties), `tokens.json` (design tokens), `logos/` |
+| `guide/` | The one-page visual guide. `guide/logos` and `guide/brand.css` link back into `skill/`, so the guide always shows the current files |
+| `airi-brand-skill.zip` | `skill/` packaged for upload to Claude.ai |
+| `dev/logo-builder/` | The Python script that generates the AIRI logo files (see its README) |
+| `legacy/logos/` | Retired Index and Repository logos. Don't use them for new work |

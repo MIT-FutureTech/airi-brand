@@ -14,8 +14,8 @@ Pipeline:
 Design decisions:
     - No divider line (removed from old build)
     - Figtree everywhere (400 for "MIT AI Risk", 700 for "Initiative")
-    - Horizontal lockup proportions (locked after variant comparison in
-      dev/logo-builder/output/variants/):
+    - Horizontal lockup proportions (locked after a side-by-side variant
+      comparison in April 2026):
         - Gap between icon and text = 1 × L-square (the largest square in
           the icon), computed from the icon's own geometry
         - Text is pinned to the M1→M4 vertical span: cap-top of "MIT AI Risk"
@@ -63,11 +63,10 @@ LOCKUP_LINE1 = "MIT AI Risk"
 
 # Product lockups share the icon and the first line ("MIT AI Risk"); only the
 # second line differs. Each product is written to its own subfolder under
-# OUTPUT/ so consumers can grab one folder and have a complete set.
+# OUTPUT/. The Index and Repository lockups are retired (see legacy/logos/);
+# add a ("slug", "Line two") pair here to build another one.
 PRODUCTS = [
     ("initiative", "Initiative"),
-    ("index", "Index"),
-    ("repository", "Repository"),
 ]
 
 # Icon geometry landmarks, in sources/icon.svg source units. Hand-catalogued

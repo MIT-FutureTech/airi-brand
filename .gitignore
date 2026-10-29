@@ -2,10 +2,15 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-# Python / build artefacts inside the logo builder
+# Local Claude Code settings (per machine)
+.claude/settings.local.json
+.claude/launch.json
+
+# Logo builder: environment and generated output (regenerate with build.py)
 dev/logo-builder/venv/
 dev/logo-builder/__pycache__/
 dev/logo-builder/**/__pycache__/
+dev/logo-builder/output/
 
 # Local scratch
 tmp/

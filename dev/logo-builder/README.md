@@ -7,7 +7,7 @@ two-line wordmark) in four colour variants: default (red on transparent),
 
 ## What it produces
 
-Running `build.py` writes 16 files into `output/`:
+Running `build.py` writes 16 files into `output/initiative/`:
 
 - `icon.svg` / `icon.png` — red on transparent (default)
 - `icon-on-light.svg` / `.png` — red on transparent (light bg)
@@ -20,9 +20,8 @@ Running `build.py` writes 16 files into `output/`:
 
 ## Sources
 
-- `sources/icon.svg` — the AIRI Initiative icon. This is now the single
-  canonical icon for the whole brand; the old index and repository icons
-  have been retired to `skill/logos/legacy/`.
+- `sources/icon.svg` — the AIRI icon, the single canonical icon for the
+  whole brand.
 - `fonts/Figtree[wght].ttf` — the Figtree variable font (SIL OFL, see
   `fonts/OFL.txt`). The builder instantiates weight 400 for "MIT AI Risk"
   and weight 700 for "Initiative".
@@ -53,8 +52,11 @@ source venv/bin/activate
 python build.py
 ```
 
-Outputs land in `output/`. To refresh `skill/logos/initiative/`, copy
-from there after checking the result visually.
+Outputs land in `output/` (gitignored). To refresh `skill/logos/initiative/`,
+copy from `output/initiative/` after checking the result visually.
+
+To build another product lockup, add a `("slug", "Line two")` pair to
+`PRODUCTS` at the top of `build.py`.
 
 ## Dependencies
 

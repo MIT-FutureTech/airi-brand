@@ -72,26 +72,6 @@
   .type-sample { margin: 10px 0; }
   .type-sample .label { font-size: 0.75rem; color: #898A8D; margin-bottom: 2px; }
 
-  /* Sub-product lockups — compact */
-  .subproduct {
-    background: #fff; border: 1px solid #e0e0e0; border-radius: 10px;
-    padding: 20px 24px; margin: 12px 0;
-  }
-  .subproduct h3 { margin: 0 0 8px; color: #1a1a1a; font-size: 1rem; }
-  .subproduct .folder { font-family: ui-monospace, monospace; color: #898A8D; font-size: 0.8rem; display: block; margin-bottom: 14px; }
-  .subproduct .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .subproduct .cell {
-    padding: 14px 8px 10px; border-radius: 6px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 8px;
-    min-height: 68px;
-  }
-  .subproduct .cell.light { background: #fafafa; border: 1px solid #e0e0e0; }
-  .subproduct .cell.dark  { background: #1a1a1a; }
-  .subproduct .cell.red   { background: #A32035; }
-  .subproduct img { max-height: 44px; width: auto; max-width: 100%; }
-
   /* Asset download links under each embedded logo/icon */
   .asset-links { display: flex; gap: 6px; margin-top: 8px; }
   .asset-links a {
@@ -111,17 +91,13 @@
     background: #A32035; border-color: #A32035; color: #fff;
   }
   .logo-cell.dark .asset-links a,
-  .logo-cell.red .asset-links a,
-  .subproduct .cell.dark .asset-links a,
-  .subproduct .cell.red .asset-links a {
+  .logo-cell.red .asset-links a {
     background: rgba(255,255,255,0.1);
     border-color: rgba(255,255,255,0.45);
     color: rgba(255,255,255,0.92);
   }
   .logo-cell.dark .asset-links a:hover,
-  .logo-cell.red .asset-links a:hover,
-  .subproduct .cell.dark .asset-links a:hover,
-  .subproduct .cell.red .asset-links a:hover {
+  .logo-cell.red .asset-links a:hover {
     background: #fff; color: #1a1a1a; border-color: #fff;
   }
 
@@ -131,11 +107,6 @@
     h1 { font-size: 1.6rem; }
     h2 { font-size: 1.2rem; margin-top: 40px; }
     .subtitle { margin-bottom: 28px; }
-
-    /* Cramped 4-column sub-product grid → 2 columns at phone width */
-    .subproduct { padding: 16px 14px; }
-    .subproduct .row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .subproduct img { max-height: 36px; }
 
     /* Main logo cells: reduce padding so 96px icons aren't crowding the edges */
     .logo-cell { padding: 20px 12px; min-height: 120px; }
@@ -178,13 +149,13 @@
 <body>
 
 <h1>MIT AI Risk <span>Brand Guide</span></h1>
-<p class="subtitle">Visual identity for the AI Risk Initiative and its two named sub-products — the AI Risk Repository and the AI Risk Index. One shared icon, one type family, one palette, three product wordmarks.</p>
+<p class="subtitle">Visual identity for the MIT AI Risk Initiative, including the AI Risk Repository and the AI Risk Index. One logo, one icon, one type family, one palette.</p>
 
 <!-- ============================================================ -->
 <!-- 1. Logo -->
 <!-- ============================================================ -->
 <h2>1 · Logo</h2>
-<p>The primary mark is the Initiative horizontal lockup: the AIRI icon beside the two-line wordmark "MIT AI Risk / Initiative". Use this everywhere the brand needs a full name — navigation bars, document headers, hero sections.</p>
+<p>The AIRI logo is the icon beside the two-line wordmark "MIT AI Risk / Initiative". Use it for all AIRI work, including the Repository and the Index, wherever the brand needs a full name: navigation bars, document headers, hero sections.</p>
 
 <div class="logo-grid">
   <div class="logo-cell light">
@@ -229,7 +200,7 @@
 <!-- 2. Icon -->
 <!-- ============================================================ -->
 <h2>2 · Icon</h2>
-<p>The icon is the "plus of squares" mark, shared by all three products. Use it on its own for favicons, app icons, small nav contexts, and anywhere the wordmark would be illegible.</p>
+<p>The icon is the "plus of squares" mark. Use it on its own for favicons, app icons, small nav contexts, and anywhere the wordmark would be illegible.</p>
 
 <div class="logo-grid">
   <div class="logo-cell light">
@@ -267,7 +238,7 @@
 </div>
 
 <div class="note">
-  Files: <code>skill/logos/initiative/icon*.svg</code> (and <code>.png</code>, 1024×1024). Byte-identical copies also live in <code>skill/logos/index/</code> and <code>skill/logos/repository/</code> so consumers can grab one folder and have a complete set — do not modify the icon per product.
+  Files: <code>skill/logos/initiative/icon*.svg</code> (and <code>.png</code>, 1024×1024).
 </div>
 
 <!-- ============================================================ -->
@@ -317,91 +288,15 @@
 </ul>
 
 <!-- ============================================================ -->
-<!-- 4. Sub-project lockups -->
+<!-- 4. Parent organisation logo -->
 <!-- ============================================================ -->
-<h2>4 · Sub-project lockups</h2>
-<p>Two sub-products have their own horizontal lockups. They share the icon and the first line of the wordmark with the Initiative; only the second line changes. Use the matching folder when you're specifically branding an Index or Repository surface. When in doubt, fall back to the Initiative lockup.</p>
-
-<div class="subproduct">
-  <h3>AI Risk Index</h3>
-  <span class="folder">skill/logos/index/horizontal*.svg</span>
-  <div class="row">
-    <div class="cell light">
-      <img src="logos/index/horizontal-on-light.svg" alt="Index lockup on light">
-      <div class="asset-links">
-        <a href="logos/index/horizontal-on-light.svg" target="_blank" rel="noopener">SVG</a>
-        <a href="logos/index/horizontal-on-light.png" target="_blank" rel="noopener">PNG</a>
-      </div>
-    </div>
-    <div class="cell light">
-      <img src="logos/index/horizontal.svg" alt="Index lockup default">
-      <div class="asset-links">
-        <a href="logos/index/horizontal.svg" target="_blank" rel="noopener">SVG</a>
-        <a href="logos/index/horizontal.png" target="_blank" rel="noopener">PNG</a>
-      </div>
-    </div>
-    <div class="cell dark">
-      <img src="logos/index/horizontal-on-dark.svg" alt="Index lockup on dark">
-      <div class="asset-links">
-        <a href="logos/index/horizontal-on-dark.svg" target="_blank" rel="noopener">SVG</a>
-        <a href="logos/index/horizontal-on-dark.png" target="_blank" rel="noopener">PNG</a>
-      </div>
-    </div>
-    <div class="cell red">
-      <img src="logos/index/horizontal-on-red.svg" alt="Index lockup on red">
-      <div class="asset-links">
-        <a href="logos/index/horizontal-on-red.svg" target="_blank" rel="noopener">SVG</a>
-        <a href="logos/index/horizontal-on-red.png" target="_blank" rel="noopener">PNG</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="subproduct">
-  <h3>AI Risk Repository</h3>
-  <span class="folder">skill/logos/repository/horizontal*.svg</span>
-  <div class="row">
-    <div class="cell light">
-      <img src="logos/repository/horizontal-on-light.svg" alt="Repository lockup on light">
-      <div class="asset-links">
-        <a href="logos/repository/horizontal-on-light.svg" target="_blank" rel="noopener">SVG</a>
-        <a href="logos/repository/horizontal-on-light.png" target="_blank" rel="noopener">PNG</a>
-      </div>
-    </div>
-    <div class="cell light">
-      <img src="logos/repository/horizontal.svg" alt="Repository lockup default">
-      <div class="asset-links">
-        <a href="logos/repository/horizontal.svg" target="_blank" rel="noopener">SVG</a>
-        <a href="logos/repository/horizontal.png" target="_blank" rel="noopener">PNG</a>
-      </div>
-    </div>
-    <div class="cell dark">
-      <img src="logos/repository/horizontal-on-dark.svg" alt="Repository lockup on dark">
-      <div class="asset-links">
-        <a href="logos/repository/horizontal-on-dark.svg" target="_blank" rel="noopener">SVG</a>
-        <a href="logos/repository/horizontal-on-dark.png" target="_blank" rel="noopener">PNG</a>
-      </div>
-    </div>
-    <div class="cell red">
-      <img src="logos/repository/horizontal-on-red.svg" alt="Repository lockup on red">
-      <div class="asset-links">
-        <a href="logos/repository/horizontal-on-red.svg" target="_blank" rel="noopener">SVG</a>
-        <a href="logos/repository/horizontal-on-red.png" target="_blank" rel="noopener">PNG</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================ -->
-<!-- 5. Parent organisation logo -->
-<!-- ============================================================ -->
-<h2>5 · Parent organisation logo</h2>
+<h2>4 · Parent organisation logo</h2>
 <p>AIRI sits within <strong>MIT FutureTech</strong>. The FutureTech logo may appear alongside the AIRI lockup on co-branded materials (websites, slide decks, partner communications). It is <em>not</em> an AIRI brand element — it comes from FutureTech's own brand guidelines — but traced SVG variants are included here for convenience.</p>
 
 <h3>Logo details</h3>
 <ul>
   <li><strong>Font:</strong> ITC Bailey Sans Pro Book — Bold/Black weight for "MIT", Bold for "FutureTech", Light/Regular for the tagline.</li>
-  <li><strong>Colour:</strong> "MIT" is black (<code>#000000</code>), "FutureTech" is <code>#9A2030</code> (confirmed with Jess Graham), tagline "Innovations that Shape the World" is black. This is a third red distinct from both AIRI's primary (<code>#A32035</code>) and MIT's institutional red (<code>#750014</code>) — do not conflate the three.</li>
+  <li><strong>Colour:</strong> "MIT" is black (<code>#000000</code>), "FutureTech" is <code>#9A2030</code>, tagline "Innovations that Shape the World" is black. This is a third red distinct from both AIRI's primary (<code>#A32035</code>) and MIT's institutional red (<code>#750014</code>) — do not conflate the three.</li>
   <li><strong>Text is outlined</strong> as SVG paths — no font dependency in the logo files.</li>
 </ul>
 
@@ -441,10 +336,10 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- 6. Open questions -->
+<!-- 5. Open questions -->
 <!-- ============================================================ -->
-<h2>6 · Open questions</h2>
-<p>Internal notes on proposed extensions from the March 2026 website mockup project. Not part of the current brand — discuss with Jess before acting on any of these.</p>
+<h2>5 · Open questions</h2>
+<p>Internal notes on proposed extensions from the March 2026 website mockup project. Not part of the current brand. Open a <a href="https://github.com/MIT-FutureTech/airi-brand/issues">GitHub issue</a> before acting on any of these.</p>
 
 <details class="qna">
   <summary><span class="tag">proposed</span> Extended colour palette for data visualisation</summary>
@@ -474,7 +369,7 @@
 <!-- ============================================================ -->
 <footer>
   <p><strong>More detail:</strong> <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/skill/BRAND.md">skill/BRAND.md</a> has the full specification, including component patterns (buttons, cards, tables, charts). <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> explains how AI coding assistants should apply the brand to new artefacts.</p>
-  <p><strong>Contributing:</strong> this repository does not accept branches, issues, or pull requests. For changes or questions, contact <a href="mailto:jgra98@mit.edu">Jess Graham</a> or message her on Slack.</p>
+  <p><strong>Questions or proposed changes:</strong> open an issue on <a href="https://github.com/MIT-FutureTech/airi-brand/issues">GitHub</a>. Retired logos (the old Index and Repository lockups) are in <a href="https://github.com/MIT-FutureTech/airi-brand/tree/main/legacy/logos">legacy/logos/</a>.</p>
 </footer>
 
 </body>

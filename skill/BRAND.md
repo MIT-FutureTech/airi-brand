@@ -2,7 +2,9 @@
 
 ## Overview
 
-The MIT AI Risk Initiative (AIRI) is the umbrella project. It has two named sub-products — the AI Risk Repository and the AI Risk Index — each with its own horizontal lockup. All three lockups share a single icon and a single wordmark structure; only the second line of the wordmark differs ("Initiative", "Repository", or "Index"). Earlier versions of this kit shipped three fully independent logo designs; those have been retired to `legacy/logos/` at the repo root.
+The MIT AI Risk Initiative (AIRI) has one logo: the AIRI icon beside the two-line wordmark "MIT AI Risk / Initiative". Use it for all AIRI work, including the AI Risk Repository and the AI Risk Index — those products no longer have their own lockups.
+
+AIRI sits within MIT FutureTech. The FutureTech logo is included for co-branded materials, but it is not an AIRI brand element.
 
 ## Colors
 
@@ -37,13 +39,11 @@ Do not introduce additional brand colors. Use opacity variations of existing col
 
 ## Logos
 
-Three product folders live under `logos/`: `initiative/`, `index/`, and `repository/`. Each contains the same icon and a horizontal lockup that differs only in the second line of the wordmark. Each layout has four colour variants in both SVG and PNG.
-
-File structure in `logos/`:
+All logo files live under `logos/`, in four colour variants, as SVG and PNG.
 
 ```
 logos/
-  initiative/                    Lockup: "MIT AI Risk / Initiative"
+  initiative/                    The AIRI logo: "MIT AI Risk / Initiative"
     icon.svg / .png              Default (red on transparent)
     icon-on-light.svg / .png     Red content, transparent background
     icon-on-dark.svg / .png      White content, transparent background
@@ -52,27 +52,29 @@ logos/
     horizontal-on-light.*        Red content, transparent background
     horizontal-on-dark.*         White content, transparent background
     horizontal-on-red.*          White content, #A32035 background
-  index/                         Lockup: "MIT AI Risk / Index" — same 16 files
-  repository/                    Lockup: "MIT AI Risk / Repository" — same 16 files
+  futuretech/                    MIT FutureTech parent logo (SVG only)
+    futuretech.svg               Default: black "MIT", #9A2030 "FutureTech", black tagline
+    futuretech-on-light.svg      Same as default
+    futuretech-on-dark.svg       All white, transparent background
+    futuretech-on-red.svg        All white, #9A2030 background
 ```
-
-**The icon is shared.** `icon.svg` is byte-identical across the three folders; each product carries its own copy only so that consumers can grab one folder and have a complete set. Do not create modified icons per product.
 
 **Variant guide:**
 - `on-light` / default: Use on white or light backgrounds. Content is `primary` (#A32035).
 - `on-dark`: Use on dark backgrounds. Content is white.
 - `on-red`: Use where you need a self-contained logo with the brand red background baked in (presentations, documents, social media).
 
-**Horizontal lockup:** Icon + "MIT AI Risk" (Figtree 400) / product name (Figtree 700), stacked as two lines with no vertical divider. Text is rendered as outlined SVG paths so the files have no font dependencies. The lockup proportions are locked: the gap between the icon and the text equals one "large square" from the icon, and the text is sized so the cap-top of "MIT AI Risk" sits on the top of the upper medium square and the baseline of the second line sits on the bottom of the lower medium square.
+**Horizontal lockup:** Icon + "MIT AI Risk" (Figtree 400) / "Initiative" (Figtree 700), stacked as two lines with no vertical divider. Text is rendered as outlined SVG paths so the files have no font dependencies. The proportions are fixed: the gap between the icon and the text equals one "large square" from the icon, and the text is sized so the cap-top of "MIT AI Risk" sits on the top of the upper medium square and the baseline of "Initiative" sits on the bottom of the lower medium square.
+
+**FutureTech logo:** traced from FutureTech's official PNG. Its red (`#9A2030`) belongs to FutureTech; do not use it as an AIRI colour. Set the FutureTech logo apart from the AIRI logo on co-branded materials; do not merge them into one mark.
 
 Usage:
-- Pick the folder that matches the project: `initiative/` for general AIRI work, `index/` for AI Risk Index pages, `repository/` for AI Risk Repository pages. If a project doesn't fit one of the two named sub-products, default to `initiative/`.
 - Navigation bars: horizontal variant, constrained to roughly 200-250px width
-- Favicons / small contexts: icon-only variant (any folder — the icon is the same)
+- Favicons / small contexts: icon only
 - Title pages / hero sections: any variant at appropriate size
 - PNG icons are 1024x1024. PNG horizontals are 512px tall.
 
-To regenerate logos, change proportions, or add a new product lockup, see `dev/logo-builder/` on the `dev` branch. The product list lives in `build.py` as `PRODUCTS`.
+Logos are generated by `dev/logo-builder/build.py` in the repository, not drawn by hand.
 
 ## Component patterns
 
@@ -112,8 +114,9 @@ These are defaults, not strict rules. The goal is visual consistency across AIRI
 
 - `tokens.json`: machine-readable design tokens
 - `brand.css`: CSS custom properties, ready to import or paste
-- `logos/initiative/`, `logos/index/`, `logos/repository/`: production logo files (SVG + PNG). Same icon in all three; different horizontal lockup per product.
+- `logos/initiative/`: the AIRI logo files (SVG + PNG)
+- `logos/futuretech/`: the MIT FutureTech parent logo (SVG)
 - `BRAND.md`: this file
 - `SKILL.md`: Claude Code skill wrapper (loads this file as context before generating visual output)
 
-Retired assets (no longer part of the skill): the pre-consolidation AI Risk Repository and AI Risk Index logos (which used fully independent icons) now live in `legacy/logos/` at the repo root. Logo build tooling lives in `dev/logo-builder/` on the `dev` branch.
+Retired assets (not part of the skill): the AI Risk Index and AI Risk Repository lockups live in `legacy/logos/` at the repository root. Do not use them for new work.
