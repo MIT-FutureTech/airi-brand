@@ -18,11 +18,11 @@ The best AIRI work uses the fewest colours. A deck that uses red, grey and near-
 
 ## 2. Five rules to remember
 
-1. **One red: `#A32035`.** Never retype it. Take it from the theme, the template or the token.
+1. **One red: `#A32035`.** Take it from the theme, the template or the token. Never retype or approximate it.
 2. **Two text colours:** ink `#1A1A1A` and muted `#666666`. White on red or dark.
 3. **In data, red is the subject, the finding or more risk.** Grey `#898A8D` is context. Blue `#2171B5` is a neutral amount.
 4. **A figure uses a red scale or a red highlight, never both.**
-5. **The greys are Google Docs presets**, so they can be clicked in Docs and Slides.
+5. **Figtree for all text**, weights 400 and 700 (600 allowed on the web). Sentence case, left-aligned.
 
 ## 3. Colour
 
@@ -61,6 +61,8 @@ Pure black text in an office document is tolerated; nobody can see the differenc
 
 There is no third text grey. If text matters, it is ink. If it is secondary, it is muted.
 
+Four neutrals are Google presets, so they can be clicked in Docs, Slides and Sheets: `text-muted` is "dark gray 3", `rule` is "gray", `border` is "light gray 1" and `fill` is "light gray 3". Ink, `gray` and `background` are custom colours; take them from the theme or the template. Google's preset named "gray" is `#CCCCCC`, the kit's `rule`. It is not the kit's `gray`, the chart grey.
+
 ### Text and background pairs
 
 Use only these pairs for text. Ratios are WCAG contrast; 4.5 is the minimum for body text.
@@ -77,12 +79,14 @@ Use only these pairs for text. Ratios are WCAG contrast; 4.5 is the minimum for 
 Pairs that fail, and what to do instead:
 
 - Gray `#898A8D` as text (3.5 on white). Use muted.
-- Red `#A32035` as text on dark `#1A1A1A` (2.3). Use `#D07886` (5.6). A red button with white text on dark is fine.
+- Red `#A32035` as text on dark `#1A1A1A` (2.3). Use `#D07886` (5.6); the `link` token makes this switch by itself. A red button with white text on dark is fine.
 - White text on `#D07886` or `#E29CA8`. Label those fills in ink.
 
 ### Links and emphasis
 
+- **Red text is the `link` token. Red fills are `primary`.** The two are the same red on light grounds. In dark mode `link` lightens to `#D07886` and `primary` stays put, so red text set in `primary` becomes unreadable (2.1 on a dark card). Use `link` for every piece of red text: links, red headings, chip text, secondary-button text, numerals.
 - Links are `#A32035` and underlined, in every medium. Hover `#8A1B2D`. Visited `#5E0E20`.
+- One exception, for PDFs set in LaTeX: links are coloured and not underlined. Web addresses are `#A32035`; cross-references and citations stay ink. `airi-colors.sty` sets this.
 - Emphasis is bold. Stronger emphasis, and "the ask" in a document, is bold in `#A32035`. Never pure red.
 - Focus ring: 2 px solid `#A32035` (`#D07886` on dark). Never remove the outline.
 
@@ -128,7 +132,10 @@ For Claude artifacts and dark tools. These values are computed and contrast-chec
 | `good-tint`, `good-ink` | `#22362A`, `#89BC9D` | |
 | `partial-tint`, `partial-ink` | `#433519`, `#E8A317` | |
 
-Red fills stay `#A32035` with white text. Category violet becomes `#9875DA`. Give any dark mark that fades into the page (the darkest scale steps) a 1 px `#6E6E6E` outline.
+- Red fills stay `#A32035` with white text. Red text is `link`, never `primary`.
+- Category violet becomes `#9875DA`, and its label switches from white to ink (4.9; white would be 3.6).
+- Label colours on fills are fixed: "ink" on a fill means `#1A1A1A` in both themes. Only violet changes, as above.
+- Give any dark mark that fades into the page a 1 px `#6E6E6E` outline: the darkest scale steps, and category teal on a dark card (3.0).
 
 ## 4. Colour in data
 
@@ -164,13 +171,14 @@ For named groups: risk domains, sectors, roles, laws. The slot order is fixed. T
 | 4 | Pink | `#CC6699` | `#A3446F` | `#F8EAF1` | ink | Malicious actors & misuse |
 | 5 | Orange | `#D4762C` | `#A54A0C` | `#F9ECE1` | ink | Human-computer interaction |
 | 6 | Gold | `#D9A531` | `#7F5D00` | `#FAF2E2` | ink | Socioeconomic & environmental |
-| 7 | Teal | `#138A73` | `#0B6655` | `#DEEFEB` | white, bold | AI system safety, failures & limitations |
+| 7 | Teal | `#117A66` | `#0B6655` | `#DEEFEB` | white | AI system safety, failures & limitations |
 | | Other | `#898A8D` | `#666666` | `#F3F3F3` | ink | Other, folded groups, context |
 
 - **Red is never a category.** That keeps red free to pick out one category: grey the others when you do.
 - A chip or tag uses the tint as background and the text colour on it. Every pair passes contrast.
 - An eighth category folds into Other. Never cycle the slots.
-- The seven risk domains always take the slot shown, in every product.
+- New work uses the slot shown for each of the seven risk domains. Existing pages, tools and decks keep their current colours until a decision is made.
+- The label on each fill is the colour in the table, at any size. Every one is at least 4.9:1. Never put white on sky, pink, orange or gold.
 - Sky and gold are faint as thin marks on white. Label them directly or give them an outline.
 - More than three lines or scatter series need direct labels or small multiples.
 - In print the seven hues are close in lightness. Domain figures in papers need direct labels.
@@ -181,21 +189,21 @@ For named groups: risk domains, sectors, roles, laws. The slot order is fixed. T
 |---|---|---|---|---|---|
 | `#E29CA8` | `#D07886` | `#B8455A` | `#A32035` | `#5E0E20` | `#F3F3F3` |
 
-Labels are ink on steps 1 and 2 and white on steps 3 to 5. The scale stays ordered in greyscale. A 1 to 5 rating is ordered, so it takes this scale, not the two-sided one.
+Labels: ink on steps 1 and 2, white on steps 3 to 5. The scale stays ordered in greyscale. A 1 to 5 rating is ordered, so it takes this scale, not the two-sided one.
 
 ### Red scale (continuous risk)
 
-Stops: `#FBF3F4` `#E29CA8` `#D07886` `#B8455A` `#A32035` `#5E0E20`. Interpolate between the stops. Never switch to a library's own red ramp.
+Stops: `#FBF3F4` `#E29CA8` `#D07886` `#B8455A` `#A32035` `#5E0E20`. Interpolate between the stops. Never switch to a library's own red ramp. Labels are ink on anything lighter than `#B8455A` and white from there on.
 
 ### Blue scale (counts and coverage)
 
-Stops: `#EFF6FF` `#C6DBEF` `#9ECAE1` `#6BAED6` `#4292C6` `#2171B5` `#084594`. Labels are ink on the first four and white on the last three. Five ordered steps: the last five.
+Stops: `#EFF6FF` `#C6DBEF` `#9ECAE1` `#6BAED6` `#4292C6` `#2171B5` `#084594`. Labels: ink on steps 1 to 5, white on steps 6 and 7. White on step 5 `#4292C6` fails (3.4); ink on it passes (5.1). Five ordered steps: the last five, with ink on the first three.
 
 ### Two-sided scale
 
 Seven steps: `#084594` `#4292C6` `#9ECAE1` `#F3F3F3` `#E29CA8` `#B8455A` `#5E0E20`. Five steps for small tables: `#2171B5` `#9ECAE1` `#F3F3F3` `#E29CA8` `#A32035`.
 
-Red is the riskier or worse side. The midpoint is grey, never yellow. Label the two palest steps directly; they are hard to tell apart for some colour-blind readers.
+Red is the riskier or worse side. The midpoint is grey, never yellow. Labels on the seven steps: white on step 1, ink on steps 2 to 5, white on steps 6 and 7. On the five steps: white on step 1, ink on steps 2 to 4, white on step 5. Label the two palest steps directly; they are hard to tell apart for some colour-blind readers.
 
 ### Chart furniture
 
@@ -225,11 +233,32 @@ PowerPoint, Word and Google Slides share the same 12 theme slots. Filling them i
 | Dark 1 (text) | `#1A1A1A` | Accent 1 | `#A32035` |
 | Light 1 (background) | `#FFFFFF` | Accent 2 | `#2171B5` |
 | Dark 2 | `#666666` | Accent 3 | `#D9A531` |
-| Light 2 | `#F3F3F3` | Accent 4 | `#138A73` |
+| Light 2 | `#F3F3F3` | Accent 4 | `#117A66` |
 | Hyperlink | `#A32035` | Accent 5 | `#CC6699` |
 | Followed hyperlink | `#5E0E20` | Accent 6 | `#6BAED6` |
 
-Office builds lighter and darker rows from each accent. Those are not AIRI tints; use the values in section 3. The colours worth keeping as custom swatches are listed in `tokens.json` under `theme.custom-swatches`.
+Office builds lighter and darker rows from each accent. Those are not AIRI tints; use the values in section 3. The colours worth keeping as custom swatches are listed in `tokens.json` under `theme.custom-swatches`: the red steps, the neutrals, the remaining category colours, the status marks and the blue-scale steps, so a heat map built from table cells needs no typing.
+
+### Charts in Slides, Sheets and Office
+
+A chart made in Google Sheets, Google Slides, PowerPoint, Word or Excel takes its series colours from Accent 1 to 6 in order: red, blue, gold, teal, pink, sky. That order is right for one kind of chart only: one series (red), or two series (red and blue). For every other chart, set the colours by hand.
+
+- **Context series:** `#898A8D`. It is not a theme colour, so it is never the default.
+- **Named groups:** set each series to its category colour, in slot order. The first group is blue. Left alone, the tool makes the first group red, which the kit forbids, and puts every risk domain on the wrong colour.
+
+| Slot | Colour | Hex | AI Risk Repository domain |
+|---|---|---|---|
+| 1 | Blue | `#2171B5` | Discrimination & toxicity |
+| 2 | Sky | `#6BAED6` | Privacy & security |
+| 3 | Violet | `#55399E` | Misinformation |
+| 4 | Pink | `#CC6699` | Malicious actors & misuse |
+| 5 | Orange | `#D4762C` | Human-computer interaction |
+| 6 | Gold | `#D9A531` | Socioeconomic & environmental |
+| 7 | Teal | `#117A66` | AI system safety, failures & limitations |
+
+- **Scales:** the severity, blue and two-sided values in section 4, set per series or per cell.
+
+The code templates (matplotlib, Plotly, R) default to red, grey, blue. A chart made in an office tool matches them only after the grey and the category colours are set as above. A chart pasted in as an image from a code template needs none of this.
 
 ## 6. Typography
 
@@ -255,8 +284,9 @@ Where red goes in type: slide titles, the document Title and Heading 1, and the 
 ## 7. Spacing, radius and layout
 
 - Spacing steps: 4, 8, 16, 24, 32, 48, 64 px (`--space-1` to `--space-7`). Slides use only 8, 16, 24 and 48.
-- Radius: 8 px for cards, panels and images; 4 px for everything else. No pills.
+- Radius: 8 px for cards, panels and images; 4 px for everything else. No pill-shaped buttons, chips or tags. A status dot or an avatar may be a circle.
 - Borders are 1 px on the web and 2 px on a 1920 px slide canvas.
+- On a 960 x 540 pt slide page, halve every 1920 px value and read it as points: gaps of 4, 8, 12 and 24 pt, borders 1 pt, radius 4 pt for cards and images and 2 pt otherwise.
 - Shadows are rare. Prefer a border.
 - A rule sits above the block it introduces, never under a heading.
 
@@ -287,7 +317,7 @@ AIRI logos are SVG and PNG. PNG icons are 1024 x 1024; PNG horizontals are 512 p
 
 | Medium | Placement |
 |---|---|
-| Slides | On the cover. A closing slide may use the `on-red` logo as a banner. Body slides carry no logo |
+| Slides | On the cover: FutureTech bottom left, AIRI bottom right. A closing slide may use the `on-red` logo as a banner. Body slides carry no logo |
 | Documents | Horizontal logo top right in the header, about 2.5 cm wide |
 | Report covers | White AIRI logo, then white FutureTech logo, top left on `#A32035` |
 | Website | Horizontal logo in the navigation, 200 to 250 px wide. Icon only on phones and as the favicon |
@@ -306,17 +336,17 @@ AIRI sits within MIT FutureTech. The FutureTech logo is included for co-branded 
 
 ## 9. Components
 
-Defaults for the web, apps and artifacts. Token names are the CSS variables in `brand.css` without the `--color-` prefix.
+Defaults for the web, apps and artifacts. Token names are the CSS variables in `brand.css` without the `--color-` prefix. Red text is always `link`; `primary` is for fills (section 3).
 
 - **Primary button.** `primary` fill, white text, weight 600, radius 8 px. Hover `primary-hover`.
-- **Secondary button.** `surface` fill, 1 px `primary` border, `primary` text. Hover fill `red-wash`. On a dark band: transparent with a white border and white text.
+- **Secondary button.** `surface` fill, 1 px `link` border, `link` text. Hover fill `red-wash`. On a dark band: transparent with a white border and white text.
 - **Card.** `surface` on `background`, 1 px `border`, radius 8 px, padding 24 px.
-- **Chip or tag.** `red-tint` with `primary` text, or a category tint with its text colour. Radius 4 px.
+- **Chip or tag.** `red-tint` with `link` text, or a category tint with its text colour. Radius 4 px.
 - **Callout.** `fill` or `red-wash`, no border, radius 8 px.
 - **Table.** Header row bold ink on `fill`, or white on `primary` for a short table. Rows alternate `surface` and `fill`. Rules `rule`. Group-header band `blue-tint`.
-- **Navigation.** `surface` bar, logo left, ink links right. The current page is `primary`.
+- **Navigation.** `surface` bar, logo left, ink links right. The current page is `link`.
 - **Header bar (apps).** `primary` bar, white logo, product name in white bold.
-- **Numbered findings.** Every numeral is `primary`. Order is carried by the number, not by a colour ramp.
+- **Numbered findings.** Every numeral is `link`. Order is carried by the number, not by a colour ramp.
 - **Marked text.** `highlight` behind ink.
 
 ## 10. By medium
@@ -328,14 +358,14 @@ Each medium has a starting file in `templates/` that already holds the values.
 Templates: `templates/google-slides-theme.md`, `templates/office-theme-colors.xml`, `templates/office-theme-fonts.xml`, `templates/office-theme.md`.
 
 - Page 960 x 540 pt (PowerPoint widescreen), or a 1920 x 1080 px canvas for HTML decks. Background `#FAFAFA`. Fill the theme slots in section 5.
-- Margins on the 1920 canvas: 96 px top, 128 px sides, 144 px bottom. Up to four equal columns with a 48 px gap.
+- Margins on the 1920 canvas: 96 px top, 128 px sides, 144 px bottom. Up to four equal columns with a 48 px gap. On the 960 pt page: 48 pt top, 64 pt sides, 72 pt bottom, and a 24 pt column gap.
 - **Slide titles are red** (`#A32035`, bold), state the slide's point and make sense read alone. No eyebrow line and no subtitle.
 - **Section dividers are full-bleed red** with a white title.
 - Body text is ink. Small text, sources and footers are muted.
-- The outcome, the one result or decision on the slide, is the largest thing after the title.
+- The outcome, the one result or decision on the slide, is set at the outcome size, the largest running text below the title. The only thing larger is the number on a stat card, which is itself the outcome of that slide.
 - A footer line names the data source on every data slide.
-- Only the five sizes in section 6. Only 8, 16, 24 and 48 px gaps. Radius 8 px for cards and screenshots, 4 px otherwise.
-- Logo on the cover: FutureTech bottom left and AIRI bottom right, or the AIRI logo alone top left. Body slides carry no logo.
+- Only the five sizes in section 6. Only 8, 16, 24 and 48 px gaps. Radius 8 px for cards and screenshots, 4 px otherwise. In points, halve them (section 7).
+- Logos on the cover: FutureTech bottom left, AIRI bottom right. Body slides carry no logo.
 
 Layouts to build from:
 
@@ -343,14 +373,15 @@ Layouts to build from:
 - **Section divider.** `#A32035` full bleed, white title.
 - **Title and body.**
 - **Main point.** One statement in muted text at the outcome size, with the key words in bold red.
-- **Stat cards.** Up to four white cards with a `#CCCCCC` outline; the number in red at the cover size, the label in muted small text.
-- **Chart.** Highlight on context (section 4), title states the finding, source in the footer.
+- **Stat cards.** Up to four white cards with a `#CCCCCC` outline. Each has three levels of text: the number, bold red at the cover size; the statement, one line in ink at the body size saying what the number counts; and an optional note in muted small text for the source or the base.
+- **Chart.** Highlight on context (section 4), title states the finding, source in the footer. For a chart made in Slides or PowerPoint itself, set the colours as in section 5.
 - **Process.** Equal cards left to right, muted arrows between.
 - **Closing.** Next steps, and the `on-red` logo as a banner.
 
 Slide components:
 
 - **Card.** White, 2 px `#CCCCCC` border, radius 8 px, padding 24 px, title in bold at body size. One outcome card per slide may take a 3 px ink border.
+- **Callout.** A `#F3F3F3` box, no border, radius 8 px, padding 24 px, text in ink at the body size. Slides do not use the red wash: it disappears on projectors and in print. For a stronger callout use the outcome card's ink border.
 - **Label.** Small, bold, muted, on its own line above its value.
 - **Tag.** Solid ink with white text, or an ink outline; marks a card and sits before its title. For three or more groups use category dots with a legend.
 - **Grade chip.** The grade variant in section 3, at body size.
@@ -405,7 +436,7 @@ Template: `brand.css`. For Tailwind, `templates/tailwind-theme.css`.
 - **Hero.** A dark band (`#1A1A1A`) with a line texture, white heading, a red primary button and a white-outline secondary button. Red text on the dark band is `#D07886`.
 - **Closing band.** The same dark band with a call to action.
 - **Page body.** `background` with white cards, 1 px `border`.
-- **Findings cards.** Numbered, every numeral in `primary`.
+- **Findings cards.** Numbered, every numeral in `link`.
 - **Share images.** `#A32035` ground, white logo top left, bold white Figtree title, one motif at low opacity.
 - One neutral temperature: the greys in section 3. No warm or beige neutrals.
 - Type scale: the six web sizes and the hero size.
@@ -430,7 +461,7 @@ Templates: `templates/airi_palette.R`, `templates/airi.mplstyle`, `templates/air
 - **Divider page** before supplements: full red, white title. **Back cover:** full red, logos and the site address.
 - **Interior.** The document styles above. Tables in print: ink or black rules are fine, zebra `#F3F3F3`, header bold.
 - **Figures.** Same meaning, same mark, across every figure in a paper. Sizes from section 6. Direct labels on category figures. One shared palette file per project, taken from `templates/`.
-- **LaTeX and preprint servers.** Use `airi-colors.sty` for link and figure colours and `\airimark` for a small identity line in the title block.
+- **LaTeX and preprint servers.** Links in a LaTeX PDF are coloured, not underlined (section 3). Use `airi-colors.sty` for link and figure colours and `\airimark` for a small identity line in the title block.
 - Before a print run, get one proof of `#A32035`; it has not been matched to a print ink.
 
 ### Claude artifacts and Claude Code
@@ -439,6 +470,8 @@ Template: `templates/claude-artifact.html`.
 
 - Start from the template. It defines every token for light and dark, loads Figtree and styles the basic elements.
 - Artifacts must work in both themes. Use variables only; a hex in the page body will be wrong in one theme.
+- Red text is `link`, red fills are `primary`. `primary` as a text colour is unreadable in dark mode.
+- A label on a category fill uses `--color-cat-N-label`, which holds the right colour for each theme.
 - Charts follow section 4 whatever library draws them.
 - Slide artifacts follow the slides section on the 1920 x 1080 canvas.
 - This applies to internal tools too. A quick internal page still uses Figtree and the tokens.
@@ -471,7 +504,11 @@ Template: `templates/claude-artifact.html`.
 | No status colours, no dark mode | Both defined |
 | `dark` token | `text` (old name still works in `brand.css`) |
 | Sizes 12 to 32 px, "flexible" | Fixed scales per medium |
-| Radius 4, 8, 12 px and pill | 4 and 8 px |
+| Radius 4, 8, 12 px and pill | 4 and 8 px. `--radius-lg` now gives 8 px; `--radius-full` still gives a full round, for dots and avatars |
+| `--font-size-lg`, `-xl`, `-2xl` at 18, 20, 24 px | 20, 26, 34 px. Pages that use these names get larger headings; check them |
+| `--color-text-muted` `#898A8D` | `#666666` |
+
+`brand.css` keeps the 1.x variable names as aliases, so pages do not break, but the three size names above change value. `tokens.json` is not backward compatible: the keys `color.dark`, `typography.size.3xl`, `typography.line-height.relaxed`, `radius.lg` and `radius.full` are gone. A script that reads them must move to `color.text`, `typography.size.2xl`, `typography.line-height.normal` and `radius.md`.
 
 ## 13. Files
 
