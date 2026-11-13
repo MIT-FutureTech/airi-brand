@@ -16,3 +16,6 @@ dev/logo-builder/output/
 tmp/
 .playwright-mcp/
 *-full.png
+
+# Kit builder
+dev/build-kit/__pycache__/

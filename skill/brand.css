@@ -1,48 +1,80 @@
-/* AIRI Brand - CSS Custom Properties
-   Generated from tokens.json
-   Import this file or copy these variables into any project. */
+/* AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
+   Import this file, or copy the variables into any project.
+   Dark mode is opt-in: set data-theme="dark" on <html> or any container. */
 
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap');
 
 :root {
-  /* Colors */
+  /* Colour: core, neutrals, links, status */
   --color-primary: #A32035;
-  --color-primary-light: #D07886;
+  --color-primary-hover: #8A1B2D;
   --color-primary-dark: #5E0E20;
-  --color-dark: #1A1A1A;
+  --color-primary-light: #D07886;
+  --color-red-500: #B8455A;
+  --color-red-300: #E29CA8;
+  --color-red-tint: #F8E1E5;
+  --color-red-wash: #FBF3F4;
+  --color-blue: #2171B5;
+  --color-blue-dark: #084594;
+  --color-blue-tint: #DCE9F4;
+  --color-highlight: #FFF0B3;
+  --color-text: #1A1A1A;
+  --color-text-muted: #666666;
   --color-gray: #898A8D;
+  --color-rule: #CCCCCC;
+  --color-border: #D9D9D9;
+  --color-fill: #F3F3F3;
   --color-background: #FAFAFA;
+  --color-surface: #FFFFFF;
   --color-white: #FFFFFF;
+  --color-link: #A32035;
+  --color-link-hover: #8A1B2D;
+  --color-link-visited: #5E0E20;
+  --color-focus: #A32035;
+  --color-good: #3A8F5C;
+  --color-good-ink: #17653C;
+  --color-good-tint: #E3F1EA;
+  --color-partial: #E8A317;
+  --color-partial-ink: #8A5A18;
+  --color-partial-tint: #FCF3E3;
+  --color-info-ink: #084594;
+  --color-poor: var(--color-primary);
+  --color-poor-ink: var(--color-link);
+  --color-poor-tint: var(--color-red-tint);
+  --color-info-tint: var(--color-blue-tint);
 
-  /* Derived colors: use these for consistent interactive states */
-  --color-primary-hover: #8a1b2d;
-  --color-primary-light-hover: #c4606f;
-  --color-link: var(--color-primary);
-  --color-link-hover: var(--color-primary-dark);
-  --color-text: var(--color-dark);
-  --color-text-muted: var(--color-gray);
-  --color-border: #e0e0e0;
-  --color-border-strong: var(--color-gray);
+  /* Colour in data: categories (never red), severity, counts, two-sided */
+  --color-cat-1: #2171B5; --color-cat-1-ink: #084594; --color-cat-1-tint: #E0EBF5;  /* blue */
+  --color-cat-2: #6BAED6; --color-cat-2-ink: #084594; --color-cat-2-tint: #EAF4F9;  /* sky */
+  --color-cat-3: #55399E; --color-cat-3-ink: #55399E; --color-cat-3-tint: #E7E3F1;  /* violet */
+  --color-cat-4: #CC6699; --color-cat-4-ink: #A3446F; --color-cat-4-tint: #F8EAF1;  /* pink */
+  --color-cat-5: #D4762C; --color-cat-5-ink: #A54A0C; --color-cat-5-tint: #F9ECE1;  /* orange */
+  --color-cat-6: #D9A531; --color-cat-6-ink: #7F5D00; --color-cat-6-tint: #FAF2E2;  /* gold */
+  --color-cat-7: #138A73; --color-cat-7-ink: #0B6655; --color-cat-7-tint: #DEEFEB;  /* teal */
+  --color-cat-other: #898A8D; --color-cat-other-ink: #666666; --color-cat-other-tint: #F3F3F3;
 
-  /* Typography */
-  --font-family: 'Figtree', sans-serif;
+  --color-sev-1: #E29CA8; --color-sev-2: #D07886; --color-sev-3: #B8455A; --color-sev-4: #A32035; --color-sev-5: #5E0E20;
+  --color-sev-none: #F3F3F3;
+  --color-seq-blue-1: #EFF6FF; --color-seq-blue-2: #C6DBEF; --color-seq-blue-3: #9ECAE1; --color-seq-blue-4: #6BAED6; --color-seq-blue-5: #4292C6; --color-seq-blue-6: #2171B5; --color-seq-blue-7: #084594;
+  --color-div-1: #084594; --color-div-2: #4292C6; --color-div-3: #9ECAE1; --color-div-4: #F3F3F3; --color-div-5: #E29CA8; --color-div-6: #B8455A; --color-div-7: #5E0E20;
+
+  /* Type */
+  --font-family: 'Figtree', Arial, sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.625rem;
+  --font-size-2xl: 2.125rem;
+  --font-size-hero: 2.75rem;
   --line-height-tight: 1.25;
   --line-height-normal: 1.5;
-  --line-height-relaxed: 1.65;
 
-  /* Spacing */
+  /* Spacing and radius */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 1rem;
@@ -50,10 +82,43 @@
   --space-5: 2rem;
   --space-6: 3rem;
   --space-7: 4rem;
-
-  /* Border radius */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-full: 9999px;
+  --focus-ring: 2px solid var(--color-focus);
+
+  /* Deprecated names from kit 1.x. Kept so old code still works. */
+  --color-dark: var(--color-text);
+  --color-border-strong: var(--color-rule);
+  --color-primary-light-hover: var(--color-red-500);
+  --font-size-3xl: var(--font-size-2xl);
+  --line-height-relaxed: var(--line-height-normal);
+  --radius-lg: var(--radius-md);
+  --radius-full: var(--radius-sm);
+}
+
+[data-theme="dark"] {
+  --color-text: #F2F2F2;
+  --color-text-muted: #A6A6A6;
+  --color-gray: #6E6E6E;
+  --color-rule: #3A3A3A;
+  --color-border: #3A3A3A;
+  --color-fill: #242424;
+  --color-background: #1A1A1A;
+  --color-surface: #242424;
+  --color-link: #D07886;
+  --color-link-hover: #E29CA8;
+  --color-link-visited: #D07886;
+  --color-focus: #D07886;
+  --color-red-tint: #431C22;
+  --color-red-wash: #2A1B1D;
+  --color-blue-tint: #1C3245;
+  --color-good-ink: #89BC9D;
+  --color-good-tint: #22362A;
+  --color-partial-ink: #E8A317;
+  --color-partial-tint: #433519;
+  --color-info-ink: #6BAED6;
+  --color-poor-ink: var(--color-link);
+  --color-poor-tint: var(--color-red-tint);
+  --color-info-tint: var(--color-blue-tint);
+  --color-cat-3: #9875DA;
 }
