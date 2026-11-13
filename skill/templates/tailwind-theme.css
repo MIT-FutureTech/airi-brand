@@ -1,0 +1,62 @@
+/* AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
+   Tailwind CSS v4. Paste after @import "tailwindcss";
+   The first line removes Tailwind's own colours, so only AIRI colours can be used:
+   bg-primary, text-ink, text-muted, border-line, bg-fill, bg-cat-1, text-cat-1-ink ...
+   For Tailwind v3, copy the same names and values into theme.colors in tailwind.config.js. */
+
+@theme {
+  --color-*: initial;
+  --color-primary: #A32035;
+  --color-primary-hover: #8A1B2D;
+  --color-primary-dark: #5E0E20;
+  --color-primary-light: #D07886;
+  --color-red-500: #B8455A;
+  --color-red-300: #E29CA8;
+  --color-red-tint: #F8E1E5;
+  --color-red-wash: #FBF3F4;
+  --color-blue: #2171B5;
+  --color-blue-dark: #084594;
+  --color-blue-tint: #DCE9F4;
+  --color-highlight: #FFF0B3;
+  --color-ink: #1A1A1A;
+  --color-muted: #666666;
+  --color-gray: #898A8D;
+  --color-rule: #CCCCCC;
+  --color-line: #D9D9D9;
+  --color-fill: #F3F3F3;
+  --color-background: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-white: #FFFFFF;
+  --color-link: #A32035;
+  --color-link-hover: #8A1B2D;
+  --color-link-visited: #5E0E20;
+  --color-focus: #A32035;
+  --color-good: #3A8F5C;
+  --color-good-ink: #17653C;
+  --color-good-tint: #E3F1EA;
+  --color-partial: #E8A317;
+  --color-partial-ink: #8A5A18;
+  --color-partial-tint: #FCF3E3;
+  --color-info-ink: #084594;
+  --color-poor: #A32035;
+  --color-cat-1: #2171B5; --color-cat-1-ink: #084594; --color-cat-1-tint: #E0EBF5;
+  --color-cat-2: #6BAED6; --color-cat-2-ink: #084594; --color-cat-2-tint: #EAF4F9;
+  --color-cat-3: #55399E; --color-cat-3-ink: #55399E; --color-cat-3-tint: #E7E3F1;
+  --color-cat-4: #CC6699; --color-cat-4-ink: #A3446F; --color-cat-4-tint: #F8EAF1;
+  --color-cat-5: #D4762C; --color-cat-5-ink: #A54A0C; --color-cat-5-tint: #F9ECE1;
+  --color-cat-6: #D9A531; --color-cat-6-ink: #7F5D00; --color-cat-6-tint: #FAF2E2;
+  --color-cat-7: #138A73; --color-cat-7-ink: #0B6655; --color-cat-7-tint: #DEEFEB;
+  --color-cat-other: #898A8D;
+  --color-sev-1: #E29CA8;
+  --color-sev-2: #D07886;
+  --color-sev-3: #B8455A;
+  --color-sev-4: #A32035;
+  --color-sev-5: #5E0E20;
+
+  --font-sans: 'Figtree', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-*: initial;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}

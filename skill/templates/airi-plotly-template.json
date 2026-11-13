@@ -1,0 +1,205 @@
+{
+ "layout": {
+  "font": {
+   "family": "Figtree, Arial, sans-serif",
+   "color": "#1A1A1A",
+   "size": 14
+  },
+  "title": {
+   "font": {
+    "family": "Figtree, Arial, sans-serif",
+    "color": "#1A1A1A",
+    "size": 20
+   },
+   "x": 0,
+   "xanchor": "left"
+  },
+  "colorway": [
+   "#A32035",
+   "#898A8D",
+   "#2171B5",
+   "#D9A531",
+   "#138A73",
+   "#CC6699",
+   "#6BAED6"
+  ],
+  "paper_bgcolor": "#FFFFFF",
+  "plot_bgcolor": "#FFFFFF",
+  "xaxis": {
+   "gridcolor": "#D9D9D9",
+   "linecolor": "#CCCCCC",
+   "zerolinecolor": "#CCCCCC",
+   "tickfont": {
+    "color": "#666666"
+   },
+   "title": {
+    "font": {
+     "color": "#666666"
+    }
+   },
+   "ticks": "",
+   "automargin": true,
+   "showgrid": false
+  },
+  "yaxis": {
+   "gridcolor": "#D9D9D9",
+   "linecolor": "#CCCCCC",
+   "zerolinecolor": "#CCCCCC",
+   "tickfont": {
+    "color": "#666666"
+   },
+   "title": {
+    "font": {
+     "color": "#666666"
+    }
+   },
+   "ticks": "",
+   "automargin": true,
+   "showline": false
+  },
+  "legend": {
+   "font": {
+    "color": "#666666"
+   },
+   "bgcolor": "rgba(0,0,0,0)"
+  },
+  "hoverlabel": {
+   "font": {
+    "family": "Figtree, Arial, sans-serif"
+   },
+   "bgcolor": "#FFFFFF",
+   "bordercolor": "#CCCCCC"
+  },
+  "colorscale": {
+   "sequential": [
+    [
+     0.0,
+     "#EFF6FF"
+    ],
+    [
+     0.1667,
+     "#C6DBEF"
+    ],
+    [
+     0.3333,
+     "#9ECAE1"
+    ],
+    [
+     0.5,
+     "#6BAED6"
+    ],
+    [
+     0.6667,
+     "#4292C6"
+    ],
+    [
+     0.8333,
+     "#2171B5"
+    ],
+    [
+     1.0,
+     "#084594"
+    ]
+   ],
+   "sequentialminus": [
+    [
+     0.0,
+     "#084594"
+    ],
+    [
+     0.1667,
+     "#2171B5"
+    ],
+    [
+     0.3333,
+     "#4292C6"
+    ],
+    [
+     0.5,
+     "#6BAED6"
+    ],
+    [
+     0.6667,
+     "#9ECAE1"
+    ],
+    [
+     0.8333,
+     "#C6DBEF"
+    ],
+    [
+     1.0,
+     "#EFF6FF"
+    ]
+   ],
+   "diverging": [
+    [
+     0.0,
+     "#084594"
+    ],
+    [
+     0.1667,
+     "#4292C6"
+    ],
+    [
+     0.3333,
+     "#9ECAE1"
+    ],
+    [
+     0.5,
+     "#F3F3F3"
+    ],
+    [
+     0.6667,
+     "#E29CA8"
+    ],
+    [
+     0.8333,
+     "#B8455A"
+    ],
+    [
+     1.0,
+     "#5E0E20"
+    ]
+   ]
+  },
+  "coloraxis": {
+   "colorbar": {
+    "outlinewidth": 0,
+    "ticks": "",
+    "tickfont": {
+     "color": "#666666"
+    }
+   }
+  },
+  "annotationdefaults": {
+   "font": {
+    "color": "#1A1A1A"
+   },
+   "arrowcolor": "#666666"
+  },
+  "shapedefaults": {
+   "line": {
+    "color": "#CCCCCC"
+   }
+  }
+ },
+ "data": {
+  "bar": [
+   {
+    "marker": {
+     "line": {
+      "width": 0
+     }
+    }
+   }
+  ],
+  "heatmap": [
+   {
+    "colorbar": {
+     "outlinewidth": 0,
+     "ticks": ""
+    }
+   }
+  ]
+ }
+}

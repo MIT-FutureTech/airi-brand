@@ -1,0 +1,19 @@
+/* AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
+   Short names used by some AIRI apps, mapped onto the kit tokens.
+   Load after brand.css. Keep the short names in existing code; write new code with the --color-* names. */
+
+:root {
+  --ink: var(--color-text);
+  --body: var(--color-text);
+  --muted: var(--color-text-muted);
+  --faint: var(--color-gray);
+  --rule: var(--color-rule);
+  --line: var(--color-border);
+  --empty: var(--color-fill);
+  --red: var(--color-primary);
+  --red-dark: var(--color-primary-dark);
+  --red-pale: var(--color-red-300);
+  --red-tint: var(--color-red-wash);
+  --axis: var(--color-blue-tint);
+  --gap: var(--color-partial);
+}
