@@ -4,372 +4,239 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AIRI Brand Guide</title>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Figtree', sans-serif;
-    color: #1a1a1a;
-    background: #fafafa;
-    padding: 40px 24px 80px;
-    max-width: 1080px;
-    margin: 0 auto;
-    line-height: 1.55;
+    font-family: var(--font-family); color: var(--color-text); background: var(--color-background);
+    padding: 40px 24px 80px; max-width: 1080px; margin: 0 auto; line-height: var(--line-height-normal);
   }
-  h1 { font-size: 2rem; font-weight: 700; color: #A32035; margin-bottom: 6px; }
-  h1 span { color: #1a1a1a; font-weight: 400; }
-  .subtitle { color: #898A8D; margin-bottom: 40px; max-width: 720px; }
-  h2 {
-    font-size: 1.4rem; font-weight: 700; color: #1a1a1a;
-    margin-top: 56px; margin-bottom: 16px;
-    padding-bottom: 8px; border-bottom: 2px solid #A32035;
-  }
-  h3 { font-size: 1rem; font-weight: 600; color: #898A8D; margin: 20px 0 10px; text-transform: none; letter-spacing: 0; }
-  p, li { font-size: 0.95rem; line-height: 1.65; }
-  ul { padding-left: 20px; margin: 8px 0 16px; }
-  code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; }
-  a { color: #A32035; }
-  a:hover { color: #5E0E20; }
+  h1 { font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-primary); line-height: var(--line-height-tight); margin-bottom: 8px; }
+  h1 span { color: var(--color-text); font-weight: 400; }
+  .subtitle { color: var(--color-text-muted); margin-bottom: 32px; max-width: 720px; }
+  h2 { font-size: var(--font-size-xl); font-weight: 700; line-height: var(--line-height-tight); margin-top: 56px; margin-bottom: 16px; padding-top: 16px; border-top: 2px solid var(--color-primary); }
+  h3 { font-size: var(--font-size-lg); font-weight: 600; margin: 32px 0 8px; }
+  h4 { font-size: var(--font-size-base); font-weight: 700; margin: 24px 0 8px; }
+  p, li { font-size: var(--font-size-base); max-width: 760px; }
+  p { margin: 8px 0; }
+  ul, ol { padding-left: 24px; margin: 8px 0 16px; }
+  code { font-family: var(--font-family-mono); font-size: 0.85em; }
+  p code, li code, td code { background: var(--color-fill); padding: 2px 6px; border-radius: 4px; }
+  a { color: var(--color-link); text-decoration: underline; }
+  a:hover { color: var(--color-link-hover); }
+  :focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+  .note { background: var(--color-fill); padding: 16px; margin: 16px 0; border-radius: 8px; font-size: var(--font-size-sm); max-width: 760px; }
+  .rules { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px 16px 16px 40px; margin: 16px 0; max-width: 760px; }
+  .rules li { margin: 8px 0; }
 
-  .note {
-    background: #fff; border-left: 3px solid #A32035;
-    padding: 12px 16px; margin: 16px 0;
-    border-radius: 0 8px 8px 0; font-size: 0.9rem;
-  }
-
-  /* Logo presentation */
-  .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
-  .logo-cell {
-    padding: 28px 24px;
-    border-radius: 10px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    min-height: 140px;
-  }
-  .logo-cell.light { background: #fff; border: 1px solid #e0e0e0; }
-  .logo-cell.dark  { background: #1a1a1a; }
-  .logo-cell.red   { background: #A32035; }
-  .logo-cell .label {
-    display: block; font-size: 11px;
-    color: #898A8D;
-    margin-top: 14px;
-    font-family: ui-monospace, monospace;
-  }
-  .logo-cell.dark .label, .logo-cell.red .label { color: rgba(255,255,255,0.7); }
+  .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .logo-cell { padding: 24px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px; }
+  .logo-cell.light { background: var(--color-surface); border: 1px solid var(--color-border); }
+  .logo-cell.dark { background: var(--color-text); }
+  .logo-cell.red { background: var(--color-primary); }
+  .logo-cell .label { display: block; font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 16px; font-family: var(--font-family-mono); }
+  .logo-cell.dark .label, .logo-cell.red .label { color: var(--color-white); }
   img.horiz { height: 72px; width: auto; max-width: 100%; }
-  img.icon  { width: 96px; height: 96px; }
-  img.horiz-sm { height: 56px; width: auto; max-width: 100%; }
+  img.icon { width: 96px; height: 96px; }
+  .asset-links { display: flex; gap: 8px; margin-top: 8px; }
+  .asset-links a { padding: 4px 12px; border: 1px solid var(--color-rule); border-radius: 4px; background: var(--color-surface); color: var(--color-text); text-decoration: none; font-family: var(--font-family-mono); font-size: var(--font-size-xs); font-weight: 600; }
+  .asset-links a:hover { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-white); }
+  .logo-cell.dark .asset-links a, .logo-cell.red .asset-links a { background: transparent; border-color: var(--color-white); color: var(--color-white); }
+  .logo-cell.dark .asset-links a:hover, .logo-cell.red .asset-links a:hover { background: var(--color-white); color: var(--color-text); }
 
-  /* Colour + typography */
-  .palette { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 8px; }
-  .swatch {
-    padding: 14px 16px; border-radius: 8px;
-    min-width: 150px; font-size: 0.85rem;
-  }
-  .swatch strong { display: block; font-weight: 700; margin-bottom: 3px; }
-  .swatch code { background: rgba(255,255,255,0.2); color: inherit; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 16px 0; }
+  .swatch { padding: 16px; border-radius: 8px; font-size: var(--font-size-sm); min-height: 96px; }
+  .swatch strong, .swatch code, .swatch span { display: block; }
+  .swatch span { font-family: var(--font-family-mono); font-size: var(--font-size-xs); }
+  .pairs { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; margin: 16px 0; }
+  .pair { padding: 16px; border-radius: 8px; display: flex; justify-content: space-between; gap: 8px; font-size: var(--font-size-sm); }
 
-  .type-sample { margin: 10px 0; }
-  .type-sample .label { font-size: 0.75rem; color: #898A8D; margin-bottom: 2px; }
+  .strip { margin: 8px 0 24px; }
+  .strip-cells { display: flex; }
+  .strip-cells > div { flex: 1; min-width: 0; }
+  .strip-cells.main > div { padding: 16px 4px; text-align: center; font-size: var(--font-size-xs); }
+  .strip-cells.main b, .strip-cells.main code { display: block; overflow-wrap: anywhere; }
+  .strip-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .strip-row span { width: 88px; flex: none; font-size: var(--font-size-xs); color: var(--color-text-muted); }
+  .strip-row .strip-cells { flex: 1; }
+  .strip-row .strip-cells > div { height: 16px; }
 
-  /* Asset download links under each embedded logo/icon */
-  .asset-links { display: flex; gap: 6px; margin-top: 8px; }
-  .asset-links a {
-    display: inline-block;
-    padding: 4px 10px;
-    border: 1px solid #898A8D;
-    border-radius: 4px;
-    background: rgba(255,255,255,0.9);
-    color: #1a1a1a;
-    text-decoration: none;
-    font-family: ui-monospace, monospace;
-    font-size: 0.72rem; font-weight: 600;
-    letter-spacing: 0.04em;
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
-  }
-  .asset-links a:hover {
-    background: #A32035; border-color: #A32035; color: #fff;
-  }
-  .logo-cell.dark .asset-links a,
-  .logo-cell.red .asset-links a {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.45);
-    color: rgba(255,255,255,0.92);
-  }
-  .logo-cell.dark .asset-links a:hover,
-  .logo-cell.red .asset-links a:hover {
-    background: #fff; color: #1a1a1a; border-color: #fff;
-  }
+  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 16px 0; }
+  figure { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px; }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption { font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: 8px; }
+  figcaption b { color: var(--color-text); }
 
-  /* Mobile responsiveness */
+  .tablewrap { overflow-x: auto; margin: 16px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: var(--font-size-sm); background: var(--color-surface); }
+  th { text-align: left; background: var(--color-fill); font-weight: 700; }
+  th, td { padding: 8px 12px; border-bottom: 1px solid var(--color-rule); vertical-align: top; }
+  .dot { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 8px; }
+  .chip, .status { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: var(--font-size-sm); font-weight: 600; white-space: nowrap; }
+  .chiprow { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  .chiprow .chip { white-space: normal; }
+  .status i { display: inline-block; width: 16px; height: 16px; line-height: 16px; border-radius: 4px; text-align: center; font-style: normal; font-size: 11px; margin-right: 8px; }
+  .grades td, .grades th { border-bottom: 1px solid var(--color-rule); }
+  .grade { display: inline-block; padding: 2px 12px; border: 2px solid; border-radius: 4px; }
+
+  .type-sample { margin: 16px 0; }
+  .type-sample .label { font-size: var(--font-size-xs); color: var(--color-text-muted); }
+
+  details.qna { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px 24px; margin: 8px 0; }
+  details.qna summary { cursor: pointer; font-weight: 600; }
+  details.qna[open] summary { margin-bottom: 8px; }
+  .tag { font-size: var(--font-size-xs); font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 8px; background: var(--color-red-tint); color: var(--color-primary); }
+  .tag.grey { background: var(--color-fill); color: var(--color-text-muted); }
+
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--color-rule); color: var(--color-text-muted); font-size: var(--font-size-sm); }
+
   @media (max-width: 640px) {
-    body { padding: 24px 16px 60px; }
-    h1 { font-size: 1.6rem; }
-    h2 { font-size: 1.2rem; margin-top: 40px; }
-    .subtitle { margin-bottom: 28px; }
-
-    /* Main logo cells: reduce padding so 96px icons aren't crowding the edges */
-    .logo-cell { padding: 20px 12px; min-height: 120px; }
-
-    /* Bigger tap targets for asset-link buttons on touch devices */
-    .asset-links { gap: 8px; margin-top: 10px; }
-    .asset-links a {
-      padding: 8px 14px;
-      font-size: 0.8rem;
-      border-radius: 6px;
-    }
+    body { padding: 24px 16px 64px; }
+    h1 { font-size: var(--font-size-xl); }
+    h2 { font-size: var(--font-size-lg); margin-top: 48px; }
+    .logo-grid { grid-template-columns: 1fr; }
+    .logo-cell { padding: 24px 16px; }
+    .asset-links a { padding: 8px 16px; font-size: var(--font-size-sm); }
+    .strip-cells.main code { font-size: 9px; }
+    .strip-row span { width: 64px; }
   }
-
-  /* Open questions */
-  details.qna {
-    background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
-    padding: 14px 20px; margin: 10px 0;
-  }
-  details.qna summary {
-    cursor: pointer; font-weight: 600; font-size: 0.95rem;
-    display: flex; align-items: center; gap: 8px;
-  }
-  details.qna[open] summary { margin-bottom: 12px; }
-  .tag {
-    font-size: 10px; font-weight: 700;
-    padding: 2px 8px; border-radius: 10px;
-    color: #fff; background: #A32035;
-  }
-  .tag.grey { background: #898A8D; }
-  .tag.outline { background: #e0e0e0; color: #666; }
-
-  footer {
-    margin-top: 72px; padding-top: 24px;
-    border-top: 1px solid #e0e0e0;
-    color: #898A8D; font-size: 0.85rem;
-  }
-  footer a { color: #898A8D; text-decoration: underline; }
 </style>
 </head>
 <body>
 
 <h1>MIT AI Risk <span>Brand Guide</span></h1>
-<p class="subtitle">Visual identity for the MIT AI Risk Initiative, including the AI Risk Repository and the AI Risk Index. One logo, one icon, one type family, one palette.</p>
+<p class="subtitle">The look of the MIT AI Risk Initiative, including the AI Risk Repository and the AI Risk Index. One logo, one icon, one typeface, one red, and fixed meanings for colour in data. Version 2.0.0.</p>
 
-<!-- ============================================================ -->
 <!-- 1. Logo -->
-<!-- ============================================================ -->
 <h2>1 · Logo</h2>
-<p>The AIRI logo is the icon beside the two-line wordmark "MIT AI Risk / Initiative". Use it for all AIRI work, including the Repository and the Index, wherever the brand needs a full name: navigation bars, document headers, hero sections.</p>
+<p>The AIRI logo is the icon beside the two-line wordmark "MIT AI Risk / Initiative". Use it for all AIRI work, including the Repository and the Index, wherever the brand needs its full name: navigation bars, document headers, covers.</p>
+<div class="logo-grid"><div class="logo-cell light"><img class="horiz" src="logos/initiative/horizontal-on-light.svg" alt="horizontal-on-light"><span class="label">horizontal-on-light</span><div class="asset-links"><a href="logos/initiative/horizontal-on-light.svg" target="_blank" rel="noopener">SVG</a><a href="logos/initiative/horizontal-on-light.png" target="_blank" rel="noopener">PNG</a></div></div><div class="logo-cell light"><img class="horiz" src="logos/initiative/horizontal.svg" alt="horizontal"><span class="label">horizontal</span><div class="asset-links"><a href="logos/initiative/horizontal.svg" target="_blank" rel="noopener">SVG</a><a href="logos/initiative/horizontal.png" target="_blank" rel="noopener">PNG</a></div></div><div class="logo-cell dark"><img class="horiz" src="logos/initiative/horizontal-on-dark.svg" alt="horizontal-on-dark"><span class="label">horizontal-on-dark</span><div class="asset-links"><a href="logos/initiative/horizontal-on-dark.svg" target="_blank" rel="noopener">SVG</a><a href="logos/initiative/horizontal-on-dark.png" target="_blank" rel="noopener">PNG</a></div></div><div class="logo-cell red"><img class="horiz" src="logos/initiative/horizontal-on-red.svg" alt="horizontal-on-red"><span class="label">horizontal-on-red</span><div class="asset-links"><a href="logos/initiative/horizontal-on-red.svg" target="_blank" rel="noopener">SVG</a><a href="logos/initiative/horizontal-on-red.png" target="_blank" rel="noopener">PNG</a></div></div></div>
+<ul>
+  <li>Use the red logo on white and light grounds, the white logo on dark grounds, and the on-red version where the logo needs its own red block.</li>
+  <li>Keep one large square of the icon clear on every side.</li>
+  <li>Do not recolour, stretch or rebuild the logo, and do not add a product name to it.</li>
+  <li>Slides carry the logo on the cover only. Documents carry it top right in the header. Report covers carry it in white, top left, on red.</li>
+</ul>
+<div class="note">Text in the logo files is outlined, so they need no font. PNG horizontals are 512 px tall. The proportions are fixed and generated by a script.</div>
 
-<div class="logo-grid">
-  <div class="logo-cell light">
-    <img class="horiz" src="logos/initiative/horizontal-on-light.svg" alt="Initiative horizontal lockup on light">
-    <span class="label">horizontal-on-light</span>
-    <div class="asset-links">
-      <a href="logos/initiative/horizontal-on-light.svg" target="_blank" rel="noopener">SVG</a>
-      <a href="logos/initiative/horizontal-on-light.png" target="_blank" rel="noopener">PNG</a>
-    </div>
-  </div>
-  <div class="logo-cell light">
-    <img class="horiz" src="logos/initiative/horizontal.svg" alt="Initiative horizontal lockup (default)">
-    <span class="label">horizontal (default)</span>
-    <div class="asset-links">
-      <a href="logos/initiative/horizontal.svg" target="_blank" rel="noopener">SVG</a>
-      <a href="logos/initiative/horizontal.png" target="_blank" rel="noopener">PNG</a>
-    </div>
-  </div>
-  <div class="logo-cell dark">
-    <img class="horiz" src="logos/initiative/horizontal-on-dark.svg" alt="Initiative horizontal lockup on dark">
-    <span class="label">horizontal-on-dark</span>
-    <div class="asset-links">
-      <a href="logos/initiative/horizontal-on-dark.svg" target="_blank" rel="noopener">SVG</a>
-      <a href="logos/initiative/horizontal-on-dark.png" target="_blank" rel="noopener">PNG</a>
-    </div>
-  </div>
-  <div class="logo-cell red">
-    <img class="horiz" src="logos/initiative/horizontal-on-red.svg" alt="Initiative horizontal lockup on red">
-    <span class="label">horizontal-on-red</span>
-    <div class="asset-links">
-      <a href="logos/initiative/horizontal-on-red.svg" target="_blank" rel="noopener">SVG</a>
-      <a href="logos/initiative/horizontal-on-red.png" target="_blank" rel="noopener">PNG</a>
-    </div>
-  </div>
-</div>
-
-<div class="note">
-  Files: <code>skill/logos/initiative/horizontal*.svg</code> (and <code>.png</code>, 512 px tall). Text is rendered as outlined SVG paths, so the logo files have no font dependency. Lockup proportions are locked — the gap equals one "large square" in the icon, and the text is sized to span two medium squares.
-</div>
-
-<!-- ============================================================ -->
 <!-- 2. Icon -->
-<!-- ============================================================ -->
 <h2>2 · Icon</h2>
-<p>The icon is the "plus of squares" mark. Use it on its own for favicons, app icons, small nav contexts, and anywhere the wordmark would be illegible.</p>
+<p>The icon is the "plus of squares" mark. Use it alone for favicons, app icons, phone-width navigation and anywhere the wordmark would be too small to read (under about 120 px wide).</p>
+<div class="logo-grid"><div class="logo-cell light"><img class="icon" src="logos/initiative/icon-on-light.svg" alt="icon-on-light"><span class="label">icon-on-light</span><div class="asset-links"><a href="logos/initiative/icon-on-light.svg" target="_blank" rel="noopener">SVG</a><a href="logos/initiative/icon-on-light.png" target="_blank" rel="noopener">PNG</a></div></div><div class="logo-cell light"><img class="icon" src="logos/initiative/icon.svg" alt="icon"><span class="label">icon</span><div class="asset-links"><a href="logos/initiative/icon.svg" target="_blank" rel="noopener">SVG</a><a href="logos/initiative/icon.png" target="_blank" rel="noopener">PNG</a></div></div><div class="logo-cell dark"><img class="icon" src="logos/initiative/icon-on-dark.svg" alt="icon-on-dark"><span class="label">icon-on-dark</span><div class="asset-links"><a href="logos/initiative/icon-on-dark.svg" target="_blank" rel="noopener">SVG</a><a href="logos/initiative/icon-on-dark.png" target="_blank" rel="noopener">PNG</a></div></div><div class="logo-cell red"><img class="icon" src="logos/initiative/icon-on-red.svg" alt="icon-on-red"><span class="label">icon-on-red</span><div class="asset-links"><a href="logos/initiative/icon-on-red.svg" target="_blank" rel="noopener">SVG</a><a href="logos/initiative/icon-on-red.png" target="_blank" rel="noopener">PNG</a></div></div></div>
+<div class="note">PNG icons are 1024 × 1024.</div>
 
-<div class="logo-grid">
-  <div class="logo-cell light">
-    <img class="icon" src="logos/initiative/icon-on-light.svg" alt="AIRI icon on light">
-    <span class="label">icon-on-light</span>
-    <div class="asset-links">
-      <a href="logos/initiative/icon-on-light.svg" target="_blank" rel="noopener">SVG</a>
-      <a href="logos/initiative/icon-on-light.png" target="_blank" rel="noopener">PNG</a>
-    </div>
-  </div>
-  <div class="logo-cell light">
-    <img class="icon" src="logos/initiative/icon.svg" alt="AIRI icon (default)">
-    <span class="label">icon (default)</span>
-    <div class="asset-links">
-      <a href="logos/initiative/icon.svg" target="_blank" rel="noopener">SVG</a>
-      <a href="logos/initiative/icon.png" target="_blank" rel="noopener">PNG</a>
-    </div>
-  </div>
-  <div class="logo-cell dark">
-    <img class="icon" src="logos/initiative/icon-on-dark.svg" alt="AIRI icon on dark">
-    <span class="label">icon-on-dark</span>
-    <div class="asset-links">
-      <a href="logos/initiative/icon-on-dark.svg" target="_blank" rel="noopener">SVG</a>
-      <a href="logos/initiative/icon-on-dark.png" target="_blank" rel="noopener">PNG</a>
-    </div>
-  </div>
-  <div class="logo-cell red">
-    <img class="icon" src="logos/initiative/icon-on-red.svg" alt="AIRI icon on red">
-    <span class="label">icon-on-red</span>
-    <div class="asset-links">
-      <a href="logos/initiative/icon-on-red.svg" target="_blank" rel="noopener">SVG</a>
-      <a href="logos/initiative/icon-on-red.png" target="_blank" rel="noopener">PNG</a>
-    </div>
-  </div>
-</div>
-
-<div class="note">
-  Files: <code>skill/logos/initiative/icon*.svg</code> (and <code>.png</code>, 1024×1024).
-</div>
-
-<!-- ============================================================ -->
-<!-- 3. Font + colour -->
-<!-- ============================================================ -->
+<!-- 3. Font and colour -->
 <h2>3 · Font &amp; colour</h2>
 
-<h3>Figtree — the only brand font</h3>
-<p>Figtree is used for everything: UI, documents, the wordmark in the logo lockup. Available from <a href="https://fonts.google.com/specimen/Figtree">Google Fonts</a>. Weights: 400 (regular), 600 (semibold), 700 (bold).</p>
+<h3>Five rules to remember</h3>
+<ol class="rules">
+  <li><strong>One red: <code>#A32035</code>.</strong> Never retype it. Take it from the theme, the template or the token.</li>
+  <li><strong>Two text colours:</strong> ink <code>#1A1A1A</code> and muted <code>#666666</code>. White on red or dark.</li>
+  <li><strong>In data, red is the subject, the finding or more risk.</strong> Grey <code>#898A8D</code> is context. Blue <code>#2171B5</code> is a neutral amount.</li>
+  <li><strong>A figure uses a red scale or a red highlight, never both.</strong></li>
+  <li><strong>The greys are Google Docs presets</strong>, so they can be clicked in Docs and Slides.</li>
+</ol>
 
-<div class="type-sample">
-  <div class="label">Regular (400)</div>
-  <div style="font-weight:400; font-size:1.2rem">The quick brown fox jumps over the lazy dog</div>
-</div>
-<div class="type-sample">
-  <div class="label">Semibold (600)</div>
-  <div style="font-weight:600; font-size:1.2rem">The quick brown fox jumps over the lazy dog</div>
-</div>
-<div class="type-sample">
-  <div class="label">Bold (700)</div>
-  <div style="font-weight:700; font-size:1.2rem">The quick brown fox jumps over the lazy dog</div>
+<h3>Figtree, the only typeface</h3>
+<p>Figtree is used for everything, including the wordmark. It is free from <a href="https://fonts.google.com/specimen/Figtree">Google Fonts</a>. Set text left-aligned and in sentence case. Slides, documents and figures use regular and bold; the web may also use semibold.</p>
+<div class="type-sample"><div class="label">Bold 700 · titles and headings</div><div style="font-weight:700;font-size:var(--font-size-xl);color:var(--color-primary)">A title states the point of the page</div></div>
+<div class="type-sample"><div class="label">Semibold 600 · web only</div><div style="font-weight:600;font-size:var(--font-size-lg)">Sub-headings below the title are ink</div></div>
+<div class="type-sample"><div class="label">Regular 400 · body</div><div>Body text is near-black on a light ground. <span style="color:var(--color-text-muted)">Captions, sources and footers are muted.</span> <a href="#">Links are red and underlined.</a></div></div>
+<div class="tablewrap"><table>
+  <thead><tr><th>Medium</th><th>Sizes</th></tr></thead>
+  <tbody>
+    <tr><td>Web and apps (px)</td><td>12, 14, 16, 20, 26, 34; hero 44</td></tr>
+    <tr><td>Slides, 1920 × 1080 canvas (px)</td><td>Cover 72, title 56, outcome 36, body 28, small 22</td></tr>
+    <tr><td>Slides, 960 × 540 pt page (pt)</td><td>Cover 36, title 28, outcome 18, body 14, small 11</td></tr>
+    <tr><td>Documents (pt)</td><td>Title 24, Heading 1 18, Heading 2 14, Heading 3 12, body 11, captions 9</td></tr>
+    <tr><td>Print figures (pt)</td><td>Panel title 9.5, labels 8, smallest 7</td></tr>
+  </tbody>
+</table></div>
+
+<h3>The palette</h3>
+<p>Fourteen swatches cover almost all work. The red is for structure: titles, covers, bars, buttons and links. Text is ink or muted. The greys do the rest.</p>
+<div class="swatches"><div class="swatch" style="background:#A32035;color:#FFFFFF;"><strong>AIRI red</strong><code>#A32035</code><span>primary</span></div><div class="swatch" style="background:#8A1B2D;color:#FFFFFF;"><strong>Red hover</strong><code>#8A1B2D</code><span>primary-hover</span></div><div class="swatch" style="background:#5E0E20;color:#FFFFFF;"><strong>Red dark</strong><code>#5E0E20</code><span>primary-dark</span></div><div class="swatch" style="background:#D07886;color:#1A1A1A;"><strong>Red light</strong><code>#D07886</code><span>primary-light</span></div><div class="swatch" style="background:#F8E1E5;color:#1A1A1A;border:1px solid #D9D9D9;"><strong>Red tint</strong><code>#F8E1E5</code><span>red-tint</span></div><div class="swatch" style="background:#FBF3F4;color:#1A1A1A;border:1px solid #D9D9D9;"><strong>Red wash</strong><code>#FBF3F4</code><span>red-wash</span></div><div class="swatch" style="background:#1A1A1A;color:#FFFFFF;"><strong>Ink</strong><code>#1A1A1A</code><span>text</span></div><div class="swatch" style="background:#666666;color:#FFFFFF;"><strong>Muted</strong><code>#666666</code><span>text-muted</span></div><div class="swatch" style="background:#898A8D;color:#1A1A1A;"><strong>Gray</strong><code>#898A8D</code><span>gray</span></div><div class="swatch" style="background:#CCCCCC;color:#1A1A1A;"><strong>Rule</strong><code>#CCCCCC</code><span>rule</span></div><div class="swatch" style="background:#D9D9D9;color:#1A1A1A;"><strong>Line</strong><code>#D9D9D9</code><span>border</span></div><div class="swatch" style="background:#F3F3F3;color:#1A1A1A;border:1px solid #D9D9D9;"><strong>Fill</strong><code>#F3F3F3</code><span>fill</span></div><div class="swatch" style="background:#FAFAFA;color:#1A1A1A;border:1px solid #D9D9D9;"><strong>Background</strong><code>#FAFAFA</code><span>background</span></div><div class="swatch" style="background:#2171B5;color:#FFFFFF;"><strong>Blue</strong><code>#2171B5</code><span>blue</span></div></div>
+<p>Text must use a pair that passes contrast. Gray <code>#898A8D</code> is for graphics, never text. On a dark ground, red text is <code>#D07886</code>.</p>
+<div class="pairs"><div class="pair" style="background:#FFFFFF;color:#1A1A1A;border:1px solid #D9D9D9"><strong>Ink on white</strong><span>17.4 : 1</span></div><div class="pair" style="background:#FFFFFF;color:#666666;border:1px solid #D9D9D9"><strong>Muted on white</strong><span>5.7 : 1</span></div><div class="pair" style="background:#FFFFFF;color:#A32035;border:1px solid #D9D9D9"><strong>Red on white</strong><span>7.5 : 1</span></div><div class="pair" style="background:#A32035;color:#FFFFFF;"><strong>White on red</strong><span>7.5 : 1</span></div><div class="pair" style="background:#F8E1E5;color:#1A1A1A;"><strong>Ink on red tint</strong><span>14.0 : 1</span></div><div class="pair" style="background:#F8E1E5;color:#666666;"><strong>Muted on red tint</strong><span>4.6 : 1</span></div><div class="pair" style="background:#1A1A1A;color:#D07886;"><strong>Red light on dark</strong><span>5.6 : 1</span></div><div class="pair" style="background:#FFFFFF;color:#898A8D;border:1px solid #D9D9D9"><strong>Gray on white (graphics only)</strong><span>3.5 : 1</span></div></div>
+
+<h3>Colour in data</h3>
+<p>Pick the palette by what the data shows. Under each strip are the same colours as seen with the two common kinds of colour blindness, and in greyscale print.</p>
+
+<h4>One thing that matters: red on grey</h4>
+<p>The default chart. One series in red, everything else in grey. When two conditions are both the subject, pair red with pale red and label the bars.</p>
+<div class="charts">
+  <figure><svg class="chart" viewBox="0 0 520 290" role="img" aria-label="Bar chart: one red bar against grey bars" xmlns="http://www.w3.org/2000/svg" font-family="Figtree, Arial, sans-serif"><rect width="520" height="290" fill="#FFFFFF"/><text x="16" y="26" font-size="15" fill="#1A1A1A" text-anchor="start" font-weight="700">Privacy and security is the risk named most often</text><text x="16" y="44" font-size="12" fill="#666666" text-anchor="start" font-weight="400">Share of documents that name each domain (%)</text><text x="118" y="77" font-size="12" fill="#666666" text-anchor="end" font-weight="400">Discrimination</text><rect x="126" y="62" width="189" height="20" fill="#898A8D"/><text x="320.6" y="77" font-size="12" fill="#666666" text-anchor="start" font-weight="400">41</text><text x="118" y="105" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="700">Privacy</text><rect x="126" y="90" width="313" height="20" fill="#A32035"/><text x="444.79999999999995" y="105" font-size="12" fill="#1A1A1A" text-anchor="start" font-weight="700">68</text><text x="118" y="133" font-size="12" fill="#666666" text-anchor="end" font-weight="400">Misinformation</text><rect x="126" y="118" width="170" height="20" fill="#898A8D"/><text x="302.2" y="133" font-size="12" fill="#666666" text-anchor="start" font-weight="400">37</text><text x="118" y="161" font-size="12" fill="#666666" text-anchor="end" font-weight="400">Misuse</text><rect x="126" y="146" width="239" height="20" fill="#898A8D"/><text x="371.2" y="161" font-size="12" fill="#666666" text-anchor="start" font-weight="400">52</text><text x="118" y="189" font-size="12" fill="#666666" text-anchor="end" font-weight="400">Human-AI</text><rect x="126" y="174" width="133" height="20" fill="#898A8D"/><text x="265.4" y="189" font-size="12" fill="#666666" text-anchor="start" font-weight="400">29</text><text x="118" y="217" font-size="12" fill="#666666" text-anchor="end" font-weight="400">Socioeconomic</text><rect x="126" y="202" width="152" height="20" fill="#898A8D"/><text x="283.79999999999995" y="217" font-size="12" fill="#666666" text-anchor="start" font-weight="400">33</text><text x="118" y="245" font-size="12" fill="#666666" text-anchor="end" font-weight="400">AI safety</text><rect x="126" y="230" width="216" height="20" fill="#898A8D"/><text x="348.2" y="245" font-size="12" fill="#666666" text-anchor="start" font-weight="400">47</text><text x="16" y="276" font-size="11" fill="#666666" text-anchor="start" font-weight="400">Source: Illustrative data</text></svg></figure>
+  <figure><svg class="chart" viewBox="0 0 520 294" role="img" aria-label="Dot plot: red dots for the subject, grey dots and bands for context" xmlns="http://www.w3.org/2000/svg" font-family="Figtree, Arial, sans-serif"><rect width="520" height="294" fill="#FFFFFF"/><text x="16" y="26" font-size="15" fill="#1A1A1A" text-anchor="start" font-weight="700">The largest companies name every risk more often</text><circle cx="22" cy="42" r="5" fill="#A32035"/><text x="32" y="46" font-size="12" fill="#666666" text-anchor="start" font-weight="400">Largest 100</text><circle cx="116" cy="42" r="5" fill="#898A8D"/><text x="126" y="46" font-size="12" fill="#666666" text-anchor="start" font-weight="400">Next 900, with range</text><line x1="150.0" y1="58" x2="150.0" y2="250" stroke="#D9D9D9"/><text x="150.0" y="264" font-size="11" fill="#666666" text-anchor="middle" font-weight="400">0%</text><line x1="236.0" y1="58" x2="236.0" y2="250" stroke="#D9D9D9"/><text x="236.0" y="264" font-size="11" fill="#666666" text-anchor="middle" font-weight="400">20%</text><line x1="322.0" y1="58" x2="322.0" y2="250" stroke="#D9D9D9"/><text x="322.0" y="264" font-size="11" fill="#666666" text-anchor="middle" font-weight="400">40%</text><line x1="408.0" y1="58" x2="408.0" y2="250" stroke="#D9D9D9"/><text x="408.0" y="264" font-size="11" fill="#666666" text-anchor="middle" font-weight="400">60%</text><line x1="494.0" y1="58" x2="494.0" y2="250" stroke="#D9D9D9"/><text x="494.0" y="264" font-size="11" fill="#666666" text-anchor="middle" font-weight="400">80%</text><text x="142" y="78" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Any risk</text><rect x="292" y="67" width="43" height="14" fill="#D9D9D9"/><circle cx="313" cy="74" r="5" fill="#898A8D"/><circle cx="442" cy="74" r="5.5" fill="#A32035"/><text x="142" y="104" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Discrimination</text><rect x="210" y="93" width="43" height="14" fill="#D9D9D9"/><circle cx="232" cy="100" r="5" fill="#898A8D"/><circle cx="326" cy="100" r="5.5" fill="#A32035"/><text x="142" y="130" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Cyberattacks</text><rect x="202" y="119" width="43" height="14" fill="#D9D9D9"/><circle cx="223" cy="126" r="5" fill="#898A8D"/><circle cx="318" cy="126" r="5.5" fill="#A32035"/><text x="142" y="156" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Privacy</text><rect x="189" y="145" width="43" height="14" fill="#D9D9D9"/><circle cx="210" cy="152" r="5" fill="#898A8D"/><circle cx="296" cy="152" r="5.5" fill="#A32035"/><text x="142" y="182" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Misinformation</text><rect x="167" y="171" width="43" height="14" fill="#D9D9D9"/><circle cx="189" cy="178" r="5" fill="#898A8D"/><circle cx="266" cy="178" r="5.5" fill="#A32035"/><text x="142" y="208" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Governance failure</text><rect x="159" y="197" width="43" height="14" fill="#D9D9D9"/><circle cx="180" cy="204" r="5" fill="#898A8D"/><circle cx="245" cy="204" r="5.5" fill="#A32035"/><text x="142" y="234" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">AI welfare</text><rect x="137" y="223" width="43" height="14" fill="#D9D9D9"/><circle cx="159" cy="230" r="5" fill="#898A8D"/><circle cx="189" cy="230" r="5.5" fill="#A32035"/><text x="16" y="284" font-size="11" fill="#666666" text-anchor="start" font-weight="400">Source: Illustrative data</text></svg></figure>
+  <figure><svg class="chart" viewBox="0 0 520 290" role="img" aria-label="Paired bars in red and pale red" xmlns="http://www.w3.org/2000/svg" font-family="Figtree, Arial, sans-serif"><rect width="520" height="290" fill="#FFFFFF"/><text x="16" y="26" font-size="15" fill="#1A1A1A" text-anchor="start" font-weight="700">Mitigations lower every estimate, most at the severe end</text><rect x="16" y="38" width="12" height="12" fill="#A32035"/><text x="34" y="48" font-size="12" fill="#666666" text-anchor="start" font-weight="400">Business as usual</text><rect x="150" y="38" width="12" height="12" fill="#E29CA8"/><text x="168" y="48" font-size="12" fill="#666666" text-anchor="start" font-weight="400">With mitigations</text><line x1="16" y1="240" x2="504" y2="240" stroke="#CCCCCC"/><rect x="40" y="87" width="40" height="153" fill="#A32035"/><text x="60" y="82.0" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="700">90%</text><rect x="84" y="104" width="40" height="136" fill="#E29CA8"/><text x="104" y="99.0" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">80%</text><text x="82" y="257" font-size="12" fill="#666666" text-anchor="middle" font-weight="400">Minor or worse</text><rect x="158" y="118" width="40" height="122" fill="#A32035"/><text x="178" y="112.60000000000001" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="700">72%</text><rect x="202" y="146" width="40" height="94" fill="#E29CA8"/><text x="222" y="141.5" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">55%</text><text x="200" y="257" font-size="12" fill="#666666" text-anchor="middle" font-weight="400">Substantial</text><rect x="276" y="165" width="40" height="75" fill="#A32035"/><text x="296" y="160.2" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="700">44%</text><rect x="320" y="189" width="40" height="51" fill="#E29CA8"/><text x="340" y="184.0" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">30%</text><text x="318" y="257" font-size="12" fill="#666666" text-anchor="middle" font-weight="400">Severe</text><rect x="394" y="209" width="40" height="31" fill="#A32035"/><text x="414" y="204.4" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="700">18%</text><rect x="438" y="225" width="40" height="15" fill="#E29CA8"/><text x="458" y="219.7" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">9%</text><text x="436" y="257" font-size="12" fill="#666666" text-anchor="middle" font-weight="400">Catastrophic</text><text x="16" y="280" font-size="11" fill="#666666" text-anchor="start" font-weight="400">Source: Illustrative data</text></svg></figure>
 </div>
 
-<h3>Palette</h3>
-<div class="palette">
-  <div class="swatch" style="background:#A32035; color:#fff">
-    <strong>Primary (AIRI red)</strong>#A32035 · <code>primary</code></div>
-  <div class="swatch" style="background:#D07886; color:#fff">
-    <strong>Primary light</strong>#D07886 · <code>primary-light</code></div>
-  <div class="swatch" style="background:#5E0E20; color:#fff">
-    <strong>Primary dark</strong>#5E0E20 · <code>primary-dark</code></div>
-  <div class="swatch" style="background:#1A1A1A; color:#fff">
-    <strong>Dark</strong>#1A1A1A · <code>dark</code></div>
-  <div class="swatch" style="background:#898A8D; color:#fff">
-    <strong>Gray</strong>#898A8D · <code>gray</code></div>
-  <div class="swatch" style="background:#FAFAFA; color:#1a1a1a; border:1px solid #e0e0e0">
-    <strong>Background</strong>#FAFAFA · <code>background</code></div>
-  <div class="swatch" style="background:#FFFFFF; color:#1a1a1a; border:1px solid #e0e0e0">
-    <strong>White</strong>#FFFFFF · <code>white</code></div>
-</div>
-<ul>
-  <li><strong>Primary</strong> — buttons, links, headings, accents, the logo itself.</li>
-  <li><strong>Primary light / dark</strong> — hover tints and hover states respectively.</li>
-  <li><strong>Dark</strong> — body text and headings on light backgrounds.</li>
-  <li><strong>Gray</strong> — muted text, captions, secondary borders.</li>
-  <li>Do not introduce new brand colours. For lighter fills, use opacity variants of the primary (e.g., <code>rgba(163, 32, 53, 0.1)</code>).</li>
-</ul>
+<h4>Ordered levels where higher is worse: the severity scale</h4>
+<div class="strip"><div class="strip-cells main"><div style="background:#E29CA8;color:#1A1A1A"><b>1</b><code>#E29CA8</code></div><div style="background:#D07886;color:#1A1A1A"><b>2</b><code>#D07886</code></div><div style="background:#B8455A;color:#FFFFFF"><b>3</b><code>#B8455A</code></div><div style="background:#A32035;color:#FFFFFF"><b>4</b><code>#A32035</code></div><div style="background:#5E0E20;color:#FFFFFF"><b>5</b><code>#5E0E20</code></div></div><div class="strip-row sim"><span>Green-blind</span><div class="strip-cells"><div style="background:rgb(183,180,167)"></div><div style="background:rgb(157,152,132)"></div><div style="background:rgb(125,117,87)"></div><div style="background:rgb(104,95,49)"></div><div style="background:rgb(57,53,30)"></div></div></div><div class="strip-row sim"><span>Red-blind</span><div class="strip-cells"><div style="background:rgb(167,167,168)"></div><div style="background:rgb(136,135,134)"></div><div style="background:rgb(95,94,90)"></div><div style="background:rgb(71,67,53)"></div><div style="background:rgb(37,36,32)"></div></div></div><div class="strip-row sim"><span>Greyscale</span><div class="strip-cells"><div style="background:rgb(175,175,175)"></div><div style="background:rgb(146,146,146)"></div><div style="background:rgb(109,109,109)"></div><div style="background:rgb(85,85,85)"></div><div style="background:rgb(47,47,47)"></div></div></div></div>
+<div class="charts"><figure><svg class="chart" viewBox="0 0 520 276" role="img" aria-label="Heat map in five red steps" xmlns="http://www.w3.org/2000/svg" font-family="Figtree, Arial, sans-serif"><rect width="520" height="276" fill="#FFFFFF"/><text x="16" y="26" font-size="15" fill="#1A1A1A" text-anchor="start" font-weight="700">Health and finance are the most exposed sectors</text><text x="16" y="44" font-size="12" fill="#666666" text-anchor="start" font-weight="400">Vulnerability by sector and risk domain, 1 (low) to 5 (high)</text><text x="150" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Discrimi.</text><text x="205" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Privacy</text><text x="260" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Misinfor.</text><text x="315" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Misuse</text><text x="370" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Human-AI</text><text x="425" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Socioeco.</text><text x="480" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">AI safety</text><text x="116" y="96" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Health</text><rect x="124" y="76" width="53" height="30" fill="#5E0E20"/><text x="150" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text><rect x="179" y="76" width="53" height="30" fill="#A32035"/><text x="205" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="234" y="76" width="53" height="30" fill="#B8455A"/><text x="260" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="400">3</text><rect x="289" y="76" width="53" height="30" fill="#A32035"/><text x="315" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="344" y="76" width="53" height="30" fill="#D07886"/><text x="370" y="96" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="399" y="76" width="53" height="30" fill="#B8455A"/><text x="425" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="400">3</text><rect x="454" y="76" width="53" height="30" fill="#5E0E20"/><text x="480" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text><text x="116" y="128" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Finance</text><rect x="124" y="108" width="53" height="30" fill="#A32035"/><text x="150" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="179" y="108" width="53" height="30" fill="#5E0E20"/><text x="205" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text><rect x="234" y="108" width="53" height="30" fill="#D07886"/><text x="260" y="128" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="289" y="108" width="53" height="30" fill="#A32035"/><text x="315" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="344" y="108" width="53" height="30" fill="#E29CA8"/><text x="370" y="128" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">1</text><rect x="399" y="108" width="53" height="30" fill="#A32035"/><text x="425" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="454" y="108" width="53" height="30" fill="#B8455A"/><text x="480" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="400">3</text><text x="116" y="160" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Education</text><rect x="124" y="140" width="53" height="30" fill="#B8455A"/><text x="150" y="160" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="400">3</text><rect x="179" y="140" width="53" height="30" fill="#B8455A"/><text x="205" y="160" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="400">3</text><rect x="234" y="140" width="53" height="30" fill="#A32035"/><text x="260" y="160" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="289" y="140" width="53" height="30" fill="#D07886"/><text x="315" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="344" y="140" width="53" height="30" fill="#B8455A"/><text x="370" y="160" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="400">3</text><rect x="399" y="140" width="53" height="30" fill="#D07886"/><text x="425" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="454" y="140" width="53" height="30" fill="#D07886"/><text x="480" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><text x="116" y="192" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Public sector</text><rect x="124" y="172" width="53" height="30" fill="#A32035"/><text x="150" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="179" y="172" width="53" height="30" fill="#A32035"/><text x="205" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="234" y="172" width="53" height="30" fill="#5E0E20"/><text x="260" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text><rect x="289" y="172" width="53" height="30" fill="#B8455A"/><text x="315" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="400">3</text><rect x="344" y="172" width="53" height="30" fill="#D07886"/><text x="370" y="192" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="399" y="172" width="53" height="30" fill="#B8455A"/><text x="425" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="400">3</text><rect x="454" y="172" width="53" height="30" fill="#A32035"/><text x="480" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><text x="116" y="224" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Transport</text><rect x="124" y="204" width="53" height="30" fill="#D07886"/><text x="150" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="179" y="204" width="53" height="30" fill="#E29CA8"/><text x="205" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">1</text><rect x="234" y="204" width="53" height="30" fill="#F3F3F3"/><text x="260" y="224" font-size="12" fill="#666666" text-anchor="middle" font-weight="400">–</text><rect x="289" y="204" width="53" height="30" fill="#D07886"/><text x="315" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="344" y="204" width="53" height="30" fill="#E29CA8"/><text x="370" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">1</text><rect x="399" y="204" width="53" height="30" fill="#D07886"/><text x="425" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="454" y="204" width="53" height="30" fill="#A32035"/><text x="480" y="224" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><text x="16" y="262" font-size="11" fill="#666666" text-anchor="start" font-weight="400">Source: Illustrative data</text></svg><figcaption>Use red only when more means more risk. Labels are ink on the two pale steps and white on the rest.</figcaption></figure>
+<figure><svg class="chart" viewBox="0 0 520 276" role="img" aria-label="Heat map in five blue steps" xmlns="http://www.w3.org/2000/svg" font-family="Figtree, Arial, sans-serif"><rect width="520" height="276" fill="#FFFFFF"/><text x="16" y="26" font-size="15" fill="#1A1A1A" text-anchor="start" font-weight="700">Most documents come from health and the public sector</text><text x="16" y="44" font-size="12" fill="#666666" text-anchor="start" font-weight="400">Documents reviewed, by sector and risk domain (quintile)</text><text x="150" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Discrimi.</text><text x="205" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Privacy</text><text x="260" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Misinfor.</text><text x="315" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Misuse</text><text x="370" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Human-AI</text><text x="425" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">Socioeco.</text><text x="480" y="68" font-size="10.5" fill="#666666" text-anchor="middle" font-weight="400">AI safety</text><text x="116" y="96" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Health</text><rect x="124" y="76" width="53" height="30" fill="#084594"/><text x="150" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text><rect x="179" y="76" width="53" height="30" fill="#2171B5"/><text x="205" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="234" y="76" width="53" height="30" fill="#4292C6"/><text x="260" y="96" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">3</text><rect x="289" y="76" width="53" height="30" fill="#2171B5"/><text x="315" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="344" y="76" width="53" height="30" fill="#6BAED6"/><text x="370" y="96" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="399" y="76" width="53" height="30" fill="#4292C6"/><text x="425" y="96" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">3</text><rect x="454" y="76" width="53" height="30" fill="#084594"/><text x="480" y="96" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text><text x="116" y="128" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Finance</text><rect x="124" y="108" width="53" height="30" fill="#2171B5"/><text x="150" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="179" y="108" width="53" height="30" fill="#084594"/><text x="205" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text><rect x="234" y="108" width="53" height="30" fill="#6BAED6"/><text x="260" y="128" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="289" y="108" width="53" height="30" fill="#2171B5"/><text x="315" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="344" y="108" width="53" height="30" fill="#9ECAE1"/><text x="370" y="128" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">1</text><rect x="399" y="108" width="53" height="30" fill="#2171B5"/><text x="425" y="128" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="454" y="108" width="53" height="30" fill="#4292C6"/><text x="480" y="128" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">3</text><text x="116" y="160" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Education</text><rect x="124" y="140" width="53" height="30" fill="#4292C6"/><text x="150" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">3</text><rect x="179" y="140" width="53" height="30" fill="#4292C6"/><text x="205" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">3</text><rect x="234" y="140" width="53" height="30" fill="#2171B5"/><text x="260" y="160" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="289" y="140" width="53" height="30" fill="#6BAED6"/><text x="315" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="344" y="140" width="53" height="30" fill="#4292C6"/><text x="370" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">3</text><rect x="399" y="140" width="53" height="30" fill="#6BAED6"/><text x="425" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="454" y="140" width="53" height="30" fill="#6BAED6"/><text x="480" y="160" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><text x="116" y="192" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Public sector</text><rect x="124" y="172" width="53" height="30" fill="#2171B5"/><text x="150" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="179" y="172" width="53" height="30" fill="#2171B5"/><text x="205" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><rect x="234" y="172" width="53" height="30" fill="#084594"/><text x="260" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">5</text><rect x="289" y="172" width="53" height="30" fill="#4292C6"/><text x="315" y="192" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">3</text><rect x="344" y="172" width="53" height="30" fill="#6BAED6"/><text x="370" y="192" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="399" y="172" width="53" height="30" fill="#4292C6"/><text x="425" y="192" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">3</text><rect x="454" y="172" width="53" height="30" fill="#2171B5"/><text x="480" y="192" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><text x="116" y="224" font-size="12" fill="#1A1A1A" text-anchor="end" font-weight="400">Transport</text><rect x="124" y="204" width="53" height="30" fill="#6BAED6"/><text x="150" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="179" y="204" width="53" height="30" fill="#9ECAE1"/><text x="205" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">1</text><rect x="234" y="204" width="53" height="30" fill="#F3F3F3"/><text x="260" y="224" font-size="12" fill="#666666" text-anchor="middle" font-weight="400">–</text><rect x="289" y="204" width="53" height="30" fill="#6BAED6"/><text x="315" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="344" y="204" width="53" height="30" fill="#9ECAE1"/><text x="370" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">1</text><rect x="399" y="204" width="53" height="30" fill="#6BAED6"/><text x="425" y="224" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="400">2</text><rect x="454" y="204" width="53" height="30" fill="#2171B5"/><text x="480" y="224" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="700">4</text><text x="16" y="262" font-size="11" fill="#666666" text-anchor="start" font-weight="400">Source: Illustrative data</text></svg><figcaption>Counts and coverage use blue, because more is only more.</figcaption></figure></div>
 
-<!-- ============================================================ -->
+<h4>Amounts: the blue scale</h4>
+<div class="strip"><div class="strip-cells main"><div style="background:#EFF6FF;color:#1A1A1A"><code>#EFF6FF</code></div><div style="background:#C6DBEF;color:#1A1A1A"><code>#C6DBEF</code></div><div style="background:#9ECAE1;color:#1A1A1A"><code>#9ECAE1</code></div><div style="background:#6BAED6;color:#1A1A1A"><code>#6BAED6</code></div><div style="background:#4292C6;color:#1A1A1A"><code>#4292C6</code></div><div style="background:#2171B5;color:#FFFFFF"><code>#2171B5</code></div><div style="background:#084594;color:#FFFFFF"><code>#084594</code></div></div><div class="strip-row sim"><span>Green-blind</span><div class="strip-cells"><div style="background:rgb(241,245,255)"></div><div style="background:rgb(206,214,239)"></div><div style="background:rgb(181,192,225)"></div><div style="background:rgb(141,161,213)"></div><div style="background:rgb(104,133,197)"></div><div style="background:rgb(58,104,180)"></div><div style="background:rgb(0,66,146)"></div></div></div><div class="strip-row sim"><span>Red-blind</span><div class="strip-cells"><div style="background:rgb(243,246,255)"></div><div style="background:rgb(211,219,240)"></div><div style="background:rgb(191,200,226)"></div><div style="background:rgb(156,173,216)"></div><div style="background:rgb(122,146,200)"></div><div style="background:rgb(81,117,184)"></div><div style="background:rgb(8,78,151)"></div></div></div><div class="strip-row sim"><span>Greyscale</span><div class="strip-cells"><div style="background:rgb(245,245,245)"></div><div style="background:rgb(216,216,216)"></div><div style="background:rgb(196,196,196)"></div><div style="background:rgb(166,166,166)"></div><div style="background:rgb(139,139,139)"></div><div style="background:rgb(110,110,110)"></div><div style="background:rgb(72,72,72)"></div></div></div></div>
+
+<h4>Two directions from a midpoint</h4>
+<div class="strip"><div class="strip-cells main"><div style="background:#084594;color:#FFFFFF"><code>#084594</code></div><div style="background:#4292C6;color:#1A1A1A"><code>#4292C6</code></div><div style="background:#9ECAE1;color:#1A1A1A"><code>#9ECAE1</code></div><div style="background:#F3F3F3;color:#1A1A1A"><code>#F3F3F3</code></div><div style="background:#E29CA8;color:#1A1A1A"><code>#E29CA8</code></div><div style="background:#B8455A;color:#FFFFFF"><code>#B8455A</code></div><div style="background:#5E0E20;color:#FFFFFF"><code>#5E0E20</code></div></div><div class="strip-row sim"><span>Green-blind</span><div class="strip-cells"><div style="background:rgb(0,66,146)"></div><div style="background:rgb(104,133,197)"></div><div style="background:rgb(181,192,225)"></div><div style="background:rgb(243,243,243)"></div><div style="background:rgb(183,180,167)"></div><div style="background:rgb(125,117,87)"></div><div style="background:rgb(57,53,30)"></div></div></div><div class="strip-row sim"><span>Red-blind</span><div class="strip-cells"><div style="background:rgb(8,78,151)"></div><div style="background:rgb(122,146,200)"></div><div style="background:rgb(191,200,226)"></div><div style="background:rgb(243,243,243)"></div><div style="background:rgb(167,167,168)"></div><div style="background:rgb(95,94,90)"></div><div style="background:rgb(37,36,32)"></div></div></div><div class="strip-row sim"><span>Greyscale</span><div class="strip-cells"><div style="background:rgb(72,72,72)"></div><div style="background:rgb(139,139,139)"></div><div style="background:rgb(196,196,196)"></div><div style="background:rgb(243,243,243)"></div><div style="background:rgb(175,175,175)"></div><div style="background:rgb(109,109,109)"></div><div style="background:rgb(47,47,47)"></div></div></div></div>
+<div class="charts"><figure><svg class="chart" viewBox="0 0 520 276" role="img" aria-label="Two-sided stacked bars from blue through grey to red" xmlns="http://www.w3.org/2000/svg" font-family="Figtree, Arial, sans-serif"><rect width="520" height="276" fill="#FFFFFF"/><text x="16" y="26" font-size="15" fill="#1A1A1A" text-anchor="start" font-weight="700">Concern rose most for misuse and fell for discrimination</text><text x="16" y="44" font-size="12" fill="#666666" text-anchor="start" font-weight="400">Change in expert concern since last year. Blue fell, grey unchanged, red rose (%)</text><text x="16" y="81" font-size="12" fill="#1A1A1A" text-anchor="start" font-weight="400">Misuse</text><rect x="264.3" y="62" width="6.3" height="28" fill="#2171B5"/><rect x="270.6" y="62" width="14.7" height="28" fill="#9ECAE1"/><rect x="285.3" y="62" width="29.4" height="28" fill="#F3F3F3"/><text x="300.0" y="81" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">14</text><rect x="314.7" y="62" width="84.0" height="28" fill="#E29CA8"/><text x="356.7" y="81" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">40</text><rect x="398.7" y="62" width="75.6" height="28" fill="#A32035"/><text x="436.5" y="81" font-size="11.5" fill="#FFFFFF" text-anchor="middle" font-weight="400">36</text><text x="16" y="125" font-size="12" fill="#1A1A1A" text-anchor="start" font-weight="400">AI safety</text><rect x="237.0" y="106" width="12.6" height="28" fill="#2171B5"/><rect x="249.6" y="106" width="25.2" height="28" fill="#9ECAE1"/><text x="262.2" y="125" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">12</text><rect x="274.8" y="106" width="50.4" height="28" fill="#F3F3F3"/><text x="300.0" y="125" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">24</text><rect x="325.2" y="106" width="75.6" height="28" fill="#E29CA8"/><text x="363.00000000000006" y="125" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">36</text><rect x="400.8" y="106" width="46.2" height="28" fill="#A32035"/><text x="423.9000000000001" y="125" font-size="11.5" fill="#FFFFFF" text-anchor="middle" font-weight="400">22</text><text x="16" y="169" font-size="12" fill="#1A1A1A" text-anchor="start" font-weight="400">Privacy</text><rect x="184.5" y="150" width="29.4" height="28" fill="#2171B5"/><text x="199.2" y="169" font-size="11.5" fill="#FFFFFF" text-anchor="middle" font-weight="400">14</text><rect x="213.9" y="150" width="54.6" height="28" fill="#9ECAE1"/><text x="241.20000000000002" y="169" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">26</text><rect x="268.5" y="150" width="63.0" height="28" fill="#F3F3F3"/><text x="300.0" y="169" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">30</text><rect x="331.5" y="150" width="46.2" height="28" fill="#E29CA8"/><text x="354.6" y="169" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">22</text><rect x="377.7" y="150" width="16.8" height="28" fill="#A32035"/><text x="16" y="213" font-size="12" fill="#1A1A1A" text-anchor="start" font-weight="400">Discrimination</text><rect x="159.3" y="194" width="46.2" height="28" fill="#2171B5"/><text x="182.39999999999998" y="213" font-size="11.5" fill="#FFFFFF" text-anchor="middle" font-weight="400">22</text><rect x="205.5" y="194" width="67.2" height="28" fill="#9ECAE1"/><text x="239.1" y="213" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">32</text><rect x="272.7" y="194" width="54.6" height="28" fill="#F3F3F3"/><text x="300.0" y="213" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">26</text><rect x="327.3" y="194" width="29.4" height="28" fill="#E29CA8"/><text x="342.0" y="213" font-size="11.5" fill="#1A1A1A" text-anchor="middle" font-weight="400">14</text><rect x="356.7" y="194" width="12.6" height="28" fill="#A32035"/><line x1="300" y1="56" x2="300" y2="236" stroke="#1A1A1A" stroke-dasharray="2 3"/><text x="16" y="262" font-size="11" fill="#666666" text-anchor="start" font-weight="400">Source: Illustrative data</text></svg><figcaption>Red is the riskier side. The midpoint is grey, never yellow.</figcaption></figure></div>
+
+<h4>Named groups: seven category colours</h4>
+<p>For groups with no order, such as the seven domains of the AI Risk Repository. The order is fixed, and red is never a category, so red stays free to pick one out.</p>
+<div class="strip"><div class="strip-cells main"><div style="background:#2171B5;color:#FFFFFF"><b>Blue</b><code>#2171B5</code></div><div style="background:#6BAED6;color:#1A1A1A"><b>Sky</b><code>#6BAED6</code></div><div style="background:#55399E;color:#FFFFFF"><b>Violet</b><code>#55399E</code></div><div style="background:#CC6699;color:#1A1A1A"><b>Pink</b><code>#CC6699</code></div><div style="background:#D4762C;color:#1A1A1A"><b>Orange</b><code>#D4762C</code></div><div style="background:#D9A531;color:#1A1A1A"><b>Gold</b><code>#D9A531</code></div><div style="background:#138A73;color:#FFFFFF"><b>Teal</b><code>#138A73</code></div><div style="background:#898A8D;color:#1A1A1A"><b>Other</b><code>#898A8D</code></div></div><div class="strip-row sim"><span>Green-blind</span><div class="strip-cells"><div style="background:rgb(58,104,180)"></div><div style="background:rgb(141,161,213)"></div><div style="background:rgb(0,74,156)"></div><div style="background:rgb(140,143,150)"></div><div style="background:rgb(168,151,43)"></div><div style="background:rgb(199,179,55)"></div><div style="background:rgb(118,118,117)"></div><div style="background:rgb(137,138,141)"></div></div></div><div class="strip-row sim"><span>Red-blind</span><div class="strip-cells"><div style="background:rgb(81,117,184)"></div><div style="background:rgb(156,173,216)"></div><div style="background:rgb(0,78,161)"></div><div style="background:rgb(113,125,155)"></div><div style="background:rgb(146,129,33)"></div><div style="background:rgb(187,165,28)"></div><div style="background:rgb(133,128,114)"></div><div style="background:rgb(137,138,141)"></div></div></div><div class="strip-row sim"><span>Greyscale</span><div class="strip-cells"><div style="background:rgb(110,110,110)"></div><div style="background:rgb(166,166,166)"></div><div style="background:rgb(77,77,77)"></div><div style="background:rgb(136,136,136)"></div><div style="background:rgb(142,142,142)"></div><div style="background:rgb(173,173,173)"></div><div style="background:rgb(122,122,122)"></div><div style="background:rgb(138,138,138)"></div></div></div></div>
+<div class="tablewrap"><table>
+  <thead><tr><th>Slot</th><th>Colour</th><th>Fill</th><th>Text on tint</th><th>Repository domain</th></tr></thead>
+  <tbody><tr><td>1</td><td><span class="dot" style="background:#2171B5"></span>Blue</td><td><code>#2171B5</code></td><td><span class="chip" style="background:#E0EBF5;color:#084594">#084594 on #E0EBF5</span></td><td>Discrimination &amp; toxicity</td></tr><tr><td>2</td><td><span class="dot" style="background:#6BAED6"></span>Sky</td><td><code>#6BAED6</code></td><td><span class="chip" style="background:#EAF4F9;color:#084594">#084594 on #EAF4F9</span></td><td>Privacy &amp; security</td></tr><tr><td>3</td><td><span class="dot" style="background:#55399E"></span>Violet</td><td><code>#55399E</code></td><td><span class="chip" style="background:#E7E3F1;color:#55399E">#55399E on #E7E3F1</span></td><td>Misinformation</td></tr><tr><td>4</td><td><span class="dot" style="background:#CC6699"></span>Pink</td><td><code>#CC6699</code></td><td><span class="chip" style="background:#F8EAF1;color:#A3446F">#A3446F on #F8EAF1</span></td><td>Malicious actors &amp; misuse</td></tr><tr><td>5</td><td><span class="dot" style="background:#D4762C"></span>Orange</td><td><code>#D4762C</code></td><td><span class="chip" style="background:#F9ECE1;color:#A54A0C">#A54A0C on #F9ECE1</span></td><td>Human-computer interaction</td></tr><tr><td>6</td><td><span class="dot" style="background:#D9A531"></span>Gold</td><td><code>#D9A531</code></td><td><span class="chip" style="background:#FAF2E2;color:#7F5D00">#7F5D00 on #FAF2E2</span></td><td>Socioeconomic &amp; environmental</td></tr><tr><td>7</td><td><span class="dot" style="background:#138A73"></span>Teal</td><td><code>#138A73</code></td><td><span class="chip" style="background:#DEEFEB;color:#0B6655">#0B6655 on #DEEFEB</span></td><td>AI system safety, failures &amp; limitations</td></tr></tbody>
+</table></div>
+<div class="charts"><figure><svg class="chart" viewBox="0 0 520 220" role="img" aria-label="Stacked bar in the seven category colours" xmlns="http://www.w3.org/2000/svg" font-family="Figtree, Arial, sans-serif"><rect width="520" height="220" fill="#FFFFFF"/><text x="16" y="26" font-size="15" fill="#1A1A1A" text-anchor="start" font-weight="700">Misuse and AI safety make up two fifths of entries</text><text x="16" y="44" font-size="12" fill="#666666" text-anchor="start" font-weight="400">Share of entries by risk domain (%)</text><rect x="16.0" y="60" width="56.6" height="44" fill="#2171B5"/><text x="45.28" y="87" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">12</text><g transform="translate(45.3,116) rotate(35)"><text x="0" y="0" font-size="11" fill="#084594" text-anchor="start" font-weight="700">Discrimination</text></g><rect x="74.6" y="60" width="76.1" height="44" fill="#6BAED6"/><text x="113.6" y="87" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="700">16</text><g transform="translate(113.6,116) rotate(35)"><text x="0" y="0" font-size="11" fill="#084594" text-anchor="start" font-weight="700">Privacy</text></g><rect x="152.6" y="60" width="41.9" height="44" fill="#55399E"/><text x="174.6" y="87" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">9</text><g transform="translate(174.6,116) rotate(35)"><text x="0" y="0" font-size="11" fill="#55399E" text-anchor="start" font-weight="700">Misinformation</text></g><rect x="196.6" y="60" width="100.5" height="44" fill="#CC6699"/><text x="247.8" y="87" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="700">21</text><g transform="translate(247.8,116) rotate(35)"><text x="0" y="0" font-size="11" fill="#A3446F" text-anchor="start" font-weight="700">Misuse</text></g><rect x="299.0" y="60" width="37.0" height="44" fill="#D4762C"/><text x="318.56" y="87" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="700">8</text><g transform="translate(318.6,116) rotate(35)"><text x="0" y="0" font-size="11" fill="#A54A0C" text-anchor="start" font-weight="700">Human-AI</text></g><rect x="338.1" y="60" width="66.3" height="44" fill="#D9A531"/><text x="372.24" y="87" font-size="13" fill="#1A1A1A" text-anchor="middle" font-weight="700">14</text><g transform="translate(372.2,116) rotate(35)"><text x="0" y="0" font-size="11" fill="#7F5D00" text-anchor="start" font-weight="700">Socioeconomic</text></g><rect x="406.4" y="60" width="95.6" height="44" fill="#138A73"/><text x="455.20000000000005" y="87" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">20</text><g transform="translate(455.2,116) rotate(35)"><text x="0" y="0" font-size="11" fill="#0B6655" text-anchor="start" font-weight="700">AI safety</text></g><text x="16" y="206" font-size="11" fill="#666666" text-anchor="start" font-weight="400">Source: Illustrative data. Every segment is labelled, so no legend is needed.</text></svg></figure></div>
+
+<h4>Status</h4>
+<p>Status always carries a word or an icon. A dense Yes / Partial / No table under a red header may use the grade style, which avoids red and green altogether.</p>
+<div class="chiprow"><span class="status" style="background:#E3F1EA;color:#17653C"><i style="background:#3A8F5C;color:#1A1A1A">✓</i>Held</span><span class="status" style="background:#FCF3E3;color:#8A5A18"><i style="background:#E8A317;color:#1A1A1A">!</i>Partial</span><span class="status" style="background:#F8E1E5;color:#A32035"><i style="background:#A32035;color:#FFFFFF">✕</i>Not met</span><span class="status" style="background:#DCE9F4;color:#084594"><i style="background:#2171B5;color:#FFFFFF">i</i>Note</span><span class="status" style="background:#F3F3F3;color:#666666"><i style="background:#D9D9D9;color:#1A1A1A">–</i>No data</span></div>
+<div class="tablewrap"><table class="grades"><thead><tr><th>Requirement</th><th>Company A</th><th>Company B</th><th>Company C</th></tr></thead><tbody><tr><th>Publish a safety framework</th><td><span class="grade" style="background:#FFFFFF;border-color:#CCCCCC;color:#1A1A1A;font-weight:400">Yes</span></td><td><span class="grade" style="background:#FFFFFF;border-color:#CCCCCC;color:#1A1A1A;font-weight:400">Yes</span></td><td><span class="grade" style="background:#FCF3E3;border-color:#E8A317;color:#1A1A1A;font-weight:700">Partial</span></td></tr><tr><th>Report serious incidents</th><td><span class="grade" style="background:#FCF3E3;border-color:#E8A317;color:#1A1A1A;font-weight:700">Partial</span></td><td><span class="grade" style="background:#8A5A18;border-color:#8A5A18;color:#FFFFFF;font-weight:700">No</span></td><td><span class="grade" style="background:#FFFFFF;border-color:#CCCCCC;color:#1A1A1A;font-weight:400">Yes</span></td></tr><tr><th>Describe testing before release</th><td><span class="grade" style="background:#FFFFFF;border-color:#CCCCCC;color:#1A1A1A;font-weight:400">Yes</span></td><td><span class="grade" style="background:#FCF3E3;border-color:#E8A317;color:#1A1A1A;font-weight:700">Partial</span></td><td><span class="grade" style="background:#FCF3E3;border-color:#E8A317;color:#1A1A1A;font-weight:700">Partial</span></td></tr></tbody></table></div>
+
+<div class="note">Every value, with text pairs, dark mode and rules for each medium, is in <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/skill/BRAND.md">BRAND.md</a>. Ready-made theme and palette files for Office, Google Workspace, CSS, Tailwind, matplotlib, Plotly, R and LaTeX are in <a href="https://github.com/MIT-FutureTech/airi-brand/tree/main/skill/templates">templates</a>.</div>
+
 <!-- 4. Parent organisation logo -->
-<!-- ============================================================ -->
 <h2>4 · Parent organisation logo</h2>
-<p>AIRI sits within <strong>MIT FutureTech</strong>. The FutureTech logo may appear alongside the AIRI lockup on co-branded materials (websites, slide decks, partner communications). It is <em>not</em> an AIRI brand element — it comes from FutureTech's own brand guidelines — but traced SVG variants are included here for convenience.</p>
-
-<h3>Logo details</h3>
+<p>AIRI sits within <strong>MIT FutureTech</strong>. The FutureTech logo may appear beside the AIRI logo on co-branded work. It comes from FutureTech's own guidelines and is not an AIRI brand element; traced SVG versions are included for convenience.</p>
+<div class="logo-grid"><div class="logo-cell light"><img class="horiz" src="logos/futuretech/futuretech-on-light.svg" alt="futuretech-on-light" style="height:48px"><span class="label">futuretech-on-light</span><div class="asset-links"><a href="logos/futuretech/futuretech-on-light.svg" target="_blank" rel="noopener">SVG</a></div></div><div class="logo-cell light"><img class="horiz" src="logos/futuretech/futuretech.svg" alt="futuretech" style="height:48px"><span class="label">futuretech</span><div class="asset-links"><a href="logos/futuretech/futuretech.svg" target="_blank" rel="noopener">SVG</a></div></div><div class="logo-cell dark"><img class="horiz" src="logos/futuretech/futuretech-on-dark.svg" alt="futuretech-on-dark" style="height:48px"><span class="label">futuretech-on-dark</span><div class="asset-links"><a href="logos/futuretech/futuretech-on-dark.svg" target="_blank" rel="noopener">SVG</a></div></div><div class="logo-cell red"><img class="horiz" src="logos/futuretech/futuretech-on-red.svg" alt="futuretech-on-red" style="height:48px"><span class="label">futuretech-on-red</span><div class="asset-links"><a href="logos/futuretech/futuretech-on-red.svg" target="_blank" rel="noopener">SVG</a></div></div></div>
 <ul>
-  <li><strong>Font:</strong> ITC Bailey Sans Pro Book — Bold/Black weight for "MIT", Bold for "FutureTech", Light/Regular for the tagline.</li>
-  <li><strong>Colour:</strong> "MIT" is black (<code>#000000</code>), "FutureTech" is <code>#9A2030</code>, tagline "Innovations that Shape the World" is black. This is a third red distinct from both AIRI's primary (<code>#A32035</code>) and MIT's institutional red (<code>#750014</code>) — do not conflate the three.</li>
-  <li><strong>Text is outlined</strong> as SVG paths — no font dependency in the logo files.</li>
+  <li>Set the two logos apart at a balanced size. Do not merge them into one mark.</li>
+  <li>Report covers carry two logos, AIRI and FutureTech, in white on red.</li>
+  <li>There are three different reds. AIRI red is <code>#A32035</code>. The FutureTech logo uses <code>#9A2030</code>. MIT's institutional red is <code>#750014</code>. The last two stay inside their own logos.</li>
+  <li>With partners: in AIRI-led work, AIRI colours and type win and the partner's logo sits apart at equal height. In partner-led work, the partner's template wins and the AIRI logo appears in white or red, never recoloured.</li>
 </ul>
 
-<div class="logo-grid">
-  <div class="logo-cell light">
-    <img class="horiz" src="logos/futuretech/futuretech.svg" alt="FutureTech logo (default)" style="height:48px">
-    <span class="label">futuretech (default)</span>
-    <div class="asset-links">
-      <a href="logos/futuretech/futuretech.svg" target="_blank" rel="noopener">SVG</a>
-    </div>
-  </div>
-  <div class="logo-cell light">
-    <img class="horiz" src="logos/futuretech/futuretech-on-light.svg" alt="FutureTech logo on light" style="height:48px">
-    <span class="label">futuretech-on-light</span>
-    <div class="asset-links">
-      <a href="logos/futuretech/futuretech-on-light.svg" target="_blank" rel="noopener">SVG</a>
-    </div>
-  </div>
-  <div class="logo-cell dark">
-    <img class="horiz" src="logos/futuretech/futuretech-on-dark.svg" alt="FutureTech logo on dark" style="height:48px">
-    <span class="label">futuretech-on-dark</span>
-    <div class="asset-links">
-      <a href="logos/futuretech/futuretech-on-dark.svg" target="_blank" rel="noopener">SVG</a>
-    </div>
-  </div>
-  <div class="logo-cell red">
-    <img class="horiz" src="logos/futuretech/futuretech-on-red.svg" alt="FutureTech logo on red" style="height:48px">
-    <span class="label">futuretech-on-red</span>
-    <div class="asset-links">
-      <a href="logos/futuretech/futuretech-on-red.svg" target="_blank" rel="noopener">SVG</a>
-    </div>
-  </div>
-</div>
-
-<div class="note">
-  Files: <code>skill/logos/futuretech/futuretech*.svg</code>. Traced from the official PNG; text rendered as outlined paths. When co-branding, place the FutureTech logo separately from the AIRI lockup — do not merge them into a single mark.
-</div>
-
-<!-- ============================================================ -->
 <!-- 5. Open questions -->
-<!-- ============================================================ -->
 <h2>5 · Open questions</h2>
-<p>Internal notes on proposed extensions from the March 2026 website mockup project. Not part of the current brand. Open a <a href="https://github.com/MIT-FutureTech/airi-brand/issues">GitHub issue</a> before acting on any of these.</p>
+<p>Not yet settled. Open a <a href="https://github.com/MIT-FutureTech/airi-brand/issues">GitHub issue</a> to weigh in.</p>
 
 <details class="qna">
-  <summary><span class="tag">proposed</span> Extended colour palette for data visualisation</summary>
-  <p>The current 4-colour palette (red, rose, gray, dark) is insufficient for charts with 5+ series or image sets needing distinct identities. A ColorBrewer Set2-influenced secondary palette (teal / coral / blue / green / lavender / sand) has been prototyped.</p>
-  <p><strong>Key question:</strong> Should these become formal brand colours with CSS tokens, or a recommended supplementary palette without token status? Either way, it changes the current "do not introduce additional brand colours" rule.</p>
+  <summary><span class="tag">new</span>Dark mode</summary>
+  <p>Dark values are defined in <code>brand.css</code> and the artifact template. They pass contrast checks but have not been proven in shipped work or on a projector. Treat them as provisional.</p>
 </details>
-
 <details class="qna">
-  <summary><span class="tag">proposed</span> Image and illustration style guide</summary>
-  <p>The brand spec has no guidance on imagery. Proposed philosophy: abstract geometric and mathematical art (tessellations, network graphs, Voronoi diagrams), with each AIRI tool getting a signature visual motif. No text in images, no photorealism, no AI-generated faces. Photography only for headshots.</p>
-  <p><strong>Key question:</strong> How prescriptive should the pattern-to-tool mapping be? Strict rules ensure consistency; loose guidance allows flexibility.</p>
+  <summary><span class="tag">new</span>Moving existing products to the category colours</summary>
+  <p>New work uses the seven category colours for the Repository's risk domains. Existing pages, tools and decks move when each is next updated, so for a while two schemes will be visible.</p>
 </details>
-
 <details class="qna">
-  <summary><span class="tag grey">under review</span> Additional web component patterns</summary>
-  <p>Proposed additions: stats bar (primary numbers, gray labels), carousel with scroll-snap, greyscale partner logo display, blockquote testimonials, alternating section backgrounds. All emerged as necessary during the website mockup.</p>
-  <p><strong>Key question:</strong> Do these belong in the brand spec or a separate design system doc?</p>
+  <summary><span class="tag">new</span>Print colour</summary>
+  <p>AIRI red has not been matched to a print ink. One proof is needed before the next printed report.</p>
 </details>
-
 <details class="qna">
-  <summary><span class="tag outline">out of scope</span> Findings belonging to a content/UX doc</summary>
-  <p>Tone of voice, CTA strategy by audience, data-freshness labelling — emerged from persona reviews but belong in a separate content and UX guidelines doc, not the brand.</p>
+  <summary><span class="tag grey">open</span>Image and illustration style</summary>
+  <p>The kit has no rules for imagery yet. Report covers use one white line texture each on red. Whether each product should have its own motif is undecided.</p>
+</details>
+<details class="qna">
+  <summary><span class="tag grey">open</span>Template files for Slides, Docs, PowerPoint and Word</summary>
+  <p>The kit ships theme colours, fonts and style tables. Finished template files built from them (a slide deck with layouts, a document with page furniture) are still to come.</p>
 </details>
 
-<!-- ============================================================ -->
-<!-- Footer -->
-<!-- ============================================================ -->
 <footer>
-  <p><strong>More detail:</strong> <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/skill/BRAND.md">skill/BRAND.md</a> has the full specification, including component patterns (buttons, cards, tables, charts). <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> explains how AI coding assistants should apply the brand to new artefacts.</p>
-  <p><strong>Questions or proposed changes:</strong> open an issue on <a href="https://github.com/MIT-FutureTech/airi-brand/issues">GitHub</a>. Retired logos (the old Index and Repository lockups) are in <a href="https://github.com/MIT-FutureTech/airi-brand/tree/main/legacy/logos">legacy/logos/</a>.</p>
+  <p><strong>More detail:</strong> <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/skill/BRAND.md">skill/BRAND.md</a> is the full specification. <a href="https://github.com/MIT-FutureTech/airi-brand/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> explains how the files fit together.</p>
+  <p><strong>Questions or proposed changes:</strong> open an issue on <a href="https://github.com/MIT-FutureTech/airi-brand/issues">GitHub</a>. Retired logos are in <a href="https://github.com/MIT-FutureTech/airi-brand/tree/main/legacy/logos">legacy/logos/</a>.</p>
 </footer>
 
 </body>
