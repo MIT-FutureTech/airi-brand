@@ -28,7 +28,13 @@ To change a colour, size, spacing step or radius:
 1. Edit `skill/tokens.json`.
 2. Run `python3 dev/build-kit/build.py`. It rewrites `brand.css`, everything in `skill/templates/` and `guide/index.html`.
 3. Update the prose and tables in `skill/BRAND.md` and `skill/SKILL.md`.
-4. Run `python3 dev/build-kit/build.py --check`. It fails if a generated file is stale, or if a hand-written file names a colour that is not a token or gives a token the wrong hex.
+4. Run `python3 dev/build-kit/build.py --check`. It fails if:
+   - a generated file is stale;
+   - any label-on-fill or text-on-ground pair in `tokens.json` is below 4.5:1, in light or dark;
+   - a hand-written file names a colour that is not a token, gives a token the wrong hex, lists a palette in the wrong order, or gets a category, status, grade or theme-slot row wrong;
+   - the five rules differ between `BRAND.md` and `SKILL.md`.
+
+   It cannot check prose that carries no hex, such as where the logo goes. Read your change to `BRAND.md` against `tokens.json` as well.
 5. Rebuild the Claude.ai upload: `rm airi-brand-skill.zip && zip -rq airi-brand-skill.zip skill/`
 
 Never edit a generated file by hand; change `tokens.json` or `dev/build-kit/` instead. The logo files are generated too, by `dev/logo-builder/build.py`.
