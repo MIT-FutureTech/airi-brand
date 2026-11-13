@@ -47,8 +47,10 @@ Add these under "Custom" in the colour picker:
 
 `#A32035` `#1A1A1A` `#F8E1E5` `#FBF3F4` `#2171B5` `#FFF0B3`
 
-The greys are Google presets, so they can be clicked:
+Four greys are Google presets, so they can be clicked:
 `#666666` (dark gray 3), `#CCCCCC` (gray), `#D9D9D9` (light gray 1), `#F3F3F3` (light gray 3).
+Ink `#1A1A1A` is not a preset; it comes from the named styles. Google's preset named
+"gray" is `#CCCCCC`, the kit's `rule`, not the kit's chart grey `#898A8D`.
 
 ## Do not click
 

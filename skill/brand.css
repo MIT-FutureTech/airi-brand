@@ -1,6 +1,8 @@
 /* AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
    Import this file, or copy the variables into any project.
-   Dark mode is opt-in: set data-theme="dark" on <html> or any container. */
+   Dark mode is opt-in: set data-theme="dark" on <html> or any container.
+   Red text is --color-link (it lightens in dark mode). Red fills are --color-primary.
+   --color-cat-N-label is the label colour to put on a --color-cat-N fill. */
 
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap');
 
@@ -44,13 +46,13 @@
   --color-info-tint: var(--color-blue-tint);
 
   /* Colour in data: categories (never red), severity, counts, two-sided */
-  --color-cat-1: #2171B5; --color-cat-1-ink: #084594; --color-cat-1-tint: #E0EBF5;  /* blue */
-  --color-cat-2: #6BAED6; --color-cat-2-ink: #084594; --color-cat-2-tint: #EAF4F9;  /* sky */
-  --color-cat-3: #55399E; --color-cat-3-ink: #55399E; --color-cat-3-tint: #E7E3F1;  /* violet */
-  --color-cat-4: #CC6699; --color-cat-4-ink: #A3446F; --color-cat-4-tint: #F8EAF1;  /* pink */
-  --color-cat-5: #D4762C; --color-cat-5-ink: #A54A0C; --color-cat-5-tint: #F9ECE1;  /* orange */
-  --color-cat-6: #D9A531; --color-cat-6-ink: #7F5D00; --color-cat-6-tint: #FAF2E2;  /* gold */
-  --color-cat-7: #138A73; --color-cat-7-ink: #0B6655; --color-cat-7-tint: #DEEFEB;  /* teal */
+  --color-cat-1: #2171B5; --color-cat-1-ink: #084594; --color-cat-1-tint: #E0EBF5; --color-cat-1-label: #FFFFFF;  /* blue */
+  --color-cat-2: #6BAED6; --color-cat-2-ink: #084594; --color-cat-2-tint: #EAF4F9; --color-cat-2-label: #1A1A1A;  /* sky */
+  --color-cat-3: #55399E; --color-cat-3-ink: #55399E; --color-cat-3-tint: #E7E3F1; --color-cat-3-label: #FFFFFF;  /* violet */
+  --color-cat-4: #CC6699; --color-cat-4-ink: #A3446F; --color-cat-4-tint: #F8EAF1; --color-cat-4-label: #1A1A1A;  /* pink */
+  --color-cat-5: #D4762C; --color-cat-5-ink: #A54A0C; --color-cat-5-tint: #F9ECE1; --color-cat-5-label: #1A1A1A;  /* orange */
+  --color-cat-6: #D9A531; --color-cat-6-ink: #7F5D00; --color-cat-6-tint: #FAF2E2; --color-cat-6-label: #1A1A1A;  /* gold */
+  --color-cat-7: #117A66; --color-cat-7-ink: #0B6655; --color-cat-7-tint: #DEEFEB; --color-cat-7-label: #FFFFFF;  /* teal */
   --color-cat-other: #898A8D; --color-cat-other-ink: #666666; --color-cat-other-tint: #F3F3F3;
 
   --color-sev-1: #E29CA8; --color-sev-2: #D07886; --color-sev-3: #B8455A; --color-sev-4: #A32035; --color-sev-5: #5E0E20;
@@ -93,7 +95,7 @@
   --font-size-3xl: var(--font-size-2xl);
   --line-height-relaxed: var(--line-height-normal);
   --radius-lg: var(--radius-md);
-  --radius-full: var(--radius-sm);
+  --radius-full: 9999px;
 }
 
 [data-theme="dark"] {
@@ -120,5 +122,8 @@
   --color-poor-ink: var(--color-link);
   --color-poor-tint: var(--color-red-tint);
   --color-info-tint: var(--color-blue-tint);
-  --color-cat-3: #9875DA;
+  --color-cat-3: #9875DA; --color-cat-3-label: #1A1A1A;
+  --focus-ring: 2px solid var(--color-focus);
+  --color-dark: var(--color-text);
+  --color-border-strong: var(--color-rule);
 }

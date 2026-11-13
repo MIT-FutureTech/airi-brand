@@ -29,7 +29,7 @@ core = [(C["primary"], "AIRI red", "primary"), (C["primary-hover"], "Red hover",
         (C["primary-dark"], "Red dark", "primary-dark"), (C["primary-light"], "Red light", "primary-light"),
         (C["red-tint"], "Red tint", "red-tint"), (C["red-wash"], "Red wash", "red-wash"),
         (C["text"], "Ink", "text"), (C["text-muted"], "Muted", "text-muted"), (C["gray"], "Gray", "gray"),
-        (C["rule"], "Rule", "rule"), (C["border"], "Line", "border"), (C["fill"], "Fill", "fill"),
+        (C["rule"], "Rule", "rule"), (C["border"], "Border", "border"), (C["fill"], "Fill", "fill"),
         (C["background"], "Background", "background"), (C["blue"], "Blue", "blue")]
 
 pairs = [("Ink on white", C["text"], "#FFFFFF"), ("Muted on white", C["text-muted"], "#FFFFFF"),
@@ -46,8 +46,22 @@ sl, sp, dc, fg = TY["slides-px-1920"], TY["slides-pt-960"], TY["docs-pt"], TY["f
 
 cat_rows = "".join(
     f'<tr><td>{c["slot"]}</td><td><span class="dot" style="background:{c["fill"]}"></span>{c["name"].capitalize()}</td>'
-    f'<td><code>{c["fill"]}</code></td><td><span class="chip" style="background:{c["tint"]};color:{c["ink"]}">{c["ink"]} on {c["tint"]}</span></td>'
+    f'<td><code>{c["fill"]}</code></td><td><span class="chip" style="background:{c["fill"]};color:{C["white"] if c["label"] == "white" else C["text"]}">{"white" if c["label"] == "white" else "ink"} {v.contrast(C["white"] if c["label"] == "white" else C["text"], c["fill"]):.1f}</span></td>'
+    f'<td><span class="chip" style="background:{c["tint"]};color:{c["ink"]}">{c["ink"]} on {c["tint"]}</span></td>'
     f'<td>{v.esc(c["domain"])}</td></tr>' for c in CATS)
+
+
+def build_label(scale):
+    """'ink on steps 1 to 5, white on steps 6 and 7', from tokens.json (same words as BRAND.md)."""
+    labs = D["labels"][scale]
+    runs, start = [], 0
+    for k in range(1, len(labs) + 1):
+        if k == len(labs) or labs[k] != labs[start]:
+            a, b = start + 1, k
+            span = f"step {a}" if a == b else f"steps {a} and {b}" if b == a + 1 else f"steps {a} to {b}"
+            runs.append(f"{'ink' if labs[start] == 'text' else 'white'} on {span}")
+            start = k
+    return ", ".join(runs)
 
 
 def render():
@@ -64,7 +78,7 @@ def render():
     font-family: var(--font-family); color: var(--color-text); background: var(--color-background);
     padding: 40px 24px 80px; max-width: 1080px; margin: 0 auto; line-height: var(--line-height-normal);
   }}
-  h1 {{ font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-primary); line-height: var(--line-height-tight); margin-bottom: 8px; }}
+  h1 {{ font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-link); line-height: var(--line-height-tight); margin-bottom: 8px; }}
   h1 span {{ color: var(--color-text); font-weight: 400; }}
   .subtitle {{ color: var(--color-text-muted); margin-bottom: 32px; max-width: 720px; }}
   h2 {{ font-size: var(--font-size-xl); font-weight: 700; line-height: var(--line-height-tight); margin-top: 56px; margin-bottom: 16px; padding-top: 16px; border-top: 2px solid var(--color-primary); }}
@@ -138,7 +152,7 @@ def render():
   details.qna {{ background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px 24px; margin: 8px 0; }}
   details.qna summary {{ cursor: pointer; font-weight: 600; }}
   details.qna[open] summary {{ margin-bottom: 8px; }}
-  .tag {{ font-size: var(--font-size-xs); font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 8px; background: var(--color-red-tint); color: var(--color-primary); }}
+  .tag {{ font-size: var(--font-size-xs); font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 8px; background: var(--color-red-tint); color: var(--color-link); }}
   .tag.grey {{ background: var(--color-fill); color: var(--color-text-muted); }}
 
   footer {{ margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--color-rule); color: var(--color-text-muted); font-size: var(--font-size-sm); }}
@@ -187,12 +201,12 @@ def render():
   <li><strong>Two text colours:</strong> ink <code>{C["text"]}</code> and muted <code>{C["text-muted"]}</code>. White on red or dark.</li>
   <li><strong>In data, red is the subject, the finding or more risk.</strong> Grey <code>{C["gray"]}</code> is context. Blue <code>{C["blue"]}</code> is a neutral amount.</li>
   <li><strong>A figure uses a red scale or a red highlight, never both.</strong></li>
-  <li><strong>The greys are Google Docs presets</strong>, so they can be clicked in Docs and Slides.</li>
+  <li><strong>Figtree for all text</strong>, regular and bold (semibold allowed on the web). Sentence case, left-aligned.</li>
 </ol>
 
 <h3>Figtree, the only typeface</h3>
 <p>Figtree is used for everything, including the wordmark. It is free from <a href="https://fonts.google.com/specimen/Figtree">Google Fonts</a>. Set text left-aligned and in sentence case. Slides, documents and figures use regular and bold; the web may also use semibold.</p>
-<div class="type-sample"><div class="label">Bold 700 · titles and headings</div><div style="font-weight:700;font-size:var(--font-size-xl);color:var(--color-primary)">A title states the point of the page</div></div>
+<div class="type-sample"><div class="label">Bold 700 · titles and headings</div><div style="font-weight:700;font-size:var(--font-size-xl);color:var(--color-link)">A title states the point of the page</div></div>
 <div class="type-sample"><div class="label">Semibold 600 · web only</div><div style="font-weight:600;font-size:var(--font-size-lg)">Sub-headings below the title are ink</div></div>
 <div class="type-sample"><div class="label">Regular 400 · body</div><div>Body text is near-black on a light ground. <span style="color:var(--color-text-muted)">Captions, sources and footers are muted.</span> <a href="#">Links are red and underlined.</a></div></div>
 <div class="tablewrap"><table>
@@ -209,7 +223,8 @@ def render():
 <h3>The palette</h3>
 <p>Fourteen swatches cover almost all work. The red is for structure: titles, covers, bars, buttons and links. Text is ink or muted. The greys do the rest.</p>
 {v.swatches(core)}
-<p>Text must use a pair that passes contrast. Gray <code>{C["gray"]}</code> is for graphics, never text. On a dark ground, red text is <code>{C["primary-light"]}</code>.</p>
+<p>Text must use a pair that passes contrast. Gray <code>{C["gray"]}</code> is for graphics, never text. Red text uses the <code>link</code> token, which becomes <code>{C["primary-light"]}</code> on dark grounds; red fills use <code>primary</code>.</p>
+<p>Four of the neutrals are Google presets and can be clicked in Docs and Slides: muted (dark gray 3), rule (gray), border (light gray 1) and fill (light gray 3). Ink, the chart gray and the background are custom colours. Google's preset named "gray" is the kit's rule <code>{C["rule"]}</code>, not the kit's gray.</p>
 <div class="pairs">{pair_html}</div>
 
 <h3>Colour in data</h3>
@@ -226,7 +241,7 @@ def render():
 <h4>Ordered levels where higher is worse: the severity scale</h4>
 {v.strip(D["severity"], ["1", "2", "3", "4", "5"])}
 <div class="charts"><figure>{v.chart_severity()}<figcaption>Use red only when more means more risk. Labels are ink on the two pale steps and white on the rest.</figcaption></figure>
-<figure>{v.chart_blue()}<figcaption>Counts and coverage use blue, because more is only more.</figcaption></figure></div>
+<figure>{v.chart_blue()}<figcaption>Counts and coverage use blue, because more is only more. On the seven-step blue scale, labels are {build_label("blue-sequential")}.</figcaption></figure></div>
 
 <h4>Amounts: the blue scale</h4>
 {v.strip(D["blue-sequential"])}
@@ -239,10 +254,11 @@ def render():
 <p>For groups with no order, such as the seven domains of the AI Risk Repository. The order is fixed, and red is never a category, so red stays free to pick one out.</p>
 {v.strip([c["fill"] for c in CATS] + [D["other"]["fill"]], [c["name"].capitalize() for c in CATS] + ["Other"])}
 <div class="tablewrap"><table>
-  <thead><tr><th>Slot</th><th>Colour</th><th>Fill</th><th>Text on tint</th><th>Repository domain</th></tr></thead>
+  <thead><tr><th>Slot</th><th>Colour</th><th>Fill</th><th>Label on fill</th><th>Text on tint</th><th>Repository domain</th></tr></thead>
   <tbody>{cat_rows}</tbody>
 </table></div>
 <div class="charts"><figure>{v.chart_cat()}</figure></div>
+<p>Charts made in Google Sheets, Slides, PowerPoint or Excel take the theme accents in order, starting with red. That suits a one- or two-series chart only. For named groups, set each series to its slot colour by hand.</p>
 
 <h4>Status</h4>
 <p>Status always carries a word or an icon. A dense Yes / Partial / No table under a red header may use the grade style, which avoids red and green altogether.</p>
@@ -272,7 +288,7 @@ def render():
 </details>
 <details class="qna">
   <summary><span class="tag">new</span>Moving existing products to the category colours</summary>
-  <p>New work uses the seven category colours for the Repository's risk domains. Existing pages, tools and decks move when each is next updated, so for a while two schemes will be visible.</p>
+  <p>New work uses the seven category colours for the Repository's risk domains. Existing pages, tools and decks keep their current colours until a decision is made, so for now two schemes are visible.</p>
 </details>
 <details class="qna">
   <summary><span class="tag">new</span>Print colour</summary>

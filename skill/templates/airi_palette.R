@@ -13,7 +13,7 @@ airi <- list(
   color = c(primary = "#A32035", primary_hover = "#8A1B2D", primary_dark = "#5E0E20", primary_light = "#D07886", red_500 = "#B8455A", red_300 = "#E29CA8", red_tint = "#F8E1E5", red_wash = "#FBF3F4", blue = "#2171B5", blue_dark = "#084594", blue_tint = "#DCE9F4", highlight = "#FFF0B3", text = "#1A1A1A", text_muted = "#666666", gray = "#898A8D", rule = "#CCCCCC", border = "#D9D9D9", fill = "#F3F3F3", background = "#FAFAFA", surface = "#FFFFFF", white = "#FFFFFF", link = "#A32035", link_hover = "#8A1B2D", link_visited = "#5E0E20", focus = "#A32035", good = "#3A8F5C", good_ink = "#17653C", good_tint = "#E3F1EA", partial = "#E8A317", partial_ink = "#8A5A18", partial_tint = "#FCF3E3", info_ink = "#084594"),
   highlight = c(subject = "#A32035", context = "#898A8D"),
   pair = c("#A32035", "#E29CA8"),
-  categorical = c(blue = "#2171B5", sky = "#6BAED6", violet = "#55399E", pink = "#CC6699", orange = "#D4762C", gold = "#D9A531", teal = "#138A73", other = "#898A8D"),
+  categorical = c(blue = "#2171B5", sky = "#6BAED6", violet = "#55399E", pink = "#CC6699", orange = "#D4762C", gold = "#D9A531", teal = "#117A66", other = "#898A8D"),
   categorical_ink = c(blue = "#084594", sky = "#084594", violet = "#55399E", pink = "#A3446F", orange = "#A54A0C", gold = "#7F5D00", teal = "#0B6655", other = "#666666"),
   categorical_tint = c(blue = "#E0EBF5", sky = "#EAF4F9", violet = "#E7E3F1", pink = "#F8EAF1", orange = "#F9ECE1", gold = "#FAF2E2", teal = "#DEEFEB", other = "#F3F3F3"),
   severity = c("#E29CA8", "#D07886", "#B8455A", "#A32035", "#5E0E20"),

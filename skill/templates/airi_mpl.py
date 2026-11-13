@@ -28,7 +28,7 @@ INK = "#1A1A1A"
 MUTED = "#666666"
 NO_DATA = "#F3F3F3"
 
-CATEGORICAL = {"blue": "#2171B5", "sky": "#6BAED6", "violet": "#55399E", "pink": "#CC6699", "orange": "#D4762C", "gold": "#D9A531", "teal": "#138A73"}
+CATEGORICAL = {"blue": "#2171B5", "sky": "#6BAED6", "violet": "#55399E", "pink": "#CC6699", "orange": "#D4762C", "gold": "#D9A531", "teal": "#117A66"}
 OTHER = "#898A8D"
 SEVERITY = ["#E29CA8", "#D07886", "#B8455A", "#A32035", "#5E0E20"]
 GOOD, PARTIAL, POOR = "#3A8F5C", "#E8A317", "#A32035"

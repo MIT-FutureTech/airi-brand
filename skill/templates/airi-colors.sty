@@ -1,7 +1,7 @@
 % AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
 %
 % AIRI colours for LaTeX. \usepackage{airi-colors}
-%   \textcolor{airiPrimary}{...}   \airilinks (red links, after hyperref)   \airimark (title-block line)
+%   \textcolor{airiPrimary}{...}   \airilinks (link colours, after hyperref)   \airimark (title-block line)
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{airi-colors}[2026/11/13 v2.0.0 AIRI brand colours]
 \RequirePackage{xcolor}
@@ -39,7 +39,7 @@
 \definecolor{airiCatPink}{HTML}{CC6699}\definecolor{airiCatPinkInk}{HTML}{A3446F}\definecolor{airiCatPinkTint}{HTML}{F8EAF1}
 \definecolor{airiCatOrange}{HTML}{D4762C}\definecolor{airiCatOrangeInk}{HTML}{A54A0C}\definecolor{airiCatOrangeTint}{HTML}{F9ECE1}
 \definecolor{airiCatGold}{HTML}{D9A531}\definecolor{airiCatGoldInk}{HTML}{7F5D00}\definecolor{airiCatGoldTint}{HTML}{FAF2E2}
-\definecolor{airiCatTeal}{HTML}{138A73}\definecolor{airiCatTealInk}{HTML}{0B6655}\definecolor{airiCatTealTint}{HTML}{DEEFEB}
+\definecolor{airiCatTeal}{HTML}{117A66}\definecolor{airiCatTealInk}{HTML}{0B6655}\definecolor{airiCatTealTint}{HTML}{DEEFEB}
 
 \definecolor{airiSevA}{HTML}{E29CA8}% severity 1
 \definecolor{airiSevB}{HTML}{D07886}% severity 2
@@ -47,7 +47,8 @@
 \definecolor{airiSevD}{HTML}{A32035}% severity 4
 \definecolor{airiSevE}{HTML}{5E0E20}% severity 5
 
-% Red, underline-free links for print; call after loading hyperref.
+% Link colours for PDFs; call after loading hyperref. Web addresses are AIRI red. Cross-references and
+% citations stay ink. PDF links are coloured, not underlined (the print exception in BRAND.md, section 3).
 \newcommand{\airilinks}{\hypersetup{colorlinks=true,linkcolor=airiText,citecolor=airiText,urlcolor=airiPrimary}}
 % A small identity line for a title block: a red rule and the initiative name.
 \newcommand{\airimark}{{\color{airiPrimary}\rule{2.4em}{1.6pt}}\par\vspace{2pt}%

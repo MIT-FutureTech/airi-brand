@@ -4,9 +4,13 @@
     python3 dev/build-kit/build.py           write the generated files
     python3 dev/build-kit/build.py --check   change nothing; fail if anything is out of sync
 
---check also reads the hand-written files (BRAND.md, SKILL.md, the guide) and
-fails if they name a colour that is not a token, or pair a token with the
-wrong hex. Standard library only.
+--check also:
+  - recomputes the contrast of every "label on fill" and "text on ground" rule in
+    tokens.json, light and dark, and fails below 4.5:1;
+  - reads the hand-written files and fails if they name a colour that is not a
+    token, give a token the wrong hex, list a palette in the wrong order, or get a
+    category, status, grade or theme-slot row wrong.
+It cannot check prose claims that carry no hex. Standard library only.
 """
 import json
 import re
@@ -28,6 +32,7 @@ CATS = D["categorical"]
 S = T["status"]
 SLOTS = T["theme"]["slots"]
 TY = T["typography"]
+SP = T["spacing"]
 VERSION = T["version"]
 FONT_URL = "https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap"
 GEN = f"AIRI brand kit {VERSION}. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand."
@@ -48,16 +53,24 @@ def css_color_lines(colors, indent="  "):
     return [f"{indent}--color-{k}: {v};" for k, v in colors.items()]
 
 
+LABEL = {"text": C["text"], "white": C["white"]}  # label colours on fills; fixed, they do not flip in dark mode
+
+
 def css_data_lines(indent="  ", dark=False):
     out = []
     if dark:
         for c in CATS:
+            bits = []
             if "fill-dark" in c:
-                out.append(f"{indent}--color-cat-{c['slot']}: {c['fill-dark']};")
+                bits.append(f"--color-cat-{c['slot']}: {c['fill-dark']};")
+            if "label-dark" in c:
+                bits.append(f"--color-cat-{c['slot']}-label: {LABEL[c['label-dark']]};")
+            if bits:
+                out.append(indent + " ".join(bits))
         return out
     for c in CATS:
         n = c["slot"]
-        out.append(f"{indent}--color-cat-{n}: {c['fill']}; --color-cat-{n}-ink: {c['ink']}; --color-cat-{n}-tint: {c['tint']};  /* {c['name']} */")
+        out.append(f"{indent}--color-cat-{n}: {c['fill']}; --color-cat-{n}-ink: {c['ink']}; --color-cat-{n}-tint: {c['tint']}; --color-cat-{n}-label: {LABEL[c['label']]};  /* {c['name']} */")
     o = D["other"]
     out.append(f"{indent}--color-cat-other: {o['fill']}; --color-cat-other-ink: {o['ink']}; --color-cat-other-tint: {o['tint']};")
     out.append("")
@@ -69,7 +82,9 @@ def css_data_lines(indent="  ", dark=False):
 
 
 def brand_css():
-    L = [f"/* {GEN}", "   Import this file, or copy the variables into any project.", "   Dark mode is opt-in: set data-theme=\"dark\" on <html> or any container. */", "",
+    L = [f"/* {GEN}", "   Import this file, or copy the variables into any project.", "   Dark mode is opt-in: set data-theme=\"dark\" on <html> or any container.",
+         "   Red text is --color-link (it lightens in dark mode). Red fills are --color-primary.",
+         "   --color-cat-N-label is the label colour to put on a --color-cat-N fill. */", "",
          f"@import url('{FONT_URL}');", "", ":root {", "  /* Colour: core, neutrals, links, status */"]
     L += css_color_lines(C)
     alias = ["  --color-poor: var(--color-primary);", "  --color-poor-ink: var(--color-link);", "  --color-poor-tint: var(--color-red-tint);",
@@ -86,15 +101,51 @@ def brand_css():
     L += [f"  --space-{i}: {v};" for i, v in enumerate(T["spacing"]["scale"], 1)]
     L += [f"  --radius-{k}: {v};" for k, v in T["radius"].items()]
     L += ["  --focus-ring: 2px solid var(--color-focus);", "", "  /* Deprecated names from kit 1.x. Kept so old code still works. */"]
-    L += [f"  --{old}: var(--{new});" for old, new in T["deprecated"].items() if old != "note"]
+    dep = {old: new for old, new in T["deprecated"].items() if old != "note"}
+
+    def dep_line(old, new):
+        return f"  --{old}: var(--{new});" if new.startswith(("color-", "font-", "line-", "radius-")) else f"  --{old}: {new};"
+
+    L += [dep_line(old, new) for old, new in dep.items()]
     L += ["}", "", '[data-theme="dark"] {']
     L += css_color_lines(DARK)
     L += alias[1:] + css_data_lines(dark=True)
+    # Aliases built from other variables are worked out where they are declared, so a dark
+    # container that is not <html> needs them declared again.
+    L += ["  --focus-ring: 2px solid var(--color-focus);"]
+    L += [dep_line(old, new) for old, new in dep.items() if new.startswith("color-") and new[len("color-"):] in DARK]
     L += ["}", ""]
     return "\n".join(L)
 
 
 # ---------------------------------------------------------------- Office
+
+def office_charts_block(tools, how):
+    """Shared by the Office and Google how-tos: what theme-coloured charts get right, and what to set by hand."""
+    order = ", ".join(f"`{SLOTS[f'accent{i}']}`" for i in range(1, 7))
+    rows = "\n".join(f"| {c['slot']} | {c['name'].capitalize()} | `{c['fill']}` | {c['label'] if c['label'] == 'white' else 'ink'} | {c['domain']} |" for c in CATS)
+    return f"""## Charts in {tools}
+
+A chart made here takes its series colours from Accent 1 to 6 in order:
+{order}. That order is right for one kind of chart only: one series (red), or
+two series (red and blue). For every other chart, set the colours by hand. {how}
+
+- **Context series** (everything that is not the subject): `{C['gray']}`. It is not a theme colour.
+- **Named groups** (risk domains, sectors, roles): set each series to its category colour,
+  in slot order. The first group is blue, never red.
+
+| Slot | Colour | Hex | Label on it | AI Risk Repository domain |
+|---|---|---|---|---|
+{rows}
+| | Other | `{D['other']['fill']}` | ink | Other, folded groups |
+
+- **Ordered levels where higher is worse:** {' '.join(f'`{h}`' for h in D['severity'])}.
+- **Counts:** {' '.join(f'`{h}`' for h in D['blue-5'])}.
+
+The code templates (matplotlib, Plotly, R) default to red, grey, blue. A chart made
+here matches them only after the grey and the category colours are set as above.
+"""
+
 
 OFFICE_ORDER = [("dk1", "dark1"), ("lt1", "light1"), ("dk2", "dark2"), ("lt2", "light2"),
                 ("accent1", "accent1"), ("accent2", "accent2"), ("accent3", "accent3"),
@@ -127,7 +178,8 @@ def office_md():
 
 Two small files set the theme colours and fonts for every Office app:
 `office-theme-colors.xml` and `office-theme-fonts.xml`. Once installed, "AIRI"
-appears in the Colors and Fonts menus, and a default chart starts with AIRI red.
+appears in the Colors and Fonts menus. A default chart then starts with AIRI red;
+see "Charts" below for what to set by hand.
 
 ## Install
 
@@ -163,6 +215,7 @@ If you would rather type them: Colors > Customize Colors.
 - Master background `{C['background']}`. Section divider background `{C['primary']}` with white text.
 - Sizes in pt: cover {TY['slides-pt-960']['cover']}, slide title {TY['slides-pt-960']['title']}, outcome {TY['slides-pt-960']['outcome']}, body {TY['slides-pt-960']['body']}, small {TY['slides-pt-960']['small']}. Nothing smaller than {TY['slides-pt-960']['small']}.
 - Slide titles are Figtree Bold in Accent 1. Everything else is Dark 1, or Dark 2 for small text.
+- Margins {SP['slides-margins-pt-960']['top']} pt top, {SP['slides-margins-pt-960']['sides']} pt sides, {SP['slides-margins-pt-960']['bottom']} pt bottom. Gaps of {', '.join(str(x) for x in SP['slides-pt-960'][:-1])} or {SP['slides-pt-960'][-1]} pt. Borders 1 pt.
 
 ## Word styles
 
@@ -187,7 +240,8 @@ tints. When you need a tint or a chart colour that is not one of the 12 slots,
 type one of these under More Colors (they then stay in Recent Colors):
 
 {sw}
-"""
+
+{office_charts_block("PowerPoint, Word and Excel", "Click a series, then Format Data Series > Fill > More Colors, and type the hex.")}"""
 
 
 # ---------------------------------------------------------------- Google
@@ -237,6 +291,9 @@ Sizes for a 960 x 540 pt page (File > Page setup > Custom > 13.333 x 7.5 in): co
 slide title {s['title']} pt, outcome {s['outcome']} pt, body {s['body']} pt, small {s['small']} pt.
 Nothing smaller than {s['small']} pt. On Google's default 720 x 405 pt page, multiply by 0.75.
 
+Spacing on the 960 x 540 pt page: margins {SP['slides-margins-pt-960']['top']} pt top, {SP['slides-margins-pt-960']['sides']} pt sides, {SP['slides-margins-pt-960']['bottom']} pt bottom.
+Gaps of {', '.join(str(x) for x in SP['slides-pt-960'][:-1])} or {SP['slides-pt-960'][-1]} pt. Borders 1 pt. Corner radius 4 pt for cards and images, 2 pt otherwise.
+
 ## Slides: by API
 
 The same change as one `presentations.batchUpdate` request. Replace `MASTER_OBJECT_ID`
@@ -262,13 +319,14 @@ Format > Theme > Customize. Font: Figtree.
 |---|---|
 {sheets}
 
-Charts then take series colours from Accent 1 to 6 in order.
-
+{office_charts_block("Slides and Sheets", "A chart in Slides is made in Sheets: double-click the chart, then Customize > Series > Fill colour > Custom, and type the hex.")}
 ## Do not click
 
 - The dark red in the toolbar grid ("dark red berry 1", `{T['avoid']['google-toolbar-dark-red']}`) or any other toolbar red. AIRI red is the Accent 1 theme colour.
 - The default link colours: teal `{T['avoid']['google-slides-teal-link']}` in Slides, blue `{T['avoid']['google-link-blue']}` in Docs. Links are `{C['link']}` and underlined.
-- The greys are safe to click. They are Google presets: {', '.join(f'`{h}` ({n})' for h, n in T['theme']['google-presets'].items())}.
+- Four greys are safe to click, because they are Google presets: {', '.join(f'`{h}` ({n})' for h, n in T['theme']['google-presets'].items())}.
+  Ink `{C['text']}`, chart grey `{C['gray']}` and background `{C['background']}` are not presets; take them from the theme or the custom colours.
+  Google's preset named "gray" is `{C['rule']}`, the kit's `rule`. It is not the kit's chart grey.
 """
 
 
@@ -323,8 +381,10 @@ Add these under "Custom" in the colour picker:
 
 `{C['primary']}` `{C['text']}` `{C['red-tint']}` `{C['red-wash']}` `{C['blue']}` `{C['highlight']}`
 
-The greys are Google presets, so they can be clicked:
+Four greys are Google presets, so they can be clicked:
 {', '.join(f'`{h}` ({n})' for h, n in T['theme']['google-presets'].items())}.
+Ink `{C['text']}` is not a preset; it comes from the named styles. Google's preset named
+"gray" is `{C['rule']}`, the kit's `rule`, not the kit's chart grey `{C['gray']}`.
 
 ## Do not click
 
@@ -611,7 +671,11 @@ ALIASES = [("ink", "text"), ("body", "text"), ("muted", "text-muted"), ("faint",
 
 def aliases_css():
     L = [f"/* {GEN}", "   Short names used by some AIRI apps, mapped onto the kit tokens.",
-         "   Load after brand.css. Keep the short names in existing code; write new code with the --color-* names. */", "", ":root {"]
+         "   Load after brand.css. Keep the short names in existing code; write new code with the --color-* names.",
+         "",
+         "   Careful: --red-tint here is the faint wash these apps already use (kit --color-red-wash, " + C["red-wash"] + ").",
+         "   It is NOT the kit's --color-red-tint (" + C["red-tint"] + "). In new code use the --color-* names, which are unambiguous.",
+         "   Likewise --line is the kit's --color-border, and --faint is --color-gray (graphics only, never text). */", "", ":root {"]
     L += [f"  --{a}: var(--color-{k});" for a, k in ALIASES]
     L += ["}", ""]
     return "\n".join(L)
@@ -620,18 +684,21 @@ def aliases_css():
 def artifact_html():
     light = "\n".join(css_color_lines(C, "    "))
     cats = "\n".join(f"    --color-cat-{c['slot']}: {c['fill']}; --color-cat-{c['slot']}-ink: {c['ink']}; --color-cat-{c['slot']}-tint: {c['tint']};" for c in CATS)
+    labels = "    " + " ".join(f"--color-cat-{c['slot']}-label: {LABEL[c['label']]};" for c in CATS)
     sev = "    " + " ".join(f"--color-sev-{i}: {h};" for i, h in enumerate(D["severity"], 1))
     dark = "\n".join(css_color_lines(DARK, "      ") + css_data_lines("      ", dark=True))
     dark2 = "\n".join(css_color_lines(DARK, "    ") + css_data_lines("    ", dark=True))
     return f"""<!-- {GEN}
      Starting point for a Claude artifact or any single-file page. Works in light and dark.
-     Paste the <link> and <style> into the page, then use the tokens. Never type a hex in the page body. -->
+     Paste the <link> and <style> into the page, then use the tokens. Never type a hex in the page body.
+     Red text is --color-link, which lightens in dark mode. Red fills are --color-primary, with white text. -->
 <link href="{FONT_URL}" rel="stylesheet">
 <style>
   :root {{
 {light}
 {cats}
     --color-cat-other: {D['other']['fill']};
+{labels}
 {sev}
     --color-sev-none: {D['severity-none']};
     --font-family: {css_family(TY['family'])};
@@ -663,6 +730,9 @@ def artifact_html():
   .button {{ display: inline-block; padding: 8px 16px; border: 0; border-radius: 8px; background: var(--color-primary);
             color: var(--color-white); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }}
   .button:hover {{ background: var(--color-primary-hover); color: var(--color-white); }}
+  .button-secondary {{ display: inline-block; padding: 7px 15px; border: 1px solid var(--color-link); border-radius: 8px; background: var(--color-surface);
+                      color: var(--color-link); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }}
+  .button-secondary:hover {{ background: var(--color-red-wash); }}
   .chip {{ display: inline-block; padding: 2px 8px; border-radius: 4px; background: var(--color-red-tint);
           color: var(--color-link); font-size: 0.875rem; font-weight: 600; }}
   table {{ border-collapse: collapse; width: 100%; }}
@@ -677,7 +747,7 @@ def latex_sty():
         return "airi" + "".join(p.capitalize() for p in k.split("-"))
 
     L = [f"% {GEN}", "%", "% AIRI colours for LaTeX. \\usepackage{airi-colors}",
-         "%   \\textcolor{airiPrimary}{...}   \\airilinks (red links, after hyperref)   \\airimark (title-block line)",
+         "%   \\textcolor{airiPrimary}{...}   \\airilinks (link colours, after hyperref)   \\airimark (title-block line)",
          "\\NeedsTeXFormat{LaTeX2e}", f"\\ProvidesPackage{{airi-colors}}[2026/11/13 v{VERSION} AIRI brand colours]",
          "\\RequirePackage{xcolor}", ""]
     for k, v in C.items():
@@ -692,7 +762,8 @@ def latex_sty():
     for i, h in enumerate(D["severity"], 1):
         L.append(f"\\definecolor{{airiSev{'ABCDE'[i - 1]}}}{{HTML}}{{{bare(h)}}}% severity {i}")
     L += ["",
-          "% Red, underline-free links for print; call after loading hyperref.",
+          "% Link colours for PDFs; call after loading hyperref. Web addresses are AIRI red. Cross-references and",
+          "% citations stay ink. PDF links are coloured, not underlined (the print exception in BRAND.md, section 3).",
           "\\newcommand{\\airilinks}{\\hypersetup{colorlinks=true,linkcolor=airiText,citecolor=airiText,urlcolor=airiPrimary}}",
           "% A small identity line for a title block: a red rule and the initiative name.",
           "\\newcommand{\\airimark}{{\\color{airiPrimary}\\rule{2.4em}{1.6pt}}\\par\\vspace{2pt}%",
@@ -729,6 +800,11 @@ other theme accents. That makes a one- or two-series chart read as "the
 subject, and everything else" without any work. For named categories, switch
 to the category colours (`airi_mpl.use_categorical()`, `airi$categorical`, or
 the `cat` values in `tokens.json`). Categories never use red.
+
+Office, Google Slides and Google Sheets are different: their charts take the
+theme accents in order (red, blue, gold, teal, pink, sky). That is right for a
+one- or two-series chart only. `office-theme.md` and `google-slides-theme.md`
+list what to set by hand.
 
 The default colour scale for heatmaps is blue, because blue means "more" and
 nothing else. Use the red scale only when more means more risk.
@@ -794,11 +870,127 @@ def all_hexes(node, out=None):
     return out
 
 
+label_phrase = guide.build_label  # 'ink on steps 1 to 5, white on steps 6 and 7'
+
+
+def contrast_problems():
+    """Every 'this text on that fill' rule in tokens.json must reach 4.5:1, in light and in dark."""
+    out = []
+
+    def need(what, fg, bg, floor=4.5):
+        r = guide.v.contrast(fg, bg)
+        if r < floor:
+            out.append(f"contrast: {what}: {fg} on {bg} is {r:.2f}, below {floor}")
+
+    for scale, labs in D["labels"].items():
+        if scale == "note":
+            continue
+        if len(labs) != len(D[scale]):
+            out.append(f"data.labels.{scale} has {len(labs)} entries; the scale has {len(D[scale])}")
+            continue
+        for n, (lab, fill) in enumerate(zip(labs, D[scale]), 1):
+            need(f"{scale} step {n} label", LABEL[lab], fill)
+    for c in CATS:
+        need(f"category {c['name']} label", LABEL[c["label"]], c["fill"])
+        need(f"category {c['name']} label (dark)", LABEL[c.get("label-dark", c["label"])], c.get("fill-dark", c["fill"]))
+        need(f"category {c['name']} text on tint", c["ink"], c["tint"])
+    need("category other text on tint", D["other"]["ink"], D["other"]["tint"])
+    for k in ("good", "partial", "poor", "info", "none"):
+        need(f"status {k} text on tint", S[k]["ink"], S[k]["tint"])
+    for k, g in S["grade"].items():
+        if k != "note":
+            need(f"grade {k}", g["text"], g["fill"])
+    for mode, col in (("light", C), ("dark", {**C, **DARK})):
+        for fg in ("text", "text-muted", "link"):
+            for bg in ("background", "surface", "fill", "red-tint", "red-wash"):
+                need(f"{fg} on {bg} ({mode})", col[fg], col[bg])
+        for k in ("good", "partial", "info"):
+            need(f"{k}-ink on its tint ({mode})", col[f"{k}-ink"], col[f"{k}-tint" if k != "info" else "blue-tint"])
+        need(f"link on red-tint, the poor status ({mode})", col["link"], col["red-tint"])
+        need(f"focus ring on surface ({mode})", col["focus"], col["surface"], 3)
+        need(f"white on primary ({mode})", C["white"], col["primary"])
+    return out
+
+
+def known_runs():
+    """Every ordered list of colours the hand-written files may quote side by side."""
+    runs = [D[k] for k in ("highlight", "pair", "severity", "red-continuous", "blue-sequential", "blue-5", "diverging-7", "diverging-5")]
+    runs.append(D["severity"] + [D["severity-none"]])
+    fills = [c["fill"] for c in CATS]
+    runs += [fills, fills + [D["other"]["fill"]]]
+    runs += [[c["fill"], c["ink"], c["tint"]] for c in CATS + [D["other"]]]
+    runs += [[S[k]["mark"], S[k]["ink"], S[k]["tint"]] for k in ("good", "partial", "poor", "info", "none")]
+    runs.append([S[k]["mark"] for k in ("good", "partial", "poor")])
+    runs.append([SLOTS[f"accent{i}"] for i in range(1, 7)])
+    return {tuple(h.upper() for h in r) for r in runs}
+
+
+RUN = re.compile(r"`#[0-9A-Fa-f]{6}`(?:[ |]+`#[0-9A-Fa-f]{6}`){2,}")
+WORD_HEX = re.compile(r"(?<![\w-])([A-Za-z][\w-]*)\s+`(#[0-9A-Fa-f]{6})`")
+WORD_ALIAS = {"ink": "text", "muted": "text-muted", "grey": "gray"}
+SLOT_NAMES = {"dark 1": "dark1", "light 1": "light1", "dark 2": "dark2", "light 2": "light2", "hyperlink": "hyperlink",
+              "followed hyperlink": "followed-hyperlink", **{f"accent {i}": f"accent{i}" for i in range(1, 7)}}
+
+
+def prose_problems(path, text):
+    """Checks on hand-written Markdown beyond 'is this hex a token'."""
+    out, rel = [], path.relative_to(ROOT)
+    runs = known_runs()
+
+    def bad(msg):
+        out.append(f"{rel}: {msg}")
+
+    # 1. Colours listed side by side must be one of the kit's palettes, in order.
+    for m in RUN.finditer(text):
+        got = tuple(h.upper() for h in HEX.findall(m.group(0)))
+        if got not in runs:
+            bad(f"the list {' '.join(got)} is not a palette in tokens.json (wrong order or wrong value)")
+    # 2. A token or status name written straight before a hex must be that token's value.
+    marks = {k: S[k]["mark"] for k in ("good", "partial", "poor")}
+    for section in re.split(r"^(?=#{1,4} )", text, flags=re.M):
+        head = section.split("\n", 1)[0].lower()
+        if "changes from" in head:  # that section quotes old values on purpose
+            continue
+        dark = "dark mode" in head
+        want = {**C, **marks, **(DARK if dark else {})}
+        for word, h in WORD_HEX.findall(section):
+            key = WORD_ALIAS.get(word.lower(), word.lower())
+            if key in want and want[key].upper() != h.upper():
+                bad(f"'{word} {h}': tokens.json says {key} is {want[key]}")
+    # 3. Category rows: slot, name, fill (and text, tint, label where the table has them), domain.
+    full = re.compile(r"^\| (\d) \| (\w+) \| `(#\w{6})` \| `(#\w{6})` \| `(#\w{6})` \| ([^|]+?) \| ([^|]+?) \|$", re.M)
+    short = re.compile(r"^\| (\d) \| (\w+) \| `(#\w{6})` \| ([^|`]+?) \|$", re.M)
+    for n, name, fill, ink, tint, label, domain in full.findall(text):
+        c = CATS[int(n) - 1]
+        if (name.lower(), fill, ink, tint, domain) != (c["name"], c["fill"], c["ink"], c["tint"], c["domain"]) \
+                or label != ("white" if c["label"] == "white" else "ink"):
+            bad(f"category row {n} ({name}) does not match tokens.json")
+    for n, name, fill, domain in short.findall(text):
+        c = CATS[int(n) - 1]
+        if (name.lower(), fill, domain) != (c["name"], c["fill"], c["domain"]):
+            bad(f"category row {n} ({name}) does not match tokens.json")
+    # 4. Status and grade rows.
+    for word, a, b, c3 in re.findall(r"^\| (Good|Partial|Poor|Info|None)\b[^|]*\| `(#\w{6})` \| `(#\w{6})` \| `(#\w{6})` \|$", text, re.M):
+        st = S[word.lower()]
+        if (a, b, c3) != (st["mark"], st["ink"], st["tint"]):
+            bad(f"status row '{word}' does not match tokens.json")
+    for word, a, b in re.findall(r"^\| (Yes|Partial|No) \| `(#\w{6})` \| `(#\w{6})` \|", text, re.M):
+        g = S["grade"][word.lower()]
+        if (a, b) != (g["fill"], g["border"]):
+            bad(f"grade row '{word}' does not match tokens.json")
+    # 5. Theme slots.
+    for name, h in re.findall(r"\| (Dark [12]|Light [12]|Accent [1-6]|Hyperlink|Followed hyperlink)\b[^|`]*\| `(#\w{6})`", text):
+        if SLOTS[SLOT_NAMES[name.lower()]] != h:
+            bad(f"theme slot {name} is {h}; tokens.json says {SLOTS[SLOT_NAMES[name.lower()]]}")
+    return out
+
+
 def check():
     problems = []
     for path, fn in OUTPUTS.items():
         if not path.exists() or path.read_text() != fn():
             problems.append(f"{path.relative_to(ROOT)} is out of date: run dev/build-kit/build.py")
+    problems += contrast_problems()
     allowed = all_hexes(T)
     names = dict(C)
     row = re.compile(r"^\|\s*`([a-z0-9-]+)`\s*\|\s*`(#[0-9A-Fa-f]{6})`", re.M)
@@ -814,6 +1006,19 @@ def check():
             for name, h in row.findall(section):
                 if name in want and want[name].upper() != h.upper():
                     problems.append(f"{path.relative_to(ROOT)} gives {name} as {h}; tokens.json says {want[name]}")
+        if path.suffix == ".md":
+            problems += prose_problems(path, text)
+    # BRAND.md must state each scale's label rule in the words generated from tokens.json.
+    brand = (SKILL / "BRAND.md").read_text()
+    for scale in ("severity", "blue-sequential", "diverging-7", "diverging-5"):
+        if label_phrase(scale) not in brand:
+            problems.append(f"skill/BRAND.md does not state the {scale} label rule as: {label_phrase(scale)}")
+    # The five rules are the part people memorise: BRAND.md and SKILL.md must give them word for word.
+    def five(text):
+        m = re.search(r"^1\. \*\*One red.*?(?=^\n|\Z)", text, re.M | re.S)
+        return m.group(0).strip() if m else None
+    if five(brand) is None or five(brand) != five((SKILL / "SKILL.md").read_text()):
+        problems.append("the five rules differ between skill/BRAND.md and skill/SKILL.md")
     for p in problems:
         print("FAIL", p)
     print("ok: everything agrees with tokens.json" if not problems else f"{len(problems)} problem(s)")

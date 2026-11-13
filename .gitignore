@@ -19,3 +19,4 @@ tmp/
 
 # Kit builder
 dev/build-kit/__pycache__/
+skill/templates/__pycache__/

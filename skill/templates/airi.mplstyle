@@ -35,4 +35,4 @@ legend.frameon: False
 lines.linewidth: 1.8
 patch.linewidth: 0
 
-axes.prop_cycle: cycler('color', ['A32035', '898A8D', '2171B5', 'D9A531', '138A73', 'CC6699', '6BAED6'])
+axes.prop_cycle: cycler('color', ['A32035', '898A8D', '2171B5', 'D9A531', '117A66', 'CC6699', '6BAED6'])

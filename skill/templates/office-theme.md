@@ -2,7 +2,8 @@
 
 Two small files set the theme colours and fonts for every Office app:
 `office-theme-colors.xml` and `office-theme-fonts.xml`. Once installed, "AIRI"
-appears in the Colors and Fonts menus, and a default chart starts with AIRI red.
+appears in the Colors and Fonts menus. A default chart then starts with AIRI red;
+see "Charts" below for what to set by hand.
 
 ## Install
 
@@ -37,7 +38,7 @@ If you would rather type them: Colors > Customize Colors.
 | accent1 | Accent 1 | `#A32035` |
 | accent2 | Accent 2 | `#2171B5` |
 | accent3 | Accent 3 | `#D9A531` |
-| accent4 | Accent 4 | `#138A73` |
+| accent4 | Accent 4 | `#117A66` |
 | accent5 | Accent 5 | `#CC6699` |
 | accent6 | Accent 6 | `#6BAED6` |
 | hlink | Hyperlink | `#A32035` |
@@ -49,6 +50,7 @@ If you would rather type them: Colors > Customize Colors.
 - Master background `#FAFAFA`. Section divider background `#A32035` with white text.
 - Sizes in pt: cover 36, slide title 28, outcome 18, body 14, small 11. Nothing smaller than 11.
 - Slide titles are Figtree Bold in Accent 1. Everything else is Dark 1, or Dark 2 for small text.
+- Margins 48 pt top, 64 pt sides, 72 pt bottom. Gaps of 4, 8, 12 or 24 pt. Borders 1 pt.
 
 ## Word styles
 
@@ -72,4 +74,31 @@ Office builds its own lighter and darker rows from each accent. Those are not AI
 tints. When you need a tint or a chart colour that is not one of the 12 slots,
 type one of these under More Colors (they then stay in Recent Colors):
 
-`#8A1B2D` `#5E0E20` `#B8455A` `#D07886` `#E29CA8` `#F8E1E5` `#898A8D` `#CCCCCC` `#D9D9D9` `#55399E` `#D4762C` `#E8A317` `#3A8F5C` `#FFF0B3`
+`#8A1B2D` `#5E0E20` `#B8455A` `#D07886` `#E29CA8` `#F8E1E5` `#898A8D` `#CCCCCC` `#D9D9D9` `#55399E` `#D4762C` `#E8A317` `#3A8F5C` `#FFF0B3` `#EFF6FF` `#C6DBEF` `#9ECAE1` `#4292C6` `#084594`
+
+## Charts in PowerPoint, Word and Excel
+
+A chart made here takes its series colours from Accent 1 to 6 in order:
+`#A32035`, `#2171B5`, `#D9A531`, `#117A66`, `#CC6699`, `#6BAED6`. That order is right for one kind of chart only: one series (red), or
+two series (red and blue). For every other chart, set the colours by hand. Click a series, then Format Data Series > Fill > More Colors, and type the hex.
+
+- **Context series** (everything that is not the subject): `#898A8D`. It is not a theme colour.
+- **Named groups** (risk domains, sectors, roles): set each series to its category colour,
+  in slot order. The first group is blue, never red.
+
+| Slot | Colour | Hex | Label on it | AI Risk Repository domain |
+|---|---|---|---|---|
+| 1 | Blue | `#2171B5` | white | Discrimination & toxicity |
+| 2 | Sky | `#6BAED6` | ink | Privacy & security |
+| 3 | Violet | `#55399E` | white | Misinformation |
+| 4 | Pink | `#CC6699` | ink | Malicious actors & misuse |
+| 5 | Orange | `#D4762C` | ink | Human-computer interaction |
+| 6 | Gold | `#D9A531` | ink | Socioeconomic & environmental |
+| 7 | Teal | `#117A66` | white | AI system safety, failures & limitations |
+| | Other | `#898A8D` | ink | Other, folded groups |
+
+- **Ordered levels where higher is worse:** `#E29CA8` `#D07886` `#B8455A` `#A32035` `#5E0E20`.
+- **Counts:** `#9ECAE1` `#6BAED6` `#4292C6` `#2171B5` `#084594`.
+
+The code templates (matplotlib, Plotly, R) default to red, grey, blue. A chart made
+here matches them only after the grey and the category colours are set as above.
