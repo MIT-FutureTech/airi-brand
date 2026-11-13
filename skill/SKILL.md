@@ -9,48 +9,77 @@ description: |
 allowed-tools: Read, Glob
 ---
 
-# AIRI Brand Skill
+# AIRI brand skill
 
-Before generating any visual output for an AIRI project, read and apply the brand specification.
+Apply this to anything visual made for AIRI: pages, apps, charts, slides, documents, figures. It applies to internal tools and quick prototypes too, not only public work.
 
-## Setup
+## Five rules
 
-1. Read [BRAND.md](BRAND.md) for the full specification including colors, typography, logos, and component patterns.
-2. Read [tokens.json](tokens.json) for exact color, typography, spacing, and radius values.
-3. Use [brand.css](brand.css) directly if the output supports CSS imports, or replicate the custom properties.
+1. **One red: `#A32035`.** Take it from a token, theme or template. Never retype or approximate it.
+2. **Two text colours:** ink `#1A1A1A` and muted `#666666`. White on red or dark.
+3. **In data, red is the subject, the finding or more risk.** Grey `#898A8D` is context. Blue `#2171B5` is a neutral amount.
+4. **A figure uses a red scale or a red highlight, never both.**
+5. **Figtree for all text**, weights 400 and 700 (600 allowed on the web). Sentence case, left-aligned.
 
-## Quick reference
+## The swatches
 
-**Colors:**
-- Primary (AIRI red): `#A32035`
-- Primary light: `#D07886`
-- Primary dark: `#5E0E20`
-- Text: `#1A1A1A`
-- Muted: `#898A8D`
-- Background: `#FAFAFA`
-- White: `#FFFFFF`
+| Token | Hex | Use |
+|---|---|---|
+| `primary` | `#A32035` | Titles, covers, header bars, buttons, links, the highlighted series |
+| `primary-hover` | `#8A1B2D` | Hover on red buttons and links |
+| `primary-dark` | `#5E0E20` | Dark end of red scales, visited links. Never headings |
+| `primary-light` | `#D07886` | Red text and links on dark grounds. Never text on light |
+| `red-tint` | `#F8E1E5` | Chips, selected rows, highlights |
+| `red-wash` | `#FBF3F4` | Faint red surfaces, screen only |
+| `text` | `#1A1A1A` | All text by default |
+| `text-muted` | `#666666` | The only other text grey |
+| `gray` | `#898A8D` | Chart context, icons, control borders. Not text |
+| `rule` | `#CCCCCC` | Visible borders, table rules, axis lines |
+| `border` | `#D9D9D9` | Hairlines, gridlines |
+| `fill` | `#F3F3F3` | Zebra rows, callouts, empty cells |
+| `background` | `#FAFAFA` | Page and slide background |
+| `blue` | `#2171B5` | The one second colour |
 
-**Font:** Figtree (Google Fonts), weights 400/600/700. Fallback: `sans-serif`.
+Data palettes:
 
-**Logos:** One AIRI logo, used for all AIRI work, including the AI Risk Repository and AI Risk Index.
+- Highlight: `#A32035` on `#898A8D`. Two conditions: `#A32035` and `#E29CA8`.
+- Severity, 1 to 5, higher is worse: `#E29CA8` `#D07886` `#B8455A` `#A32035` `#5E0E20`. None: `#F3F3F3`.
+- Counts (more is only more): `#EFF6FF` `#C6DBEF` `#9ECAE1` `#6BAED6` `#4292C6` `#2171B5` `#084594`.
+- Two-sided: `#084594` `#4292C6` `#9ECAE1` `#F3F3F3` `#E29CA8` `#B8455A` `#5E0E20`. Red is the worse side.
+- Categories, in fixed order, never red: `#2171B5` `#6BAED6` `#55399E` `#CC6699` `#D4762C` `#D9A531` `#138A73`, then Other `#898A8D`. The seven AI Risk Repository domains take these slots in order.
+- Status, always with a word or icon: good `#3A8F5C`, partial `#E8A317`, poor `#A32035`.
 
-- `logos/initiative/icon.*`: the square mark (the "plus of squares").
-- `logos/initiative/horizontal.*`: icon + two-line wordmark "MIT AI Risk / **Initiative**".
-- `logos/futuretech/futuretech*.svg`: the MIT FutureTech parent logo, for co-branded materials only.
+## What to read
 
-Each comes in four colour variants:
-- Default / `-on-light`: red content, transparent background (for light backgrounds)
-- `-on-dark`: white content, transparent background (for dark backgrounds)
-- `-on-red`: white content, red background (self-contained, for documents/slides)
+1. This file is enough for a simple page or chart.
+2. [BRAND.md](BRAND.md) for the full spec: text pairs and contrast, category text and tint pairs, dark mode, type scales, logo rules, and a section for each medium (slides, documents, website, interactive tools, papers, Claude artifacts).
+3. [tokens.json](tokens.json) for every value in machine-readable form.
+4. [templates/](templates/README.md) for a starting file per tool. Use the template instead of typing values:
 
-AIRI logos are SVG and PNG (PNGs are 1024px for icons, 512px tall for horizontals). The FutureTech logo is SVG only.
+| Making | Start from |
+|---|---|
+| A web page or app | `brand.css` |
+| A Claude artifact or single-file page | `templates/claude-artifact.html` (light and dark) |
+| Tailwind | `templates/tailwind-theme.css` |
+| matplotlib | `templates/airi.mplstyle` and `templates/airi_mpl.py` |
+| Plotly | `templates/airi-plotly-template.json` |
+| R / ggplot2 | `templates/airi_palette.R` |
+| LaTeX | `templates/airi-colors.sty` |
+| PowerPoint or Word | `templates/office-theme-colors.xml`, `office-theme-fonts.xml`, `office-theme.md` |
+| Google Slides or Sheets | `templates/google-slides-theme.md` |
+| Google Docs | `templates/google-docs-styles.md` |
 
 ## Rules
 
-1. Always use the AIRI color palette. Do not introduce other brand colors.
-2. Always load Figtree from Google Fonts (or reference it if already available).
-3. Use the logo files in `logos/initiative/` as they are. Do not invent new icons, product lockups, or modified variants.
-4. For interactive sites: import or inline the CSS custom properties from `brand.css`.
-5. For charts: use the data visualization color sequence from BRAND.md.
-6. For slide decks: use `primary` as the accent color, Figtree as the font.
-7. Keep it simple. The brand is minimal: red, dark, gray, white, one font. Consistency matters more than elaboration.
+1. Every colour in the output is a token. If you need a colour that is not in `tokens.json`, stop and ask; do not invent one, and do not borrow from a chart library or CSS framework.
+2. In CSS, use the variables, not hex values. Artifacts must work in light and dark; the artifact template handles both.
+3. Text is `text` or `text-muted`. Never use `gray` or anything lighter for text. Red text on a dark ground is `primary-light`.
+4. Red goes on the top-level title (`h1`, slide title, document Title and Heading 1), links, buttons and bars. Headings below that are ink.
+5. Links are red and underlined. Focus ring is 2 px red; never remove outlines.
+6. Charts: decide what the chart is about and make that red; make the rest grey. Use the red scale only when more means more risk, blue when it is only more. Named groups use the category colours, never red. No red-to-green, traffic lights or rainbows. Title states the finding; add a source line.
+7. Status colours always carry a word or an icon.
+8. Slides: red titles that state the point, full-red section dividers, five sizes (72, 56, 36, 28, 22 px on a 1920 canvas), gaps of 8, 16, 24 or 48 px, a source line on data slides, no logo on body slides.
+9. Radius is 8 px for cards and images and 4 px otherwise. No pills. Prefer borders to shadows.
+10. Logos: use the files in `logos/initiative/` as they are (`on-light`, `on-dark`, `on-red`). One logo for all AIRI work. No product lockups, no recolouring. `logos/futuretech/` is the parent logo, for co-branded work only.
+11. AIRI red is not MIT red (`#750014`) and not FutureTech's logo red (`#9A2030`). Do not use either as a colour.
+12. Fewer colours is better. Red, grey, ink and white are enough for most work.
