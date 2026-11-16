@@ -52,7 +52,7 @@ Data palettes:
 ## What to read
 
 1. This file is enough for a simple page or chart.
-2. [BRAND.md](BRAND.md) for the full spec: text pairs and contrast, category text and tint pairs, dark mode, type scales, logo rules, and a section for each medium (slides, documents, website, interactive tools, papers, Claude artifacts).
+2. [BRAND.md](BRAND.md) for the full spec: text pairs and contrast, category text and tint pairs, dark mode, type scales, logo rules, a section for each medium (slides, documents, website, interactive tools, papers, Claude artifacts), and motion and video.
 3. [tokens.json](tokens.json) for every value in machine-readable form.
 4. [templates/](templates/README.md) for a starting file per tool. Use the template instead of typing values:
 
@@ -68,6 +68,7 @@ Data palettes:
 | PowerPoint or Word | `templates/office-theme-colors.xml`, `office-theme-fonts.xml`, `office-theme.md` |
 | Google Slides or Sheets | `templates/google-slides-theme.md` |
 | Google Docs | `templates/google-docs-styles.md` |
+| An explainer video or animation | `templates/video/` |
 
 ## Rules
 
@@ -86,3 +87,11 @@ Data palettes:
 13. Logos: use the files in `logos/initiative/` as they are (`on-light`, `on-dark`, `on-red`). One logo for all AIRI work. No product lockups, no recolouring. `logos/futuretech/` is the parent logo, for co-branded work only.
 14. AIRI red is not MIT red (`#750014`) and not FutureTech's logo red (`#9A2030`). Do not use either as a colour.
 15. Fewer colours is better. Red, grey, ink and white are enough for most work.
+
+## Motion and video
+
+- Interface motion: the `--motion-` durations (70 to 700 ms) and `--ease-` curves in `brand.css`; `transform` and `opacity` only; honour `prefers-reduced-motion`.
+- Video motion: 400, 700 or 1000 ms with the video curves; frame, then text, then data; stagger 80 to 150 ms; about three brand moments a video.
+- Never: bounce, elastic, overshoot, rotation, glitch, software presets, diagonal moves, or a logo that fades, slides or scales in.
+- Start videos from `templates/video/` (it sits on the `generate-video` template). Every video has captions, an SRT file and an end card.
+- Run `python3 templates/video/check_video.py comp.html captions.srt` before rendering. Detail: BRAND.md section 11.

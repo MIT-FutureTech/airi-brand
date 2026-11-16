@@ -13,9 +13,9 @@ The visual identity of the MIT AI Risk Initiative (AIRI): logo, icon, colours an
 ## Start here
 
 - **See the brand:** open [guide/index.html](guide/index.html) in a browser. It shows the logo, icon, font, palette, chart colours and the MIT FutureTech parent logo on one page, with download links.
-- **Get a starting file for your tool:** [skill/templates/](skill/templates/README.md) has theme colours and fonts for PowerPoint and Word, set-up steps for Google Slides, Sheets and Docs, and palette files for CSS, Tailwind, matplotlib, Plotly, R and LaTeX.
+- **Get a starting file for your tool:** [skill/templates/](skill/templates/README.md) has theme colours and fonts for PowerPoint and Word, set-up steps for Google Slides, Sheets and Docs, palette files for CSS, Tailwind, matplotlib, Plotly, R and LaTeX, and a [video template](skill/templates/video/README.md).
 - **Get the logo files:** [skill/logos/initiative/](skill/logos/initiative/) has the AIRI icon and horizontal logo as SVG and PNG. [skill/logos/futuretech/](skill/logos/futuretech/) has the FutureTech logo for co-branded materials.
-- **Read the full spec:** [skill/BRAND.md](skill/BRAND.md) covers colour (including charts, status and dark mode), type sizes, logo rules, and a section for each medium: slides, documents, website, interactive tools, papers and Claude artifacts.
+- **Read the full spec:** [skill/BRAND.md](skill/BRAND.md) covers colour (including charts, status and dark mode), type sizes, logo rules, and a section for each medium: slides, documents, website, interactive tools, papers and Claude artifacts. It also sets motion and video rules.
 - **Ask a question or propose a change:** open a [GitHub issue](https://github.com/MIT-FutureTech/airi-brand/issues). See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Logo variants

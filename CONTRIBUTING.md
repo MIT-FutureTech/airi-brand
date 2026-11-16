@@ -23,7 +23,7 @@ If you've already drafted the change, attach the diff or link your branch.
 | `skill/brand.css` | CSS custom properties | Generated from `tokens.json` |
 | `skill/BRAND.md` | Markdown | Written by hand; a check compares its values with `tokens.json` |
 
-To change a colour, size, spacing step or radius:
+To change a colour, size, spacing step, radius, or a motion or video value:
 
 1. Edit `skill/tokens.json`.
 2. Run `python3 dev/build-kit/build.py`. It rewrites `brand.css`, everything in `skill/templates/` and `guide/index.html`.
@@ -32,12 +32,13 @@ To change a colour, size, spacing step or radius:
    - a generated file is stale;
    - any label-on-fill or text-on-ground pair in `tokens.json` is below 4.5:1, in light or dark;
    - a hand-written file names a colour that is not a token, gives a token the wrong hex, lists a palette in the wrong order, or gets a category, status, grade or theme-slot row wrong;
-   - the five rules differ between `BRAND.md` and `SKILL.md`.
+   - the five rules differ between `BRAND.md` and `SKILL.md`;
+   - a motion or video token is out of range, the video styles use a time or curve that is not a token, or `BRAND.md` and `SKILL.md` do not state the motion values.
 
    It cannot check prose that carries no hex, such as where the logo goes. Read your change to `BRAND.md` against `tokens.json` as well.
 5. Rebuild the Claude.ai upload: `rm airi-brand-skill.zip && zip -rq airi-brand-skill.zip skill/`
 
-Never edit a generated file by hand; change `tokens.json` or `dev/build-kit/` instead. The logo files are generated too, by `dev/logo-builder/build.py`.
+Never edit a generated file by hand; change `tokens.json` or `dev/build-kit/` instead. Two things in `skill/templates/video/` are kept by hand: `check_video.py` and the font in `fonts/`. The logo files are generated too, by `dev/logo-builder/build.py`.
 
 ## Working with an AI assistant
 

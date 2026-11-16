@@ -1,6 +1,6 @@
 # AIRI brand specification
 
-Version 2.0. The visual identity of the MIT AI Risk Initiative (AIRI), for every medium: slides, documents, the website, interactive tools, charts, papers and anything Claude generates.
+Version 2.0. The visual identity of the MIT AI Risk Initiative (AIRI), for every medium: slides, documents, the website, interactive tools, charts, papers, video and anything Claude generates.
 
 Values in this file match `tokens.json` exactly. `brand.css` and the files in `templates/` are generated from `tokens.json`. If you are applying the brand in a tool, start from the template for that tool (section 10) instead of typing values.
 
@@ -476,7 +476,111 @@ Template: `templates/claude-artifact.html`.
 - Slide artifacts follow the slides section on the 1920 x 1080 canvas.
 - This applies to internal tools too. A quick internal page still uses Figtree and the tokens.
 
-## 11. Do and don't
+## 11. Motion and video
+
+Templates: `templates/video/` for video; the `--motion-` and `--ease-` variables in `brand.css` for interfaces.
+
+AIRI moves in two registers. Interface motion is quick and quiet. Video motion is slower, so a viewer seeing it once can follow it. Both are restrained: things move in straight lines, settle without overshoot, and most of the frame is still most of the time. Pick a value from the tables; do not invent a duration or a curve.
+
+### Interface motion
+
+For web pages, interactive tools and Claude artifacts. These are IBM Carbon's "productive" values, unchanged.
+
+| Token | Duration | Use |
+|---|---|---|
+| `fast-01` | 70 ms | Small state changes: a button press, a toggle |
+| `fast-02` | 110 ms | Fades, hover |
+| `moderate-01` | 150 ms | Small expansions, short moves |
+| `moderate-02` | 240 ms | A panel or a menu opening |
+| `slow-01` | 400 ms | A large expansion |
+| `slow-02` | 700 ms | A background change. Rare |
+
+| Curve | Value | Use |
+|---|---|---|
+| standard | `cubic-bezier(0.2, 0, 0.38, 0.9)` | Something that stays on screen and moves or resizes |
+| entrance | `cubic-bezier(0, 0, 0.38, 0.9)` | Something arriving |
+| exit | `cubic-bezier(0.2, 0, 1, 0.9)` | Something leaving |
+
+- Animate `transform` and `opacity` only.
+- Items that arrive together are staggered by 20 ms each, and the whole group finishes inside 500 ms.
+- Honour `prefers-reduced-motion`: replace movement with a short opacity change, or nothing. `brand.css` and the artifact template switch motion off for people who ask for that.
+- Motion that runs for more than 5 seconds needs a way to stop it.
+
+### Video motion
+
+For explainer videos of 1 to 10 minutes and for explanatory animation. The curves are Carbon's "expressive" set.
+
+| Token | Duration | Use |
+|---|---|---|
+| `short` | 400 ms | Small moves, exits, a crossfade |
+| `long` | 700 ms | Entrances, bars growing, lines drawing |
+| `scene` | 1000 ms | A scene change |
+
+| Curve | Value |
+|---|---|
+| standard | `cubic-bezier(0.4, 0.14, 0.3, 1)` |
+| entrance | `cubic-bezier(0, 0, 0.3, 1)` |
+| exit | `cubic-bezier(0.4, 0.14, 1, 1)` |
+
+- **Order of arrival:** the frame, then text, then anything that changes, then the data. A chart's title and labels are in place before its bars grow.
+- **Stagger** items that arrive together by 80 to 150 ms. The interface value of 20 ms is too fast to read in a video.
+- **Paths follow the grid:** horizontal or vertical, never diagonal.
+- **Same meaning, same motion.** If bars grow from the left in one chart, they grow from the left in all of them.
+- **Brand moments are rationed.** A video has about three: the title, a section change, the end. Everything between them is calm.
+
+### Never
+
+No bounce, elastic or overshoot. No rotation. No glitch effects. No software presets. No diagonal moves. The logo is never faded in, slid in or scaled up. Nothing flashes more than 3 times a second.
+
+### Video furniture
+
+| Item | Rule |
+|---|---|
+| Frame | 1920 x 1080 by default. 1080 x 1920 for phones and 1080 x 1080 for square feeds, each designed again for its shape |
+| Frame rate | 30 fps; 60 for data-heavy animation |
+| Safe areas | Text and logos inside the title-safe area, a 10% inset. Anything that matters inside the action-safe area, a 5% inset |
+| Type | Title 120 px, section 96, statement 72, chart title 56, body 44, labels 32. Nothing under 28 px |
+| Captions | White on an ink plate, bottom centre. 54 px or larger (1/20 of the frame's short side). At most 42 characters a line (30 in vertical and square), 2 lines, 20 characters a second. At least 20 frames on screen. An SRT file ships with every video |
+| Lower third | Bottom left, inside title-safe. 1 s in, 4 to 5 s hold, 1 s out. Never over a face or a caption |
+| Title card | Red ground, white logo top left, white bold title |
+| Section card | Full red, white heading, as in slides |
+| End card | On every external video: the AIRI logo and `airisk.mit.edu`, held 3 s |
+| Logo card | A video shorter than 15 s opens on the logo alone for 2 to 3 s |
+| Charts | Colours follow section 4. The title states the finding; a source line sits under the chart |
+
+`templates/video/check_video.py` checks a composition and its SRT file against these limits.
+
+### Square-step (optional style)
+
+A second way to move the brand moments, built from the AIRI icon. The icon is made of small, medium and large squares. In this style the title card, section cards and the logo move in whole squares on a fixed grid, in steps with no easing.
+
+| | Value |
+|---|---|
+| Module | 40 px, the icon's small square at 1/27 of the frame's short side |
+| Squares | Small 40 px, medium 80 px, large 120 px. The large square tiles every format exactly |
+| Tick | 15 steps a second, which is 2 frames at 30 fps |
+| Section wipe | A red block advances one large square a tick. Its edge is a column of medium squares, then small ones on the diagonals |
+| Title | Revealed one column a tick behind a square cursor |
+| Logo | Its squares appear from small to large, left to right, then the wordmark. The logo file is shown through a mask and never redrawn |
+
+Charts, labels, captions and lower thirds never use it. They keep the calm motion above.
+
+### Alternatives
+
+Every video comes with a transcript and one static key frame that makes sense alone. On a web page, a video does not autoplay with sound, and motion respects `prefers-reduced-motion`.
+
+### Open defaults
+
+These are set, and not yet confirmed.
+
+| Question | Default |
+|---|---|
+| House style | Conventional. Square-step is an option |
+| End-card length | 3 s |
+| Music | Optional. A quiet bed under the voice, with the level set by the renderer |
+| Logo animation | Conventional: the logo cuts in. Square-step: it assembles |
+
+## 12. Do and don't
 
 | Do | Don't |
 |---|---|
@@ -491,7 +595,7 @@ Template: `templates/claude-artifact.html`.
 | Underline red links | Leave a tool's default blue or teal links |
 | Use the one AIRI logo from `logos/` | Use retired lockups or recolour the logo |
 
-## 12. Changes from kit 1.x
+## 13. Changes from kit 1.x
 
 | 1.x | 2.0 |
 |---|---|
@@ -510,11 +614,12 @@ Template: `templates/claude-artifact.html`.
 
 `brand.css` keeps the 1.x variable names as aliases, so pages do not break, but the three size names above change value. `tokens.json` is not backward compatible: the keys `color.dark`, `typography.size.3xl`, `typography.line-height.relaxed`, `radius.lg` and `radius.full` are gone. A script that reads them must move to `color.text`, `typography.size.2xl`, `typography.line-height.normal` and `radius.md`.
 
-## 13. Files
+## 14. Files
 
 - `tokens.json`: every value, machine-readable. The source for the generated files.
 - `brand.css`: CSS custom properties, light and opt-in dark.
 - `templates/`: starting files for Office, Google Workspace, Tailwind, Claude artifacts, matplotlib, Plotly, R and LaTeX. See `templates/README.md`.
+- `templates/video/`: video styles, a sample composition and `check_video.py`. See `templates/video/README.md`.
 - `logos/initiative/`, `logos/futuretech/`: logo files.
 - `SKILL.md`: the short version Claude loads first.
 
