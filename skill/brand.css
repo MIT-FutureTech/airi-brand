@@ -88,6 +88,18 @@
   --radius-md: 8px;
   --focus-ring: 2px solid var(--color-focus);
 
+  /* Motion for interfaces: animate transform and opacity only */
+  --motion-fast-01: 70ms;
+  --motion-fast-02: 110ms;
+  --motion-moderate-01: 150ms;
+  --motion-moderate-02: 240ms;
+  --motion-slow-01: 400ms;
+  --motion-slow-02: 700ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0.38, 0.9);
+  --ease-entrance: cubic-bezier(0, 0, 0.38, 0.9);
+  --ease-exit: cubic-bezier(0.2, 0, 1, 0.9);
+  --motion-stagger: 20ms;
+
   /* Deprecated names from kit 1.x. Kept so old code still works. */
   --color-dark: var(--color-text);
   --color-border-strong: var(--color-rule);
@@ -126,4 +138,12 @@
   --focus-ring: 2px solid var(--color-focus);
   --color-dark: var(--color-text);
   --color-border-strong: var(--color-rule);
+}
+
+/* People who ask for less motion get none. Use a short opacity change if a state change needs a cue. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important; scroll-behavior: auto !important;
+  }
 }

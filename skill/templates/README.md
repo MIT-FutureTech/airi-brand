@@ -17,6 +17,7 @@ Start from these instead of typing hex values. All are generated from
 | Plotly | `airi-plotly-template.json` | See below |
 | R, ggplot2 | `airi_palette.R` | `source("airi_palette.R")`, then `airi$...`, `airi_ramp()`, `theme_airi()` |
 | LaTeX | `airi-colors.sty` | `\usepackage{airi-colors}` |
+| Explainer videos, animation | `video/` | Sits on the `generate-video` template; see `video/README.md` |
 
 ## Chart defaults
 

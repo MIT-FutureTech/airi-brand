@@ -1,0 +1,9 @@
+1
+00:00:21,800 --> 00:00:24,700
+The repository groups risks from AI
+into seven domains.
+
+2
+00:00:25,000 --> 00:00:28,300
+Each domain keeps the same colour
+in every chart.

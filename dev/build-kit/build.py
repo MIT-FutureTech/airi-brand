@@ -7,6 +7,8 @@
 --check also:
   - recomputes the contrast of every "label on fill" and "text on ground" rule in
     tokens.json, light and dark, and fails below 4.5:1;
+  - checks the motion and video tokens, that the video CSS takes every time and
+    curve from them, and that BRAND.md and SKILL.md state the same values;
   - reads the hand-written files and fails if they name a colour that is not a
     token, give a token the wrong hex, list a palette in the wrong order, or get a
     category, status, grade or theme-slot row wrong.
@@ -19,6 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import guide  # noqa: E402  (the one-page visual guide)
+import video  # noqa: E402  (motion tokens and the video templates)
 
 ROOT = Path(__file__).resolve().parents[2]
 SKILL = ROOT / "skill"
@@ -34,6 +37,7 @@ SLOTS = T["theme"]["slots"]
 TY = T["typography"]
 SP = T["spacing"]
 VERSION = T["version"]
+MOTION = T["motion"]["ui"]
 FONT_URL = "https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap"
 GEN = f"AIRI brand kit {VERSION}. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand."
 
@@ -81,6 +85,24 @@ def css_data_lines(indent="  ", dark=False):
     return out
 
 
+def css_motion_lines(indent="  "):
+    """Interface motion. Video motion is separate: templates/video/airi-video.css."""
+    out = [f"{indent}/* Motion for interfaces: animate transform and opacity only */"]
+    out += [f"{indent}--motion-{k}: {ms}ms;" for k, ms in MOTION["duration-ms"].items()]
+    out += [f"{indent}--ease-{k}: {video.bezier(p)};" for k, p in MOTION["easing"].items()]
+    out += [f"{indent}--motion-stagger: {MOTION['stagger-ms']}ms;"]
+    return out
+
+
+REDUCED_MOTION = """/* People who ask for less motion get none. Use a short opacity change if a state change needs a cue. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important; scroll-behavior: auto !important;
+  }
+}"""
+
+
 def brand_css():
     L = [f"/* {GEN}", "   Import this file, or copy the variables into any project.", "   Dark mode is opt-in: set data-theme=\"dark\" on <html> or any container.",
          "   Red text is --color-link (it lightens in dark mode). Red fills are --color-primary.",
@@ -100,7 +122,8 @@ def brand_css():
     L += ["", "  /* Spacing and radius */"]
     L += [f"  --space-{i}: {v};" for i, v in enumerate(T["spacing"]["scale"], 1)]
     L += [f"  --radius-{k}: {v};" for k, v in T["radius"].items()]
-    L += ["  --focus-ring: 2px solid var(--color-focus);", "", "  /* Deprecated names from kit 1.x. Kept so old code still works. */"]
+    L += ["  --focus-ring: 2px solid var(--color-focus);", ""] + css_motion_lines()
+    L += ["", "  /* Deprecated names from kit 1.x. Kept so old code still works. */"]
     dep = {old: new for old, new in T["deprecated"].items() if old != "note"}
 
     def dep_line(old, new):
@@ -114,7 +137,7 @@ def brand_css():
     # container that is not <html> needs them declared again.
     L += ["  --focus-ring: 2px solid var(--color-focus);"]
     L += [dep_line(old, new) for old, new in dep.items() if new.startswith("color-") and new[len("color-"):] in DARK]
-    L += ["}", ""]
+    L += ["}", ""] + REDUCED_MOTION.splitlines() + [""]
     return "\n".join(L)
 
 
@@ -688,6 +711,8 @@ def artifact_html():
     sev = "    " + " ".join(f"--color-sev-{i}: {h};" for i, h in enumerate(D["severity"], 1))
     dark = "\n".join(css_color_lines(DARK, "      ") + css_data_lines("      ", dark=True))
     dark2 = "\n".join(css_color_lines(DARK, "    ") + css_data_lines("    ", dark=True))
+    motion = "\n".join(css_motion_lines("    "))
+    reduced = "\n".join("  " + x for x in REDUCED_MOTION.splitlines()[1:])
     return f"""<!-- {GEN}
      Starting point for a Claude artifact or any single-file page. Works in light and dark.
      Paste the <link> and <style> into the page, then use the tokens. Never type a hex in the page body.
@@ -703,6 +728,7 @@ def artifact_html():
     --color-sev-none: {D['severity-none']};
     --font-family: {css_family(TY['family'])};
     --font-family-mono: {TY['family-mono']};
+{motion}
   }}
   @media (prefers-color-scheme: dark) {{
     :root:not([data-theme="light"]) {{
@@ -738,6 +764,9 @@ def artifact_html():
   table {{ border-collapse: collapse; width: 100%; }}
   th {{ text-align: left; font-weight: 700; background: var(--color-fill); }}
   th, td {{ padding: 8px 12px; border-bottom: 1px solid var(--color-rule); }}
+
+  /* Motion: the --motion and --ease variables, on transform and opacity only. */
+{reduced}
 </style>
 """
 
@@ -792,6 +821,7 @@ Start from these instead of typing hex values. All are generated from
 | Plotly | `airi-plotly-template.json` | See below |
 | R, ggplot2 | `airi_palette.R` | `source("airi_palette.R")`, then `airi$...`, `airi_ramp()`, `theme_airi()` |
 | LaTeX | `airi-colors.sty` | `\\usepackage{{airi-colors}}` |
+| Explainer videos, animation | `video/` | Sits on the `generate-video` template; see `video/README.md` |
 
 ## Chart defaults
 
@@ -848,6 +878,7 @@ OUTPUTS = {
     TPL / "airi-colors.sty": latex_sty,
     ROOT / "guide" / "index.html": guide.render,
 }
+OUTPUTS.update({TPL / "video" / name: fn for name, fn in video.OUTPUTS.items()})
 
 # ---------------------------------------------------------------- checks
 
@@ -991,6 +1022,8 @@ def check():
         if not path.exists() or path.read_text() != fn():
             problems.append(f"{path.relative_to(ROOT)} is out of date: run dev/build-kit/build.py")
     problems += contrast_problems()
+    problems += video.motion_problems()
+    problems += video.prose_problems((SKILL / "BRAND.md").read_text(), (SKILL / "SKILL.md").read_text())
     allowed = all_hexes(T)
     names = dict(C)
     row = re.compile(r"^\|\s*`([a-z0-9-]+)`\s*\|\s*`(#[0-9A-Fa-f]{6})`", re.M)
@@ -1030,6 +1063,7 @@ def main():
         sys.exit(check())
     TPL.mkdir(exist_ok=True)
     for path, fn in OUTPUTS.items():
+        path.parent.mkdir(exist_ok=True)
         path.write_text(fn())
         print("wrote", path.relative_to(ROOT))
 

@@ -50,6 +50,17 @@
     --color-sev-none: #F3F3F3;
     --font-family: 'Figtree', Arial, sans-serif;
     --font-family-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    /* Motion for interfaces: animate transform and opacity only */
+    --motion-fast-01: 70ms;
+    --motion-fast-02: 110ms;
+    --motion-moderate-01: 150ms;
+    --motion-moderate-02: 240ms;
+    --motion-slow-01: 400ms;
+    --motion-slow-02: 700ms;
+    --ease-standard: cubic-bezier(0.2, 0, 0.38, 0.9);
+    --ease-entrance: cubic-bezier(0, 0, 0.38, 0.9);
+    --ease-exit: cubic-bezier(0.2, 0, 1, 0.9);
+    --motion-stagger: 20ms;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -125,4 +136,12 @@
   table { border-collapse: collapse; width: 100%; }
   th { text-align: left; font-weight: 700; background: var(--color-fill); }
   th, td { padding: 8px 12px; border-bottom: 1px solid var(--color-rule); }
+
+  /* Motion: the --motion and --ease variables, on transform and opacity only. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 1ms !important; animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important; scroll-behavior: auto !important;
+    }
+  }
 </style>
