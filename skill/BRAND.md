@@ -537,6 +537,9 @@ No bounce, elastic or overshoot. No rotation. No glitch effects. No software pre
 | Item | Rule |
 |---|---|
 | Frame | 1920 x 1080 by default. 1080 x 1920 for phones and 1080 x 1080 for square feeds, each designed again for its shape |
+| Length | Under a minute; shorter is better. Most explainers land between 30 and 60 s. Cut scenes before speeding up the voice |
+| Narration | A brisk, conversational pace of 150 to 170 words a minute (voice style "clear, warm, brisk"). About 140 words for a 55 s video |
+| Music | Off by default (see below) |
 | Frame rate | 30 fps; 60 for data-heavy animation |
 | Safe areas | Text and logos inside the title-safe area, a 10% inset. Anything that matters inside the action-safe area, a 5% inset |
 | Type | Title 120 px, section 96, statement 72, chart title 56, body 44, labels 32. Nothing under 28 px |
@@ -565,6 +568,15 @@ A second way to move the brand moments, built from the AIRI icon. The icon is ma
 
 Charts, labels, captions and lower thirds never use it. They keep the calm motion above.
 
+### Music
+
+Off by default. People often watch explainers at 1.5x or 2x, and music sounds wrong sped up. When a video does want music (a title sequence, a trailer, a loop at an event), use one style:
+
+- A sparse ambient bed: soft piano or warm pads, 70 to 90 bpm.
+- No vocals, no drums or percussion, no build-ups or drops.
+- At least 15 LU under the voice; the renderer sets the level. Fade out over 2.5 s.
+- Say that it was generated.
+
 ### Alternatives
 
 Every video comes with a transcript and one static key frame that makes sense alone. On a web page, a video does not autoplay with sound, and motion respects `prefers-reduced-motion`.
@@ -577,7 +589,7 @@ These are set, and not yet confirmed.
 |---|---|
 | House style | Conventional. Square-step is an option |
 | End-card length | 3 s |
-| Music | Optional. A quiet bed under the voice, with the level set by the renderer |
+| Music | Off. The style above applies when a video wants it |
 | Logo animation | Conventional: the logo cuts in. Square-step: it assembles |
 
 ## 12. Do and don't

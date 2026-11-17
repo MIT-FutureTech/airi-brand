@@ -125,8 +125,11 @@ def check_comp(path, lim, have_srt):
         fails.append(f"{name}: data-fps is {fps}; use " + " or ".join(str(x) for x in lim["fps"]))
     if "airi-video.css" not in text:
         fails.append(f"{name}: airi-video.css is not linked")
+    # Motion rules apply to code, not to words on screen: a slide may say "No bounce".
+    code = "\n".join(body for _, body in re.findall(r"<(style|script)\b[^>]*>(.*?)</\1>", text, re.S | re.I))
+    code += "\n" + "\n".join(re.findall(r'\b(?:class|style)\s*=\s*"([^"]*)"', text))  # not data-at: it names spoken words
     for pattern, what in BANNED:
-        m = pattern.search(text)
+        m = pattern.search(text if "remote" in what else code)
         if m:
             fails.append(f"{name}: uses {what}: {m.group(0)!r}")
     for m in BEZIER.finditer(text):

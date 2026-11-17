@@ -83,8 +83,10 @@ on the SRT before rendering.
 
 ## Sound
 
-Music is optional: a quiet bed under the voice. Place it with `data-role="music"`
-and the renderer sets the level. Say when music or a voice was generated.
+Keep videos under a minute and narrate briskly: `narrate.js script.txt --style "clear, warm, brisk"`,
+about 140 words for 55 s. Music is off by default (people speed explainers up). If a video
+wants it, use the style in BRAND.md and place it with `data-role="music"`; the renderer sets the
+level. Say when music or a voice was generated.
 
 ## On a web page
 
