@@ -8,7 +8,7 @@ the font is generated from `../../tokens.json`.
 
 | File | What it is |
 |---|---|
-| `airi-video.css` | Tokens as CSS variables, the scene components, and both motion styles |
+| `airi-video.css` | Tokens as CSS variables and the scene components |
 | `comp.html` | A sample that uses every component. Copy it and replace the content |
 | `script.txt` | Narration for the sample, one line per line |
 | `captions.srt` | Captions for the sample |
@@ -31,30 +31,34 @@ node ~/.claude/skills/generate-video/scripts/render.js comp.html --out out/video
 Write the storyboard and the script first, as the `generate-video` skill says.
 Renders use local files only: no web fonts, no remote images.
 
-## The two styles
+## Motion
 
-Set one class on `<html>` beside `airi`:
+Put class `airi` on `<html>`. Transitions are conventional: the red card slides on and off
+smoothly, titles rise in, scenes cut or crossfade. These are defaults. A person can ask for
+something different.
 
-- `style-conventional`: the red card slides on and off smoothly, titles rise in, the logo cuts in.
-- `style-square`: the red card arrives as a wipe of squares on the icon's grid, titles are
-  revealed a column at a time, and the logo assembles square by square. Steps, no easing.
+The logo builds from its squares, small to large, then the wordmark. Its speed and style are
+being finalised; the current timing is the default until then. The logo is never faded, slid
+or scaled. That one is a hard rule.
 
-Only the brand moments differ: the title card, section cards and the end card. Use at most
-3 in a video. Charts, labels, captions and lower thirds move the same calm way in both.
+The title card, section cards and the end card are the brand moments. Aim for
+3 in a video.
+
+Square-step transitions (the red-square wipe and the stepped title reveal) were dropped after
+team review. `style-square` and `airi-reveal` no longer do anything.
 
 ## Components
 
 | Class | Use |
 |---|---|
 | `airi-card airi-title` | Title card: red, white logo top left, `h1`, one line under it. `--hold` is how long it stays |
-| `airi-card` | Section card: wipes on, holds for `--hold`, wipes off. Change the scene underneath during the hold. `--n` is the heading's width in large squares |
+| `airi-card` | Section card: slides on, holds for `--hold`, slides off. Change the scene underneath during the hold |
 | `scene airi-statement` | One large sentence at a time. `<em>` is the red emphasis |
 | `scene airi-chart` | `h2` states the finding; `airi-bars` rows grow last; `airi-source` under it |
 | `airi-lower-third` | Name and role, bottom left. `data-out` is `data-at` plus 1 s plus a 4 to 5 s hold; the scene must last 1 s longer |
 | `airi-caption` | A burned-in caption cue, `<br>` between its two lines. `#captions` gets the same look |
-| `scene airi-endcard` | The logo and `airisk.mit.edu`, held 3 s after the logo is complete |
+| `scene airi-endcard` | The logo and `airisk.mit.edu`, held 3 s after the logo is complete. Copy the masked logo from `comp.html` for the build |
 | `scene airi-logocard` | The logo alone, 2 to 3 s, to open a video shorter than 15 s |
-| `airi-reveal` | A title outside a card that should arrive as a brand moment |
 
 Formats: 1920 x 1080 | 1080 x 1920 | 1080 x 1080. For the second and third add `format-vertical` or `format-square`
 to `<html>` and set `data-width` and `data-height` to match.
@@ -67,7 +71,8 @@ to `<html>` and set `data-width` and `data-height` to match.
 | Easing | standard `cubic-bezier(0.4, 0.14, 0.3, 1)`, entrance `cubic-bezier(0, 0, 0.3, 1)`, exit `cubic-bezier(0.4, 0.14, 1, 1)` |
 | Stagger | 80 to 150 ms between items that arrive together |
 | Order | frame, then text, then dynamic content, then data visualisation |
-| Square grid | module 40 px; squares of 40, 80 and 120 px; 15 steps a second |
+| Layout grid | module 40 px; squares of 40, 80 and 120 px |
+| Logo build | 15 steps a second, 2 steps a beat. Being finalised |
 | Frame rate | 30 fps; 60 for data-heavy animation |
 | Safe areas | title-safe 10% inset, action-safe 5% |
 | Captions | 54 px or larger, 42 characters a line (30 in vertical and square), 2 lines, 20 characters a second, at least 20 frames |

@@ -92,7 +92,8 @@ Data palettes:
 
 - Interface motion: the `--motion-` durations (70 to 700 ms) and `--ease-` curves in `brand.css`; `transform` and `opacity` only; honour `prefers-reduced-motion`.
 - Video motion: 400, 700 or 1000 ms with the video curves; frame, then text, then data; stagger 80 to 150 ms; about three brand moments a video.
-- Never: bounce, elastic, overshoot, rotation, glitch, software presets, diagonal moves, or a logo that fades, slides or scales in.
+- Transitions are conventional. Avoid bounce, elastic, overshoot, rotation, glitch, software presets and diagonal moves. Square-step transitions were dropped.
+- The logo cuts in or builds from its squares (being finalised; use the template's timing). It never fades, slides or scales in.
 - Start videos from `templates/video/` (it sits on the `generate-video` template). Every video has captions, an SRT file and an end card.
 - Videos run under a minute (shorter is better), narrated briskly at 150 to 170 words a minute. No music unless asked; the style is in BRAND.md.
 - Run `python3 templates/video/check_video.py comp.html captions.srt` before rendering. Detail: BRAND.md section 11.

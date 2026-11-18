@@ -2,9 +2,8 @@
 <!-- AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
      A sample AIRI video: every component, on the generate-video template. Silent, so the times are
      plain seconds; in a narrated video tie them to the narration (data-at="n03") as that template shows.
-     Style: change "style-conventional" to "style-square" on the next line. Nothing else changes.
      The words and bar lengths are illustrative. See README.md in this folder. -->
-<html lang="en" class="airi style-conventional" data-width="1920" data-height="1080" data-fps="30" data-duration="34">
+<html lang="en" class="airi" data-width="1920" data-height="1080" data-fps="30" data-duration="34">
 <head>
 <meta charset="utf-8">
 <title>Seven domains of AI risk (sample)</title>
@@ -13,8 +12,8 @@
 </head>
 <body>
 
-<!-- 1. Title card (brand moment 1). Already on at the start; holds, then wipes off. -->
-<div class="airi-card airi-title" data-at="0" style="--hold: 5.6s; --n: 8">
+<!-- 1. Title card (brand moment 1). Already on at the start; holds, then slides off. -->
+<div class="airi-card airi-title" data-at="0" style="--hold: 5.6s">
   <img class="airi-card-logo" src="logos/initiative/horizontal-on-dark.svg" alt="MIT AI Risk Initiative">
   <h1>Seven domains<br>of AI risk</h1>
   <p>A sample explainer from the AIRI brand kit</p>
@@ -28,7 +27,7 @@
 </section>
 
 <!-- 3. Section card (brand moment 2). The scene underneath changes at 15 s, while the card holds. -->
-<div class="airi-card" data-at="13.8" style="--hold: 2.8s; --n: 8">
+<div class="airi-card" data-at="13.8" style="--hold: 2.8s">
   <p>Part 1</p>
   <h2>The seven domains</h2>
 </div>
@@ -52,7 +51,7 @@
 <div class="airi-caption" data-at="21.8" data-out="24.7">The repository groups risks from AI<br>into seven domains.</div>
 <div class="airi-caption" data-at="25" data-out="28.3">Each domain keeps the same colour<br>in every chart.</div>
 
-<!-- 5. End card (brand moment 3). The logo cuts in (conventional) or assembles (square), then holds 3 s. -->
+<!-- 5. End card (brand moment 3). The logo builds from its squares, then holds 3 s. -->
 <section class="scene airi-endcard" data-from="28.7" data-to="end">
   <svg class="airi-logo" data-at="28.9" viewBox="0 0 401.3 120" role="img" aria-label="MIT AI Risk Initiative">
     <mask id="airi-logo-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="401.3" height="120" fill="#fff">

@@ -1,6 +1,6 @@
 /* AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
    Video styles for compositions made with the generate-video template (stage.js, stage.css).
-   Put class "airi" and one of "style-conventional" or "style-square" on <html>.
+   Put class "airi" on <html>.
    Self-contained: no web fonts and no imports, because a render uses local files only. */
 
 @font-face { font-family: "Figtree"; font-weight: 300 900; src: url("fonts/Figtree-wght.ttf") format("truetype"), local("Figtree"); }
@@ -52,7 +52,6 @@
   /* Frame: landscape by default. Safe insets are the title-safe area, rounded up to the square grid */
   --w: 1920px; --h: 1080px;
   --airi-safe-x: 200px; --airi-safe-y: 120px;
-  --airi-wipe-steps: 18;
 
   /* Motion for video: three durations, three curves, one stagger */
   --airi-dur-short: 400ms;
@@ -63,14 +62,15 @@
   --airi-ease-out: cubic-bezier(0.4, 0.14, 1, 1);
   --airi-stagger: 100ms;
 
-  /* Square-step: the grid and the tick */
+  /* Layout grid: the icon's small, medium and large squares */
   --airi-sq: 40px;
   --airi-sq-m: 80px;
   --airi-sq-l: 120px;
+
+  /* Logo build (being finalised; these are the interim values): one tick, and ticks per beat */
   --airi-tick: calc(1s / 15);
   --airi-nudge: calc(var(--airi-tick) / 4);  /* steps land between frames, never on one */
   --airi-logo-beat: calc(2 * var(--airi-tick));
-  --airi-fringe: calc(2 * var(--airi-sq-l));
 
   /* Furniture */
   --airi-type-title: 120px;
@@ -91,12 +91,10 @@
 html.format-vertical {
   --w: 1080px; --h: 1920px;
   --airi-safe-x: 120px; --airi-safe-y: 200px;
-  --airi-wipe-steps: 11;
 }
 html.format-square {
   --w: 1080px; --h: 1080px;
   --airi-safe-x: 120px; --airi-safe-y: 120px;
-  --airi-wipe-steps: 11;
 }
 
 /* ---- components ----
@@ -156,19 +154,24 @@ html.format-square {
 .airi-lower-third strong { align-self: end; font-size: var(--airi-type-body); font-weight: 700; }
 .airi-lower-third span { align-self: start; font-size: var(--airi-type-label); color: var(--color-text-muted); }
 
-/* End card and logo card. The logo cuts in: it is never faded, slid or scaled. */
+/* End card and logo card. The logo is never faded, slid or scaled. A plain logo image cuts in.
+   The masked logo that comp.html uses builds: its squares appear in the icon's own order, small
+   to large, then the wordmark. The logo file is shown through the mask and never redrawn. */
 .airi .airi-endcard, .airi .airi-logocard { gap: calc(2 * var(--airi-sq)); }
 .airi .airi-logo[data-at] { display: block; width: calc(9 * var(--airi-sq-l)); max-width: 100%; height: auto;
                             opacity: 1; transform: none; transition: none; visibility: hidden; }
 .airi .airi-logo[data-at].in { visibility: visible; }
+.airi .airi-logo .sq { opacity: 0; }
+.airi .airi-logo.in .sq {
+  animation: airi-appear var(--airi-tick) steps(1, end) calc(var(--b) * var(--airi-logo-beat) - var(--airi-nudge)) forwards; }
+@keyframes airi-appear { to { opacity: 1; } }
 .airi-url { font-size: var(--airi-type-statement); font-weight: 700; }
 
 /* Red card: the title card and the section card. One element placed above the scenes.
-   It wipes on, holds for --hold while its text shows, then wipes off. Change the scene
+   It slides on, holds for --hold while its text shows, then slides off. Change the scene
    underneath while it holds. Class "airi-title" starts already on. */
 .airi .airi-card[data-at] {
-  --airi-on: var(--airi-dur-scene); --airi-off: var(--airi-dur-scene); --hold: var(--airi-end-hold); --lead: 0s; --n: 10;
-  --airi-cursor: var(--color-white); --airi-travel: calc(var(--w) + var(--airi-fringe));
+  --airi-on: var(--airi-dur-scene); --airi-off: var(--airi-dur-scene); --hold: var(--airi-end-hold); --lead: 0s;
   position: absolute; inset: 0; z-index: 20; overflow: hidden;
   display: flex; flex-direction: column; justify-content: center; gap: calc(var(--airi-sq) / 2);
   padding: var(--airi-safe-y) var(--airi-safe-x); color: var(--color-white);
@@ -179,14 +182,13 @@ html.format-square {
 .airi-card h2 { font-size: var(--airi-type-section); font-weight: 700; line-height: var(--airi-sq-l); }
 .airi-card .airi-card-logo { position: absolute; left: var(--airi-safe-x); top: var(--airi-safe-y); height: var(--airi-sq-m); }
 
-.airi-card::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0;
-                     left: calc(-1 * var(--airi-fringe)); width: calc(var(--w) + 2 * var(--airi-fringe));
-                     background: var(--color-primary); transform: translateX(calc(-1 * var(--airi-travel))); }
+.airi-card::before { content: ""; position: absolute; z-index: -1; inset: 0;
+                     background: var(--color-primary); transform: translateX(-100%); }
 .airi .airi-card.in::before {
   animation: airi-wipe-on var(--airi-on) var(--airi-ease) forwards,
              airi-wipe-off var(--airi-off) var(--airi-ease) calc(var(--airi-on) + var(--hold)) forwards; }
-@keyframes airi-wipe-on { from { transform: translateX(calc(-1 * var(--airi-travel))); } to { transform: translateX(0); } }
-@keyframes airi-wipe-off { from { transform: translateX(0); } to { transform: translateX(var(--airi-travel)); } }
+@keyframes airi-wipe-on { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes airi-wipe-off { from { transform: translateX(0); } to { transform: translateX(100%); } }
 
 /* The card's text shows only while the card holds. */
 .airi-card > * { visibility: hidden; --d: 0s; }
@@ -203,60 +205,3 @@ html.format-square {
 @keyframes airi-rise { from { opacity: 0; transform: translateY(var(--airi-sq)); } }
 @keyframes airi-fade-out { to { opacity: 0; } }
 
-/* ---- style-square: brand moments move in whole squares, in steps ----
-   Only the red card, a title with class "airi-reveal" and the logo change. Charts, labels,
-   captions and lower thirds keep the calm motion above. */
-
-/* The wipe: a red block whose leading and trailing edges are small, then medium, squares. */
-.airi.style-square .airi-card[data-at] { --airi-on: calc(var(--airi-wipe-steps) * var(--airi-tick)); --airi-off: var(--airi-on); }
-.airi.style-square .airi-card.airi-title[data-at] { --airi-on: 0s; --airi-off: calc(var(--airi-wipe-steps) * var(--airi-tick)); }
-.airi.style-square .airi-card::before {
-  --r: var(--color-primary); --l: var(--airi-sq-l); --q: calc(var(--airi-sq) / 2);
-  /* Medium squares sit one per row. Small squares sit on the lines between rows, diagonal to
-     the medium ones, as they do in the icon. */
-  --mid: repeating-linear-gradient(to bottom, transparent 0 var(--q), var(--r) var(--q) calc(var(--l) - var(--q)), transparent calc(var(--l) - var(--q)) var(--l));
-  --small: repeating-linear-gradient(to bottom, var(--r) 0 var(--airi-sq), transparent var(--airi-sq) var(--l));
-  --small-y: calc(var(--l) - var(--q)); --small-h: calc(100% - 2 * var(--l) + 2 * var(--q));
-  --x: calc(var(--w) + var(--airi-fringe));
-  background:
-    linear-gradient(var(--r), var(--r)) var(--airi-fringe) 0 / var(--w) 100% no-repeat,
-    var(--small) var(--airi-sq) var(--small-y) / var(--airi-sq) var(--small-h) no-repeat,
-    var(--mid) calc(var(--l) + var(--q)) 0 / var(--airi-sq-m) 100% no-repeat,
-    var(--mid) calc(var(--x) + var(--q)) 0 / var(--airi-sq-m) 100% no-repeat,
-    var(--small) calc(var(--x) + var(--l) + var(--airi-sq)) var(--small-y) / var(--airi-sq) var(--small-h) no-repeat; }
-.airi.style-square .airi-card.in::before {
-  animation-timing-function: steps(var(--airi-wipe-steps));
-  animation-delay: calc(-1 * var(--airi-nudge)), calc(var(--airi-on) + var(--hold) - var(--airi-nudge)); }
-
-/* Card text: everything cuts in on a tick; the heading is revealed a column at a time behind a square cursor. */
-.airi.style-square .airi-card > * { --d: var(--lead); }
-.airi.style-square .airi-card > :is(h1, h2) { --d: calc(var(--lead) + 2 * var(--airi-tick)); position: relative; width: calc(var(--n) * var(--airi-sq-l)); }
-.airi.style-square .airi-card > :is(h1, h2) ~ * { --d: calc(var(--lead) + (var(--n) + 6) * var(--airi-tick)); }
-.airi.style-square .airi-card > .airi-card-logo { --d: 0s; }
-.airi.style-square .airi-card.in > * {
-  animation: airi-hold calc(var(--hold) - var(--d)) linear calc(var(--airi-on) + var(--d) - var(--airi-nudge)); }
-.airi.style-square .airi-card.in > :is(h1, h2) {
-  animation: airi-hold calc(var(--hold) - var(--d)) linear calc(var(--airi-on) + var(--d) - var(--airi-nudge)),
-             airi-reveal calc(var(--n) * var(--airi-tick)) steps(var(--n)) calc(var(--airi-on) + var(--d) - var(--airi-nudge)) backwards; }
-.airi.style-square .airi-card > :is(h1, h2)::after, .airi.style-square .airi-reveal::after {
-  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: var(--airi-sq-l);
-  background: var(--airi-cursor); visibility: hidden; }
-.airi.style-square .airi-card.in > :is(h1, h2)::after {
-  animation: airi-cursor calc(var(--n) * var(--airi-tick)) steps(var(--n)) calc(var(--airi-on) + var(--d) - var(--airi-nudge)); }
-@keyframes airi-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-@keyframes airi-cursor { from { visibility: visible; transform: translateX(calc(-1 * var(--airi-sq-l))); }
-                         to { visibility: visible; transform: translateX(calc((var(--n) - 1) * var(--airi-sq-l))); } }
-
-/* A title outside a card: class "airi-reveal" with data-at, and --n for its width in large squares. */
-.airi.style-square .airi-reveal[data-at] { --n: 10; --airi-cursor: var(--color-primary); position: relative; width: calc(var(--n) * var(--airi-sq-l));
-                                           opacity: 1; transform: none; transition: none; visibility: hidden; }
-.airi.style-square .airi-reveal[data-at].in { visibility: visible;
-  animation: airi-reveal calc(var(--n) * var(--airi-tick)) steps(var(--n)) calc(-1 * var(--airi-nudge)) backwards; }
-.airi.style-square .airi-reveal[data-at].in::after {
-  animation: airi-cursor calc(var(--n) * var(--airi-tick)) steps(var(--n)) calc(-1 * var(--airi-nudge)); }
-
-/* The logo assembles: its squares appear in the icon's own order, small to large, then the wordmark. */
-.airi.style-square .airi-logo .sq { opacity: 0; }
-.airi.style-square .airi-logo.in .sq {
-  animation: airi-appear var(--airi-tick) steps(1, end) calc(var(--b) * var(--airi-logo-beat) - var(--airi-nudge)) forwards; }
-@keyframes airi-appear { to { opacity: 1; } }

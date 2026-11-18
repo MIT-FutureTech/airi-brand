@@ -64,6 +64,15 @@ def build_label(scale):
     return ", ".join(runs)
 
 
+def open_questions():
+    """The open items in tokens.json, as collapsed blocks."""
+    out = []
+    for q in T["decisions"]["open"]:
+        tag = '<span class="tag">new</span>' if q["tag"] == "new" else '<span class="tag grey">open</span>'
+        out.append(f'<details class="qna">\n  <summary>{tag}{q["topic"]}</summary>\n  <p>{q["text"]}</p>\n</details>')
+    return "\n".join(out)
+
+
 def render():
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -280,28 +289,9 @@ def render():
 
 <!-- 5. Open questions -->
 <h2>5 · Open questions</h2>
-<p>Not yet settled. Open a <a href="{GH}/issues">GitHub issue</a> to weigh in.</p>
+<p>Not yet settled. Each has a default to use until it is. Open a <a href="{GH}/issues">GitHub issue</a> to weigh in.</p>
 
-<details class="qna">
-  <summary><span class="tag">new</span>Dark mode</summary>
-  <p>Dark values are defined in <code>brand.css</code> and the artifact template. They pass contrast checks but have not been proven in shipped work or on a projector. Treat them as provisional.</p>
-</details>
-<details class="qna">
-  <summary><span class="tag">new</span>Moving existing products to the category colours</summary>
-  <p>New work uses the seven category colours for the Repository's risk domains. Existing pages, tools and decks keep their current colours until a decision is made, so for now two schemes are visible.</p>
-</details>
-<details class="qna">
-  <summary><span class="tag">new</span>Print colour</summary>
-  <p>AIRI red has not been matched to a print ink. One proof is needed before the next printed report.</p>
-</details>
-<details class="qna">
-  <summary><span class="tag grey">open</span>Image and illustration style</summary>
-  <p>The kit has no rules for imagery yet. Report covers use one white line texture each on red. Whether each product should have its own motif is undecided.</p>
-</details>
-<details class="qna">
-  <summary><span class="tag grey">open</span>Template files for Slides, Docs, PowerPoint and Word</summary>
-  <p>The kit ships theme colours, fonts and style tables. Finished template files built from them (a slide deck with layouts, a document with page furniture) are still to come.</p>
-</details>
+{open_questions()}
 
 <footer>
   <p><strong>More detail:</strong> <a href="{GH}/blob/main/skill/BRAND.md">skill/BRAND.md</a> is the full specification. <a href="{GH}/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> explains how the files fit together.</p>

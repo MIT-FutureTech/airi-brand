@@ -8,8 +8,9 @@
 For an .srt file it fails on a line that is too long, a cue with too many lines, a cue
 read faster than the limit, a cue on screen for too few frames, and cues that overlap.
 For a composition (.html) it fails on a frame size or rate the kit does not define, a
-missing style class, prohibited motion, remote files, and a missing .srt file.
-It warns about more brand moments than the limit and a missing end card.
+missing "airi" class, prohibited motion, remote files, and a missing .srt file.
+It warns about more brand moments than the limit, a missing end card, and a dropped
+square-step transition.
 
 Limits come from tokens.json two folders up. If this file has been copied somewhere
 else, it uses the copy of the limits below. Standard library only. Exit code 1 on failure.
@@ -108,8 +109,8 @@ def check_comp(path, lim, have_srt):
     classes = (attr("class") or "").split()
     if "airi" not in classes:
         fails.append(f'{name}: <html> needs class "airi"')
-    if sum(c in ("style-conventional", "style-square") for c in classes) != 1:
-        fails.append(f'{name}: <html> needs exactly one of "style-conventional" or "style-square"')
+    if "style-square" in classes or re.search(r'class="[^"]*\bairi-reveal\b', text):
+        warns.append(f"{name}: uses a square-step transition (style-square or airi-reveal); these were dropped and now do nothing")
     try:
         size = [int(attr("data-width")), int(attr("data-height"))]
     except (TypeError, ValueError):
@@ -136,7 +137,7 @@ def check_comp(path, lim, have_srt):
         if not all(0 <= float(x) <= 1 for x in m.groups()):
             fails.append(f"{name}: {m.group(0)} overshoots; use the kit's curves (--airi-ease, --airi-ease-in, --airi-ease-out)")
     if re.search(r'class="[^"]*airi-logo\b[^"]*"[^>]*data-enter', text):
-        fails.append(f"{name}: the logo has a data-enter entrance; the logo cuts in or assembles, nothing else")
+        fails.append(f"{name}: the logo has a data-enter entrance; the logo cuts in or builds from its squares, nothing else")
     moments = len(re.findall(r'class="[^"]*\bairi-(?:card|reveal|endcard|logocard)\b(?!-)', text))
     if moments > lim["brand-moments-max"]:
         warns.append(f"{name}: {moments} brand moments (cards, reveals, end card); aim for {lim['brand-moments-max']}")

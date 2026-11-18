@@ -2,7 +2,7 @@
 
 build.py imports this module. Nothing here is run on its own.
 
-  airi-video.css   tokens as CSS variables, then the scene components, in two styles
+  airi-video.css   tokens as CSS variables, then the scene components
   comp.html        a sample composition that uses every component
   script.txt       narration for the sample
   captions.srt     captions for the sample
@@ -23,16 +23,16 @@ C = T["color"]
 CATS = T["data"]["categorical"]
 M = T["motion"]
 V = T["video"]
-SQ = M["square-step"]
+GRID = V["grid"]
+BUILD = M["logo-build"]
 CAP = V["captions"]
 LT = V["lower-third"]
 FMT = V["formats"]
 GEN = f"AIRI brand kit {T['version']}. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand."
 
-MODULE = SQ["module-px"]
-LARGE = MODULE * SQ["squares-in-modules"]["large"]
-MEDIUM = MODULE * SQ["squares-in-modules"]["medium"]
-FRINGE = SQ["fringe-columns"]
+MODULE = GRID["module-px"]
+LARGE = MODULE * GRID["squares-in-modules"]["large"]
+MEDIUM = MODULE * GRID["squares-in-modules"]["medium"]
 
 
 def bezier(p):
@@ -44,9 +44,6 @@ def safe(px, pct):
     need = px * pct / 100
     return int(-(-need // MODULE) * MODULE)
 
-
-def wipe_steps(width):
-    return width // LARGE + FRINGE
 
 
 # ---------------------------------------------------------------- the icon's squares
@@ -109,12 +106,11 @@ def token_css():
     def frame(f, indent="  "):
         w, h = f["width"], f["height"]
         return [f"{indent}--w: {w}px; --h: {h}px;",
-                f"{indent}--airi-safe-x: {safe(w, V['safe-area-pct']['title'])}px; --airi-safe-y: {safe(h, V['safe-area-pct']['title'])}px;",
-                f"{indent}--airi-wipe-steps: {wipe_steps(w)};"]
+                f"{indent}--airi-safe-x: {safe(w, V['safe-area-pct']['title'])}px; --airi-safe-y: {safe(h, V['safe-area-pct']['title'])}px;"]
 
     L = [f"/* {GEN}",
          "   Video styles for compositions made with the generate-video template (stage.js, stage.css).",
-         "   Put class \"airi\" and one of \"style-conventional\" or \"style-square\" on <html>.",
+         "   Put class \"airi\" on <html>.",
          "   Self-contained: no web fonts and no imports, because a render uses local files only. */", "",
          '@font-face { font-family: "Figtree"; font-weight: 300 900; src: url("fonts/Figtree-wght.ttf") format("truetype"), local("Figtree"); }', "",
          "/* ---- tokens ---- */", ":root {"]
@@ -128,12 +124,12 @@ def token_css():
           f"  --airi-ease-in: {bezier(v['easing']['entrance'])};",
           f"  --airi-ease-out: {bezier(v['easing']['exit'])};",
           f"  --airi-stagger: {v['stagger-ms']['default']}ms;", "",
-          "  /* Square-step: the grid and the tick */",
-          f"  --airi-sq: {MODULE}px;", f"  --airi-sq-m: {MEDIUM}px;", f"  --airi-sq-l: {LARGE}px;",
-          f"  --airi-tick: calc(1s / {SQ['ticks-per-second']});",
+          "  /* Layout grid: the icon's small, medium and large squares */",
+          f"  --airi-sq: {MODULE}px;", f"  --airi-sq-m: {MEDIUM}px;", f"  --airi-sq-l: {LARGE}px;", "",
+          "  /* Logo build (being finalised; these are the interim values): one tick, and ticks per beat */",
+          f"  --airi-tick: calc(1s / {BUILD['ticks-per-second']});",
           "  --airi-nudge: calc(var(--airi-tick) / 4);  /* steps land between frames, never on one */",
-          f"  --airi-logo-beat: calc({SQ['logo-beat-ticks']} * var(--airi-tick));",
-          f"  --airi-fringe: calc({FRINGE} * var(--airi-sq-l));", "",
+          f"  --airi-logo-beat: calc({BUILD['beat-ticks']} * var(--airi-tick));", "",
           "  /* Furniture */"]
     L += [f"  --airi-type-{k}: {px}px;" for k, px in ty.items()]
     L += [f"  --airi-caption-size: {CAP['size-px']}px;",
@@ -204,19 +200,24 @@ COMPONENTS = r"""
 .airi-lower-third strong { align-self: end; font-size: var(--airi-type-body); font-weight: 700; }
 .airi-lower-third span { align-self: start; font-size: var(--airi-type-label); color: var(--color-text-muted); }
 
-/* End card and logo card. The logo cuts in: it is never faded, slid or scaled. */
+/* End card and logo card. The logo is never faded, slid or scaled. A plain logo image cuts in.
+   The masked logo that comp.html uses builds: its squares appear in the icon's own order, small
+   to large, then the wordmark. The logo file is shown through the mask and never redrawn. */
 .airi .airi-endcard, .airi .airi-logocard { gap: calc(2 * var(--airi-sq)); }
 .airi .airi-logo[data-at] { display: block; width: calc(9 * var(--airi-sq-l)); max-width: 100%; height: auto;
                             opacity: 1; transform: none; transition: none; visibility: hidden; }
 .airi .airi-logo[data-at].in { visibility: visible; }
+.airi .airi-logo .sq { opacity: 0; }
+.airi .airi-logo.in .sq {
+  animation: airi-appear var(--airi-tick) steps(1, end) calc(var(--b) * var(--airi-logo-beat) - var(--airi-nudge)) forwards; }
+@keyframes airi-appear { to { opacity: 1; } }
 .airi-url { font-size: var(--airi-type-statement); font-weight: 700; }
 
 /* Red card: the title card and the section card. One element placed above the scenes.
-   It wipes on, holds for --hold while its text shows, then wipes off. Change the scene
+   It slides on, holds for --hold while its text shows, then slides off. Change the scene
    underneath while it holds. Class "airi-title" starts already on. */
 .airi .airi-card[data-at] {
-  --airi-on: var(--airi-dur-scene); --airi-off: var(--airi-dur-scene); --hold: var(--airi-end-hold); --lead: 0s; --n: 10;
-  --airi-cursor: var(--color-white); --airi-travel: calc(var(--w) + var(--airi-fringe));
+  --airi-on: var(--airi-dur-scene); --airi-off: var(--airi-dur-scene); --hold: var(--airi-end-hold); --lead: 0s;
   position: absolute; inset: 0; z-index: 20; overflow: hidden;
   display: flex; flex-direction: column; justify-content: center; gap: calc(var(--airi-sq) / 2);
   padding: var(--airi-safe-y) var(--airi-safe-x); color: var(--color-white);
@@ -227,14 +228,13 @@ COMPONENTS = r"""
 .airi-card h2 { font-size: var(--airi-type-section); font-weight: 700; line-height: var(--airi-sq-l); }
 .airi-card .airi-card-logo { position: absolute; left: var(--airi-safe-x); top: var(--airi-safe-y); height: var(--airi-sq-m); }
 
-.airi-card::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0;
-                     left: calc(-1 * var(--airi-fringe)); width: calc(var(--w) + 2 * var(--airi-fringe));
-                     background: var(--color-primary); transform: translateX(calc(-1 * var(--airi-travel))); }
+.airi-card::before { content: ""; position: absolute; z-index: -1; inset: 0;
+                     background: var(--color-primary); transform: translateX(-100%); }
 .airi .airi-card.in::before {
   animation: airi-wipe-on var(--airi-on) var(--airi-ease) forwards,
              airi-wipe-off var(--airi-off) var(--airi-ease) calc(var(--airi-on) + var(--hold)) forwards; }
-@keyframes airi-wipe-on { from { transform: translateX(calc(-1 * var(--airi-travel))); } to { transform: translateX(0); } }
-@keyframes airi-wipe-off { from { transform: translateX(0); } to { transform: translateX(var(--airi-travel)); } }
+@keyframes airi-wipe-on { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes airi-wipe-off { from { transform: translateX(0); } to { transform: translateX(100%); } }
 
 /* The card's text shows only while the card holds. */
 .airi-card > * { visibility: hidden; --d: 0s; }
@@ -251,63 +251,6 @@ COMPONENTS = r"""
 @keyframes airi-rise { from { opacity: 0; transform: translateY(var(--airi-sq)); } }
 @keyframes airi-fade-out { to { opacity: 0; } }
 
-/* ---- style-square: brand moments move in whole squares, in steps ----
-   Only the red card, a title with class "airi-reveal" and the logo change. Charts, labels,
-   captions and lower thirds keep the calm motion above. */
-
-/* The wipe: a red block whose leading and trailing edges are small, then medium, squares. */
-.airi.style-square .airi-card[data-at] { --airi-on: calc(var(--airi-wipe-steps) * var(--airi-tick)); --airi-off: var(--airi-on); }
-.airi.style-square .airi-card.airi-title[data-at] { --airi-on: 0s; --airi-off: calc(var(--airi-wipe-steps) * var(--airi-tick)); }
-.airi.style-square .airi-card::before {
-  --r: var(--color-primary); --l: var(--airi-sq-l); --q: calc(var(--airi-sq) / 2);
-  /* Medium squares sit one per row. Small squares sit on the lines between rows, diagonal to
-     the medium ones, as they do in the icon. */
-  --mid: repeating-linear-gradient(to bottom, transparent 0 var(--q), var(--r) var(--q) calc(var(--l) - var(--q)), transparent calc(var(--l) - var(--q)) var(--l));
-  --small: repeating-linear-gradient(to bottom, var(--r) 0 var(--airi-sq), transparent var(--airi-sq) var(--l));
-  --small-y: calc(var(--l) - var(--q)); --small-h: calc(100% - 2 * var(--l) + 2 * var(--q));
-  --x: calc(var(--w) + var(--airi-fringe));
-  background:
-    linear-gradient(var(--r), var(--r)) var(--airi-fringe) 0 / var(--w) 100% no-repeat,
-    var(--small) var(--airi-sq) var(--small-y) / var(--airi-sq) var(--small-h) no-repeat,
-    var(--mid) calc(var(--l) + var(--q)) 0 / var(--airi-sq-m) 100% no-repeat,
-    var(--mid) calc(var(--x) + var(--q)) 0 / var(--airi-sq-m) 100% no-repeat,
-    var(--small) calc(var(--x) + var(--l) + var(--airi-sq)) var(--small-y) / var(--airi-sq) var(--small-h) no-repeat; }
-.airi.style-square .airi-card.in::before {
-  animation-timing-function: steps(var(--airi-wipe-steps));
-  animation-delay: calc(-1 * var(--airi-nudge)), calc(var(--airi-on) + var(--hold) - var(--airi-nudge)); }
-
-/* Card text: everything cuts in on a tick; the heading is revealed a column at a time behind a square cursor. */
-.airi.style-square .airi-card > * { --d: var(--lead); }
-.airi.style-square .airi-card > :is(h1, h2) { --d: calc(var(--lead) + 2 * var(--airi-tick)); position: relative; width: calc(var(--n) * var(--airi-sq-l)); }
-.airi.style-square .airi-card > :is(h1, h2) ~ * { --d: calc(var(--lead) + (var(--n) + 6) * var(--airi-tick)); }
-.airi.style-square .airi-card > .airi-card-logo { --d: 0s; }
-.airi.style-square .airi-card.in > * {
-  animation: airi-hold calc(var(--hold) - var(--d)) linear calc(var(--airi-on) + var(--d) - var(--airi-nudge)); }
-.airi.style-square .airi-card.in > :is(h1, h2) {
-  animation: airi-hold calc(var(--hold) - var(--d)) linear calc(var(--airi-on) + var(--d) - var(--airi-nudge)),
-             airi-reveal calc(var(--n) * var(--airi-tick)) steps(var(--n)) calc(var(--airi-on) + var(--d) - var(--airi-nudge)) backwards; }
-.airi.style-square .airi-card > :is(h1, h2)::after, .airi.style-square .airi-reveal::after {
-  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: var(--airi-sq-l);
-  background: var(--airi-cursor); visibility: hidden; }
-.airi.style-square .airi-card.in > :is(h1, h2)::after {
-  animation: airi-cursor calc(var(--n) * var(--airi-tick)) steps(var(--n)) calc(var(--airi-on) + var(--d) - var(--airi-nudge)); }
-@keyframes airi-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-@keyframes airi-cursor { from { visibility: visible; transform: translateX(calc(-1 * var(--airi-sq-l))); }
-                         to { visibility: visible; transform: translateX(calc((var(--n) - 1) * var(--airi-sq-l))); } }
-
-/* A title outside a card: class "airi-reveal" with data-at, and --n for its width in large squares. */
-.airi.style-square .airi-reveal[data-at] { --n: 10; --airi-cursor: var(--color-primary); position: relative; width: calc(var(--n) * var(--airi-sq-l));
-                                           opacity: 1; transform: none; transition: none; visibility: hidden; }
-.airi.style-square .airi-reveal[data-at].in { visibility: visible;
-  animation: airi-reveal calc(var(--n) * var(--airi-tick)) steps(var(--n)) calc(-1 * var(--airi-nudge)) backwards; }
-.airi.style-square .airi-reveal[data-at].in::after {
-  animation: airi-cursor calc(var(--n) * var(--airi-tick)) steps(var(--n)) calc(-1 * var(--airi-nudge)); }
-
-/* The logo assembles: its squares appear in the icon's own order, small to large, then the wordmark. */
-.airi.style-square .airi-logo .sq { opacity: 0; }
-.airi.style-square .airi-logo.in .sq {
-  animation: airi-appear var(--airi-tick) steps(1, end) calc(var(--b) * var(--airi-logo-beat) - var(--airi-nudge)) forwards; }
-@keyframes airi-appear { to { opacity: 1; } }
 """
 
 
@@ -359,15 +302,14 @@ def comp_html():
                     f'<b data-at="{round(at + 0.7, 2):g}" data-enter="fade">{round(v * 25)}</b></span>')
     caps = "\n".join(f'<div class="airi-caption" data-at="{a:g}" data-out="{b:g}">{"<br>".join(escape(x) for x in lines)}</div>' for a, b, lines in CUES)
     logo, beats = logo_svg("28.9", "  ")
-    done = 28.9 + (beats + 2) * SQ["logo-beat-ticks"] / SQ["ticks-per-second"]
+    done = 28.9 + (beats + 2) * BUILD["beat-ticks"] / BUILD["ticks-per-second"]
     nl = "\n"
     return f"""<!doctype html>
 <!-- {GEN}
      A sample AIRI video: every component, on the generate-video template. Silent, so the times are
      plain seconds; in a narrated video tie them to the narration (data-at="n03") as that template shows.
-     Style: change "style-conventional" to "style-square" on the next line. Nothing else changes.
      The words and bar lengths are illustrative. See README.md in this folder. -->
-<html lang="en" class="airi style-conventional" data-width="{land['width']}" data-height="{land['height']}" data-fps="{V['fps']['default']}" data-duration="{DURATION:g}">
+<html lang="en" class="airi" data-width="{land['width']}" data-height="{land['height']}" data-fps="{V['fps']['default']}" data-duration="{DURATION:g}">
 <head>
 <meta charset="utf-8">
 <title>Seven domains of AI risk (sample)</title>
@@ -376,8 +318,8 @@ def comp_html():
 </head>
 <body>
 
-<!-- 1. Title card (brand moment 1). Already on at the start; holds, then wipes off. -->
-<div class="airi-card airi-title" data-at="0" style="--hold: 5.6s; --n: 8">
+<!-- 1. Title card (brand moment 1). Already on at the start; holds, then slides off. -->
+<div class="airi-card airi-title" data-at="0" style="--hold: 5.6s">
   <img class="airi-card-logo" src="logos/initiative/horizontal-on-dark.svg" alt="MIT AI Risk Initiative">
   <h1>{TITLE[0]}<br>{TITLE[1]}</h1>
   <p>A sample explainer from the AIRI brand kit</p>
@@ -391,7 +333,7 @@ def comp_html():
 </section>
 
 <!-- 3. Section card (brand moment 2). The scene underneath changes at 15 s, while the card holds. -->
-<div class="airi-card" data-at="13.8" style="--hold: 2.8s; --n: 8">
+<div class="airi-card" data-at="13.8" style="--hold: 2.8s">
   <p>Part 1</p>
   <h2>The seven domains</h2>
 </div>
@@ -408,7 +350,7 @@ def comp_html():
 <!-- Captions: two lines at most, {CAP['max-chars-per-line']} characters a line. The same cues are in captions.srt. -->
 {caps}
 
-<!-- 5. End card (brand moment 3). The logo cuts in (conventional) or assembles (square), then holds {V['end-card']['hold-s']} s. -->
+<!-- 5. End card (brand moment 3). The logo builds from its squares, then holds {V['end-card']['hold-s']} s. -->
 <section class="scene airi-endcard" data-from="28.7" data-to="end">
 {logo}
   <p class="airi-url" data-at="{done:.1f}" data-enter="fade">{V['end-card']['url']}</p>
@@ -448,7 +390,7 @@ the font is generated from `../../tokens.json`.
 
 | File | What it is |
 |---|---|
-| `airi-video.css` | Tokens as CSS variables, the scene components, and both motion styles |
+| `airi-video.css` | Tokens as CSS variables and the scene components |
 | `comp.html` | A sample that uses every component. Copy it and replace the content |
 | `script.txt` | Narration for the sample, one line per line |
 | `captions.srt` | Captions for the sample |
@@ -471,30 +413,34 @@ node ~/.claude/skills/generate-video/scripts/render.js comp.html --out out/video
 Write the storyboard and the script first, as the `generate-video` skill says.
 Renders use local files only: no web fonts, no remote images.
 
-## The two styles
+## Motion
 
-Set one class on `<html>` beside `airi`:
+Put class `airi` on `<html>`. Transitions are conventional: the red card slides on and off
+smoothly, titles rise in, scenes cut or crossfade. These are defaults. A person can ask for
+something different.
 
-- `style-conventional`: the red card slides on and off smoothly, titles rise in, the logo cuts in.
-- `style-square`: the red card arrives as a wipe of squares on the icon's grid, titles are
-  revealed a column at a time, and the logo assembles square by square. Steps, no easing.
+The logo builds from its squares, small to large, then the wordmark. Its speed and style are
+being finalised; the current timing is the default until then. The logo is never faded, slid
+or scaled. That one is a hard rule.
 
-Only the brand moments differ: the title card, section cards and the end card. Use at most
-{v['brand-moments-max']} in a video. Charts, labels, captions and lower thirds move the same calm way in both.
+The title card, section cards and the end card are the brand moments. Aim for
+{v['brand-moments-max']} in a video.
+
+Square-step transitions (the red-square wipe and the stepped title reveal) were dropped after
+team review. `style-square` and `airi-reveal` no longer do anything.
 
 ## Components
 
 | Class | Use |
 |---|---|
 | `airi-card airi-title` | Title card: red, white logo top left, `h1`, one line under it. `--hold` is how long it stays |
-| `airi-card` | Section card: wipes on, holds for `--hold`, wipes off. Change the scene underneath during the hold. `--n` is the heading's width in large squares |
+| `airi-card` | Section card: slides on, holds for `--hold`, slides off. Change the scene underneath during the hold |
 | `scene airi-statement` | One large sentence at a time. `<em>` is the red emphasis |
 | `scene airi-chart` | `h2` states the finding; `airi-bars` rows grow last; `airi-source` under it |
 | `airi-lower-third` | Name and role, bottom left. `data-out` is `data-at` plus {LT['in-ms'] // 1000} s plus a {LT['hold-s-min']} to {LT['hold-s-max']} s hold; the scene must last {LT['out-ms'] // 1000} s longer |
 | `airi-caption` | A burned-in caption cue, `<br>` between its two lines. `#captions` gets the same look |
-| `scene airi-endcard` | The logo and `{V['end-card']['url']}`, held {V['end-card']['hold-s']} s after the logo is complete |
+| `scene airi-endcard` | The logo and `{V['end-card']['url']}`, held {V['end-card']['hold-s']} s after the logo is complete. Copy the masked logo from `comp.html` for the build |
 | `scene airi-logocard` | The logo alone, {V['logo-card']['length-s-min']} to {V['logo-card']['length-s-max']} s, to open a video shorter than {V['logo-card']['videos-under-s']} s |
-| `airi-reveal` | A title outside a card that should arrive as a brand moment |
 
 Formats: {fm}. For the second and third add `format-vertical` or `format-square`
 to `<html>` and set `data-width` and `data-height` to match.
@@ -507,7 +453,8 @@ to `<html>` and set `data-width` and `data-height` to match.
 | Easing | standard `{bezier(v['easing']['standard'])}`, entrance `{bezier(v['easing']['entrance'])}`, exit `{bezier(v['easing']['exit'])}` |
 | Stagger | {v['stagger-ms']['min']} to {v['stagger-ms']['max']} ms between items that arrive together |
 | Order | {", then ".join(v['order'])} |
-| Square grid | module {MODULE} px; squares of {MODULE}, {MEDIUM} and {LARGE} px; {SQ['ticks-per-second']} steps a second |
+| Layout grid | module {MODULE} px; squares of {MODULE}, {MEDIUM} and {LARGE} px |
+| Logo build | {BUILD['ticks-per-second']} steps a second, {BUILD['beat-ticks']} steps a beat. Being finalised |
 | Frame rate | {V['fps']['default']} fps; {V['fps']['data-heavy']} for data-heavy animation |
 | Safe areas | title-safe {V['safe-area-pct']['title']}% inset, action-safe {V['safe-area-pct']['action']}% |
 | Captions | {CAP['size-px']} px or larger, {CAP['max-chars-per-line']} characters a line ({CAP['max-chars-per-line-narrow']} in vertical and square), {CAP['max-lines']} lines, {CAP['max-chars-per-second']} characters a second, at least {CAP['min-frames']} frames |
@@ -578,10 +525,12 @@ def motion_problems():
         if f["width"] % 2 or f["height"] % 2:
             out.append(f"video.formats.{name} has an odd side")
     if MODULE * 27 != min(FMT["landscape"]["width"], FMT["landscape"]["height"]):
-        out.append("motion.square-step.module-px is not 1/27 of the frame's short side")
+        out.append("video.grid.module-px is not 1/27 of the frame's short side")
     for fps in V["fps"].values():
-        if fps % SQ["ticks-per-second"]:
-            out.append(f"{fps} fps is not a whole number of frames per square-step tick")
+        if fps % BUILD["ticks-per-second"]:
+            out.append(f"{fps} fps is not a whole number of frames per logo-build tick")
+    if "style-square" in COMPONENTS or "airi-reveal" in COMPONENTS:
+        out.append("airi-video.css components still carry a dropped square-step transition")
     for key in ("size-px", "max-chars-per-line", "max-chars-per-line-narrow", "max-lines", "max-chars-per-second", "min-frames", "text", "plate"):
         if not CAP.get(key):
             out.append(f"video.captions.{key} is missing")
@@ -589,8 +538,6 @@ def motion_problems():
         out.append("video.captions.size-px is under 1/20 of a 1080 px frame")
     if V["type-px"]["smallest"] < 28:
         out.append("video.type-px.smallest is under 28 px")
-    if V["open-defaults"]["end-card-hold-s"] != V["end-card"]["hold-s"]:
-        out.append("video.end-card.hold-s and video.open-defaults.end-card-hold-s differ")
     if len(icon_squares()) != 15:
         out.append("the icon no longer reads as 15 squares; check video.icon_squares()")
     # check_video.py carries a copy of the limits for when it is used away from tokens.json.
@@ -637,7 +584,7 @@ def prose_problems(brand, skill):
         "caption reading speed": f"{CAP['max-chars-per-second']} characters a second", "caption minimum": f"{CAP['min-frames']} frames",
         "end-card hold": f"{V['end-card']['hold-s']} s", "end-card address": V["end-card"]["url"],
         "title-safe": f"{V['safe-area-pct']['title']}%", "action-safe": f"{V['safe-area-pct']['action']}%",
-        "square module": f"{MODULE} px", "tick rate": f"{SQ['ticks-per-second']} steps a second",
+        "grid module": f"{MODULE} px", "logo-build tick rate": f"{BUILD['ticks-per-second']} steps a second",
         "interface stagger": f"{ui['stagger-ms']} ms", "frame rate": f"{V['fps']['default']} fps",
     }
     for what, text in need.items():

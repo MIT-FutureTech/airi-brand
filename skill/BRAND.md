@@ -177,7 +177,9 @@ For named groups: risk domains, sectors, roles, laws. The slot order is fixed. T
 - **Red is never a category.** That keeps red free to pick out one category: grey the others when you do.
 - A chip or tag uses the tint as background and the text colour on it. Every pair passes contrast.
 - An eighth category folds into Other. Never cycle the slots.
-- New work uses the slot shown for each of the seven risk domains. Existing pages, tools and decks keep their current colours until a decision is made.
+- New work uses the slot shown for each of the seven risk domains. Existing pages, tools and decks keep their colours; nothing is retrofitted.
+- A person can set the domain colours aside for one figure, with a reason. For example, they clash with what the figure needs to say.
+- Which seven colours fill the slots is still being chosen. This set is the default until then (section 15).
 - The label on each fill is the colour in the table, at any size. Every one is at least 4.9:1. Never put white on sky, pink, orange or gold.
 - Sky and gold are faint as thin marks on white. Label them directly or give them an outline.
 - More than three lines or scatter series need direct labels or small multiples.
@@ -480,7 +482,7 @@ Template: `templates/claude-artifact.html`.
 
 Templates: `templates/video/` for video; the `--motion-` and `--ease-` variables in `brand.css` for interfaces.
 
-AIRI moves in two registers. Interface motion is quick and quiet. Video motion is slower, so a viewer seeing it once can follow it. Both are restrained: things move in straight lines, settle without overshoot, and most of the frame is still most of the time. Pick a value from the tables; do not invent a duration or a curve.
+AIRI moves in two registers. Interface motion is quick and quiet. Video motion is slower, so a viewer seeing it once can follow it. Both are restrained: things move in straight lines, settle without overshoot, and most of the frame is still most of the time. Pick a value from the tables before inventing a duration or a curve.
 
 ### Interface motion
 
@@ -508,7 +510,7 @@ For web pages, interactive tools and Claude artifacts. These are IBM Carbon's "p
 
 ### Video motion
 
-For explainer videos of 1 to 10 minutes and for explanatory animation. The curves are Carbon's "expressive" set.
+For explainer videos and explanatory animation. The curves are Carbon's "expressive" set.
 
 | Token | Duration | Use |
 |---|---|---|
@@ -526,11 +528,15 @@ For explainer videos of 1 to 10 minutes and for explanatory animation. The curve
 - **Stagger** items that arrive together by 80 to 150 ms. The interface value of 20 ms is too fast to read in a video.
 - **Paths follow the grid:** horizontal or vertical, never diagonal.
 - **Same meaning, same motion.** If bars grow from the left in one chart, they grow from the left in all of them.
-- **Brand moments are rationed.** A video has about three: the title, a section change, the end. Everything between them is calm.
+- **Brand moments are few.** A video has about three: the title, a section change, the end. Everything between them is calm.
 
-### Never
+### Transitions
 
-No bounce, elastic or overshoot. No rotation. No glitch effects. No software presets. No diagonal moves. The logo is never faded in, slid in or scaled up. Nothing flashes more than 3 times a second.
+Transitions are conventional. A red card slides on and off with the standard curve. Text rises in. Scenes cut, or crossfade over 400 ms. The team confirmed this in November 2026.
+
+Avoid bounce, elastic and overshoot, rotation, glitch effects, software presets and diagonal moves. Like the rest of this section these are defaults, so a person can ask for one.
+
+Two things here are hard rules (section 2). The logo is never faded in, slid in or scaled up. Nothing flashes more than 3 times a second.
 
 ### Video furniture
 
@@ -553,20 +559,25 @@ No bounce, elastic or overshoot. No rotation. No glitch effects. No software pre
 
 `templates/video/check_video.py` checks a composition and its SRT file against these limits.
 
-### Square-step (optional style)
+### Logo build
 
-A second way to move the brand moments, built from the AIRI icon. The icon is made of small, medium and large squares. In this style the title card, section cards and the logo move in whole squares on a fixed grid, in steps with no easing.
+The logo has one animation. The squares of the icon appear from small to large, left to right, and then the wordmark appears. The logo file is shown through a mask and is never redrawn, so the hard rule on the logo holds.
 
-| | Value |
+Status: being finalised. The team likes the build and wants it faster. Until new options are chosen, the current timing is the default.
+
+| | Interim value |
 |---|---|
-| Module | 40 px, the icon's small square at 1/27 of the frame's short side |
-| Squares | Small 40 px, medium 80 px, large 120 px. The large square tiles every format exactly |
 | Tick | 15 steps a second, which is 2 frames at 30 fps |
-| Section wipe | A red block advances one large square a tick. Its edge is a column of medium squares, then small ones on the diagonals |
-| Title | Revealed one column a tick behind a square cursor |
-| Logo | Its squares appear from small to large, left to right, then the wordmark. The logo file is shown through a mask and never redrawn |
+| Beat | One column of squares every 2 ticks |
+| Where | The end card and the logo card. A logo that sits in a corner of a title card does not animate |
 
-Charts, labels, captions and lower thirds never use it. They keep the calm motion above.
+Without the mask, the logo cuts in. Those are the only two ways a logo arrives.
+
+The video layout sits on a grid built from the same squares: a module of 40 px (the icon's small square at 1/27 of the frame's short side), with squares of 40, 80 and 120 px. The large square tiles every format exactly.
+
+### Dropped after team review
+
+Square-step transitions are gone: the red-square section wipe and the stepped title reveal. Do not rebuild them. The classes `style-square` and `airi-reveal` no longer do anything.
 
 ### Music
 
@@ -580,17 +591,6 @@ Off by default. People often watch explainers at 1.5x or 2x, and music sounds wr
 ### Alternatives
 
 Every video comes with a transcript and one static key frame that makes sense alone. On a web page, a video does not autoplay with sound, and motion respects `prefers-reduced-motion`.
-
-### Open defaults
-
-These are set, and not yet confirmed.
-
-| Question | Default |
-|---|---|
-| House style | Conventional. Square-step is an option |
-| End-card length | 3 s |
-| Music | Off. The style above applies when a video wants it |
-| Logo animation | Conventional: the logo cuts in. Square-step: it assembles |
 
 ## 12. Do and don't
 
@@ -636,3 +636,29 @@ These are set, and not yet confirmed.
 - `SKILL.md`: the short version Claude loads first.
 
 Retired logo lockups live in `legacy/logos/` at the repository root. Do not use them.
+
+## 15. Decided and still open
+
+The team reviewed the kit in November 2026. `tokens.json` holds the same list under `decisions`.
+
+Decided:
+
+| Topic | Decision |
+|---|---|
+| Slide titles | Red. Section slides are full red |
+| Music in video | Off by default |
+| Transitions in video | Conventional. The square-step wipe and the stepped title reveal are dropped |
+| Logo animation | The logo builds from its squares. It is the only logo animation |
+| End card | Held 3 s, as a default |
+| Risk-domain colours | One set, as a default for new work only. Existing work is never retrofitted. A person can set it aside for one figure, with a reason |
+
+Still open. Each has a default to use until it closes:
+
+| Topic | Default until then |
+|---|---|
+| Which seven colours for the risk domains | The set in section 4. Options are being prepared |
+| Logo build: speed and style | The timing in section 11. Faster options are being made |
+| Dark mode | The values in section 3, as provisional |
+| Print colour | None. AIRI red has not been matched to a print ink |
+| Image and illustration style | No rules yet. Reuse what the report covers do: one white line texture on red |
+| Template files for Slides, Docs, PowerPoint and Word | The theme colours, fonts and style tables in `templates/` |
