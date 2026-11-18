@@ -22,6 +22,7 @@ dev/build-kit/         build.py generates brand.css, templates/ and the guide fr
                        (guide.py is the guide, viz.py its charts, video.py the motion and video files)
 dev/logo-builder/      build.py generates skill/logos/initiative/ (output/ is gitignored)
 legacy/logos/          retired Index and Repository lockups
+install/               git hooks that keep ~/.claude/skills/airi-brand in sync with skill/ on main
 ```
 
 ## Facts that aren't obvious from the files
@@ -37,7 +38,7 @@ legacy/logos/          retired Index and Repository lockups
 - **Motion has two registers.** Interface motion is IBM Carbon's productive set (70 to 700 ms), exposed in `brand.css`. Video motion is Carbon's expressive curves at 400, 700 and 1000 ms, in `templates/video/airi-video.css`. Transitions are conventional. Square-step transitions (the red-square wipe, the stepped title reveal) were dropped; do not rebuild them. The logo build from the icon's squares stays as the one logo animation, with interim timing in `motion.logo-build`.
 - **The video templates sit on the `generate-video` skill's template.** `stage.js` and `stage.css` are copied from that skill when a video is started; they are not in this repo. `airi-video.css` holds no time or curve of its own outside its tokens block, and `--check` enforces that.
 - **The zip goes stale silently.** Rebuild it after any change to `skill/`: `rm airi-brand-skill.zip && zip -rq airi-brand-skill.zip skill/`
-- **The installed skill is a separate copy.** A copy installed at `~/.claude/skills/airi-brand` is not linked to this repo; changes here don't reach it automatically.
+- **The installed skill is a copy kept in sync by git hooks.** `install/install-hooks.sh` adds post-commit and post-merge hooks that mirror the committed `skill/` into `~/.claude/skills/airi-brand` whenever `main` changes it (other branches are skipped). The copy must stay a plain folder, not a symlink, because a Syncthing share carries it to other machines. Re-run the installer after a fresh clone; run `install/sync-installed-skill.sh --force` to sync by hand.
 - **Logo proportions are fixed.** In the horizontal lockup, the icon-to-text gap and the right padding each equal one large square of the icon. The text spans the two medium squares: cap-top of "MIT AI Risk" on the top of the upper one, baseline of "Initiative" on the bottom of the lower one, line spacing 1.0. build.py computes all of this from the icon geometry.
 - **The builder needs its venv.** `cd dev/logo-builder && python3 -m venv venv && venv/bin/pip install -r requirements.txt && venv/bin/python build.py`, then copy `output/initiative/` over `skill/logos/initiative/`.
 
