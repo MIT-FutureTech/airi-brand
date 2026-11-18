@@ -233,14 +233,14 @@ def video_css():
 TITLE = ("Seven domains", "of AI risk")
 CUES = [
     (21.8, 24.7, ["The repository groups risks from AI", "into seven domains."]),
-    (25.0, 28.3, ["Each domain keeps the same colour", "in every chart."]),
+    (25.0, 28.3, ["The red bar is the one", "the chart is about."]),
 ]
 SCRIPT = [
     "People describe the risks from A I in many ways.",
     "A shared map makes them comparable.",
     "[pause 1.5]",
     "The repository groups risks from A I into seven domains.",
-    "Each domain keeps the same colour in every chart.",
+    "The red bar is the one the chart is about.",
 ]
 SHARES = [0.62, 0.48, 0.34, 0.55, 0.41, 0.72, 1.0]   # illustrative bar lengths, not data
 DURATION = 34

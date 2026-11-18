@@ -2,4 +2,4 @@ People describe the risks from A I in many ways.
 A shared map makes them comparable.
 [pause 1.5]
 The repository groups risks from A I into seven domains.
-Each domain keeps the same colour in every chart.
+The red bar is the one the chart is about.

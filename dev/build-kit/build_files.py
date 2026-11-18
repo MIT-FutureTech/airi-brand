@@ -191,6 +191,8 @@ def build_docx(dest: Path):
     ftr = sec.footer
     fp = ftr.paragraphs[0]
     from docx.enum.text import WD_TAB_ALIGNMENT
+    fp.style.paragraph_format.tab_stops.clear_all()  # Word's Footer style has its own centre and right stops
+    fp.paragraph_format.tab_stops.clear_all()
     fp.paragraph_format.tab_stops.add_tab_stop(text_w, alignment=WD_TAB_ALIGNMENT.RIGHT)
     fp.paragraph_format.space_after = Pt(10)
 
