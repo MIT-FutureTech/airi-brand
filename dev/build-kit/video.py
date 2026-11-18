@@ -394,7 +394,7 @@ the font is generated from `../../tokens.json`.
 | `comp.html` | A sample that uses every component. Copy it and replace the content |
 | `script.txt` | Narration for the sample, one line per line |
 | `captions.srt` | Captions for the sample |
-| `check_video.py` | Checks a composition and its captions against the rules |
+| `check_video.py` | Checks a composition and its captions. Fails on a hard rule or a broken file; warns on a changed default |
 | `fonts/` | Figtree, so a render never falls back to another font |
 
 ## Start a video
@@ -459,7 +459,7 @@ to `<html>` and set `data-width` and `data-height` to match.
 | Safe areas | title-safe {V['safe-area-pct']['title']}% inset, action-safe {V['safe-area-pct']['action']}% |
 | Captions | {CAP['size-px']} px or larger, {CAP['max-chars-per-line']} characters a line ({CAP['max-chars-per-line-narrow']} in vertical and square), {CAP['max-lines']} lines, {CAP['max-chars-per-second']} characters a second, at least {CAP['min-frames']} frames |
 
-Never: {", ".join(M['prohibited'])}.
+Avoid: {", ".join(M['prohibited'])}. The last two fall under hard rules; the rest are defaults.
 
 ## Captions and the alternative
 
@@ -545,7 +545,7 @@ def motion_problems():
     m = re.search(r"^DEFAULTS = (\{.*\})$", src, re.M)
     want = {k: CAP[k] for k in ("max-chars-per-line", "max-chars-per-line-narrow", "max-lines", "max-chars-per-second", "min-frames")}
     want.update({"fps": sorted(V["fps"].values()), "formats": [[f["width"], f["height"]] for f in FMT.values()],
-                 "brand-moments-max": M["video"]["brand-moments-max"]})
+                 "brand-moments-max": M["video"]["brand-moments-max"], "end-card-hold-s": V["end-card"]["hold-s"]})
     if not m or json.loads(m.group(1)) != want:
         out.append("skill/templates/video/check_video.py: DEFAULTS differ from tokens.json")
     # No stray times or curves in the components.

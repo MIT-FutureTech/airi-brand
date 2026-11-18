@@ -12,7 +12,7 @@ the font is generated from `../../tokens.json`.
 | `comp.html` | A sample that uses every component. Copy it and replace the content |
 | `script.txt` | Narration for the sample, one line per line |
 | `captions.srt` | Captions for the sample |
-| `check_video.py` | Checks a composition and its captions against the rules |
+| `check_video.py` | Checks a composition and its captions. Fails on a hard rule or a broken file; warns on a changed default |
 | `fonts/` | Figtree, so a render never falls back to another font |
 
 ## Start a video
@@ -77,7 +77,7 @@ to `<html>` and set `data-width` and `data-height` to match.
 | Safe areas | title-safe 10% inset, action-safe 5% |
 | Captions | 54 px or larger, 42 characters a line (30 in vertical and square), 2 lines, 20 characters a second, at least 20 frames |
 
-Never: bounce, elastic, overshoot, rotation, glitch, software presets, diagonal moves, fading, sliding or scaling the logo in, more than 3 flashes a second.
+Avoid: bounce, elastic, overshoot, rotation, glitch, software presets, diagonal moves, fading, sliding or scaling the logo in, more than 3 flashes a second. The last two fall under hard rules; the rest are defaults.
 
 ## Captions and the alternative
 
