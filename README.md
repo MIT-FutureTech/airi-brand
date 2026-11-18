@@ -2,13 +2,19 @@
 
 The visual identity of the MIT AI Risk Initiative (AIRI): logo, icon, colours and font, with ready-made files for each tool and a Claude skill that applies them. Use it for all AIRI work, including the AI Risk Repository and the AI Risk Index.
 
-## The brand in five rules
+## Seven hard rules, and defaults for the rest
 
-1. One red: `#A32035`. Take it from a theme, template or token; never retype it.
-2. Two text colours: ink `#1A1A1A` and muted `#666666`. White on red or dark.
-3. In data, red is the subject, the finding or more risk. Grey `#898A8D` is context. Blue `#2171B5` is a neutral amount.
-4. A figure uses a red scale or a red highlight, never both.
-5. Figtree for all text.
+The kit is a starting point. These rules always hold:
+
+1. Use the logo files as they are: never redrawn, recoloured, stretched or merged with another mark. There is one AIRI logo for all products.
+2. AIRI red is `#A32035`, taken from the theme, the template or the token. Never approximate it, and never add a red from outside the kit.
+3. Figtree for all text, with the fallback stack Figtree, Arial, sans-serif. Code may use the monospace stack.
+4. Text meets WCAG AA contrast: 4.5 to 1, or 3 to 1 for large text.
+5. Colour never carries meaning alone. A status colour comes with a word or an icon.
+6. In data, red never means good, and a red scale never shows a neutral amount.
+7. Nothing flashes more than three times a second, and every video has captions.
+
+Everything else is a default: palettes for data, type sizes, spacing, layouts, chart conventions, motion. Follow a default unless someone on the team asks for something different. A little drift is fine. Where the kit says nothing, reuse the closest pattern it already has, or pick the plainest option. [skill/BRAND.md](skill/BRAND.md) section 2 has the detail.
 
 ## Start here
 

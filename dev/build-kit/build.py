@@ -9,6 +9,9 @@
     tokens.json, light and dark, and fails below 4.5:1;
   - checks the motion and video tokens, that the video CSS takes every time and
     curve from them, and that BRAND.md and SKILL.md state the same values;
+  - checks the rules block (5 to 7 hard rules, each with a reason; the defaults and
+    gap rules present), that BRAND.md and SKILL.md give the hard rules word for word,
+    and that BRAND.md lists every decided and open item;
   - reads the hand-written files and fails if they name a colour that is not a
     token, give a token the wrong hex, list a palette in the wrong order, or get a
     category, status, grade or theme-slot row wrong.
@@ -1016,6 +1019,38 @@ def prose_problems(path, text):
     return out
 
 
+def rules_problems(brand, skill):
+    """The rules block is well formed, and BRAND.md and SKILL.md give the hard rules word for word."""
+    out = []
+    R = T.get("rules", {})
+    hard = R.get("hard", [])
+    if not 5 <= len(hard) <= 7:
+        out.append(f"rules.hard has {len(hard)} rules; keep it to between 5 and 7")
+    ids = [h.get("id") for h in hard]
+    if len(set(ids)) != len(ids) or not all(ids):
+        out.append("rules.hard: every rule needs its own id")
+    for h in hard:
+        if not h.get("rule") or not h.get("why"):
+            out.append(f"rules.hard {h.get('id')}: needs a rule and a why")
+    for key, parts in (("defaults", ("rule", "when-a-person-asks")), ("gap", ("rule", "where-to-look", "neutral", "report"))):
+        for part in parts:
+            if not R.get(key, {}).get(part):
+                out.append(f"rules.{key}.{part} is missing")
+    plain = lambda text: re.sub(r"\s+", " ", re.sub(r"[`*]", "", text)).lower()
+    for name, text in (("skill/BRAND.md", plain(brand)), ("skill/SKILL.md", plain(skill))):
+        for n, h in enumerate(hard, 1):
+            if plain(h.get("rule", "")) not in text:
+                out.append(f"{name} does not give hard rule {n} ({h.get('id')}) word for word")
+            if plain(h.get("why", "")) not in text:
+                out.append(f"{name} does not give the reason for hard rule {n} ({h.get('id')})")
+    # Decisions: BRAND.md names every decided and open topic.
+    dec = T.get("decisions", {})
+    for item in dec.get("decided", []) + dec.get("open", []):
+        if item["topic"].lower() not in brand.lower():
+            out.append(f"skill/BRAND.md does not list the decision or open question: {item['topic']}")
+    return out
+
+
 def check():
     problems = []
     for path, fn in OUTPUTS.items():
@@ -1046,12 +1081,7 @@ def check():
     for scale in ("severity", "blue-sequential", "diverging-7", "diverging-5"):
         if label_phrase(scale) not in brand:
             problems.append(f"skill/BRAND.md does not state the {scale} label rule as: {label_phrase(scale)}")
-    # The five rules are the part people memorise: BRAND.md and SKILL.md must give them word for word.
-    def five(text):
-        m = re.search(r"^1\. \*\*One red.*?(?=^\n|\Z)", text, re.M | re.S)
-        return m.group(0).strip() if m else None
-    if five(brand) is None or five(brand) != five((SKILL / "SKILL.md").read_text()):
-        problems.append("the five rules differ between skill/BRAND.md and skill/SKILL.md")
+    problems += rules_problems(brand, (SKILL / "SKILL.md").read_text())
     for p in problems:
         print("FAIL", p)
     print("ok: everything agrees with tokens.json" if not problems else f"{len(problems)} problem(s)")

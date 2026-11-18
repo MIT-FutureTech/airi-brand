@@ -1,7 +1,7 @@
 """The one-page visual guide (guide/index.html), rendered from tokens.json.
 
-build.py calls render(). Section order is fixed: logo, icon, font and colour,
-parent organisation logo, open questions.
+build.py calls render(). The hard rules come first, from tokens.json. Section order
+after that is fixed: logo, icon, font and colour, parent organisation logo, open questions.
 """
 import viz as v
 from viz import C, D, CATS, S, T, KIT
@@ -62,6 +62,10 @@ def build_label(scale):
             runs.append(f"{'ink' if labs[start] == 'text' else 'white'} on {span}")
             start = k
     return ", ".join(runs)
+
+
+def hard_rules():
+    return "\n".join(f'  <li>{h["rule"]} <span class="why">{h["why"][0].upper() + h["why"][1:]}.</span></li>' for h in T["rules"]["hard"])
 
 
 def open_questions():
@@ -158,6 +162,9 @@ def render():
   .type-sample {{ margin: 16px 0; }}
   .type-sample .label {{ font-size: var(--font-size-xs); color: var(--color-text-muted); }}
 
+  .hardrules {{ margin: 24px 0; max-width: 760px; }}
+  .hardrules .why {{ color: var(--color-text-muted); }}
+
   details.qna {{ background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px 24px; margin: 8px 0; }}
   details.qna summary {{ cursor: pointer; font-weight: 600; }}
   details.qna[open] summary {{ margin-bottom: 8px; }}
@@ -183,6 +190,14 @@ def render():
 <h1>MIT AI Risk <span>Brand Guide</span></h1>
 <p class="subtitle">The look of the MIT AI Risk Initiative, including the AI Risk Repository and the AI Risk Index. One logo, one icon, one typeface, one red, and fixed meanings for colour in data. Version {T["version"]}.</p>
 
+<div class="hardrules">
+<h3>{len(T["rules"]["hard"])} hard rules. Everything else is a default.</h3>
+<ol class="rules">
+{hard_rules()}
+</ol>
+<p>The rest of this guide shows defaults: a starting point, and the answer when nobody has said otherwise. People can stray from a default on purpose, and a little drift is fine. Claude follows the defaults unless a person asks for something different. Where the kit says nothing, Claude reuses the closest pattern here, or picks the plainest option, and says so.</p>
+</div>
+
 <!-- 1. Logo -->
 <h2>1 · Logo</h2>
 <p>The AIRI logo is the icon beside the two-line wordmark "MIT AI Risk / Initiative". Use it for all AIRI work, including the Repository and the Index, wherever the brand needs its full name: navigation bars, document headers, covers.</p>
@@ -204,13 +219,12 @@ def render():
 <!-- 3. Font and colour -->
 <h2>3 · Font &amp; colour</h2>
 
-<h3>Five rules to remember</h3>
+<h3>Colour in one breath</h3>
 <ol class="rules">
-  <li><strong>One red: <code>{C["primary"]}</code>.</strong> Never retype it. Take it from the theme, the template or the token.</li>
+  <li><strong>One red: <code>{C["primary"]}</code>.</strong> Take it from the theme, the template or the token.</li>
   <li><strong>Two text colours:</strong> ink <code>{C["text"]}</code> and muted <code>{C["text-muted"]}</code>. White on red or dark.</li>
   <li><strong>In data, red is the subject, the finding or more risk.</strong> Grey <code>{C["gray"]}</code> is context. Blue <code>{C["blue"]}</code> is a neutral amount.</li>
-  <li><strong>A figure uses a red scale or a red highlight, never both.</strong></li>
-  <li><strong>Figtree for all text</strong>, regular and bold (semibold allowed on the web). Sentence case, left-aligned.</li>
+  <li><strong>A figure uses a red scale or a red highlight, not both.</strong></li>
 </ol>
 
 <h3>Figtree, the only typeface</h3>

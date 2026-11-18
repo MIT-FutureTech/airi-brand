@@ -32,7 +32,8 @@ To change a colour, size, spacing step, radius, or a motion or video value:
    - a generated file is stale;
    - any label-on-fill or text-on-ground pair in `tokens.json` is below 4.5:1, in light or dark;
    - a hand-written file names a colour that is not a token, gives a token the wrong hex, lists a palette in the wrong order, or gets a category, status, grade or theme-slot row wrong;
-   - the five rules differ between `BRAND.md` and `SKILL.md`;
+   - the `rules` block is malformed, or `BRAND.md` and `SKILL.md` do not give the hard rules word for word;
+   - `BRAND.md` does not list a decided or open item from `decisions`;
    - a motion or video token is out of range, the video styles use a time or curve that is not a token, or `BRAND.md` and `SKILL.md` do not state the motion values.
 
    It cannot check prose that carries no hex, such as where the logo goes. Read your change to `BRAND.md` against `tokens.json` as well.

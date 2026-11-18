@@ -82,6 +82,9 @@
   .type-sample { margin: 16px 0; }
   .type-sample .label { font-size: var(--font-size-xs); color: var(--color-text-muted); }
 
+  .hardrules { margin: 24px 0; max-width: 760px; }
+  .hardrules .why { color: var(--color-text-muted); }
+
   details.qna { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 16px 24px; margin: 8px 0; }
   details.qna summary { cursor: pointer; font-weight: 600; }
   details.qna[open] summary { margin-bottom: 8px; }
@@ -107,6 +110,20 @@
 <h1>MIT AI Risk <span>Brand Guide</span></h1>
 <p class="subtitle">The look of the MIT AI Risk Initiative, including the AI Risk Repository and the AI Risk Index. One logo, one icon, one typeface, one red, and fixed meanings for colour in data. Version 2.0.0.</p>
 
+<div class="hardrules">
+<h3>7 hard rules. Everything else is a default.</h3>
+<ol class="rules">
+  <li>Use the logo files as they are: never redrawn, recoloured, stretched or merged with another mark. There is one AIRI logo for all products. <span class="why">It must look the same everywhere.</span></li>
+  <li>AIRI red is #A32035, taken from the theme, the template or the token. Never approximate it, and never add a red from outside the kit. <span class="why">Near-reds are the most common drift.</span></li>
+  <li>Figtree for all text, with the fallback stack Figtree, Arial, sans-serif. Code may use the monospace stack. <span class="why">One typeface ties the products together.</span></li>
+  <li>Text meets WCAG AA contrast: 4.5 to 1, or 3 to 1 for large text. <span class="why">People must be able to read it.</span></li>
+  <li>Colour never carries meaning alone. A status colour comes with a word or an icon. <span class="why">Some readers cannot tell colours apart.</span></li>
+  <li>In data, red never means good, and a red scale never shows a neutral amount. <span class="why">Everywhere else in AIRI work red means risk.</span></li>
+  <li>Nothing flashes more than three times a second, and every video has captions. <span class="why">Flashing can trigger seizures, and many people watch without sound.</span></li>
+</ol>
+<p>The rest of this guide shows defaults: a starting point, and the answer when nobody has said otherwise. People can stray from a default on purpose, and a little drift is fine. Claude follows the defaults unless a person asks for something different. Where the kit says nothing, Claude reuses the closest pattern here, or picks the plainest option, and says so.</p>
+</div>
+
 <!-- 1. Logo -->
 <h2>1 · Logo</h2>
 <p>The AIRI logo is the icon beside the two-line wordmark "MIT AI Risk / Initiative". Use it for all AIRI work, including the Repository and the Index, wherever the brand needs its full name: navigation bars, document headers, covers.</p>
@@ -128,13 +145,12 @@
 <!-- 3. Font and colour -->
 <h2>3 · Font &amp; colour</h2>
 
-<h3>Five rules to remember</h3>
+<h3>Colour in one breath</h3>
 <ol class="rules">
-  <li><strong>One red: <code>#A32035</code>.</strong> Never retype it. Take it from the theme, the template or the token.</li>
+  <li><strong>One red: <code>#A32035</code>.</strong> Take it from the theme, the template or the token.</li>
   <li><strong>Two text colours:</strong> ink <code>#1A1A1A</code> and muted <code>#666666</code>. White on red or dark.</li>
   <li><strong>In data, red is the subject, the finding or more risk.</strong> Grey <code>#898A8D</code> is context. Blue <code>#2171B5</code> is a neutral amount.</li>
-  <li><strong>A figure uses a red scale or a red highlight, never both.</strong></li>
-  <li><strong>Figtree for all text</strong>, regular and bold (semibold allowed on the web). Sentence case, left-aligned.</li>
+  <li><strong>A figure uses a red scale or a red highlight, not both.</strong></li>
 </ol>
 
 <h3>Figtree, the only typeface</h3>

@@ -16,17 +16,49 @@ Five things make a piece of work look like AIRI.
 
 The best AIRI work uses the fewest colours. A deck that uses red, grey and near-black looks better than one that uses twenty.
 
-## 2. Five rules to remember
+## 2. How to read the rules
 
-1. **One red: `#A32035`.** Take it from the theme, the template or the token. Never retype or approximate it.
-2. **Two text colours:** ink `#1A1A1A` and muted `#666666`. White on red or dark.
-3. **In data, red is the subject, the finding or more risk.** Grey `#898A8D` is context. Blue `#2171B5` is a neutral amount.
-4. **A figure uses a red scale or a red highlight, never both.**
-5. **Figtree for all text**, weights 400 and 700 (600 allowed on the web). Sentence case, left-aligned.
+The kit is a starting point. It has three tiers.
+
+### Hard rules
+
+Claude always follows these, and people should too. They protect the identity, accessibility and meaning.
+
+| | Hard rule | Why it is hard |
+|---|---|---|
+| 1 | Use the logo files as they are: never redrawn, recoloured, stretched or merged with another mark. There is one AIRI logo for all products. | It must look the same everywhere |
+| 2 | AIRI red is `#A32035`, taken from the theme, the template or the token. Never approximate it, and never add a red from outside the kit. | Near-reds are the most common drift |
+| 3 | Figtree for all text, with the fallback stack Figtree, Arial, sans-serif. Code may use the monospace stack. | One typeface ties the products together |
+| 4 | Text meets WCAG AA contrast: 4.5 to 1, or 3 to 1 for large text. | People must be able to read it |
+| 5 | Colour never carries meaning alone. A status colour comes with a word or an icon. | Some readers cannot tell colours apart |
+| 6 | In data, red never means good, and a red scale never shows a neutral amount. | Everywhere else in AIRI work red means risk |
+| 7 | Nothing flashes more than three times a second, and every video has captions. | Flashing can trigger seizures, and many people watch without sound |
+
+These cover AIRI-led work. In partner-led work the partner's template sets colour and type, and the logo rule still holds (section 8).
+
+### Defaults
+
+**Everything else in this file is a default.** That covers data palettes, type sizes, spacing, layouts, chart conventions, motion values and video furniture. Words like "never" and "always" outside the table above describe the default; they do not make a hard rule.
+
+- Claude follows a default unless a person asks for something different.
+- When a person asks, Claude does it. It does not argue, ask for a reason, or quietly put the default back later.
+- Claude speaks up only if the request breaks a hard rule. It says which one in a line and offers the closest option that keeps it.
+- Claude does not decide by itself to stray from a default. A person does. People sometimes stray on purpose to make a point, and a little drift is fine.
+
+### When the kit says nothing
+
+1. Reuse the closest pattern the kit already has. Look in the templates (`templates/`), the components and by-medium sections (9 and 10), and the visual guide.
+2. If nothing is close, choose the most neutral option: ink and greys, Figtree regular, the default spacing, no new colour.
+3. Never invent a new creative treatment. Invented treatments are how products end up looking different from each other.
+4. When handing the work back, say which gap you hit and what you reused, so the gap can be added to the kit.
+
+Sections below carry a "Hard rule" note where one of the seven applies. Nothing else is marked, because everything else is a default.
 
 ## 3. Colour
 
 ### Core
+
+**Hard rule 2:** AIRI red is `#A32035`, taken from the theme, the template or the token. How the red and its ramp are used is a default.
 
 | Token | Hex | Use |
 |---|---|---|
@@ -65,6 +97,8 @@ Four neutrals are Google presets, so they can be clicked in Docs, Slides and She
 
 ### Text and background pairs
 
+**Hard rule 4:** text meets WCAG AA contrast. The pairs below are the default way to get there.
+
 Use only these pairs for text. Ratios are WCAG contrast; 4.5 is the minimum for body text.
 
 | Text | On | Ratio |
@@ -91,6 +125,8 @@ Pairs that fail, and what to do instead:
 - Focus ring: 2 px solid `#A32035` (`#D07886` on dark). Never remove the outline.
 
 ### Status
+
+**Hard rule 5:** colour never carries meaning alone. Which colours mean what is a default.
 
 Status always carries a word or an icon, never colour alone.
 
@@ -138,6 +174,8 @@ For Claude artifacts and dark tools. These values are computed and contrast-chec
 - Give any dark mark that fades into the page a 1 px `#6E6E6E` outline: the darkest scale steps, and category teal on a dark card (3.0).
 
 ## 4. Colour in data
+
+**Hard rule 6:** red never means good, and a red scale never shows a neutral amount. The palettes and chart conventions are defaults.
 
 One rule decides most charts: **red is the subject, grey is context, blue is a neutral amount.**
 
@@ -264,6 +302,8 @@ The code templates (matplotlib, Plotly, R) default to red, grey, blue. A chart m
 
 ## 6. Typography
 
+**Hard rule 3:** Figtree for all text. Sizes, weights and alignment are defaults.
+
 Figtree, from Google Fonts, for everything. Fallback: Arial, then the system sans-serif. Monospace is the system stack (`ui-monospace, SFMono-Regular, Menlo, monospace`); there is no brand mono face.
 
 - Left-aligned. Centre only short labels and hero lines.
@@ -293,6 +333,8 @@ Where red goes in type: slide titles, the document Title and Heading 1, and the 
 - A rule sits above the block it introduces, never under a heading.
 
 ## 8. Logo
+
+**Hard rule 1:** use the logo files as they are. Placement and size are defaults.
 
 There is one AIRI logo: the icon beside the two-line wordmark "MIT AI Risk / Initiative". Use it for all AIRI work, including the AI Risk Repository and the AI Risk Index. Those products have no lockups of their own.
 
@@ -536,9 +578,11 @@ Transitions are conventional. A red card slides on and off with the standard cur
 
 Avoid bounce, elastic and overshoot, rotation, glitch effects, software presets and diagonal moves. Like the rest of this section these are defaults, so a person can ask for one.
 
-Two things here are hard rules (section 2). The logo is never faded in, slid in or scaled up. Nothing flashes more than 3 times a second.
+**Hard rules 1 and 7:** the logo is never faded in, slid in or scaled up, and nothing flashes more than 3 times a second.
 
 ### Video furniture
+
+**Hard rule 7:** every video has captions, and nothing flashes more than three times a second. The other values in the table are defaults.
 
 | Item | Rule |
 |---|---|
@@ -557,7 +601,7 @@ Two things here are hard rules (section 2). The logo is never faded in, slid in 
 | Logo card | A video shorter than 15 s opens on the logo alone for 2 to 3 s |
 | Charts | Colours follow section 4. The title states the finding; a source line sits under the chart |
 
-`templates/video/check_video.py` checks a composition and its SRT file against these limits.
+`templates/video/check_video.py` checks a composition and its SRT file. It fails on a hard-rule breach or a file that will not render. It warns on a default, so a deliberate change still passes.
 
 ### Logo build
 
