@@ -84,6 +84,10 @@ This file is enough for a simple page or chart. [BRAND.md](BRAND.md) is the full
 | Google Slides, Sheets, Docs | `templates/google-slides-theme.md`, `templates/google-docs-styles.md` |
 | Video | `templates/video/` |
 
+## Updating existing work
+
+When asked to bring existing work up to the kit, or to check it, follow [CHANGEOVER.md](CHANGEOVER.md). Start with `python3 tools/brand_scan.py PATH`, which only reads. Hard-rule breaches are must-fix; the rest you propose. Ask which differences are deliberate, and never retrofit category colours.
+
 ## Defaults to know
 
 - Every colour is a token; in CSS use the variables. Artifacts work in light and dark.

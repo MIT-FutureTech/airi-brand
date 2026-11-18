@@ -678,6 +678,7 @@ Every video comes with a transcript and one static key frame that makes sense al
 - `templates/video/`: video styles, a sample composition and `check_video.py`. See `templates/video/README.md`.
 - `logos/initiative/`, `logos/futuretech/`: logo files.
 - `SKILL.md`: the short version Claude loads first.
+- `CHANGEOVER.md`, `tools/brand_scan.py`: how to bring existing work up to the kit, and the read-only scanner that reports what differs.
 
 Retired logo lockups live in `legacy/logos/` at the repository root. Do not use them.
 

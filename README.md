@@ -54,7 +54,7 @@ Claude Code picks it up when you mention AIRI, the Repository or the Index. You 
 
 | Path | What it is |
 |------|------------|
-| `skill/` | The brand kit itself: `BRAND.md` (spec), `SKILL.md` (Claude skill entry point), `tokens.json` (every value), `brand.css` (CSS custom properties), `templates/` (a starting file per tool), `logos/` |
+| `skill/` | The brand kit itself: `BRAND.md` (spec), `SKILL.md` (Claude skill entry point), `tokens.json` (every value), `brand.css` (CSS custom properties), `templates/` (a starting file per tool), `CHANGEOVER.md` and `tools/brand_scan.py` (check existing work against the kit), `logos/` |
 | `guide/` | The one-page visual guide. `guide/logos` and `guide/brand.css` link back into `skill/` |
 | `airi-brand-skill.zip` | `skill/` packaged for upload to Claude.ai |
 | `dev/build-kit/` | `build.py` generates `brand.css`, the templates and the guide from `tokens.json`, and checks that everything agrees |

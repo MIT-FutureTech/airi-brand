@@ -20,6 +20,7 @@ guide/index.html       one-page visual guide (generated); guide/logos and guide/
 airi-brand-skill.zip   skill/ zipped for Claude.ai upload
 dev/build-kit/         build.py generates brand.css, templates/ and the guide from tokens.json; --check verifies
                        (guide.py is the guide, viz.py its charts, video.py the motion and video files)
+dev/brand-scan/        tests for skill/tools/brand_scan.py, the read-only scanner behind skill/CHANGEOVER.md
 dev/logo-builder/      build.py generates skill/logos/initiative/ (output/ is gitignored)
 legacy/logos/          retired Index and Repository lockups
 install/               git hooks that keep ~/.claude/skills/airi-brand in sync with skill/ on main

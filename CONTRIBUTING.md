@@ -39,7 +39,7 @@ To change a colour, size, spacing step, radius, or a motion or video value:
    It cannot check prose that carries no hex, such as where the logo goes. Read your change to `BRAND.md` against `tokens.json` as well.
 5. Rebuild the Claude.ai upload: `rm airi-brand-skill.zip && zip -rq airi-brand-skill.zip skill/`
 
-Never edit a generated file by hand; change `tokens.json` or `dev/build-kit/` instead. Two things in `skill/templates/video/` are kept by hand: `check_video.py` and the font in `fonts/`. The logo files are generated too, by `dev/logo-builder/build.py`.
+Never edit a generated file by hand; change `tokens.json` or `dev/build-kit/` instead. Two things in `skill/templates/video/` are kept by hand: `check_video.py` and the font in `fonts/`. The logo files are generated too, by `dev/logo-builder/build.py`. `skill/CHANGEOVER.md` and `skill/tools/brand_scan.py` are also kept by hand; after changing the scanner, run `python3 dev/brand-scan/test_brand_scan.py`.
 
 ## Working with an AI assistant
 

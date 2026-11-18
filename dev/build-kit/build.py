@@ -12,6 +12,7 @@
   - checks the rules block (5 to 7 hard rules, each with a reason; the defaults and
     gap rules present), that BRAND.md and SKILL.md give the hard rules word for word,
     and that BRAND.md lists every decided and open item;
+  - checks that the changeover procedure and its scanner exist and SKILL.md points at them;
   - reads the hand-written files and fails if they name a colour that is not a
     token, give a token the wrong hex, list a palette in the wrong order, or get a
     category, status, grade or theme-slot row wrong.
@@ -1082,6 +1083,12 @@ def check():
         if label_phrase(scale) not in brand:
             problems.append(f"skill/BRAND.md does not state the {scale} label rule as: {label_phrase(scale)}")
     problems += rules_problems(brand, (SKILL / "SKILL.md").read_text())
+    # The changeover procedure and its scanner ship with the skill, and SKILL.md must point at both.
+    for rel in ("CHANGEOVER.md", "tools/brand_scan.py"):
+        if not (SKILL / rel).exists():
+            problems.append(f"skill/{rel} is missing")
+        elif rel not in (SKILL / "SKILL.md").read_text():
+            problems.append(f"skill/SKILL.md does not point at {rel}")
     for p in problems:
         print("FAIL", p)
     print("ok: everything agrees with tokens.json" if not problems else f"{len(problems)} problem(s)")
