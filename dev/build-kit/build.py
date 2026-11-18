@@ -24,6 +24,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import build_files  # noqa: E402  (the binary starter files in templates/files/)
 import guide  # noqa: E402  (the one-page visual guide)
 import video  # noqa: E402  (motion tokens and the video templates)
 
@@ -817,6 +818,8 @@ Start from these instead of typing hex values. All are generated from
 
 | For | File | How to use |
 |---|---|---|
+| A ready deck, document or workbook | `files/airi-slides.pptx`, `files/airi-document.docx`, `files/airi-sheet.xlsx` | Make a copy and replace the sample content. Theme colours, Figtree, layouts and named styles are already set. For Google Slides, Docs or Sheets, upload the file to Drive and open it with the Google app |
+| Social share card (Open Graph) | `files/airi-og-image.html`, `files/airi-og-image.png` | 1200 x 630. Change the title in the HTML and render it with headless Chrome (command in the file) |
 | PowerPoint, Word, Excel | `office-theme-colors.xml`, `office-theme-fonts.xml`, `office-theme.md` | Copy the two XML files into Office's theme folders; "AIRI" then appears under Colors and Fonts. Steps and Word styles are in the .md |
 | Google Slides, Sheets | `google-slides-theme.md` | Hex per theme slot, by hand or as one API request |
 | Google Docs | `google-docs-styles.md` | Named styles, page furniture, colours to paste |
@@ -1061,6 +1064,7 @@ def check():
     for path, fn in OUTPUTS.items():
         if not path.exists() or path.read_text() != fn():
             problems.append(f"{path.relative_to(ROOT)} is out of date: run dev/build-kit/build.py")
+    problems += build_files.check()
     problems += contrast_problems()
     problems += video.motion_problems()
     problems += video.prose_problems((SKILL / "BRAND.md").read_text(), (SKILL / "SKILL.md").read_text())
