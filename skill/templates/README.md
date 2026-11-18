@@ -6,7 +6,7 @@ Start from these instead of typing hex values. All are generated from
 
 | For | File | How to use |
 |---|---|---|
-| A ready deck, document or workbook | `files/airi-slides.pptx`, `files/airi-document.docx`, `files/airi-sheet.xlsx` | Make a copy and replace the sample content. Theme colours, Figtree, layouts and named styles are already set. For Google Slides, Docs or Sheets, upload the file to Drive and open it with the Google app |
+| A ready document | `files/airi-document.docx` | Make a copy and replace the sample content. Theme colours, Figtree and the named styles are already set. For Google Docs, upload it to Drive and open it with Docs. There is no deck file: start from a recent AIRI deck or a Claude slide artifact |
 | Social share card (Open Graph) | `files/airi-og-image.html`, `files/airi-og-image.png` | 1200 x 630. Change the title in the HTML and render it with headless Chrome (command in the file) |
 | PowerPoint, Word, Excel | `office-theme-colors.xml`, `office-theme-fonts.xml`, `office-theme.md` | Copy the two XML files into Office's theme folders; "AIRI" then appears under Colors and Fonts. Steps and Word styles are in the .md |
 | Google Slides, Sheets | `google-slides-theme.md` | Hex per theme slot, by hand or as one API request |
