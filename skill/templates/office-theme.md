@@ -36,11 +36,11 @@ If you would rather type them: Colors > Customize Colors.
 | dk2 | Text/Background: Dark 2 | `#666666` |
 | lt2 | Text/Background: Light 2 | `#F3F3F3` |
 | accent1 | Accent 1 | `#A32035` |
-| accent2 | Accent 2 | `#2171B5` |
-| accent3 | Accent 3 | `#D9A531` |
-| accent4 | Accent 4 | `#117A66` |
-| accent5 | Accent 5 | `#CC6699` |
-| accent6 | Accent 6 | `#6BAED6` |
+| accent2 | Accent 2 | `#898A8D` |
+| accent3 | Accent 3 | `#1A1A1A` |
+| accent4 | Accent 4 | `#2C6395` |
+| accent5 | Accent 5 | `#7DC1E3` |
+| accent6 | Accent 6 | `#443471` |
 | hlink | Hyperlink | `#A32035` |
 | folHlink | Followed Hyperlink | `#5E0E20` |
 
@@ -74,31 +74,35 @@ Office builds its own lighter and darker rows from each accent. Those are not AI
 tints. When you need a tint or a chart colour that is not one of the 12 slots,
 type one of these under More Colors (they then stay in Recent Colors):
 
-`#8A1B2D` `#5E0E20` `#B8455A` `#D07886` `#E29CA8` `#F8E1E5` `#898A8D` `#CCCCCC` `#D9D9D9` `#55399E` `#D4762C` `#E8A317` `#3A8F5C` `#FFF0B3` `#EFF6FF` `#C6DBEF` `#9ECAE1` `#4292C6` `#084594`
+`#8A1B2D` `#5E0E20` `#B8455A` `#D07886` `#E29CA8` `#F8E1E5` `#898A8D` `#CCCCCC` `#D9D9D9` `#E8A317` `#3A8F5C` `#FFF0B3` `#EFF6FF` `#C6DBEF` `#9ECAE1` `#4292C6` `#084594` `#2171B5` `#B973AB` `#ECBA7B` `#8F8D44` `#2A9484` `#ACC6B1`
 
 ## Charts in PowerPoint, Word and Excel
 
 A chart made here takes its series colours from Accent 1 to 6 in order:
-`#A32035`, `#2171B5`, `#D9A531`, `#117A66`, `#CC6699`, `#6BAED6`. That order is right for one kind of chart only: one series (red), or
-two series (red and blue). For every other chart, set the colours by hand. Click a series, then Format Data Series > Fill > More Colors, and type the hex.
+`#A32035`, `#898A8D`, `#1A1A1A`, `#2C6395`, `#7DC1E3`, `#443471`: red (the subject), grey (context), ink (a comparison), then category colours
+1 to 3. That suits a chart of one to three series. For named groups and scales, set the
+colours by hand. Click a series, then Format Data Series > Fill > More Colors, and type the hex.
 
-- **Context series** (everything that is not the subject): `#898A8D`. It is not a theme colour.
-- **Named groups** (risk domains, sectors, roles): set each series to its category colour,
-  in slot order. The first group is blue, never red.
+- **Bars that compare groups** are one colour: grey, with the subject in red. Colour a
+  grouping only when the colour says something.
+- **Named groups** that each need their own mark (stacked bars, one line per group,
+  a diagram's parts): set each series to its category colour, in slot order. The first
+  group is blue, never red. More than eight groups: grey with direct labels.
 
 | Slot | Colour | Hex | Label on it | AI Risk Repository domain |
 |---|---|---|---|---|
-| 1 | Blue | `#2171B5` | white | Discrimination & toxicity |
-| 2 | Sky | `#6BAED6` | ink | Privacy & security |
-| 3 | Violet | `#55399E` | white | Misinformation |
-| 4 | Pink | `#CC6699` | ink | Malicious actors & misuse |
-| 5 | Orange | `#D4762C` | ink | Human-computer interaction |
-| 6 | Gold | `#D9A531` | ink | Socioeconomic & environmental |
-| 7 | Teal | `#117A66` | white | AI system safety, failures & limitations |
+| 1 | Blue | `#2C6395` | white | Discrimination & toxicity |
+| 2 | Sky | `#7DC1E3` | ink | Privacy & security |
+| 3 | Violet | `#443471` | white | Misinformation |
+| 4 | Mauve | `#B973AB` | ink | Malicious actors & misuse |
+| 5 | Sand | `#ECBA7B` | ink | Human-computer interaction |
+| 6 | Olive | `#8F8D44` | ink | Socioeconomic & environmental |
+| 7 | Teal | `#2A9484` | ink | AI system safety, failures & limitations |
+| 8 | Sage | `#ACC6B1` | ink | — |
 | | Other | `#898A8D` | ink | Other, folded groups |
 
 - **Ordered levels where higher is worse:** `#E29CA8` `#D07886` `#B8455A` `#A32035` `#5E0E20`.
 - **Counts:** `#9ECAE1` `#6BAED6` `#4292C6` `#2171B5` `#084594`.
 
-The code templates (matplotlib, Plotly, R) default to red, grey, blue. A chart made
-here matches them only after the grey and the category colours are set as above.
+The code templates (matplotlib, Plotly, R) default to the same order: red, grey, ink,
+then the category colours.

@@ -17,11 +17,15 @@
   "colorway": [
    "#A32035",
    "#898A8D",
-   "#2171B5",
-   "#D9A531",
-   "#117A66",
-   "#CC6699",
-   "#6BAED6"
+   "#1A1A1A",
+   "#2C6395",
+   "#7DC1E3",
+   "#443471",
+   "#B973AB",
+   "#ECBA7B",
+   "#8F8D44",
+   "#2A9484",
+   "#ACC6B1"
   ],
   "paper_bgcolor": "#FFFFFF",
   "plot_bgcolor": "#FFFFFF",

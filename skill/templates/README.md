@@ -21,15 +21,16 @@ Start from these instead of typing hex values. All are generated from
 
 ## Chart defaults
 
-The default colour order in the chart templates is red, grey, blue, then the
-other theme accents. That makes a one- or two-series chart read as "the
-subject, and everything else" without any work. For named categories, switch
+The default colour order in the chart templates is red, grey, ink, then the
+category colours. That makes a one- or two-series chart read as "the
+subject, and everything else" without any work. Bars that compare groups
+stay one colour. For named categories, switch
 to the category colours (`airi_mpl.use_categorical()`, `airi$categorical`, or
 the `cat` values in `tokens.json`). Categories never use red.
 
 Office, Google Slides and Google Sheets are different: their charts take the
-theme accents in order (red, blue, gold, teal, pink, sky). That is right for a
-one- or two-series chart only. `office-theme.md` and `google-slides-theme.md`
+theme accents in order (red, grey, ink, blue, sky, violet). That suits a chart
+of one to three series. `office-theme.md` and `google-slides-theme.md`
 list what to set by hand.
 
 The default colour scale for heatmaps is blue, because blue means "more" and
@@ -44,7 +45,7 @@ pio.templates.default = "airi"
 
 AIRI_RED_SCALE = ["#FBF3F4", "#E29CA8", "#D07886", "#B8455A", "#A32035", "#5E0E20"]       # more means more risk
 AIRI_SEVERITY = ["#E29CA8", "#D07886", "#B8455A", "#A32035", "#5E0E20"]              # ordered levels 1 to 5
-AIRI_CATEGORIES = ["#2171B5", "#6BAED6", "#55399E", "#CC6699", "#D4762C", "#D9A531", "#117A66", "#898A8D"]
+AIRI_CATEGORIES = ["#2C6395", "#7DC1E3", "#443471", "#B973AB", "#ECBA7B", "#8F8D44", "#2A9484", "#ACC6B1", "#898A8D"]
 fig.update_traces(colorscale=AIRI_RED_SCALE)       # on a heatmap
 fig.update_layout(colorway=AIRI_CATEGORIES)        # named categories
 ```

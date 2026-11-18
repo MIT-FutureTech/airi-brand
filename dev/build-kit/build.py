@@ -154,12 +154,15 @@ def office_charts_block(tools, how):
     return f"""## Charts in {tools}
 
 A chart made here takes its series colours from Accent 1 to 6 in order:
-{order}. That order is right for one kind of chart only: one series (red), or
-two series (red and blue). For every other chart, set the colours by hand. {how}
+{order}: red (the subject), grey (context), ink (a comparison), then category colours
+1 to 3. That suits a chart of one to three series. For named groups and scales, set the
+colours by hand. {how}
 
-- **Context series** (everything that is not the subject): `{C['gray']}`. It is not a theme colour.
-- **Named groups** (risk domains, sectors, roles): set each series to its category colour,
-  in slot order. The first group is blue, never red.
+- **Bars that compare groups** are one colour: grey, with the subject in red. Colour a
+  grouping only when the colour says something.
+- **Named groups** that each need their own mark (stacked bars, one line per group,
+  a diagram's parts): set each series to its category colour, in slot order. The first
+  group is blue, never red. More than eight groups: grey with direct labels.
 
 | Slot | Colour | Hex | Label on it | AI Risk Repository domain |
 |---|---|---|---|---|
@@ -169,8 +172,8 @@ two series (red and blue). For every other chart, set the colours by hand. {how}
 - **Ordered levels where higher is worse:** {' '.join(f'`{h}`' for h in D['severity'])}.
 - **Counts:** {' '.join(f'`{h}`' for h in D['blue-5'])}.
 
-The code templates (matplotlib, Plotly, R) default to red, grey, blue. A chart made
-here matches them only after the grey and the category colours are set as above.
+The code templates (matplotlib, Plotly, R) default to the same order: red, grey, ink,
+then the category colours.
 """
 
 
@@ -424,8 +427,8 @@ Ink `{C['text']}` is not a preset; it comes from the named styles. Google's pres
 # ---------------------------------------------------------------- charts
 
 def default_cycle():
-    """Subject, context, second colour, then the remaining theme accents."""
-    return [C["primary"], C["gray"], C["blue"], SLOTS["accent3"], SLOTS["accent4"], SLOTS["accent5"], SLOTS["accent6"]]
+    """Subject, context, comparison, then the category colours in slot order."""
+    return [C["primary"], C["gray"], C["text"]] + [c["fill"] for c in CATS]
 
 
 def mplstyle():
@@ -435,7 +438,7 @@ def mplstyle():
     f = TY["figure-pt"]
     return f"""# {GEN}
 # Use: plt.style.use("airi.mplstyle"). For colour maps and the category cycle, import airi_mpl.
-# Default cycle: red (the subject), grey (context), blue, then the theme accents.
+# Default cycle: red (the subject), grey (context), ink (a comparison), then the category colours.
 # For named categories use airi_mpl.use_categorical(); categories never use red.
 
 font.family: sans-serif
@@ -560,7 +563,7 @@ def register():
 
 
 def use_categorical():
-    """Colour cycle for named categories: the seven slots in order, then grey for Other."""
+    """Colour cycle for named categories: the eight slots in order, then grey for Other."""
     mpl.rcParams["axes.prop_cycle"] = cycler(color=list(CATEGORICAL.values()) + [OTHER])
 
 
@@ -829,15 +832,16 @@ Start from these instead of typing hex values. All are generated from
 
 ## Chart defaults
 
-The default colour order in the chart templates is red, grey, blue, then the
-other theme accents. That makes a one- or two-series chart read as "the
-subject, and everything else" without any work. For named categories, switch
+The default colour order in the chart templates is red, grey, ink, then the
+category colours. That makes a one- or two-series chart read as "the
+subject, and everything else" without any work. Bars that compare groups
+stay one colour. For named categories, switch
 to the category colours (`airi_mpl.use_categorical()`, `airi$categorical`, or
 the `cat` values in `tokens.json`). Categories never use red.
 
 Office, Google Slides and Google Sheets are different: their charts take the
-theme accents in order (red, blue, gold, teal, pink, sky). That is right for a
-one- or two-series chart only. `office-theme.md` and `google-slides-theme.md`
+theme accents in order (red, grey, ink, blue, sky, violet). That suits a chart
+of one to three series. `office-theme.md` and `google-slides-theme.md`
 list what to set by hand.
 
 The default colour scale for heatmaps is blue, because blue means "more" and

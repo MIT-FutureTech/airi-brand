@@ -18,11 +18,11 @@ Do it in a template deck, then start new decks with File > Make a copy.
 | Text and background 3 | `DARK2` | `#666666` |
 | Text and background 4 | `LIGHT2` | `#F3F3F3` |
 | Accent 1 | `ACCENT1` | `#A32035` |
-| Accent 2 | `ACCENT2` | `#2171B5` |
-| Accent 3 | `ACCENT3` | `#D9A531` |
-| Accent 4 | `ACCENT4` | `#117A66` |
-| Accent 5 | `ACCENT5` | `#CC6699` |
-| Accent 6 | `ACCENT6` | `#6BAED6` |
+| Accent 2 | `ACCENT2` | `#898A8D` |
+| Accent 3 | `ACCENT3` | `#1A1A1A` |
+| Accent 4 | `ACCENT4` | `#2C6395` |
+| Accent 5 | `ACCENT5` | `#7DC1E3` |
+| Accent 6 | `ACCENT6` | `#443471` |
 | Link | `HYPERLINK` | `#A32035` |
 | (API only) | `FOLLOWED_HYPERLINK` | `#5E0E20` |
 
@@ -91,41 +91,41 @@ The API needs all 12 colours in one request.
        {
         "type": "ACCENT2",
         "color": {
-         "red": 0.1294,
-         "green": 0.4431,
-         "blue": 0.7098
+         "red": 0.5373,
+         "green": 0.5412,
+         "blue": 0.5529
         }
        },
        {
         "type": "ACCENT3",
         "color": {
-         "red": 0.851,
-         "green": 0.6471,
-         "blue": 0.1922
+         "red": 0.102,
+         "green": 0.102,
+         "blue": 0.102
         }
        },
        {
         "type": "ACCENT4",
         "color": {
-         "red": 0.0667,
-         "green": 0.4784,
-         "blue": 0.4
+         "red": 0.1725,
+         "green": 0.3882,
+         "blue": 0.5843
         }
        },
        {
         "type": "ACCENT5",
         "color": {
-         "red": 0.8,
-         "green": 0.4,
-         "blue": 0.6
+         "red": 0.4902,
+         "green": 0.7569,
+         "blue": 0.8902
         }
        },
        {
         "type": "ACCENT6",
         "color": {
-         "red": 0.4196,
-         "green": 0.6824,
-         "blue": 0.8392
+         "red": 0.2667,
+         "green": 0.2039,
+         "blue": 0.4431
         }
        },
        {
@@ -159,7 +159,7 @@ The API needs all 12 colours in one request.
 Google lists custom colours under "Custom" in the colour picker. Add these there,
 and keep a small strip of them on the template's last slide so they travel with copies:
 
-`#8A1B2D` `#5E0E20` `#B8455A` `#D07886` `#E29CA8` `#F8E1E5` `#898A8D` `#CCCCCC` `#D9D9D9` `#55399E` `#D4762C` `#E8A317` `#3A8F5C` `#FFF0B3` `#EFF6FF` `#C6DBEF` `#9ECAE1` `#4292C6` `#084594`
+`#8A1B2D` `#5E0E20` `#B8455A` `#D07886` `#E29CA8` `#F8E1E5` `#898A8D` `#CCCCCC` `#D9D9D9` `#E8A317` `#3A8F5C` `#FFF0B3` `#EFF6FF` `#C6DBEF` `#9ECAE1` `#4292C6` `#084594` `#2171B5` `#B973AB` `#ECBA7B` `#8F8D44` `#2A9484` `#ACC6B1`
 
 ## Sheets
 
@@ -170,39 +170,43 @@ Format > Theme > Customize. Font: Figtree.
 | Text | `#1A1A1A` |
 | Background | `#FFFFFF` |
 | Accent 1 | `#A32035` |
-| Accent 2 | `#2171B5` |
-| Accent 3 | `#D9A531` |
-| Accent 4 | `#117A66` |
-| Accent 5 | `#CC6699` |
-| Accent 6 | `#6BAED6` |
+| Accent 2 | `#898A8D` |
+| Accent 3 | `#1A1A1A` |
+| Accent 4 | `#2C6395` |
+| Accent 5 | `#7DC1E3` |
+| Accent 6 | `#443471` |
 | Hyperlink | `#A32035` |
 
 ## Charts in Slides and Sheets
 
 A chart made here takes its series colours from Accent 1 to 6 in order:
-`#A32035`, `#2171B5`, `#D9A531`, `#117A66`, `#CC6699`, `#6BAED6`. That order is right for one kind of chart only: one series (red), or
-two series (red and blue). For every other chart, set the colours by hand. A chart in Slides is made in Sheets: double-click the chart, then Customize > Series > Fill colour > Custom, and type the hex.
+`#A32035`, `#898A8D`, `#1A1A1A`, `#2C6395`, `#7DC1E3`, `#443471`: red (the subject), grey (context), ink (a comparison), then category colours
+1 to 3. That suits a chart of one to three series. For named groups and scales, set the
+colours by hand. A chart in Slides is made in Sheets: double-click the chart, then Customize > Series > Fill colour > Custom, and type the hex.
 
-- **Context series** (everything that is not the subject): `#898A8D`. It is not a theme colour.
-- **Named groups** (risk domains, sectors, roles): set each series to its category colour,
-  in slot order. The first group is blue, never red.
+- **Bars that compare groups** are one colour: grey, with the subject in red. Colour a
+  grouping only when the colour says something.
+- **Named groups** that each need their own mark (stacked bars, one line per group,
+  a diagram's parts): set each series to its category colour, in slot order. The first
+  group is blue, never red. More than eight groups: grey with direct labels.
 
 | Slot | Colour | Hex | Label on it | AI Risk Repository domain |
 |---|---|---|---|---|
-| 1 | Blue | `#2171B5` | white | Discrimination & toxicity |
-| 2 | Sky | `#6BAED6` | ink | Privacy & security |
-| 3 | Violet | `#55399E` | white | Misinformation |
-| 4 | Pink | `#CC6699` | ink | Malicious actors & misuse |
-| 5 | Orange | `#D4762C` | ink | Human-computer interaction |
-| 6 | Gold | `#D9A531` | ink | Socioeconomic & environmental |
-| 7 | Teal | `#117A66` | white | AI system safety, failures & limitations |
+| 1 | Blue | `#2C6395` | white | Discrimination & toxicity |
+| 2 | Sky | `#7DC1E3` | ink | Privacy & security |
+| 3 | Violet | `#443471` | white | Misinformation |
+| 4 | Mauve | `#B973AB` | ink | Malicious actors & misuse |
+| 5 | Sand | `#ECBA7B` | ink | Human-computer interaction |
+| 6 | Olive | `#8F8D44` | ink | Socioeconomic & environmental |
+| 7 | Teal | `#2A9484` | ink | AI system safety, failures & limitations |
+| 8 | Sage | `#ACC6B1` | ink | — |
 | | Other | `#898A8D` | ink | Other, folded groups |
 
 - **Ordered levels where higher is worse:** `#E29CA8` `#D07886` `#B8455A` `#A32035` `#5E0E20`.
 - **Counts:** `#9ECAE1` `#6BAED6` `#4292C6` `#2171B5` `#084594`.
 
-The code templates (matplotlib, Plotly, R) default to red, grey, blue. A chart made
-here matches them only after the grey and the category colours are set as above.
+The code templates (matplotlib, Plotly, R) default to the same order: red, grey, ink,
+then the category colours.
 
 ## Do not click
 

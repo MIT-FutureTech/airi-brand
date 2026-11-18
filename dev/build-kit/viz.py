@@ -219,6 +219,28 @@ def chart_cat():
     return _svg(520, 220, b, "Stacked bar in the seven category colours")
 
 
+def chart_lines():
+    """Several groups across the same items: one line per group, in slot order, labelled at the end."""
+    risks = ["Discrim.", "Privacy", "Misinfo.", "Misuse", "Human-AI", "Socioecon.", "AI safety"]
+    actors = [("Developers", [62, 71, 48, 66, 30, 22, 74]), ("Deployers", [41, 58, 27, 35, 24, 18, 39]),
+              ("Governments", [55, 63, 52, 47, 15, 41, 33]), ("Investors", [12, 20, 8, 15, 6, 29, 10])]
+    b = _t(16, 26, "Developers disclose most, except on socioeconomic risk", 15, INK, weight=700)
+    b += _t(16, 44, "Share of organisations that disclose each risk, by type of actor (%)", 12, MUTED)
+    x0, dx, top, base = 40, 58, 64, 236
+    for g in range(0, 81, 20):
+        gy = base - g * (base - top) / 80
+        b += f'<line x1="{x0}" y1="{gy:.0f}" x2="{x0 + dx * 6}" y2="{gy:.0f}" stroke="{LINE}"/>' + _t(x0 - 6, gy + 4, g, 11, MUTED, "end")
+    for i, r in enumerate(risks):
+        b += _t(x0 + i * dx, base + 16, r, 10.5, MUTED, "middle")
+    for (name, vals), c in zip(actors, CATS):
+        pts = " ".join(f"{x0 + i * dx},{base - v * (base - top) / 80:.1f}" for i, v in enumerate(vals))
+        b += f'<polyline points="{pts}" fill="none" stroke="{c["fill"]}" stroke-width="2.5"/>'
+        b += "".join(f'<circle cx="{x0 + i * dx}" cy="{base - v * (base - top) / 80:.1f}" r="3.5" fill="{c["fill"]}"/>' for i, v in enumerate(vals))
+        b += _t(x0 + dx * 6 + 8, base - vals[-1] * (base - top) / 80 + 4, name, 11.5, c["ink"], weight=700)
+    b += _t(16, 276, "Source: " + SOURCE + ". Lines take category slots 1 to 4 and are labelled at their ends.", 11, MUTED)
+    return _svg(520, 290, b, "Line chart: four actor types across seven risk domains, one category colour each")
+
+
 def chart_dots():
     rows = [("Any risk", 38, 68), ("Discrimination", 19, 41), ("Cyberattacks", 17, 39), ("Privacy", 14, 34),
             ("Misinformation", 9, 27), ("Governance failure", 7, 22), ("AI welfare", 2, 9)]

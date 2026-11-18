@@ -39,13 +39,14 @@
   --color-partial-ink: #8A5A18;
   --color-partial-tint: #FCF3E3;
   --color-info-ink: #084594;
-  --color-cat-1: #2171B5;
-  --color-cat-2: #6BAED6;
-  --color-cat-3: #55399E;
-  --color-cat-4: #CC6699;
-  --color-cat-5: #D4762C;
-  --color-cat-6: #D9A531;
-  --color-cat-7: #117A66;
+  --color-cat-1: #2C6395;
+  --color-cat-2: #7DC1E3;
+  --color-cat-3: #443471;
+  --color-cat-4: #B973AB;
+  --color-cat-5: #ECBA7B;
+  --color-cat-6: #8F8D44;
+  --color-cat-7: #2A9484;
+  --color-cat-8: #ACC6B1;
   --color-cat-other: #898A8D;
   --airi-font: 'Figtree', Arial, sans-serif;
 
@@ -66,11 +67,6 @@
   --airi-sq: 40px;
   --airi-sq-m: 80px;
   --airi-sq-l: 120px;
-
-  /* Logo build (being finalised; these are the interim values): one tick, and ticks per beat */
-  --airi-tick: calc(1s / 15);
-  --airi-nudge: calc(var(--airi-tick) / 4);  /* steps land between frames, never on one */
-  --airi-logo-beat: calc(2 * var(--airi-tick));
 
   /* Furniture */
   --airi-type-title: 120px;
@@ -154,17 +150,12 @@ html.format-square {
 .airi-lower-third strong { align-self: end; font-size: var(--airi-type-body); font-weight: 700; }
 .airi-lower-third span { align-self: start; font-size: var(--airi-type-label); color: var(--color-text-muted); }
 
-/* End card and logo card. The logo is never faded, slid or scaled. A plain logo image cuts in.
-   The masked logo that comp.html uses builds: its squares appear in the icon's own order, small
-   to large, then the wordmark. The logo file is shown through the mask and never redrawn. */
+/* End card and logo card. The logo is not animated: it cuts in at data-at and holds still.
+   It is never faded, slid or scaled. */
 .airi .airi-endcard, .airi .airi-logocard { gap: calc(2 * var(--airi-sq)); }
 .airi .airi-logo[data-at] { display: block; width: calc(9 * var(--airi-sq-l)); max-width: 100%; height: auto;
                             opacity: 1; transform: none; transition: none; visibility: hidden; }
 .airi .airi-logo[data-at].in { visibility: visible; }
-.airi .airi-logo .sq { opacity: 0; }
-.airi .airi-logo.in .sq {
-  animation: airi-appear var(--airi-tick) steps(1, end) calc(var(--b) * var(--airi-logo-beat) - var(--airi-nudge)) forwards; }
-@keyframes airi-appear { to { opacity: 1; } }
 .airi-url { font-size: var(--airi-type-statement); font-weight: 700; }
 
 /* Red card: the title card and the section card. One element placed above the scenes.

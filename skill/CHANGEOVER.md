@@ -81,7 +81,7 @@ The report, shortened:
 - `#898A8D` → `text-muted` `#666666` (kit grey used as a text colour ...). 6 places in 2 files.
 
 ## Needs a decision
-- `#0D9488`: closest kit colour is `cat-7` `#117A66`, difference 10.3. 9 places in 3 files. Defined as `--accent`.
+- `#14B8A6`: closest kit colour is `cat-7` `#2A9484`, difference 10.9. 9 places in 3 files. Defined as `--accent`.
 
 ## For information
 - `#4E79A7 #F28E2B #76B7B2 #59A14F #EDC948`

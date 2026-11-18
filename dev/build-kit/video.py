@@ -24,7 +24,7 @@ CATS = T["data"]["categorical"]
 M = T["motion"]
 V = T["video"]
 GRID = V["grid"]
-BUILD = M["logo-build"]
+LOGO = M["logo-build"]
 CAP = V["captions"]
 LT = V["lower-third"]
 FMT = V["formats"]
@@ -73,27 +73,6 @@ def icon_squares():
     return sorted(out)
 
 
-def logo_mask():
-    """Mask boxes for the horizontal logo, in its viewBox, grouped into beats from left to right.
-
-    The logo file itself is shown through the mask, so the logo is never redrawn.
-    """
-    svg = (SKILL / "logos/initiative/horizontal-on-light.svg").read_text()
-    vb = [float(x) for x in re.search(r'viewBox="([^"]+)"', svg).group(1).split()]
-    m = re.search(r"translate\(([\d.]+), ([\d.]+)\) scale\(([\d.]+)\) translate\((-?[\d.]+), (-?[\d.]+)\)", svg)
-    tx, ty, s, ox, oy = (float(x) for x in m.groups())
-    beats, rects, right = [], [], 0
-    for x, y, side in icon_squares():
-        key = round(x / 10)
-        if key not in beats:
-            beats.append(key)
-        pad = 0.15
-        X, Y, S = tx + s * (x + ox), ty + s * (y + oy), s * side
-        right = max(right, X + S)
-        rects.append((beats.index(key), X - pad, Y - pad, S + 2 * pad))
-    return vb, rects, len(beats), right
-
-
 # ---------------------------------------------------------------- airi-video.css
 
 def token_css():
@@ -126,10 +105,6 @@ def token_css():
           f"  --airi-stagger: {v['stagger-ms']['default']}ms;", "",
           "  /* Layout grid: the icon's small, medium and large squares */",
           f"  --airi-sq: {MODULE}px;", f"  --airi-sq-m: {MEDIUM}px;", f"  --airi-sq-l: {LARGE}px;", "",
-          "  /* Logo build (being finalised; these are the interim values): one tick, and ticks per beat */",
-          f"  --airi-tick: calc(1s / {BUILD['ticks-per-second']});",
-          "  --airi-nudge: calc(var(--airi-tick) / 4);  /* steps land between frames, never on one */",
-          f"  --airi-logo-beat: calc({BUILD['beat-ticks']} * var(--airi-tick));", "",
           "  /* Furniture */"]
     L += [f"  --airi-type-{k}: {px}px;" for k, px in ty.items()]
     L += [f"  --airi-caption-size: {CAP['size-px']}px;",
@@ -200,17 +175,12 @@ COMPONENTS = r"""
 .airi-lower-third strong { align-self: end; font-size: var(--airi-type-body); font-weight: 700; }
 .airi-lower-third span { align-self: start; font-size: var(--airi-type-label); color: var(--color-text-muted); }
 
-/* End card and logo card. The logo is never faded, slid or scaled. A plain logo image cuts in.
-   The masked logo that comp.html uses builds: its squares appear in the icon's own order, small
-   to large, then the wordmark. The logo file is shown through the mask and never redrawn. */
+/* End card and logo card. The logo is not animated: it cuts in at data-at and holds still.
+   It is never faded, slid or scaled. */
 .airi .airi-endcard, .airi .airi-logocard { gap: calc(2 * var(--airi-sq)); }
 .airi .airi-logo[data-at] { display: block; width: calc(9 * var(--airi-sq-l)); max-width: 100%; height: auto;
                             opacity: 1; transform: none; transition: none; visibility: hidden; }
 .airi .airi-logo[data-at].in { visibility: visible; }
-.airi .airi-logo .sq { opacity: 0; }
-.airi .airi-logo.in .sq {
-  animation: airi-appear var(--airi-tick) steps(1, end) calc(var(--b) * var(--airi-logo-beat) - var(--airi-nudge)) forwards; }
-@keyframes airi-appear { to { opacity: 1; } }
 .airi-url { font-size: var(--airi-type-statement); font-weight: 700; }
 
 /* Red card: the title card and the section card. One element placed above the scenes.
@@ -276,18 +246,9 @@ SHARES = [0.62, 0.48, 0.34, 0.55, 0.41, 0.72, 1.0]   # illustrative bar lengths,
 DURATION = 34
 
 
-def logo_svg(at, indent="  "):
-    vb, rects, beats, right = logo_mask()
-    w, h = vb[2], vb[3]
-    L = [f'{indent}<svg class="airi-logo" data-at="{at}" viewBox="0 0 {w:g} {h:g}" role="img" aria-label="MIT AI Risk Initiative">',
-         f'{indent}  <mask id="airi-logo-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="{w:g}" height="{h:g}" fill="#fff">']
-    for b, x, y, s in rects:
-        L.append(f'{indent}    <rect class="sq" style="--b:{b}" x="{x:.2f}" y="{y:.2f}" width="{s:.2f}" height="{s:.2f}"/>')
-    L += [f'{indent}    <rect class="sq" style="--b:{beats + 1}" x="{right + 1:.2f}" y="0" width="{w - right - 1:.2f}" height="{h:g}"/>',
-          f"{indent}  </mask>",
-          f'{indent}  <image href="logos/initiative/horizontal-on-light.svg" width="{w:g}" height="{h:g}" mask="url(#airi-logo-mask)"/>',
-          f"{indent}</svg>"]
-    return "\n".join(L), beats
+def logo_img(at, indent="  "):
+    """The logo for the end card: the file itself, cutting in at `at`. It is never animated."""
+    return f'{indent}<img class="airi-logo" data-at="{at}" src="logos/initiative/horizontal-on-light.svg" alt="MIT AI Risk Initiative">'
 
 
 def comp_html():
@@ -298,11 +259,11 @@ def comp_html():
     for i, (c, v) in enumerate(zip(CATS, SHARES)):
         at = round(t0 + 0.9 + i * stag, 2)
         rows.append(f'    <span>{escape(c["domain"])}</span>'
-                    f'<span class="track"><i data-at="{at:g}" style="--v:{v:g}; --c:var(--color-cat-{c["slot"]})"></i>'
+                    f'<span class="track"><i data-at="{at:g}" style="--v:{v:g}; --c:var(--color-{'primary' if v == max(SHARES) else 'gray'})"></i>'
                     f'<b data-at="{round(at + 0.7, 2):g}" data-enter="fade">{round(v * 25)}</b></span>')
     caps = "\n".join(f'<div class="airi-caption" data-at="{a:g}" data-out="{b:g}">{"<br>".join(escape(x) for x in lines)}</div>' for a, b, lines in CUES)
-    logo, beats = logo_svg("28.9", "  ")
-    done = 28.9 + (beats + 2) * BUILD["beat-ticks"] / BUILD["ticks-per-second"]
+    logo = logo_img("28.9", "  ")
+    done = 29.4
     nl = "\n"
     return f"""<!doctype html>
 <!-- {GEN}
@@ -338,9 +299,9 @@ def comp_html():
   <h2>The seven domains</h2>
 </div>
 
-<!-- 4. Chart. Order: title, then labels, then the bars, {round(stag * 1000)} ms apart. Category colours, in their fixed order. -->
+<!-- 4. Chart. Order: title, then labels, then the bars, {round(stag * 1000)} ms apart. Bars that compare groups are one colour: grey, with the subject in red. -->
 <section class="scene airi-chart" data-from="15" data-to="28.7">
-  <h2 data-at="{t0 - 0.7:g}">AI risks fall into seven domains</h2>
+  <h2 data-at="{t0 - 0.7:g}">AI system safety is the largest domain</h2>
   <div class="airi-bars" data-at="{t0:g}" data-enter="fade">
 {nl.join(rows)}
   </div>
@@ -350,7 +311,7 @@ def comp_html():
 <!-- Captions: two lines at most, {CAP['max-chars-per-line']} characters a line. The same cues are in captions.srt. -->
 {caps}
 
-<!-- 5. End card (brand moment 3). The logo builds from its squares, then holds {V['end-card']['hold-s']} s. -->
+<!-- 5. End card (brand moment 3). The logo cuts in, then holds {V['end-card']['hold-s']} s. -->
 <section class="scene airi-endcard" data-from="28.7" data-to="end">
 {logo}
   <p class="airi-url" data-at="{done:.1f}" data-enter="fade">{V['end-card']['url']}</p>
@@ -419,9 +380,8 @@ Put class `airi` on `<html>`. Transitions are conventional: the red card slides 
 smoothly, titles rise in, scenes cut or crossfade. These are defaults. A person can ask for
 something different.
 
-The logo builds from its squares, small to large, then the wordmark. Its speed and style are
-being finalised; the current timing is the default until then. The logo is never faded, slid
-or scaled. That one is a hard rule.
+The logo is not animated. It cuts in and holds still: the team chose a plain cut over a build
+in November 2026. It is never faded, slid or scaled. That one is a hard rule.
 
 The title card, section cards and the end card are the brand moments. Aim for
 {v['brand-moments-max']} in a video.
@@ -439,7 +399,7 @@ team review. `style-square` and `airi-reveal` no longer do anything.
 | `scene airi-chart` | `h2` states the finding; `airi-bars` rows grow last; `airi-source` under it |
 | `airi-lower-third` | Name and role, bottom left. `data-out` is `data-at` plus {LT['in-ms'] // 1000} s plus a {LT['hold-s-min']} to {LT['hold-s-max']} s hold; the scene must last {LT['out-ms'] // 1000} s longer |
 | `airi-caption` | A burned-in caption cue, `<br>` between its two lines. `#captions` gets the same look |
-| `scene airi-endcard` | The logo and `{V['end-card']['url']}`, held {V['end-card']['hold-s']} s after the logo is complete. Copy the masked logo from `comp.html` for the build |
+| `scene airi-endcard` | The logo and `{V['end-card']['url']}`, held {V['end-card']['hold-s']} s after the logo cuts in |
 | `scene airi-logocard` | The logo alone, {V['logo-card']['length-s-min']} to {V['logo-card']['length-s-max']} s, to open a video shorter than {V['logo-card']['videos-under-s']} s |
 
 Formats: {fm}. For the second and third add `format-vertical` or `format-square`
@@ -454,7 +414,7 @@ to `<html>` and set `data-width` and `data-height` to match.
 | Stagger | {v['stagger-ms']['min']} to {v['stagger-ms']['max']} ms between items that arrive together |
 | Order | {", then ".join(v['order'])} |
 | Layout grid | module {MODULE} px; squares of {MODULE}, {MEDIUM} and {LARGE} px |
-| Logo build | {BUILD['ticks-per-second']} steps a second, {BUILD['beat-ticks']} steps a beat. Being finalised |
+| Logo | Not animated: it cuts in |
 | Frame rate | {V['fps']['default']} fps; {V['fps']['data-heavy']} for data-heavy animation |
 | Safe areas | title-safe {V['safe-area-pct']['title']}% inset, action-safe {V['safe-area-pct']['action']}% |
 | Captions | {CAP['size-px']} px or larger, {CAP['max-chars-per-line']} characters a line ({CAP['max-chars-per-line-narrow']} in vertical and square), {CAP['max-lines']} lines, {CAP['max-chars-per-second']} characters a second, at least {CAP['min-frames']} frames |
@@ -526,9 +486,8 @@ def motion_problems():
             out.append(f"video.formats.{name} has an odd side")
     if MODULE * 27 != min(FMT["landscape"]["width"], FMT["landscape"]["height"]):
         out.append("video.grid.module-px is not 1/27 of the frame's short side")
-    for fps in V["fps"].values():
-        if fps % BUILD["ticks-per-second"]:
-            out.append(f"{fps} fps is not a whole number of frames per logo-build tick")
+    if LOGO.get("style") != "cut":
+        out.append("motion.logo-build.style is not 'cut'; the team chose no logo animation")
     if "style-square" in COMPONENTS or "airi-reveal" in COMPONENTS:
         out.append("airi-video.css components still carry a dropped square-step transition")
     for key in ("size-px", "max-chars-per-line", "max-chars-per-line-narrow", "max-lines", "max-chars-per-second", "min-frames", "text", "plate"):
@@ -584,7 +543,7 @@ def prose_problems(brand, skill):
         "caption reading speed": f"{CAP['max-chars-per-second']} characters a second", "caption minimum": f"{CAP['min-frames']} frames",
         "end-card hold": f"{V['end-card']['hold-s']} s", "end-card address": V["end-card"]["url"],
         "title-safe": f"{V['safe-area-pct']['title']}%", "action-safe": f"{V['safe-area-pct']['action']}%",
-        "grid module": f"{MODULE} px", "logo-build tick rate": f"{BUILD['ticks-per-second']} steps a second",
+        "grid module": f"{MODULE} px",
         "interface stagger": f"{ui['stagger-ms']} ms", "frame rate": f"{V['fps']['default']} fps",
     }
     for what, text in need.items():

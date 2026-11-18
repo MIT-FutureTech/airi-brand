@@ -156,7 +156,7 @@ def check_comp(path, lim, have_srt):
 
     # Hard rules.
     if re.search(r'class="[^"]*airi-logo\b[^"]*"[^>]*data-enter', text):
-        fails.append(hard(1) + f"{name}: the logo has a data-enter entrance; the logo cuts in or builds from its squares, and never fades, slides or zooms")
+        fails.append(hard(1) + f"{name}: the logo has a data-enter entrance; the logo cuts in, and never fades, slides or zooms")
     # Rules on code apply to code, not to words on screen: a slide may say "No bounce".
     code = "\n".join(body for _, body in re.findall(r"<(style|script)\b[^>]*>(.*?)</\1>", text, re.S | re.I))
     code += "\n" + "\n".join(re.findall(r'\b(?:class|style)\s*=\s*"([^"]*)"', text))  # not data-at: it names spoken words

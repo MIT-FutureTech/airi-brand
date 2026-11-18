@@ -70,7 +70,7 @@ Sections below carry a "Hard rule" note where one of the seven applies. Nothing 
 | `red-300` | `#E29CA8` | Lightest step of red scales; the pale partner bar beside red. Fill only |
 | `red-tint` | `#F8E1E5` | Chips, selected rows, lead-sentence highlight. The palest red that survives printing |
 | `red-wash` | `#FBF3F4` | Faint red surface for callouts and cards. Screen only |
-| `blue` | `#2171B5` | The one second colour: a comparison series, neutral amounts, the cool end of two-sided scales. Not for links |
+| `blue` | `#2171B5` | One job: shading neutral amounts. A step of the blue scale, the cool end of two-sided scales, the info status. Not a comparison series, not a category, not for links |
 | `blue-dark` | `#084594` | Text on blue tints; dark end of the blue scale |
 | `blue-tint` | `#DCE9F4` | Group-header bands in tables, info backgrounds |
 | `highlight` | `#FFF0B3` | Marked passages, search hits, draft or AI-written text |
@@ -169,15 +169,15 @@ For Claude artifacts and dark tools. These values are computed and contrast-chec
 | `partial-tint`, `partial-ink` | `#433519`, `#E8A317` | |
 
 - Red fills stay `#A32035` with white text. Red text is `link`, never `primary`.
-- Category violet becomes `#9875DA`, and its label switches from white to ink (4.9; white would be 3.6).
-- Label colours on fills are fixed: "ink" on a fill means `#1A1A1A` in both themes. Only violet changes, as above.
-- Give any dark mark that fades into the page a 1 px `#6E6E6E` outline: the darkest scale steps, and category teal on a dark card (3.0).
+- Category blue becomes `#4576A2` and category violet becomes `#786D99`, so they show on a dark card. Both keep white labels (4.8 and 4.7).
+- Label colours on fills are fixed: "ink" on a fill means `#1A1A1A` in both themes.
+- Give any dark mark that fades into the page a 1 px `#6E6E6E` outline: the darkest scale steps.
 
 ## 4. Colour in data
 
 **Hard rule 6:** red never means good, and a red scale never shows a neutral amount. The palettes and chart conventions are defaults.
 
-One rule decides most charts: **red is the subject, grey is context, blue is a neutral amount.**
+One rule decides most charts: **red is the subject, grey is context, ink is a comparison, blue shades a neutral amount.** Each colour has one job.
 
 ### Which palette
 
@@ -189,39 +189,48 @@ One rule decides most charts: **red is the subject, grey is context, blue is a n
 | A continuous amount of risk | Red scale | 6 stops |
 | Counts, coverage, anything where more is only more | Blue scale | 7 steps |
 | Two directions from a real midpoint (agree and disagree, above and below) | Two-sided | Blue, grey, red |
-| Named groups with no order | Categories | 7 slots and Other |
+| Named groups that each need their own mark | Categories | 8 slots and Other |
 
 ### Highlight and pair
 
 - The default chart is one series in `#A32035` and everything else in `#898A8D`.
 - Uncertainty bands and reference ranges are `#D9D9D9`.
-- For a second subject of equal weight, add `#2171B5`.
+- For a comparison series (last year, a benchmark, a second subject), use ink `#1A1A1A`. Never a flat blue: a flat blue is always a category colour.
 
 ### Categories
 
-For named groups: risk domains, sectors, roles, laws. The slot order is fixed. Take slots in order from 1; three groups are blue, violet and teal when they need to be far apart.
+One palette of eight colours for any grouping: risk domains, actors, sectors, roles, mitigations, laws. The team chose it in November 2026 (palette B, "quiet but distinct": Paul Tol's muted scheme in the Repository's hue order). It gives AIRI work one look, and n colours ready for any figure with n groups.
 
 | Slot | Name | Fill | Text | Tint | Label on fill | AI Risk Repository domain |
 |---|---|---|---|---|---|---|
-| 1 | Blue | `#2171B5` | `#084594` | `#E0EBF5` | white | Discrimination & toxicity |
-| 2 | Sky | `#6BAED6` | `#084594` | `#EAF4F9` | ink | Privacy & security |
-| 3 | Violet | `#55399E` | `#55399E` | `#E7E3F1` | white | Misinformation |
-| 4 | Pink | `#CC6699` | `#A3446F` | `#F8EAF1` | ink | Malicious actors & misuse |
-| 5 | Orange | `#D4762C` | `#A54A0C` | `#F9ECE1` | ink | Human-computer interaction |
-| 6 | Gold | `#D9A531` | `#7F5D00` | `#FAF2E2` | ink | Socioeconomic & environmental |
-| 7 | Teal | `#117A66` | `#0B6655` | `#DEEFEB` | white | AI system safety, failures & limitations |
+| 1 | Blue | `#2C6395` | `#2C6395` | `#E1E9F0` | white | Discrimination & toxicity |
+| 2 | Sky | `#7DC1E3` | `#4B7488` | `#EDF6FB` | ink | Privacy & security |
+| 3 | Violet | `#443471` | `#443471` | `#E5E3EB` | white | Misinformation |
+| 4 | Mauve | `#B973AB` | `#8D5782` | `#F5EBF3` | ink | Malicious actors & misuse |
+| 5 | Sand | `#ECBA7B` | `#846845` | `#FCF5ED` | ink | Human-computer interaction |
+| 6 | Olive | `#8F8D44` | `#6D6B34` | `#EFEFE5` | ink | Socioeconomic & environmental |
+| 7 | Teal | `#2A9484` | `#22766A` | `#E1F0EE` | ink | AI system safety, failures & limitations |
+| 8 | Sage | `#ACC6B1` | `#647367` | `#F3F7F4` | ink | — |
 | | Other | `#898A8D` | `#666666` | `#F3F3F3` | ink | Other, folded groups, context |
 
-- **Red is never a category.** That keeps red free to pick out one category: grey the others when you do.
+How to colour a grouping:
+
+- **Colour a grouping only when the colour says something.** Bars that compare values across groups are one colour (grey, or red for the subject); the names and the lengths do the work, and extra colours make lengths harder to compare. Two exceptions: pick one group out in red, or give related groups the same colour to show they belong together.
+- **Use the slots where each group needs its own mark:** a diagram or schematic with a few named parts, the parts of a stacked bar, one line per group across the same items (for example, the share of organisations disclosing each risk, one line per actor type).
+- **Take the slots in order from 1.** Never cycle them. Red is never a category, which keeps it free to pick one group out.
+- **More than eight groups** (sectors, mitigation domains, subdomains): don't give each its own colour. Draw them grey with names on the chart, and colour only the one or two the chart is about.
+- **Subgroups** take lighter and darker steps of their parent's colour.
+- **Two groupings at once** (domain by sector): colour one of them; put the other on the axis, or in small separate charts.
+- **Keep a group's colour the same** within one paper or product.
+- **Risk domains** take slots 1 to 7 in new work. Existing pages, tools and decks keep their colours; nothing is retrofitted. A person can set the domain colours aside for one figure, with a reason.
+
+Notes on the values:
+
 - A chip or tag uses the tint as background and the text colour on it. Every pair passes contrast.
-- An eighth category folds into Other. Never cycle the slots.
-- New work uses the slot shown for each of the seven risk domains. Existing pages, tools and decks keep their colours; nothing is retrofitted.
-- A person can set the domain colours aside for one figure, with a reason. For example, they clash with what the figure needs to say.
-- Which seven colours fill the slots is still being chosen. This set is the default until then (section 15).
-- The label on each fill is the colour in the table, at any size. Every one is at least 4.9:1. Never put white on sky, pink, orange or gold.
-- Sky and gold are faint as thin marks on white. Label them directly or give them an outline.
+- The label on each fill is the colour in the table, at any size. Every one is at least 4.7:1. Never put white on a fill whose label is ink.
+- Sky, sand and sage are faint as thin marks on white. Label them directly or give them an outline.
 - More than three lines or scatter series need direct labels or small multiples.
-- In print the seven hues are close in lightness. Domain figures in papers need direct labels.
+- In print the palette falls to four greys. Category figures in papers need direct labels.
 
 ### Severity (5 ordered levels, higher is worse)
 
@@ -266,39 +275,40 @@ Red is the riskier or worse side. The midpoint is grey, never yellow. Labels on 
 
 ## 5. Theme slots
 
-PowerPoint, Word and Google Slides share the same 12 theme slots. Filling them is what keeps a file on brand: default charts start with AIRI red and links come out red.
+PowerPoint, Word and Google Slides share the same 12 theme slots. Filling them is what keeps a file on brand: default charts start with AIRI red, then grey and ink, and links come out red.
 
 | Slot | Hex | Slot | Hex |
 |---|---|---|---|
 | Dark 1 (text) | `#1A1A1A` | Accent 1 | `#A32035` |
-| Light 1 (background) | `#FFFFFF` | Accent 2 | `#2171B5` |
-| Dark 2 | `#666666` | Accent 3 | `#D9A531` |
-| Light 2 | `#F3F3F3` | Accent 4 | `#117A66` |
-| Hyperlink | `#A32035` | Accent 5 | `#CC6699` |
-| Followed hyperlink | `#5E0E20` | Accent 6 | `#6BAED6` |
+| Light 1 (background) | `#FFFFFF` | Accent 2 | `#898A8D` |
+| Dark 2 | `#666666` | Accent 3 | `#1A1A1A` |
+| Light 2 | `#F3F3F3` | Accent 4 | `#2C6395` |
+| Hyperlink | `#A32035` | Accent 5 | `#7DC1E3` |
+| Followed hyperlink | `#5E0E20` | Accent 6 | `#443471` |
 
-Office builds lighter and darker rows from each accent. Those are not AIRI tints; use the values in section 3. The colours worth keeping as custom swatches are listed in `tokens.json` under `theme.custom-swatches`: the red steps, the neutrals, the remaining category colours, the status marks and the blue-scale steps, so a heat map built from table cells needs no typing.
+Office builds lighter and darker rows from each accent. Those are not AIRI tints; use the values in section 3. The colours worth keeping as custom swatches are listed in `tokens.json` under `theme.custom-swatches`: the red steps, the neutrals, the category colours not in the accents, the status marks and the blue-scale steps, so a heat map built from table cells needs no typing.
 
 ### Charts in Slides, Sheets and Office
 
-A chart made in Google Sheets, Google Slides, PowerPoint, Word or Excel takes its series colours from Accent 1 to 6 in order: red, blue, gold, teal, pink, sky. That order is right for one kind of chart only: one series (red), or two series (red and blue). For every other chart, set the colours by hand.
+A chart made in Google Sheets, Google Slides, PowerPoint, Word or Excel takes its series colours from Accent 1 to 6 in order: red (the subject), grey (context), ink (a comparison), then category blue, sky and violet. That order suits a chart of one to three series. For anything else, set the colours by hand.
 
-- **Context series:** `#898A8D`. It is not a theme colour, so it is never the default.
-- **Named groups:** set each series to its category colour, in slot order. The first group is blue. Left alone, the tool makes the first group red, which the kit forbids, and puts every risk domain on the wrong colour.
+- **Bars that compare groups:** one colour. Leave every bar grey `#898A8D`, and set the subject's bar to red.
+- **Named groups that each need their own mark:** set each series to its category colour, in slot order. The first group is blue. Left alone, the tool makes the first group red, which the kit forbids.
 
 | Slot | Colour | Hex | AI Risk Repository domain |
 |---|---|---|---|
-| 1 | Blue | `#2171B5` | Discrimination & toxicity |
-| 2 | Sky | `#6BAED6` | Privacy & security |
-| 3 | Violet | `#55399E` | Misinformation |
-| 4 | Pink | `#CC6699` | Malicious actors & misuse |
-| 5 | Orange | `#D4762C` | Human-computer interaction |
-| 6 | Gold | `#D9A531` | Socioeconomic & environmental |
-| 7 | Teal | `#117A66` | AI system safety, failures & limitations |
+| 1 | Blue | `#2C6395` | Discrimination & toxicity |
+| 2 | Sky | `#7DC1E3` | Privacy & security |
+| 3 | Violet | `#443471` | Misinformation |
+| 4 | Mauve | `#B973AB` | Malicious actors & misuse |
+| 5 | Sand | `#ECBA7B` | Human-computer interaction |
+| 6 | Olive | `#8F8D44` | Socioeconomic & environmental |
+| 7 | Teal | `#2A9484` | AI system safety, failures & limitations |
+| 8 | Sage | `#ACC6B1` | — |
 
 - **Scales:** the severity, blue and two-sided values in section 4, set per series or per cell.
 
-The code templates (matplotlib, Plotly, R) default to red, grey, blue. A chart made in an office tool matches them only after the grey and the category colours are set as above. A chart pasted in as an image from a code template needs none of this.
+The code templates (matplotlib, Plotly, R) use the same order: red, grey, ink, then the category colours. A chart pasted in as an image from a code template needs none of this.
 
 ## 6. Typography
 
@@ -603,19 +613,9 @@ Avoid bounce, elastic and overshoot, rotation, glitch effects, software presets 
 
 `templates/video/check_video.py` checks a composition and its SRT file. It fails on a hard-rule breach or a file that will not render. It warns on a default, so a deliberate change still passes.
 
-### Logo build
+### The logo in video
 
-The logo has one animation. The squares of the icon appear from small to large, left to right, and then the wordmark appears. The logo file is shown through a mask and is never redrawn, so the hard rule on the logo holds.
-
-Status: being finalised. The team likes the build and wants it faster. Until new options are chosen, the current timing is the default.
-
-| | Interim value |
-|---|---|
-| Tick | 15 steps a second, which is 2 frames at 30 fps |
-| Beat | One column of squares every 2 ticks |
-| Where | The end card and the logo card. A logo that sits in a corner of a title card does not animate |
-
-Without the mask, the logo cuts in. Those are the only two ways a logo arrives.
+The logo is not animated. It cuts in and holds still, on the end card, the logo card and the title card alike. The team chose this in November 2026 over four 600 ms builds, to keep things simple. Don't add a logo animation without a new decision.
 
 The video layout sits on a grid built from the same squares: a module of 40 px (the icon's small square at 1/27 of the frame's short side), with squares of 40, 80 and 120 px. The large square tiles every format exactly.
 
@@ -693,7 +693,10 @@ Decided:
 | Slide titles | Red. Section slides are full red |
 | Music in video | Off by default |
 | Transitions in video | Conventional. The square-step wipe and the stepped title reveal are dropped |
-| Logo animation | The logo builds from its squares. It is the only logo animation |
+| Logo animation | None. The logo cuts in. Chosen over four 600 ms builds to keep things simple |
+| Category palette | Palette B, "quiet but distinct": eight colours in a fixed order for any grouping. The seven risk domains take slots 1 to 7 |
+| Colour for groups | Colour a grouping only when the colour says something. Bars that compare groups are one colour. Up to eight groups take the slots in order; more than eight are grey with direct labels |
+| Blue | One colour, one job. A comparison series is ink, not blue. Blue shades counts; a flat blue is a category colour |
 | End card | Held 3 s, as a default |
 | Risk-domain colours | One set, as a default for new work only. Existing work is never retrofitted. A person can set it aside for one figure, with a reason |
 
@@ -701,8 +704,6 @@ Still open. Each has a default to use until it closes:
 
 | Topic | Default until then |
 |---|---|
-| Which seven colours for the risk domains | The set in section 4. Options are being prepared |
-| Logo build: speed and style | The timing in section 11. Faster options are being made |
 | Dark mode | The values in section 3, as provisional |
 | Print colour | None. AIRI red has not been matched to a print ink |
 | Image and illustration style | No rules yet. Reuse what the report covers do: one white line texture on red |

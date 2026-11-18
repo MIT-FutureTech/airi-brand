@@ -1,6 +1,6 @@
 # AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
 # Use: plt.style.use("airi.mplstyle"). For colour maps and the category cycle, import airi_mpl.
-# Default cycle: red (the subject), grey (context), blue, then the theme accents.
+# Default cycle: red (the subject), grey (context), ink (a comparison), then the category colours.
 # For named categories use airi_mpl.use_categorical(); categories never use red.
 
 font.family: sans-serif
@@ -35,4 +35,4 @@ legend.frameon: False
 lines.linewidth: 1.8
 patch.linewidth: 0
 
-axes.prop_cycle: cycler('color', ['A32035', '898A8D', '2171B5', 'D9A531', '117A66', 'CC6699', '6BAED6'])
+axes.prop_cycle: cycler('color', ['A32035', '898A8D', '1A1A1A', '2C6395', '7DC1E3', '443471', 'B973AB', 'ECBA7B', '8F8D44', '2A9484', 'ACC6B1'])

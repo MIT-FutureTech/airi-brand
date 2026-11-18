@@ -82,7 +82,7 @@ class Classify(unittest.TestCase):
         return v["kind"], v["group"], v["use"]
 
     def test_exact_tokens_are_fine(self):
-        for h in ("A32035", "1A1A1A", "2171B5", "117A66", "FFFFFF", "F2F2F2"):
+        for h in ("A32035", "1A1A1A", "2171B5", "2A9484", "FFFFFF", "F2F2F2"):
             self.assertEqual(KIT.classify(h)["group"], "ok", h)
 
     def test_near_red_is_a_hard_rule(self):
@@ -107,7 +107,7 @@ class Classify(unittest.TestCase):
     def test_near_miss_and_off_kit(self):
         self.assertEqual(self.kind("F5F5F5"), ("near", "drift", "fill"))
         self.assertEqual(self.kind("2E8B57"), ("near", "drift", "good"))
-        self.assertEqual(self.kind("0D9488")[:2], ("off-kit", "decision"))
+        self.assertEqual(self.kind("14B8A6")[:2], ("off-kit", "decision"))
         # a tighter threshold turns a near-miss into a decision
         self.assertEqual(KIT.classify("2E8B57", near=1.0)["group"], "decision")
 
@@ -166,7 +166,7 @@ class Finding(unittest.TestCase):
 class Reports(unittest.TestCase):
     def test_groups(self):
         findings, stats = scan_text({"site.css": """
-            :root { --brand: #A52238; --line: #e0e0e0; --accent: #0d9488; --ok: #A32035; }
+            :root { --brand: #A52238; --line: #e0e0e0; --accent: #14b8a6; --ok: #A32035; }
             body { font-family: Inter, sans-serif; color: var(--color-dark); }
             .muted { color: #898A8D }
             .faint { color: #999; background: #fff; }
@@ -174,7 +174,7 @@ class Reports(unittest.TestCase):
         f = by_value(findings)
         self.assertEqual((f["#A52238"]["group"], f["#A52238"]["use"], f["#A52238"]["defined_as"]), ("must", "primary", ["--brand"]))
         self.assertEqual((f["#E0E0E0"]["group"], f["#E0E0E0"]["use"]), ("drift", "border"))
-        self.assertEqual(f["#0D9488"]["group"], "decision")
+        self.assertEqual(f["#14B8A6"]["group"], "decision")
         self.assertEqual((f["Inter"]["group"], f["Inter"]["rule"]), ("must", "font"))
         self.assertEqual((f["#898A8D"]["kind"], f["#898A8D"]["use"]), ("gray-text", "text-muted"))
         self.assertEqual(f["--color-dark"]["use"], "--color-text")
@@ -214,7 +214,7 @@ class Reports(unittest.TestCase):
         self.assertNotIn("#DE2D26", by_value(findings))
 
     def test_kit_palettes_raise_nothing(self):
-        cats = ", ".join(f'"{c}"' for c in ["#2171B5", "#6BAED6", "#55399E", "#CC6699", "#D4762C", "#D9A531", "#117A66"])
+        cats = ", ".join(f'"{c}"' for c in ["#2C6395", "#7DC1E3", "#443471", "#B973AB", "#ECBA7B", "#8F8D44", "#2A9484", "#ACC6B1"])
         findings, _ = scan_text({"k.js": f"const categories = [{cats}];\nconst sev = ['#E29CA8', '#D07886', '#B8455A', '#A32035', '#5E0E20'];\n"})
         self.assertEqual(findings, [])
 
@@ -243,7 +243,7 @@ class Reports(unittest.TestCase):
 
     def test_office_file(self):
         theme = ('<a:theme xmlns:a="x"><a:themeElements><a:clrScheme name="Office"><a:dk1><a:sysClr val="windowText" lastClr="000000"/></a:dk1>'
-                 '<a:accent1><a:srgbClr val="4472C4"/></a:accent1><a:accent2><a:srgbClr val="2171B5"/></a:accent2></a:clrScheme>'
+                 '<a:accent1><a:srgbClr val="4472C4"/></a:accent1><a:accent2><a:srgbClr val="898A8D"/></a:accent2></a:clrScheme>'
                  '<a:fontScheme name="Office"><a:majorFont><a:latin typeface="Calibri Light"/></a:majorFont>'
                  '<a:minorFont><a:latin typeface="Figtree"/></a:minorFont></a:fontScheme></a:themeElements></a:theme>')
         slide = ('<p:sld xmlns:a="x" xmlns:p="y"><a:solidFill><a:srgbClr val="A31E38"/></a:solidFill>'

@@ -223,7 +223,7 @@ def render():
 <ol class="rules">
   <li><strong>One red: <code>{C["primary"]}</code>.</strong> Take it from the theme, the template or the token.</li>
   <li><strong>Two text colours:</strong> ink <code>{C["text"]}</code> and muted <code>{C["text-muted"]}</code>. White on red or dark.</li>
-  <li><strong>In data, red is the subject, the finding or more risk.</strong> Grey <code>{C["gray"]}</code> is context. Blue <code>{C["blue"]}</code> is a neutral amount.</li>
+  <li><strong>In data, red is the subject, the finding or more risk.</strong> Grey <code>{C["gray"]}</code> is context. Ink <code>{C["text"]}</code> is a comparison. Blue shades a neutral amount.</li>
   <li><strong>A figure uses a red scale or a red highlight, not both.</strong></li>
 </ol>
 
@@ -273,15 +273,22 @@ def render():
 {v.strip(D["diverging-7"])}
 <div class="charts"><figure>{v.chart_div()}<figcaption>Red is the riskier side. The midpoint is grey, never yellow.</figcaption></figure></div>
 
-<h4>Named groups: seven category colours</h4>
-<p>For groups with no order, such as the seven domains of the AI Risk Repository. The order is fixed, and red is never a category, so red stays free to pick one out.</p>
+<h4>Named groups: eight category colours</h4>
+<p>One palette for any grouping: risk domains, actors, sectors, mitigations. Groups take the colours in order from the first. The seven risk domains use colours 1 to 7 by default, in new work only. Red is never a category, so it stays free to pick one out.</p>
 {v.strip([c["fill"] for c in CATS] + [D["other"]["fill"]], [c["name"].capitalize() for c in CATS] + ["Other"])}
 <div class="tablewrap"><table>
   <thead><tr><th>Slot</th><th>Colour</th><th>Fill</th><th>Label on fill</th><th>Text on tint</th><th>Repository domain</th></tr></thead>
   <tbody>{cat_rows}</tbody>
 </table></div>
-<div class="charts"><figure>{v.chart_cat()}</figure></div>
-<p>Charts made in Google Sheets, Slides, PowerPoint or Excel take the theme accents in order, starting with red. That suits a one- or two-series chart only. For named groups, set each series to its slot colour by hand.</p>
+<ul>
+  <li><strong>Colour a grouping only when the colour says something.</strong> Bars that compare groups are one colour; the names and the lengths do the work. Pick one out in red, or give related groups one colour.</li>
+  <li>Use the colours where each group needs its own mark: a diagram or schematic with a few named parts, a stacked bar, one line per group.</li>
+  <li>More than eight groups: grey with names on the chart, and colour only the one or two the chart is about.</li>
+  <li>Subgroups take lighter and darker steps of their parent's colour. Two groupings at once: colour one, put the other on the axis.</li>
+  <li>Keep a group's colour the same within one paper or product.</li>
+</ul>
+<div class="charts"><figure>{v.chart_cat()}</figure><figure>{v.chart_lines()}</figure></div>
+<p>Charts made in Google Sheets, Slides, PowerPoint or Excel take the theme accents in order: red, grey, ink, then category colours 1 to 3. That suits a chart of one to three series. For named groups, set each series to its slot colour by hand.</p>
 
 <h4>Status</h4>
 <p>Status always carries a word or an icon. A dense Yes / Partial / No table under a red header may use the grade style, which avoids red and green altogether.</p>

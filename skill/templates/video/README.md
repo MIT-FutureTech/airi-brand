@@ -37,9 +37,8 @@ Put class `airi` on `<html>`. Transitions are conventional: the red card slides 
 smoothly, titles rise in, scenes cut or crossfade. These are defaults. A person can ask for
 something different.
 
-The logo builds from its squares, small to large, then the wordmark. Its speed and style are
-being finalised; the current timing is the default until then. The logo is never faded, slid
-or scaled. That one is a hard rule.
+The logo is not animated. It cuts in and holds still: the team chose a plain cut over a build
+in November 2026. It is never faded, slid or scaled. That one is a hard rule.
 
 The title card, section cards and the end card are the brand moments. Aim for
 3 in a video.
@@ -57,7 +56,7 @@ team review. `style-square` and `airi-reveal` no longer do anything.
 | `scene airi-chart` | `h2` states the finding; `airi-bars` rows grow last; `airi-source` under it |
 | `airi-lower-third` | Name and role, bottom left. `data-out` is `data-at` plus 1 s plus a 4 to 5 s hold; the scene must last 1 s longer |
 | `airi-caption` | A burned-in caption cue, `<br>` between its two lines. `#captions` gets the same look |
-| `scene airi-endcard` | The logo and `airisk.mit.edu`, held 3 s after the logo is complete. Copy the masked logo from `comp.html` for the build |
+| `scene airi-endcard` | The logo and `airisk.mit.edu`, held 3 s after the logo cuts in |
 | `scene airi-logocard` | The logo alone, 2 to 3 s, to open a video shorter than 15 s |
 
 Formats: 1920 x 1080 | 1080 x 1920 | 1080 x 1080. For the second and third add `format-vertical` or `format-square`
@@ -72,7 +71,7 @@ to `<html>` and set `data-width` and `data-height` to match.
 | Stagger | 80 to 150 ms between items that arrive together |
 | Order | frame, then text, then dynamic content, then data visualisation |
 | Layout grid | module 40 px; squares of 40, 80 and 120 px |
-| Logo build | 15 steps a second, 2 steps a beat. Being finalised |
+| Logo | Not animated: it cuts in |
 | Frame rate | 30 fps; 60 for data-heavy animation |
 | Safe areas | title-safe 10% inset, action-safe 5% |
 | Captions | 54 px or larger, 42 characters a line (30 in vertical and square), 2 lines, 20 characters a second, at least 20 frames |

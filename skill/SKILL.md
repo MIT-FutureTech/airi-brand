@@ -56,7 +56,7 @@ When a person asks, do it. Do not argue, ask for a reason, or quietly put the de
 | `border` | `#D9D9D9` | Hairlines, gridlines |
 | `fill` | `#F3F3F3` | Zebra rows, callouts, empty cells |
 | `background` | `#FAFAFA` | Page and slide background |
-| `blue` | `#2171B5` | The one second colour |
+| `blue` | `#2171B5` | Shades neutral amounts only. A comparison series is ink, not blue |
 
 Data palettes:
 
@@ -64,7 +64,9 @@ Data palettes:
 - Severity, 1 to 5, higher is worse: `#E29CA8` `#D07886` `#B8455A` `#A32035` `#5E0E20`. None: `#F3F3F3`. Labels: ink on steps 1 and 2, white on steps 3 to 5.
 - Counts (more is only more): `#EFF6FF` `#C6DBEF` `#9ECAE1` `#6BAED6` `#4292C6` `#2171B5` `#084594`. Labels: ink on steps 1 to 5, white on steps 6 and 7.
 - Two-sided: `#084594` `#4292C6` `#9ECAE1` `#F3F3F3` `#E29CA8` `#B8455A` `#5E0E20`. Red is the worse side.
-- Categories, in fixed order, never red: `#2171B5` `#6BAED6` `#55399E` `#CC6699` `#D4762C` `#D9A531` `#117A66`, then Other `#898A8D`. The seven AI Risk Repository domains take these slots in order, in new work only; leave existing work as it is. Labels on the fills (`--color-cat-N-label`): white on blue, violet and teal; ink on sky, pink, orange and gold.
+- Categories, eight in fixed order, never red: `#2C6395` `#7DC1E3` `#443471` `#B973AB` `#ECBA7B` `#8F8D44` `#2A9484` `#ACC6B1`, then Other `#898A8D`. Labels on the fills (`--color-cat-N-label`): white on blue and violet; ink on the rest. The seven AI Risk Repository domains take slots 1 to 7, in new work only; leave existing work as it is.
+- Colour a grouping only when the colour says something. Bars comparing groups are one colour (grey, the subject red). Use the slots where each group needs its own mark: a diagram's parts, a stacked bar, one line per group. More than eight groups: grey with direct labels, colour the one or two that matter.
+- A comparison series (last year, a benchmark) is ink `#1A1A1A`.
 - Status: good `#3A8F5C`, partial `#E8A317`, poor `#A32035`.
 
 ## What to read
@@ -105,6 +107,6 @@ When asked to bring existing work up to the kit, or to check it, follow [CHANGEO
 - Interface: the `--motion-` durations (70 to 700 ms) and `--ease-` curves in `brand.css`; `transform` and `opacity` only; honour `prefers-reduced-motion`.
 - Video: 400, 700 or 1000 ms; frame, then text, then data.
 - Transitions are conventional: no bounce, elastic, overshoot, rotation, glitch, presets or diagonal moves.
-- The logo cuts in or builds from its squares (timing being finalised; use the template's). Fading, sliding or zooming it breaks rule 1.
+- The logo is not animated: it cuts in and holds still. Fading, sliding or zooming it breaks rule 1.
 - Start from `templates/video/`. Under a minute, an SRT file, an end card, no music unless asked.
 - Before rendering, run `python3 templates/video/check_video.py comp.html captions.srt`. It fails on hard rules and broken files, and warns on defaults. Detail: BRAND.md section 11.
