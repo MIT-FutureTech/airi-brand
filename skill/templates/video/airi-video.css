@@ -1,0 +1,198 @@
+/* AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
+   Video styles for compositions made with the generate-video template (stage.js, stage.css).
+   Put class "airi" on <html>.
+   Self-contained: no web fonts and no imports, because a render uses local files only. */
+
+@font-face { font-family: "Figtree"; font-weight: 300 900; src: url("fonts/Figtree-wght.ttf") format("truetype"), local("Figtree"); }
+
+/* ---- tokens ---- */
+:root {
+  --color-primary: #A32035;
+  --color-primary-hover: #8A1B2D;
+  --color-primary-dark: #5E0E20;
+  --color-primary-light: #D07886;
+  --color-red-500: #B8455A;
+  --color-red-300: #E29CA8;
+  --color-red-tint: #F8E1E5;
+  --color-red-wash: #FBF3F4;
+  --color-blue: #2171B5;
+  --color-blue-dark: #084594;
+  --color-blue-tint: #DCE9F4;
+  --color-highlight: #FFF0B3;
+  --color-text: #1A1A1A;
+  --color-text-muted: #666666;
+  --color-gray: #898A8D;
+  --color-rule: #CCCCCC;
+  --color-border: #D9D9D9;
+  --color-fill: #F3F3F3;
+  --color-background: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-white: #FFFFFF;
+  --color-link: #A32035;
+  --color-link-hover: #8A1B2D;
+  --color-link-visited: #5E0E20;
+  --color-focus: #A32035;
+  --color-good: #3A8F5C;
+  --color-good-ink: #17653C;
+  --color-good-tint: #E3F1EA;
+  --color-partial: #E8A317;
+  --color-partial-ink: #8A5A18;
+  --color-partial-tint: #FCF3E3;
+  --color-info-ink: #084594;
+  --color-cat-1: #2C6395;
+  --color-cat-2: #7DC1E3;
+  --color-cat-3: #443471;
+  --color-cat-4: #B973AB;
+  --color-cat-5: #ECBA7B;
+  --color-cat-6: #8F8D44;
+  --color-cat-7: #2A9484;
+  --color-cat-8: #ACC6B1;
+  --color-cat-other: #898A8D;
+  --airi-font: 'Figtree', Arial, sans-serif;
+
+  /* Frame: landscape by default. Safe insets are the title-safe area, rounded up to the square grid */
+  --w: 1920px; --h: 1080px;
+  --airi-safe-x: 200px; --airi-safe-y: 120px;
+
+  /* Motion for video: three durations, three curves, one stagger */
+  --airi-dur-short: 400ms;
+  --airi-dur-long: 700ms;
+  --airi-dur-scene: 1000ms;
+  --airi-ease: cubic-bezier(0.4, 0.14, 0.3, 1);
+  --airi-ease-in: cubic-bezier(0, 0, 0.3, 1);
+  --airi-ease-out: cubic-bezier(0.4, 0.14, 1, 1);
+  --airi-stagger: 100ms;
+
+  /* Layout grid: the icon's small, medium and large squares */
+  --airi-sq: 40px;
+  --airi-sq-m: 80px;
+  --airi-sq-l: 120px;
+
+  /* Furniture */
+  --airi-type-title: 120px;
+  --airi-type-section: 96px;
+  --airi-type-statement: 72px;
+  --airi-type-chart-title: 56px;
+  --airi-type-body: 44px;
+  --airi-type-label: 32px;
+  --airi-type-smallest: 28px;
+  --airi-caption-size: 54px;
+  --airi-caption-text: #FFFFFF;
+  --airi-caption-plate: #1A1A1A;
+  --airi-lt-in: 1000ms;
+  --airi-lt-out: 1000ms;
+  --airi-end-hold: 3s;
+  --radius-sm: 4px;
+}
+html.format-vertical {
+  --w: 1080px; --h: 1920px;
+  --airi-safe-x: 120px; --airi-safe-y: 200px;
+}
+html.format-square {
+  --w: 1080px; --h: 1080px;
+  --airi-safe-x: 120px; --airi-safe-y: 120px;
+}
+
+/* ---- components ----
+   Every time and curve below is a variable from the tokens above. */
+
+.airi body { background: var(--color-background); color: var(--color-text); font-family: var(--airi-font);
+             font-weight: 400; font-size: var(--airi-type-body); line-height: 1.25; }
+.airi h1, .airi h2, .airi p { margin: 0; }
+.airi em { font-style: normal; color: var(--color-link); }
+
+/* Scenes cut. Add class "fade" for a short crossfade. */
+.airi .scene { --scene-fade: 0s; display: flex; flex-direction: column; justify-content: center; gap: var(--airi-sq);
+               padding: var(--airi-safe-y) var(--airi-safe-x); background: var(--color-background); }
+.airi .scene.fade { --scene-fade: var(--airi-dur-short); transition-timing-function: var(--airi-ease); }
+
+/* Anything with data-at arrives calmly: the entrance curve, the long duration. */
+.airi [data-at] { transition-duration: var(--airi-dur-long); transition-timing-function: var(--airi-ease-in); }
+
+/* Statement: one large sentence at a time. */
+.airi-statement p { font-size: var(--airi-type-statement); font-weight: 700; line-height: 1.15; max-width: 22ch; }
+
+/* Chart scene: finding as the title, direct labels, bars grow last. */
+.airi .airi-chart { justify-content: flex-start; }
+.airi-chart h2 { font-size: var(--airi-type-chart-title); font-weight: 700; color: var(--color-link); }
+.airi-bars { display: grid; grid-template-columns: max-content 1fr; column-gap: var(--airi-sq);
+             row-gap: calc(var(--airi-sq) * 0.8); align-items: center; font-size: var(--airi-type-label); }
+.airi-bars .track { display: flex; align-items: center; gap: calc(var(--airi-sq) / 2); height: var(--airi-sq); }
+.airi-bars .track i { display: block; height: 100%; width: calc(var(--v) * 85%); background: var(--c); }
+.airi .airi-bars .track i[data-at] { opacity: 1; transform: scaleX(0); transform-origin: left;
+                                     transition: transform var(--airi-dur-long) var(--airi-ease); }
+.airi .airi-bars .track i[data-at].in { transform: scaleX(1); }
+.airi .airi-bars .track b[data-at] { font-weight: 700; transform: none; transition-duration: var(--airi-dur-short); }
+.airi-source { font-size: var(--airi-type-smallest); color: var(--color-text-muted); }
+
+/* Caption plate: white on ink, bottom centre, inside the title-safe area. Captions cut in and out.
+   #captions is the element stage.js fills from the narration. */
+.airi .airi-caption[data-at], .airi #captions {
+  position: absolute; left: 50%; bottom: var(--airi-safe-y); z-index: 30; transform: translateX(-50%);
+  max-width: calc(var(--w) - 2 * var(--airi-safe-x)); padding: calc(var(--airi-sq) * 0.3) calc(var(--airi-sq) * 0.6);
+  border-radius: var(--radius-sm); font-size: var(--airi-caption-size); font-weight: 400; line-height: 1.25;
+  text-align: center; white-space: nowrap; color: var(--airi-caption-text); background: var(--airi-caption-plate);
+  opacity: 0; transition: none; }
+.airi #captions { white-space: normal; text-wrap: balance; max-width: 22em; }
+.airi .airi-caption[data-at].in, .airi #captions.in { opacity: 1; }
+
+/* Lower third: bottom left, inside title-safe. In, hold, out; set data-out to data-at plus the in time plus the hold. */
+.airi .airi-lower-third[data-at] {
+  position: absolute; left: var(--airi-safe-x); bottom: var(--airi-safe-y); z-index: 10;
+  display: grid; grid-template-columns: var(--airi-sq-l) auto; column-gap: calc(var(--airi-sq) * 0.75);
+  align-content: center; min-height: var(--airi-sq-l); padding-right: var(--airi-sq);
+  background: var(--color-surface); color: var(--color-text); line-height: 1.2;
+  opacity: 1; transform: none; clip-path: inset(0 100% 0 0); visibility: hidden;
+  transition: clip-path var(--airi-lt-out) var(--airi-ease-out), visibility 0s linear var(--airi-lt-out); }
+.airi .airi-lower-third[data-at].in { clip-path: inset(0 0 0 0); visibility: visible;
+  transition: clip-path var(--airi-lt-in) var(--airi-ease-in), visibility 0s; }
+.airi-lower-third::before { content: ""; grid-row: 1 / span 2; background: var(--color-primary); min-height: var(--airi-sq-l); }
+.airi-lower-third strong { align-self: end; font-size: var(--airi-type-body); font-weight: 700; }
+.airi-lower-third span { align-self: start; font-size: var(--airi-type-label); color: var(--color-text-muted); }
+
+/* End card and logo card. The logo is not animated: it cuts in at data-at and holds still.
+   It is never faded, slid or scaled. */
+.airi .airi-endcard, .airi .airi-logocard { gap: calc(2 * var(--airi-sq)); }
+.airi .airi-logo[data-at] { display: block; width: calc(9 * var(--airi-sq-l)); max-width: 100%; height: auto;
+                            opacity: 1; transform: none; transition: none; visibility: hidden; }
+.airi .airi-logo[data-at].in { visibility: visible; }
+.airi-url { font-size: var(--airi-type-statement); font-weight: 700; }
+
+/* Red card: the title card and the section card. One element placed above the scenes.
+   It slides on, holds for --hold while its text shows, then slides off. Change the scene
+   underneath while it holds. Class "airi-title" starts already on. */
+.airi .airi-card[data-at] {
+  --airi-on: var(--airi-dur-scene); --airi-off: var(--airi-dur-scene); --hold: var(--airi-end-hold); --lead: 0s;
+  position: absolute; inset: 0; z-index: 20; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center; gap: calc(var(--airi-sq) / 2);
+  padding: var(--airi-safe-y) var(--airi-safe-x); color: var(--color-white);
+  opacity: 1; transform: none; transition: none; visibility: hidden; }
+.airi .airi-card.airi-title[data-at] { --airi-on: 0s; --lead: var(--airi-dur-short); }
+.airi .airi-card[data-at].in { visibility: visible; }
+.airi-card h1 { font-size: var(--airi-type-title); font-weight: 700; line-height: var(--airi-sq-l); }
+.airi-card h2 { font-size: var(--airi-type-section); font-weight: 700; line-height: var(--airi-sq-l); }
+.airi-card .airi-card-logo { position: absolute; left: var(--airi-safe-x); top: var(--airi-safe-y); height: var(--airi-sq-m); }
+
+.airi-card::before { content: ""; position: absolute; z-index: -1; inset: 0;
+                     background: var(--color-primary); transform: translateX(-100%); }
+.airi .airi-card.in::before {
+  animation: airi-wipe-on var(--airi-on) var(--airi-ease) forwards,
+             airi-wipe-off var(--airi-off) var(--airi-ease) calc(var(--airi-on) + var(--hold)) forwards; }
+@keyframes airi-wipe-on { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes airi-wipe-off { from { transform: translateX(0); } to { transform: translateX(100%); } }
+
+/* The card's text shows only while the card holds. */
+.airi-card > * { visibility: hidden; --d: 0s; }
+.airi-card > :nth-child(2) { --i: 1; }
+.airi-card > :nth-child(3) { --i: 2; }
+.airi-card > :nth-child(4) { --i: 3; }
+.airi-card > :not(.airi-card-logo) { --d: calc(var(--lead) + var(--i, 0) * var(--airi-dur-short)); }
+.airi .airi-card.in > * { animation: airi-hold calc(var(--hold) - var(--d)) linear calc(var(--airi-on) + var(--d)); }
+.airi .airi-card.in > :not(.airi-card-logo) {
+  animation: airi-hold calc(var(--hold) - var(--d)) linear calc(var(--airi-on) + var(--d)),
+             airi-rise var(--airi-dur-long) var(--airi-ease-in) calc(var(--airi-on) + var(--d)) backwards,
+             airi-fade-out var(--airi-dur-short) var(--airi-ease-out) calc(var(--airi-on) + var(--hold) - var(--airi-dur-short)) forwards; }
+@keyframes airi-hold { from, to { visibility: visible; } }
+@keyframes airi-rise { from { opacity: 0; transform: translateY(var(--airi-sq)); } }
+@keyframes airi-fade-out { to { opacity: 0; } }
+

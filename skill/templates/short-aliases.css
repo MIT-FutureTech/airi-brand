@@ -1,0 +1,23 @@
+/* AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
+   Short names used by some AIRI apps, mapped onto the kit tokens.
+   Load after brand.css. Keep the short names in existing code; write new code with the --color-* names.
+
+   Careful: --red-tint here is the faint wash these apps already use (kit --color-red-wash, #FBF3F4).
+   It is NOT the kit's --color-red-tint (#F8E1E5). In new code use the --color-* names, which are unambiguous.
+   Likewise --line is the kit's --color-border, and --faint is --color-gray (graphics only, never text). */
+
+:root {
+  --ink: var(--color-text);
+  --body: var(--color-text);
+  --muted: var(--color-text-muted);
+  --faint: var(--color-gray);
+  --rule: var(--color-rule);
+  --line: var(--color-border);
+  --empty: var(--color-fill);
+  --red: var(--color-primary);
+  --red-dark: var(--color-primary-dark);
+  --red-pale: var(--color-red-300);
+  --red-tint: var(--color-red-wash);
+  --axis: var(--color-blue-tint);
+  --gap: var(--color-partial);
+}

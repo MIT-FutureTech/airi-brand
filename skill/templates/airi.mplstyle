@@ -1,0 +1,38 @@
+# AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
+# Use: plt.style.use("airi.mplstyle"). For colour maps and the category cycle, import airi_mpl.
+# Default cycle: red (the subject), grey (context), ink (a comparison), then the category colours.
+# For named categories use airi_mpl.use_categorical(); categories never use red.
+
+font.family: sans-serif
+font.sans-serif: Figtree, Arial, DejaVu Sans
+font.size: 8
+axes.titlesize: 9.5
+axes.titleweight: bold
+axes.titlelocation: left
+axes.labelsize: 8
+xtick.labelsize: 8
+ytick.labelsize: 8
+legend.fontsize: 8
+
+text.color: 1A1A1A
+axes.titlecolor: 1A1A1A
+axes.labelcolor: 666666
+xtick.color: 666666
+ytick.color: 666666
+axes.edgecolor: CCCCCC
+grid.color: D9D9D9
+grid.linewidth: 0.6
+axes.linewidth: 0.8
+axes.grid: True
+axes.grid.axis: y
+axes.axisbelow: True
+axes.spines.top: False
+axes.spines.right: False
+axes.facecolor: FFFFFF
+figure.facecolor: FFFFFF
+savefig.facecolor: FFFFFF
+legend.frameon: False
+lines.linewidth: 1.8
+patch.linewidth: 0
+
+axes.prop_cycle: cycler('color', ['A32035', '898A8D', '1A1A1A', '2C6395', '7DC1E3', '443471', 'B973AB', 'ECBA7B', '8F8D44', '2A9484', 'ACC6B1'])

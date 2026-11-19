@@ -1,0 +1,57 @@
+% AIRI brand kit 2.0.0. Generated from tokens.json by dev/build-kit/build.py. Do not edit by hand.
+%
+% AIRI colours for LaTeX. \usepackage{airi-colors}
+%   \textcolor{airiPrimary}{...}   \airilinks (link colours, after hyperref)   \airimark (title-block line)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{airi-colors}[2026/11/13 v2.0.0 AIRI brand colours]
+\RequirePackage{xcolor}
+
+\definecolor{airiPrimary}{HTML}{A32035}
+\definecolor{airiPrimaryHover}{HTML}{8A1B2D}
+\definecolor{airiPrimaryDark}{HTML}{5E0E20}
+\definecolor{airiPrimaryLight}{HTML}{D07886}
+\definecolor{airiRed500}{HTML}{B8455A}
+\definecolor{airiRed300}{HTML}{E29CA8}
+\definecolor{airiRedTint}{HTML}{F8E1E5}
+\definecolor{airiRedWash}{HTML}{FBF3F4}
+\definecolor{airiBlue}{HTML}{2171B5}
+\definecolor{airiBlueDark}{HTML}{084594}
+\definecolor{airiBlueTint}{HTML}{DCE9F4}
+\definecolor{airiHighlight}{HTML}{FFF0B3}
+\definecolor{airiText}{HTML}{1A1A1A}
+\definecolor{airiTextMuted}{HTML}{666666}
+\definecolor{airiGray}{HTML}{898A8D}
+\definecolor{airiRule}{HTML}{CCCCCC}
+\definecolor{airiBorder}{HTML}{D9D9D9}
+\definecolor{airiFill}{HTML}{F3F3F3}
+\definecolor{airiBackground}{HTML}{FAFAFA}
+\definecolor{airiWhite}{HTML}{FFFFFF}
+\definecolor{airiGood}{HTML}{3A8F5C}
+\definecolor{airiGoodInk}{HTML}{17653C}
+\definecolor{airiGoodTint}{HTML}{E3F1EA}
+\definecolor{airiPartial}{HTML}{E8A317}
+\definecolor{airiPartialInk}{HTML}{8A5A18}
+\definecolor{airiPartialTint}{HTML}{FCF3E3}
+
+\definecolor{airiCatBlue}{HTML}{2C6395}\definecolor{airiCatBlueInk}{HTML}{2C6395}\definecolor{airiCatBlueTint}{HTML}{E1E9F0}
+\definecolor{airiCatSky}{HTML}{7DC1E3}\definecolor{airiCatSkyInk}{HTML}{4B7488}\definecolor{airiCatSkyTint}{HTML}{EDF6FB}
+\definecolor{airiCatViolet}{HTML}{443471}\definecolor{airiCatVioletInk}{HTML}{443471}\definecolor{airiCatVioletTint}{HTML}{E5E3EB}
+\definecolor{airiCatMauve}{HTML}{B973AB}\definecolor{airiCatMauveInk}{HTML}{8D5782}\definecolor{airiCatMauveTint}{HTML}{F5EBF3}
+\definecolor{airiCatSand}{HTML}{ECBA7B}\definecolor{airiCatSandInk}{HTML}{846845}\definecolor{airiCatSandTint}{HTML}{FCF5ED}
+\definecolor{airiCatOlive}{HTML}{8F8D44}\definecolor{airiCatOliveInk}{HTML}{6D6B34}\definecolor{airiCatOliveTint}{HTML}{EFEFE5}
+\definecolor{airiCatTeal}{HTML}{2A9484}\definecolor{airiCatTealInk}{HTML}{22766A}\definecolor{airiCatTealTint}{HTML}{E1F0EE}
+\definecolor{airiCatSage}{HTML}{ACC6B1}\definecolor{airiCatSageInk}{HTML}{647367}\definecolor{airiCatSageTint}{HTML}{F3F7F4}
+
+\definecolor{airiSevA}{HTML}{E29CA8}% severity 1
+\definecolor{airiSevB}{HTML}{D07886}% severity 2
+\definecolor{airiSevC}{HTML}{B8455A}% severity 3
+\definecolor{airiSevD}{HTML}{A32035}% severity 4
+\definecolor{airiSevE}{HTML}{5E0E20}% severity 5
+
+% Link colours for PDFs; call after loading hyperref. Web addresses are AIRI red. Cross-references and
+% citations stay ink. PDF links are coloured, not underlined (the print exception in BRAND.md, section 3).
+\newcommand{\airilinks}{\hypersetup{colorlinks=true,linkcolor=airiText,citecolor=airiText,urlcolor=airiPrimary}}
+% A small identity line for a title block: a red rule and the initiative name.
+\newcommand{\airimark}{{\color{airiPrimary}\rule{2.4em}{1.6pt}}\par\vspace{2pt}%
+  {\sffamily\small\color{airiTextMuted}MIT AI Risk Initiative\enspace\textbar\enspace airisk.mit.edu}\par}
+\endinput
